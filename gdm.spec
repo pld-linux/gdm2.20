@@ -3,13 +3,13 @@ Summary(pl):	gdm
 Name:		gdm
 Version:	2.0beta4
 Release:	3
-Source0:	ftp://socsci.auc.dk/~mkp/gdm/gdm-2.0beta4.tar.gz
+Source0:	ftp://socsci.auc.dk/~mkp/gdm/%{name}-%{version}.tar.gz
 Source1:	gdm.pamd
 Patch0:		gdm-gnomerc.patch
 Patch1:		gdm-config.patch
 Group:		X11/GNOME
 Group(pl):	X11/GNOME
-Copyright:	LGPL/GPL
+License:	LGPL/GPL
 Prereq:		/usr/sbin/groupadd
 Prereq:		/usr/sbin/groupdel
 Prereq:		/usr/sbin/useradd
@@ -33,8 +33,8 @@ gdm manages local and remote displays and provides the user with a
 graphical login window.
 
 %description -l pl
-gdm zarz±dza lokalnymi i zdalnymi X serwerami i udostêpnia u¿ytkownikowi
-graficzne okienko logowania.
+gdm zarz±dza lokalnymi i zdalnymi X serwerami i udostêpnia
+u¿ytkownikowi graficzne okienko logowania.
 
 %prep
 %setup -q
@@ -45,7 +45,7 @@ graficzne okienko logowania.
 CFLAGS="$RPM_OPT_FLAGS" \
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
-	--sysconfdir=/etc/X11 \
+	--sysconfdir=%{_sysconfdir} \
 	--localstatedir=/var/lib
 make
 
@@ -59,7 +59,7 @@ make install prefix=$RPM_BUILD_ROOT%{_prefix} \
 	localstatedir=$RPM_BUILD_ROOT/var/lib
 
 sed -e "s#$RPM_BUILD_ROOT##g" config/gnomerc >config/gnomerc.X
-install config/gnomerc.X $RPM_BUILD_ROOT/etc/X11/gdm/gnomerc
+install config/gnomerc.X $RPM_BUILD_ROOT%{_sysconfdir}/gdm/gnomerc
 
 sed -e "s#$RPM_BUILD_ROOT##g" $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome \
 	> $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome.X
@@ -114,7 +114,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,xdm,xdm) %config %{_sysconfdir}/gdm/PostSession
 %attr(755,xdm,xdm) %config %{_sysconfdir}/gdm/gnomerc
 %attr(644,xdm,xdm) %config %{_sysconfdir}/gdm/gdm.conf
-%attr(644,xdm,xdm) %config /etc/X11/gdm/locale.alias
+%attr(644,xdm,xdm) %config %{_sysconfdir}/gdm/locale.alias
 %attr(755,xdm,xdm) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
