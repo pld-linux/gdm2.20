@@ -2,7 +2,7 @@ Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
 Version:	2.2.5.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
@@ -142,7 +142,7 @@ fi
 %attr(664,root,xdm) %config %{_sysconfdir}/gdm/gdm.conf
 %attr(664,root,xdm) %config %{_sysconfdir}/gdm/locale.alias
 %attr(775,root,xdm) %dir %{_sysconfdir}/gdm
-%attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/gdm
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
 %attr(750,xdm,xdm) /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
