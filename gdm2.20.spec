@@ -12,13 +12,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.4.7
+Version:	2.5.90.0
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	a3d2f243c4f42e2542bda8cb5fb9a7c5
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.5/%{name}-%{version}.tar.bz2
+# Source0-md5:	1dab37053816ac36a69045122a7076b5
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -30,14 +30,15 @@ URL:		http://www.jirka.org/gdm.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2.2.4
-BuildRequires:	intltool >= 0.22
-BuildRequires:	libglade2-devel >= 2.0.1
-BuildRequires:	libgnome-devel >= 2.4.0
-BuildRequires:	libgnomecanvas-devel >= 2.4.0
-BuildRequires:	libgnomeui-devel >= 2.4.0.1
+BuildRequires:	gtk+2-devel >= 2.3.1
+BuildRequires:	intltool >= 0.30
+BuildRequires:	libglade2-devel >= 2.5.0
+BuildRequires:	libgnome-devel >= 2.5.0
+BuildRequires:	libgnomecanvas-devel >= 2.5.0
+BuildRequires:	libgnomeui-devel >= 2.5.0
 BuildRequires:	libgsf-devel >= 1.8.2
-BuildRequires:	librsvg-devel >= 2.4.0
+BuildRequires:	librsvg-devel >= 2.5.0
+BuildRequires:	libselinux-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
@@ -50,10 +51,10 @@ Requires(postun):	/usr/sbin/userdel
 Requires(postun):	/usr/sbin/groupdel
 Requires(post,preun):	/sbin/chkconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
-Requires:	libgnome >= 2.4.0
+Requires:	libgnome >= 2.5.0
 Requires:	sessreg
 Requires:	which
-Requires:	pam >= 0.77.3
+Requires:	pam >= 0.77.3-7
 Obsoletes:	xdm kdm wdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -143,7 +144,8 @@ intltoolize --copy --force
 	--with-pam-prefix=/etc \
 	--with-tcp-wrappers=yes \
 	--enable-authentication-scheme=pam \
-	--disable-console-helper
+	--disable-console-helper \
+	--with-selinux
 
 %{__make}
 
@@ -156,6 +158,8 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PAM_PREFIX=/etc
 
+mv $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop $RPM_BUILD_ROOT%{_datadir}/xsessions
+
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
@@ -163,12 +167,13 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
-mv $RPM_BUILD_ROOT{%{_sysconfdir}/dm/Sessions/default.desktop,%{_datadir}/xsessions}
-
 %find_lang %{name} --all-name --with-gnome
 
 # Remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/modules/*.{la,a}
+
+# moved to gnome-session
+rm -f $RPM_BUILD_ROOT%{_datadir}/xsessions/gnome.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
