@@ -29,6 +29,7 @@ Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
 Patch4:		%{name}-locale-names.patch
+Patch5:		%{name}-default_theme.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf
@@ -134,6 +135,7 @@ Skrypt init dla GDM-a.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
 install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/themes/storky
 install storky/*.* $RPM_BUILD_ROOT%{_datadir}/%{name}/themes/storky/
 
