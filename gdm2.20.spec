@@ -24,6 +24,7 @@ Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
+Patch2:		%{name}-xsession.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -122,6 +123,7 @@ Skrypt init dla GDM-a.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 rm -f missing
