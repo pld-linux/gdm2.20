@@ -136,8 +136,6 @@ Skrypt init dla GDM-a.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/themes/storky
-install storky/*.* $RPM_BUILD_ROOT%{_datadir}/%{name}/themes/storky/
 
 mv po/{no,nb}.po
 
