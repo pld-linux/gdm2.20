@@ -2,7 +2,7 @@ Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
 Version:	2.2.5.1
-Release:	1
+Release:	2
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
