@@ -7,7 +7,7 @@ Summary(es):	Administrador de Entrada del GNOME
 Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
-Version:	2.4.0.10
+Version:	2.4.0.11
 Release:	1
 Epoch:		1
 License:	LGPL/GPL
@@ -20,18 +20,18 @@ Source3:	%{name}.conf
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2.0.3
+BuildRequires:	gtk+2-devel >= 2.0.6
 BuildRequires:	intltool >= 0.22
-BuildRequires:	libglade2-devel >= 2.0.0
-BuildRequires:	libgnomecanvas-devel >= 2.0.1
-BuildRequires:	libgnome-devel >= 2.0.1
-BuildRequires:	libgnomeui-devel >= 2.0.1
-BuildRequires:	librsvg-devel >= 2.0.0
+BuildRequires:	libglade2-devel >= 2.0.1
+BuildRequires:	libgnomecanvas-devel >= 2.0.3
+BuildRequires:	libgnome-devel >= 2.0.3
+BuildRequires:	libgnomeui-devel >= 2.0.4
+BuildRequires:	librsvg-devel >= 2.0.1
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.24
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	scrollkeeper >= 0.3.6
+BuildRequires:	scrollkeeper >= 0.3.11
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
 PreReq:		scrollkeeper
