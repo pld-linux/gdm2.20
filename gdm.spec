@@ -1,29 +1,11 @@
 Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
-Version:	2.0beta4
-Release:	6
-Source0:	ftp://socsci.auc.dk/~mkp/gdm/%{name}-%{version}.tar.gz
+Version:	2.2.2
+Release:	1
+Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
 Source1:	%{name}.pamd
 Source2:	%{name}.init
-Patch0:		%{name}-config.patch
-Patch1:		%{name}-gnomerc.patch
-Patch2:		%{name}-chpass.patch
-Patch3:		%{name}-daemonfixes.patch
-Patch4:		%{name}-dumberrmsg.patch
-Patch5:		%{name}-fdleak.patch
-Patch6:		%{name}-fixmessages.patch
-Patch7:		%{name}-i18n.patch
-Patch8:		%{name}-loopofdeath.patch
-Patch9:		%{name}-no_questions_asked.patch
-Patch10:	%{name}-pipewrite.patch
-Patch11:	%{name}-rhlang.patch
-Patch12:	%{name}-system-auth.patch
-Patch13:	%{name}-tolower.patch
-Patch14:	%{name}-usershell.patch
-Patch15:	%{name}-nonbash-shell.patch
-Patch16:	%{name}-xdmcp.patch
-Patch17:	%{name}-ypconfigure.patch
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
@@ -56,24 +38,6 @@ u¿ytkownikowi graficzne okienko logowania.
 
 %prep
 %setup -q
-%patch0 -p1	
-%patch1 -p1	
-%patch2 -p1	
-%patch3 -p1	
-%patch4 -p1	
-%patch5 -p1	
-%patch6 -p1	
-%patch7 -p1	
-%patch8 -p1	
-%patch9 -p1	
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch15 -p1
-%patch16 -p1
-%patch17 -p1
 
 %build
 CFLAGS="%{rpmcflags}" \
@@ -107,7 +71,7 @@ mv -f $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome.X \
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
-gzip -9nf AUTHORS ChangeLog NEWS README TODO RELEASENOTES
+gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
 %find_lang gdm
 
