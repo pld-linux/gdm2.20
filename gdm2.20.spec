@@ -24,6 +24,7 @@ Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
+URL:		http://www.jirka.org/gdm.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
