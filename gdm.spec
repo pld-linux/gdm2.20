@@ -1,7 +1,7 @@
 Summary:	GNOME Display Manager
 Name:		gdm
-Version:	1.0.0
-Release:	3
+Version:	2.0.0
+Release:	1
 Source0:	ftp://ftp.socsci.auc.dk/pub/empl/mkp/gdm-%{PACKAGE_VERSION}.tar.gz
 Source1:	gdm.initd
 Source2:	gdm.pamd
