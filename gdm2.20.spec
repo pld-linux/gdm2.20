@@ -40,11 +40,7 @@ BuildRequires:	scrollkeeper >= 0.3.11
 Requires:	libgnome >= 2.1.0-3
 Requires:	which
 Requires:	sessreg
-Requires(pre):	/bin/id
-Requires(pre):	/usr/sbin/groupadd
-Requires(pre):	/usr/sbin/useradd
-Requires(postun):	/usr/sbin/userdel
-Requires(postun):	/usr/sbin/groupdel
+Requires(pre):	user-xdm
 Requires(post,postun):scrollkeeper
 Requires(post,preun):/sbin/chkconfig
 Conflicts:	gdkxft
@@ -157,23 +153,10 @@ touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%pre
-/usr/sbin/groupadd -g 55 -r -f xdm
-
-if [ -z "`id -u xdm 2>/dev/null`" ]; then
-	/usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
-fi
-
 %post
 /usr/bin/scrollkeeper-update
 
 %postun
-if [ "$1" = "0" ]; then
-	if [ -n "`id -u xdm 2>/dev/null`" ]; then
-		/usr/sbin/userdel xdm
-	fi
-	/usr/sbin/groupdel xdm
-fi
 /usr/bin/scrollkeeper-update
 
 %post init
