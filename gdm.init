@@ -15,7 +15,7 @@
 . /etc/rc.d/init.d/functions
 
 # Get service config
-if [ -f /etc/sysconfig/gdm ] ; then
+if [ -f /etc/sysconfig/gdm ]; then
 	. /etc/sysconfig/gdm
 fi
 
