@@ -13,7 +13,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.4.7
-Release:	1
+Release:	1.9
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -150,7 +150,7 @@ intltoolize --copy --force
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
-	$RPM_BUILD_ROOT/home/services/xdm
+	$RPM_BUILD_ROOT{/home/services/xdm,/var/log/gdm}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -248,6 +248,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
 %attr(750,xdm,xdm) /var/lib/gdm
+%attr(750,xdm,xdm) /var/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
 %{_desktopdir}/gdmsetup.desktop
