@@ -202,7 +202,7 @@ fi
 %attr(755,root,root) %config %{_sysconfdir}/gdm/gnomerc
 %attr(755,root,root) %config %{_sysconfdir}/gdm/XKeepsCrashing
 %config %{_sysconfdir}/gdm/factory-gdm.conf
-%config %{_sysconfdir}/gdm/gdm.conf
+%config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/gdm/gdm.conf
 %config %{_sysconfdir}/gdm/locale.alias
 %attr(755,root,root) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm
