@@ -1,5 +1,5 @@
 # TODO:
-# /etc/X11/dm dir should belong to XFree? I is common for KDE and GNOME
+# /etc/X11/dm dir should belong to XFree? It is common for KDE and GNOME
 # s=/dev/null=/home/services/xdm= in %%trigger for gracefull upgrade from xdm/kdm/gdm 2.2
 # check /etc/pam.d/gdm-autologin
 #
@@ -12,13 +12,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.2.97
+Version:	2.4.2.98
 Release:	0.9
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	300033d842870987ed8509b5bc13a722
+# Source0-md5:	b1882d6dd25e2f9e1c7b0800e15481d0
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -195,7 +195,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO docs/GdmGreeterThemeManual.txt
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/gdm
 %attr(755,root,root) %{_bindir}/gdm-binary
 %attr(755,root,root) %{_bindir}/gdmchooser
@@ -207,6 +207,7 @@ fi
 %attr(755,root,root) %{_bindir}/gdmthemetester
 %attr(755,root,root) %{_libdir}/gdmaskpass
 %attr(755,root,root) %{_libdir}/gdmopen
+%attr(755,root,root) %{_libdir}/gdmtranslate
 %attr(755,root,root) %{_sbindir}/*
 %dir %{_sysconfdir}/gdm
 %dir %{_sysconfdir}/gdm/modules
@@ -231,6 +232,7 @@ fi
 %{_desktopdir}/gdmflexiserver.desktop
 %{_datadir}/gnome/capplets/*
 %{_datadir}/gdm
+%{_omf_dest_dir}/gdm
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
 
 %files Xnest
