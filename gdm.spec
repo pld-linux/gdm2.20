@@ -22,15 +22,15 @@ graphical login window.
 %setup
 
 %build
-%ifarch alpha
-  MYARCH_FLAGS="--host=alpha-redhat-linux"
-%endif
-
 # Needed for snapshot releases.
 if [ ! -f configure ]; then
-	CFLAGS="$RPM_OPT_FLAGS" ./autogen.sh $MYARCH_FLAGS --prefix=%prefix
+	CFLAGS="$RPM_OPT_FLAGS" \
+	./autogen.sh %{_target} \
+		--prefix=%prefix
 else
-	CFLAGS="$RPM_OPT_FLAGS" ./configure $MYARCH_FLAGS --prefix=%prefix
+	CFLAGS="$RPM_OPT_FLAGS" \
+	./configure %{_target} \
+		--prefix=%prefix
 fi
 make
 
