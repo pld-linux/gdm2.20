@@ -86,7 +86,7 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 %build
 rm -f missing
 %{__libtoolize}
-gettextize --copy --force
+%{__gettextize}
 aclocal -I %{_aclocaldir}/gnome
 %{__autoconf}
 %{__automake}
