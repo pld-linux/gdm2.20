@@ -1,12 +1,12 @@
-diff -urN aa/gdm-2.5.90.1/configure.in gdm-2.5.90.1/configure.in
---- aa/gdm-2.5.90.1/configure.in	2004-02-08 22:08:34.000000000 +0100
-+++ gdm-2.5.90.1/configure.in	2004-02-26 17:07:24.587286976 +0100
+diff -urN gdm-2.6.0.1.orig/configure.in gdm-2.6.0.1/configure.in
+--- gdm-2.6.0.1.orig/configure.in	2004-04-17 11:08:33.621221688 +0200
++++ gdm-2.6.0.1/configure.in	2004-04-17 11:08:45.659391608 +0200
 @@ -144,7 +144,7 @@
  AC_SUBST(GETTEXT_PACKAGE)
  
  dnl ## internationalization support
--ALL_LINGUAS="am ar az be bg bn ca cs cy da de el en_CA es et eu fa fi fr ga gl hi he hr hu id is it ja ko lt lv mk ml mn ms nl nn no pl pt_BR pt ro ru sk sl sq sr sr@Latn sv ta th tr uk vi wa zh_CN zh_TW"
-+ALL_LINGUAS="am ar az be bg bn ca cs cy da de el en_CA es et eu fa fi fr ga gl hi he hr hu id is it ja ko lt lv mk ml mn ms nb nl nn pl pt_BR pt ro ru sk sl sq sr sr@Latn sv ta th tr uk vi wa zh_CN zh_TW"
+-ALL_LINGUAS="af am ar az be bg bn ca cs cy da de el en_CA en_GB es et eu fa fi fr ga gl gu hi he hr hu id is it ja ko lt lv mk ml mn mr ms nl nn no pa pl pt_BR pt ro ru sk sl sq sr sr@Latn sv ta th tr uk vi wa zh_CN zh_TW"
++ALL_LINGUAS="af am ar az be bg bn ca cs cy da de el en_CA en_GB es et eu fa fi fr ga gl gu hi he hr hu id is it ja ko lt lv mk ml mn mr ms nb nl nn pa pl pt_BR pt ro ru sk sl sq sr sr@Latn sv ta th tr uk vi wa zh_CN zh_TW"
  AM_GLIB_GNU_GETTEXT
  
  EXTRA_DAEMON_LIBS=""
