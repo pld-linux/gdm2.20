@@ -1,11 +1,11 @@
---- gdm-2.2.1/daemon/server.c.orig	Sat May  5 11:05:32 2001
-+++ gdm-2.2.1/daemon/server.c	Sat May  5 11:05:46 2001
-@@ -297,7 +297,7 @@
+--- gdm-2.2.3/daemon/server.c.orig	Fri Jun 29 11:30:30 2001
++++ gdm-2.2.3/daemon/server.c	Tue Jul  3 23:17:09 2001
+@@ -388,7 +388,7 @@
  
          /* Log all output from spawned programs to a file */
  	logfd = open (g_strconcat (GdmLogDir, "/", d->name, ".log", NULL),
--		      O_CREAT|O_TRUNC|O_APPEND|O_WRONLY, 0666);
-+		      O_CREAT|O_TRUNC|O_APPEND|O_WRONLY, 0660);
+-		      O_CREAT|O_TRUNC|O_WRONLY, 0666);
++		      O_CREAT|O_TRUNC|O_WRONLY, 0660);
  
  	if (logfd != -1) {
  		dup2 (logfd, 1);
