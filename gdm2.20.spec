@@ -50,7 +50,6 @@ Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires(postun):	/usr/sbin/groupdel
-Requires(post,preun):	/sbin/chkconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	libgnome >= 2.6.1
 Requires:	sessreg
@@ -117,6 +116,7 @@ Summary(pl):	Skrypt init dla GDM-a
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	open
+Requires(post,preun):	/sbin/chkconfig
 
 %description init
 Init script for GDM.
