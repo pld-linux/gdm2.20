@@ -12,13 +12,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.2.95
+Version:	2.4.2.96
 Release:	0.9
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	83190cb663db4168a19032a9adf205fc
+# Source0-md5:	c94ba18e1776e555cdc33d02fa4a7b2a
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -96,7 +96,7 @@ Window та п╕дтриму╓ роботу к╕лькох р╕зних X сеанс╕в одночасно.
 Summary:	Xnest (ie embedded X) server for GDM
 Summary(pl):	Serwer Xnest dla GDM
 Group:		X11/Applications
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 Requires:	XFree86-Xnest
 
 %description Xnest
@@ -109,7 +109,7 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 Summary:	Init script for GDM
 Summary(pl):	Skrypt init dla GDM-a
 Group:		X11/Applications
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}
 Requires:	open
 
 %description init
