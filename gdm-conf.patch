@@ -1,0 +1,14 @@
+diff -Nur gdm-2.4.0.11.orig/config/gdm.conf.in gdm-2.4.0.11/config/gdm.conf.in
+--- gdm-2.4.0.11.orig/config/gdm.conf.in	Fri Aug 23 19:53:53 2002
++++ gdm-2.4.0.11/config/gdm.conf.in	Wed Oct 23 15:35:33 2002
+@@ -52,8 +52,8 @@
+ # you should create these user and group.  Anyone found running this as
+ # someone too privilaged will get a kick in the ass.  This should have
+ # access to only the gdm directories and files.
+-User=gdm
+-Group=gdm
++User=xdm
++Group=xdm
+ # To try to kill all clients started at greeter time or in the Init script.
+ # doesn't always work, only if those clients have a window of their own
+ KillInitClients=true
