@@ -27,7 +27,7 @@ case "$1" in
 		msg_starting "Gnome Display Manager"
 		daemon /usr/X11R6/bin/gdm
 		RETVAL=$?
-		$RETVAL -eq 0 ] && touch /var/lock/subsys/gdm
+		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gdm
 	else
 		msg_Already_Running "Gnome Display Manager"
 	fi
