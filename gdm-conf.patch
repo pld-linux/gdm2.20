@@ -16,7 +16,7 @@ diff -urN gdm-2.4.1.1.orig/config/gdm.conf.in gdm-2.4.1.1/config/gdm.conf.in
  # The 'theme'.  By default we're using the default gtk theme
  # Of course assuming that gtk got installed in the same prefix,
  # if not change this.
--GtkRC=@EXPANDED_DATADIR@/themes/Default/gtk/gtkrc
+-#GtkRC=@EXPANDED_DATADIR@/themes/Default/gtk/gtkrc
 +GtkRC=@EXPANDED_DATADIR@/themes/Default/gtk-2.0/gtkrc
  # Maximum size of an icon, larger icons are scaled down
  MaxIconWidth=128
