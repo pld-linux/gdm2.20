@@ -12,13 +12,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.2.99
-Release:	0.91
+Version:	2.4.2.100
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	e89b869f2f877b5eb2635b8797731791
+# Source0-md5:	989ed213235818445a396a0f0e173bf1
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -30,17 +30,17 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2.0.6
 BuildRequires:	intltool >= 0.22
-BuildRequires:	libglade2-devel >= 2.0.1
-BuildRequires:	libgnomecanvas-devel >= 2.0.3
-BuildRequires:	libgnome-devel >= 2.0.6
-BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
 BuildRequires:	libart_lgpl-devel >= 2.3.14
+BuildRequires:	libglade2-devel >= 2.0.1
+BuildRequires:	libgnome-devel >= 2.0.6
+BuildRequires:	libgnomecanvas-devel >= 2.0.3
+BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
+BuildRequires:	libgsf-devel >= 1.8.1-2
 BuildRequires:	librsvg-devel >= 2.0.1
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.24
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	libgsf-devel >= 1.8.1-2
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
@@ -49,8 +49,8 @@ Requires(postun):	/usr/sbin/groupdel
 Requires(post,preun):	/sbin/chkconfig
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	libgnome >= 2.1.0-3
-Requires:	which
 Requires:	sessreg
+Requires:	which
 Obsoletes:	xdm kdm wdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
