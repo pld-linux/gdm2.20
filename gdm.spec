@@ -11,7 +11,7 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.1.0
+Version:	2.4.1.1
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
@@ -39,7 +39,7 @@ BuildRequires:	perl-modules
 BuildRequires:	scrollkeeper >= 0.3.11
 Requires:	libgnome >= 2.1.0-3
 Requires:	which
-Requires:	/usr/X11R6/bin/sessreg
+Requires:	sessreg
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
