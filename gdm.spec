@@ -23,7 +23,7 @@ BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
-BuildRequires:	libglade-devel
+BuildRequires:	libglade-gnome-devel
 BuildRequires:	libtool
 BuildRequires:	libxml-devel
 BuildRequires:	perl-modules
@@ -32,9 +32,13 @@ BuildRequires:	intltool >= 0.14
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
-PreReq:		scrollkeeper
-PreReq:		shadow
-PreReq:		/sbin/chkconfig
+Requires(pre):	/bin/id
+Requires(pre):	/usr/sbin/groupadd
+Requires(pre):	/usr/sbin/useradd
+Requires(postun):	/usr/sbin/userdel
+Requires(postun):	/usr/sbin/groupdel
+Requires(post,postun):	scrollkeeper
+Requires(post,preun):	/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
@@ -117,8 +121,6 @@ touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 mv $RPM_BUILD_ROOT%{_applnkdir}/System/gdmconfig.desktop \
 	$RPM_BUILD_ROOT%{_applnkdir}/Settings/GNOME/
 
-gzip -9nf AUTHORS ChangeLog NEWS README TODO
-
 %find_lang %{name} --all-name --with-gnome
 
 %clean
@@ -159,7 +161,7 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/gdm
 %attr(755,root,root) %{_bindir}/gdmchooser
 %attr(755,root,root) %{_bindir}/gdmconfig
