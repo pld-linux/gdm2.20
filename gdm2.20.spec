@@ -11,13 +11,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.6.0.2
+Version:	2.6.0.3
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	037435f440c0d179eb10495172d4e872
+# Source0-md5:	2eb8c0fb4289d78fdae686aee3cfbd5c
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -31,9 +31,9 @@ BuildRequires:	attr-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.4.1
+BuildRequires:	gtk+2-devel >= 2:2.4.3
 BuildRequires:	intltool >= 0.30
-BuildRequires:	libglade2-devel >= 1:2.3.6
+BuildRequires:	libglade2-devel >= 1:2.4.0
 BuildRequires:	libgnome-devel >= 2.6.1
 BuildRequires:	libgnomecanvas-devel >= 2.6.1
 BuildRequires:	libgnomeui-devel >= 2.6.1
@@ -266,6 +266,7 @@ fi
 %{_datadir}/gdm
 #%%{_datadir}/xsessions  -  moved to gnome-session
 %{_datadir}/xsessions/default.desktop
+%{_iconsdir}/hicolor/*/apps/*.png
 %{_omf_dest_dir}/gdm
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
 %{_mandir}/man1/gdm*
