@@ -24,6 +24,7 @@ Source3:	%{name}-pld-logo.png
 # http://cvs.pld-linux.org/cgi-bin/cvsweb/pld-artwork/gdm/storky/
 Source4:	%{name}-storky.tar.gz
 # Source4-md5:	e293fbe4a60004056f6894463b874ae8
+Source5:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
@@ -175,6 +176,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 mv $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop $RPM_BUILD_ROOT%{_datadir}/xsessions
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
+install %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
