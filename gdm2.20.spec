@@ -7,7 +7,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.2.5.4
-Release:	9
+Release:	10
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -19,6 +19,7 @@ Source4:	%{name}-pld-logo.png
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-am_fixes.patch
 Patch2:		%{name}-permissions.patch
+Patch3:		%{name}-omf.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel
@@ -106,6 +107,7 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 rm -f missing
