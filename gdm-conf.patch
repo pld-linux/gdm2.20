@@ -13,11 +13,11 @@ diff -urN gdm-2.4.1.1.orig/config/gdm.conf.in gdm-2.4.1.1/config/gdm.conf.in
  # doesn't always work, only if those clients have a window of their own
  KillInitClients=true
 @@ -157,7 +157,7 @@
- # The 'theme'.  By default we're using the default gtk theme
- # Of course assuming that gtk got installed in the same prefix,
- # if not change this.
+ # The specific gtkrc file we use.  It should be the full path to the gtkrc
+ # that we need.  Unless you need a specific gtkrc that doesn't correspond to
+ # a specific theme, then just use the GtkTheme key
 -#GtkRC=@EXPANDED_DATADIR@/themes/Default/gtk/gtkrc
 +GtkRC=@EXPANDED_DATADIR@/themes/Default/gtk-2.0/gtkrc
- # Maximum size of an icon, larger icons are scaled down
- MaxIconWidth=128
- MaxIconHeight=128
+ 
+ # The GTK+ theme to use for the gui
+ #GtkTheme=Default

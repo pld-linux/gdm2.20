@@ -1,12 +1,12 @@
 diff -urN gdm-2.4.2.99.orig/daemon/server.c gdm-2.4.2.99/daemon/server.c
 --- gdm-2.4.2.99.orig/daemon/server.c	Fri Aug  1 01:39:23 2003
 +++ gdm-2.4.2.99/daemon/server.c	Fri Aug  1 01:40:23 2003
-@@ -1013,7 +1013,7 @@
+@@ -1061,7 +1061,7 @@
          /* Log all output from spawned programs to a file */
- 	logfile = g_strconcat (GdmLogDir, "/", d->name, ".log", NULL);
- 	IGNORE_EINTR (unlink (logfile));
--	logfd = open (logfile, O_CREAT|O_TRUNC|O_WRONLY|O_EXCL, 0644);
-+	logfd = open (logfile, O_CREAT|O_TRUNC|O_WRONLY|O_EXCL, 0640);
+ 	logfile = gdm_make_filename (GdmLogDir, d->name, ".log");
+ 	VE_IGNORE_EINTR (unlink (logfile));
+-	VE_IGNORE_EINTR (logfd = open (logfile, O_CREAT|O_TRUNC|O_WRONLY|O_EXCL, 0644));
++	VE_IGNORE_EINTR (logfd = open (logfile, O_CREAT|O_TRUNC|O_WRONLY|O_EXCL, 0640));
  
  	if (logfd != -1) {
- 		IGNORE_EINTR (dup2 (logfd, 1));
+ 		VE_IGNORE_EINTR (dup2 (logfd, 1));
