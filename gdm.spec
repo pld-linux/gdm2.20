@@ -53,14 +53,19 @@ BuildRequires:	scrollkeeper
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires(postun):	/usr/sbin/userdel
 Requires(postun):	/usr/sbin/groupdel
+Requires(postun):	/usr/sbin/userdel
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	libgnome >= 2.6.1
 Requires:	sessreg
 Requires:	which
 Requires:	pam >= 0.77.3-7
-Obsoletes:	xdm kdm wdm
+Provides:	group(xdm)
+Provides:	user(xdm)
+Obsoletes:	X11-xdm
+Obsoletes:	kdm
+Obsoletes:	wdm
+Obsoletes:	xdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -201,9 +206,12 @@ if [ -n "`getgid xdm`" ]; then
 else
 	/usr/sbin/groupadd -g 55 -r -f xdm
 fi
-
-
-if [ -z "`id -u xdm 2>/dev/null`" ]; then
+if [ -n "`/bin/id -u xdm 2>/dev/null`" ]; then
+	if [ "`/bin/id -u xdm`" != "55" ]; then
+		echo "Error: user xdm doesn't have UID=55. Correct this before installing xdm." 1>&2
+		exit 1
+	fi
+else
 	/usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
 fi
 
@@ -213,10 +221,8 @@ fi
 %postun
 /usr/bin/scrollkeeper-update
 if [ "$1" = "0" ]; then
-	if [ -n "`id -u xdm 2>/dev/null`" ]; then
-		/usr/sbin/userdel xdm
-	fi
-	/usr/sbin/groupdel xdm
+	%userremove xdm
+	%groupremove xdm
 fi
 
 %post init
