@@ -167,7 +167,15 @@ rm -f $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/modules/*.{la,a}
 rm -rf $RPM_BUILD_ROOT
 
 %pre
-/usr/sbin/groupadd -g 55 -r -f xdm
+if [ -n "`getgid xdm`" ]; then
+	if [ "`getgid xdm`" != "55" ]; then
+                echo "Error: group xdm doesn't have gid=55. Correct this before installing %{name}." 1>&2
+                exit 1
+        fi
+else
+	/usr/sbin/groupadd -g 55 -r -f xdm
+fi
+
 
 if [ -z "`id -u xdm 2>/dev/null`" ]; then
        /usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
