@@ -6,7 +6,7 @@
 Summary:	GNOME Display Manager
 Summary(es):	Administrador de Entrada del GNOME
 Summary(ja):	GNOME ¥Ç¥£¥¹¥×¥ì¥¤¥Ş¥Í¡¼¥¸¥ã
-Summary(pl):	gdm
+Summary(pl):	gdm - zarz±dca ekranów GNOME
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	äÉÓĞÌÅÊÎÙÊ ÍÅÎÅÄÖÅÒ GNOME
 Summary(uk):	äÉÓĞÌÅÊÎÉÊ ÍÅÎÅÄÖÅÒ GNOME
@@ -79,7 +79,7 @@ Manager ¤ÎºÆ¼ÂÁõÈÇ¤Ç¤¹¡£ Gdm ¤ò»È¤¦¤È¡¢ X Window System
 %description -l pl
 Gdm jest wysokokonfigurowaln± reimplementacj± xdma. Gdm pozwala
 logowaæ siê do systemu z poziomu X11 i wspiera jednoczesn± pracê kilku
-ró¿nych Xsesji na lokalnej maszynie.
+ró¿nych sesji X na lokalnej maszynie.
 
 %description -l pt_BR
 Gerenciador de Entrada do GNOME.
