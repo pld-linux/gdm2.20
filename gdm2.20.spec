@@ -1,12 +1,13 @@
 # TODO:
 # s=/dev/null=/home/services/xdm= in %%trigger for gracefull upgrade from xdm/kdm/gdm 2.2
+# check /etc/pam.d/gdm-autologin
 #
 Summary:	GNOME Display Manager
 Summary(es):	Administrador de Entrada del GNOME
 Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
-Version:	2.3.90.6
+Version:	2.4.0.0
 Release:	1
 Epoch:		1
 License:	LGPL/GPL
@@ -21,15 +22,15 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	perl-modules
-BuildRequires:	scrollkeeper >= 0.1.4
-BuildRequires:	intltool >= 0.14
-BuildRequires:	gtk+2-devel >= 2.0.2
-BuildRequires:	libglade2-devel >= 1.99.2
-BuildRequires:	libgnome-devel >= 1.99.0
-BuildRequires:	libgnomeui-devel >= 1.99.0
-BuildRequires:	libgnomecanvas-devel >= 1.109.0
-BuildRequires:	librsvg-devel >= 1.1.1
-BuildRequires:	libxml2-devel >= 2.4.12
+BuildRequires:	scrollkeeper >= 0.3.6
+BuildRequires:	intltool >= 0.22
+BuildRequires:	gtk+2-devel >= 2.0.3
+BuildRequires:	libglade2-devel >= 2.0.0
+BuildRequires:	libgnome-devel >= 2.0.1
+BuildRequires:	libgnomeui-devel >= 2.0.1
+BuildRequires:	libgnomecanvas-devel >= 2.0.1
+BuildRequires:	librsvg-devel >= 1.1.6
+BuildRequires:	libxml2-devel >= 2.4.22
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
 PreReq:		scrollkeeper
