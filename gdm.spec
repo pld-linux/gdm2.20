@@ -1,14 +1,14 @@
 Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
-Version:	2.2.4.3
+Version:	2.2.5.1
 Release:	1
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/%{name}/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
