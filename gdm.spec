@@ -12,7 +12,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.0.11
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -29,7 +29,7 @@ BuildRequires:	gtk+2-devel >= 2.0.6
 BuildRequires:	intltool >= 0.22
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomecanvas-devel >= 2.0.3
-BuildRequires:	libgnome-devel >= 2.0.3
+BuildRequires:	libgnome-devel >= 2.1.0-3
 BuildRequires:	libgnomeui-devel >= 2.0.4
 BuildRequires:	librsvg-devel >= 2.0.1
 BuildRequires:	libtool
@@ -37,6 +37,7 @@ BuildRequires:	libxml2-devel >= 2.4.24
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	scrollkeeper >= 0.3.11
+Requires:	libgnome >= 2.1.0-3
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
 Requires(pre):	/bin/id
