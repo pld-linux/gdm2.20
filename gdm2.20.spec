@@ -8,12 +8,6 @@ Release:	3
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
-Group(de):	X11/Applikationen
-Group(es):	X11/Aplicaciones
-Group(fr):	X11/Applications
-Group(pl):	X11/Aplikacje
-Group(pt_BR):	X11/Aplicações
-Group(pt):	X11/Aplicações
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1:	%{name}.pamd
 Source2:	%{name}.init
@@ -73,12 +67,6 @@ Gerenciador de Entrada do GNOME.
 Summary:	Xnest (ie embedded X) server for GDM
 Summary(pl):	Serwer Xnest dla GDM
 Group:		X11/Applications
-Group(de):	X11/Applikationen
-Group(es):	X11/Aplicaciones
-Group(fr):	X11/Applications
-Group(pl):	X11/Aplikacje
-Group(pt_BR):	X11/Aplicações
-Group(pt):	X11/Aplicações
 Requires:	%{name} = %{version}
 Requires:	XFree86-Xnest
 
