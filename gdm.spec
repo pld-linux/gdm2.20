@@ -13,7 +13,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.2.98
-Release:	0.9
+Release:	0.10
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -48,7 +48,7 @@ Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires(postun):	/usr/sbin/groupdel
 Requires(post,preun):	/sbin/chkconfig
-Requires(post,postun):	/usr/bin/scrollkeeper
+Requires(post,postun):	/usr/bin/scrollkeeper-update
 Obsoletes:	xdm kdm wdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
