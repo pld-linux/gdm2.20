@@ -48,6 +48,7 @@ Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires(postun):	/usr/sbin/groupdel
 Requires(post,preun):	/sbin/chkconfig
+Requires(post,postun):	/usr/bin/scrollkeeper
 Obsoletes:	xdm kdm wdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -169,7 +170,11 @@ if [ -z "`id -u xdm 2>/dev/null`" ]; then
        /usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
 fi
 
+%post
+/usr/bin/scrollkeeper-update
+
 %postun
+/usr/bin/scrollkeeper-update
 if [ "$1" = "0" ]; then
        if [ -n "`id -u xdm 2>/dev/null`" ]; then
                /usr/sbin/userdel xdm
