@@ -2,7 +2,8 @@ diff -Nuard gdm-2.2.5.5.orig/docs/gdmconfig/C/gdmconfig-C.omf gdm-2.2.5.5/docs/g
 --- gdm-2.2.5.5.orig/docs/gdmconfig/C/gdmconfig-C.omf	Sun Mar  4 17:24:41 2001
 +++ gdm-2.2.5.5/docs/gdmconfig/C/gdmconfig-C.omf	Wed Oct  2 15:08:55 2002
 @@ -1,14 +1,22 @@
- <?xml version="1.0" standalone="no"?>
+-<?xml version="1.0" standalone="no"?>
++<?xml version="1.0" encoding="UTF-8" ?>
 +<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
  <omf>
    <resource>
@@ -30,7 +31,8 @@ diff -Nuard gdm-2.2.5.5.orig/docs/gdmconfig/C/gdmconfig-C.omf gdm-2.2.5.5/docs/g
 --- gdm-2.2.5.5.orig/docs/gdmconfig/eu/gdmconfig-eu.omf	Thu Jan 22 00:44:10 2004
 +++ gdm-2.2.5.5/docs/gdmconfig/eu/gdmconfig-eu.omf	Thu Jan 22 00:44:10 2004
 @@ -1,14 +1,22 @@
- <?xml version="1.0" standalone="no"?>
+-<?xml version="1.0" standalone="no"?>
++<?xml version="1.0" encoding="UTF-8" ?>
 +<!DOCTYPE omf PUBLIC "-//OMF//DTD Scrollkeeper OMF Variant V1.0//EN" "http://scrollkeeper.sourceforge.net/dtds/scrollkeeper-omf-1.0/scrollkeeper-omf.dtd">
  <omf>
    <resource>
@@ -51,7 +53,7 @@ diff -Nuard gdm-2.2.5.5.orig/docs/gdmconfig/C/gdmconfig-C.omf gdm-2.2.5.5/docs/g
      <format mime="text/sgml"/>
      <identifier url="gdmconfig.sgml"/>
      <language code="eu"/>
-+    <relation seriesid="6670c0da-d607-11d6-9b66-fbf823ee93f7"/>
++    <relation seriesid="3a62c3d9-d261-4c8b-95a0-55e7ea914630"/>
 +    <rights type="GNU GPL" license.version="2" license="http://www.gnu.org/licenses/gpl.html"/>
    </resource>
  </omf>
