@@ -12,7 +12,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.1.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -142,9 +142,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	PAM_PREFIX=/etc \
-	Settingsdir=%{_applnkdir}/Settings/GNOME \
-	Systemdir=%{_applnkdir}/System
+	PAM_PREFIX=/etc
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
@@ -152,9 +150,6 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
-
-mv $RPM_BUILD_ROOT%{_applnkdir}/System/gdmsetup.desktop \
-	$RPM_BUILD_ROOT%{_applnkdir}/Settings/GNOME/
 
 %find_lang %{name} --all-name --with-gnome
 
@@ -225,14 +220,15 @@ fi
 %attr(750,xdm,xdm) /var/lib/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
-%{_applnkdir}/Settings/GNOME/*
-%{_applnkdir}/System/gdmflexiserver.desktop
+%{_datadir}/applications/gdmsetup.desktop
+%{_datadir}/applications/gdmflexiserver.desktop
+%{_datadir}/gnome/capplets/*
 %{_datadir}/gdm
 
 %files Xnest
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gdmXnestchooser
-%{_applnkdir}/System/gdmflexiserver-xnest.desktop
+%{_datadir}/applications/gdmflexiserver-xnest.desktop
 
 %files init
 %defattr(644,root,root,755)
