@@ -1,4 +1,5 @@
 # TODO:
+# /etc/X11/dm dir should belong to XFree? I is common for KDE and GNOME
 # s=/dev/null=/home/services/xdm= in %%trigger for gracefull upgrade from xdm/kdm/gdm 2.2
 # check /etc/pam.d/gdm-autologin
 #
@@ -12,7 +13,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.2.95
-Release:	0.1
+Release:	0.9
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -156,6 +157,9 @@ touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
 %find_lang %{name} --all-name --with-gnome
 
+# Remove useless files
+rm -f $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/modules/*.{la,a}
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -203,7 +207,6 @@ fi
 %attr(755,root,root) %{_bindir}/gdmflexiserver
 %attr(755,root,root) %{_bindir}/gdmgreeter
 %attr(755,root,root) %{_bindir}/gdmlogin
-#%attr(755,root,root) %{_bindir}/gdmmktemp
 %attr(755,root,root) %{_bindir}/gdmphotosetup
 %attr(755,root,root) %{_bindir}/gdmsetup
 %attr(755,root,root) %{_bindir}/gdmthemetester
@@ -211,16 +214,17 @@ fi
 %attr(755,root,root) %{_libdir}/gdmopen
 %attr(755,root,root) %{_sbindir}/*
 %dir %{_sysconfdir}/gdm
+%dir %{_sysconfdir}/gdm/modules
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Init
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PreSession
-#%attr(755,root,root) %config %{_sysconfdir}/gdm/Sessions
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PostSession
-#%attr(755,root,root) %config %{_sysconfdir}/gdm/gnomerc
 %attr(755,root,root) %config %{_sysconfdir}/gdm/XKeepsCrashing
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Xsession
 %config %{_sysconfdir}/gdm/factory-gdm.conf
 %config %{_sysconfdir}/gdm/PostLogin/Default.sample
-%config %{_sysconfdir}/gdm/modules
+%config %{_sysconfdir}/gdm/modules/*
+%{_sysconfdir}/dm/Sessions/*.desktop
+
 %config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/gdm/gdm.conf
 %config %{_sysconfdir}/gdm/locale.alias
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm*
