@@ -7,7 +7,7 @@ Summary(es):	Administrador de Entrada del GNOME
 Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
-Version:	2.4.0.0
+Version:	2.4.0.2
 Release:	1
 Epoch:		1
 License:	LGPL/GPL
@@ -161,6 +161,7 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/gdm
+%attr(755,root,root) %{_bindir}/gdm-binary
 %attr(755,root,root) %{_bindir}/gdmchooser
 %attr(755,root,root) %{_bindir}/gdmflexiserver
 %attr(755,root,root) %{_bindir}/gdmgreeter
