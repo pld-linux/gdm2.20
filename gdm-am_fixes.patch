@@ -1,6 +1,7 @@
---- gdm-2.2.5.4/config/Makefile.am~	Tue Jan 29 02:28:03 2002
-+++ gdm-2.2.5.4/config/Makefile.am	Tue Jan 29 02:28:03 2002
-@@ -31,85 +31,25 @@
+diff -u -r gdm-2.2.5.4/config/Makefile.am gdm-2.2.5.4.new/config/Makefile.am
+--- gdm-2.2.5.4/config/Makefile.am	Fri Dec  7 06:15:49 2001
++++ gdm-2.2.5.4.new/config/Makefile.am	Sun Oct 27 13:02:32 2002
+@@ -31,85 +31,26 @@
  	cat $^ | $(srcdir)/extract-shell.sh > gettextfoo.h
  
  install-data-hook: gdm.conf gnomerc Gnome
@@ -97,7 +98,8 @@
 +	$(INSTALL_SCRIPT) PreSession $(DESTDIR)$(predir)/Default
 +	$(INSTALL_SCRIPT) PostSession $(DESTDIR)$(postdir)/Default
 +	$(INSTALL_SCRIPT) gnomerc $(DESTDIR)$(gnomercdir)/gnomerc
-+	$(INSTALL_SCRIPT) Default.redhat $(DESTDIR)$(sessdir)/Default
++	(echo "#!/bin/sh"; echo; echo "exec $(sessdir)/Xsession") > Default.pld
++	$(INSTALL_SCRIPT) Default.pld $(DESTDIR)$(sessdir)/Default
 +
 +	chown gdm $(DESTDIR)$(authdir) || :
 +	chogrp gdm $(DESTDIR)$(authdir) || :
@@ -105,7 +107,7 @@
  
  	system=`uname`; \
  	if test -f /usr/include/security/pam_appl.h; then \
-@@ -124,6 +64,6 @@
+@@ -124,6 +65,6 @@
  		$(INSTALL_DATA) gdm-autologin $(DESTDIR)$(PAM_PREFIX)/pam.d/gdm-autologin; \
  	   fi; \
  	   if test $$system = SunOS; then \
@@ -113,8 +115,9 @@
 +		echo "Please add PAM authentication for gdm and gdm-autologin in $(DESTDIR)$(PAM_PREFIX)/pam.conf!"; \
  	   fi; \
  	fi
---- gdm-2.2.5.4/daemon/Makefile.am~	Tue Jan 29 02:32:48 2002
-+++ gdm-2.2.5.4/daemon/Makefile.am	Tue Jan 29 02:32:48 2002
+diff -u -r gdm-2.2.5.4/daemon/Makefile.am gdm-2.2.5.4.new/daemon/Makefile.am
+--- gdm-2.2.5.4/daemon/Makefile.am	Wed Dec  5 01:24:16 2001
++++ gdm-2.2.5.4.new/daemon/Makefile.am	Sun Oct 27 13:01:00 2002
 @@ -1,9 +1,6 @@
  ## Process this file with automake to produce makefile.in
 -CFLAGS = @CFLAGS@ -g -Wall \
@@ -126,8 +129,9 @@
  
  INCLUDES = \
  	-I.						\
---- gdm-2.2.5.4/docs/sgmldocs.make~	Tue Jan 29 02:41:23 2002
-+++ gdm-2.2.5.4/docs/sgmldocs.make	Tue Jan 29 02:41:23 2002
+diff -u -r gdm-2.2.5.4/docs/sgmldocs.make gdm-2.2.5.4.new/docs/sgmldocs.make
+--- gdm-2.2.5.4/docs/sgmldocs.make	Fri Aug 24 09:18:15 2001
++++ gdm-2.2.5.4.new/docs/sgmldocs.make	Sun Oct 27 13:01:00 2002
 @@ -58,7 +58,7 @@
  	-cp $(docname)/index.html .
  
