@@ -48,7 +48,7 @@ CFLAGS="$RPM_OPT_FLAGS" \
 	--prefix=%{_prefix} \
 	--sysconfdir=%{_sysconfdir} \
 	--localstatedir=/var/lib
-make
+%{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
