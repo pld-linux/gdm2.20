@@ -13,7 +13,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.5.90.1
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -26,6 +26,7 @@ Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
+Patch4:		%{name}-locale-names.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -101,7 +102,7 @@ Window та п╕дтриму╓ роботу к╕лькох р╕зних X сеанс╕в одночасно.
 Summary:	Xnest (ie embedded X) server for GDM
 Summary(pl):	Serwer Xnest dla GDM
 Group:		X11/Applications
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	XFree86-Xnest
 
 %description Xnest
@@ -114,7 +115,7 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 Summary:	Init script for GDM
 Summary(pl):	Skrypt init dla GDM-a
 Group:		X11/Applications
-Requires:	%{name} = %{epoch}:%{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	open
 
 %description init
@@ -129,6 +130,9 @@ Skrypt init dla GDM-a.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+
+mv po/{no,nb}.po
 
 %build
 rm -f missing
@@ -152,7 +156,7 @@ intltoolize --copy --force
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
-	$RPM_BUILD_ROOT/home/services/xdm
+	$RPM_BUILD_ROOT{/home/services/xdm,/var/log/gdm}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -253,6 +257,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
 %attr(750,xdm,xdm) /var/lib/gdm
+%attr(750,xdm,xdm) /var/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
 %{_desktopdir}/gdmsetup.desktop
