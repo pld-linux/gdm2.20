@@ -13,7 +13,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.4.3
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -25,6 +25,7 @@ Source3:	%{name}-pld-logo.png
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
+Patch3:		%{name}-logdir.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -125,6 +126,7 @@ Skrypt init dla GDM-a.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 %build
 rm -f missing
