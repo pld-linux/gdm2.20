@@ -51,6 +51,6 @@ rm -rf $RPM_BUILD_ROOT
 %{prefix}/bin/gdmgreeter
 %{prefix}/bin/gdmchooser
 %attr (750, gdm, gdm) %{prefix}/var/gdm
-%attr (-, root, root) %{prefix}/share/locale/*/*
+%attr (-,root,root) %{prefix}/share/locale/*/*
 %config %{prefix}/etc/gdm
 %config %{prefix}/etc/gnomerc
