@@ -1,7 +1,10 @@
 Summary:	GNOME Display Manager
 Summary(es):	Administrador de Entrada del GNOME
+Summary(ja):	GNOME ╔г╔ё╔╧╔в╔Л╔╓╔ч╔м║╪╔╦╔Ц
 Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
+Summary(ru):	Дисплейный менеджер GNOME
+Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.2.5.4
 Release:	7
@@ -23,12 +26,11 @@ BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
+BuildRequires:	intltool >= 0.14
 BuildRequires:	libglade-gnome-devel
-BuildRequires:	libtool
 BuildRequires:	libxml-devel
 BuildRequires:	perl-modules
 BuildRequires:	scrollkeeper
-BuildRequires:	intltool >= 0.14
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
@@ -37,8 +39,8 @@ Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires(postun):	/usr/sbin/groupdel
-Requires(post,postun):	scrollkeeper
-Requires(post,preun):	/sbin/chkconfig
+Requires(post,postun):scrollkeeper
+Requires(post,preun):/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
@@ -60,6 +62,14 @@ several different X sessions on your local machine at the same time.
 %description -l es
 Administrador de Entrada del GNOME.
 
+%description -l ja
+Gdm (the GNOME Display Manager) ╓о║╒╧Беы╓кюъдЙ╡дг╫╓й xdm X Display
+Manager ╓н╨ф╪баУхг╓г╓╧║ё Gdm ╓Р╩х╓╕╓х║╒ X Window System
+╓╛ф╟╓╓╓ф╓╓╓К╓╒╓й╓©╓н
+╔╥╔╧╔ф╔Ю╓к╓╓╓М╓╓╓М╓й╔╩╔ц╔╥╔Г╔С╓Ра╙бР╓╥╓ф╔М╔╟╔╓╔С╓╧╓К╓Ё╓х╓╛╓г╓╜╓ч╓╧║ё
+
+╓Ё╓н╔п║╪╔╦╔Г╔С╓н Gdm ╓г╓о║╒Ёф╪О╦ю╦Л╓Д║╒XIM ╓Ра╙бР╓╧╓К╓Ё╓х╓Б╡дг╫╓г╓╧║ё
+
 %description -l pl
 Gdm jest wysokokonfigurowaln╠ reimplementacj╠ xdma. Gdm pozwala
 logowaФ siЙ do systemu z poziomu X11 i wspiera jednoczesn╠ pracЙ kilku
@@ -67,6 +77,16 @@ rС©nych Xsesji na lokalnej maszynie.
 
 %description -l pt_BR
 Gerenciador de Entrada do GNOME.
+
+%description -l ru
+GDM (GNOME Display Manager) - это реимплементация xdm (X Display
+Manager). GDM позволяет вам входить в систему, на которой запущено X
+Window и поддерживает работу нескольуих разных X сеансов одновременно.
+
+%description -l uk
+GDM (GNOME Display Manager) - це ре╕мплементац╕я xdm (X Display
+Manager). GDM дозволя╓ вам входити в систему, на як╕й запущено X
+Window та п╕дтриму╓ роботу к╕лькох р╕зних X сеанс╕в одночасно.
 
 %package Xnest
 Summary:	Xnest (ie embedded X) server for GDM
@@ -91,6 +111,7 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 rm -f missing
 %{__libtoolize}
 %{__gettextize}
+intltoolize --copy --force
 aclocal -I %{_aclocaldir}/gnome
 %{__autoconf}
 %{__automake}
@@ -108,6 +129,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
+	PAM_PREFIX=/etc \
 	Settingsdir=%{_applnkdir}/Settings/GNOME \
 	Systemdir=%{_applnkdir}/System \
 	omf_dest_dir=%{_omf_dest_dir}/%{name}
@@ -115,7 +137,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/gdm.conf
-install %{SOURCE4} $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+install %{SOURCE4} $RPM_BUILD_ROOT%{_pixmapsdir}
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
 mv $RPM_BUILD_ROOT%{_applnkdir}/System/gdmconfig.desktop \
