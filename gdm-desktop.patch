@@ -11,14 +11,36 @@ diff -urN aa/gdm-2.6.0.3/gui/gdmphotosetup.desktop.in gdm-2.6.0.3/gui/gdmphotose
  X-GNOME-Bugzilla-Product=gdm
  X-GNOME-Bugzilla-Component=general
 diff -urN gdm-2.6.0.3-patrys/gui/gdmsetup.desktop.in gdm-2.6.0.3/gui/gdmsetup.desktop.in
---- gdm-2.6.0.3-patrys/gui/gdmsetup.desktop.in	2003-07-28 17:59:52.000000000 +0200
-+++ gdm-2.6.0.3/gui/gdmsetup.desktop.in	2004-07-26 01:38:53.871528568 +0200
+--- gdm-2.6.0.3/gui/gdmsetup.desktop.in	2004-07-26 01:38:53.871528568 +0200
++++ gdm-2.6.0.3-patrys/gui/gdmsetup.desktop.in	2003-07-28 17:59:52.000000000 +0200
 @@ -9,7 +9,7 @@
  StartupNotify=true
  Terminal=false
  Type=Application
 -Categories=Application;System;SystemSetup;X-Red-Hat-Base;
 +Categories=GTK;GNOME;Settings;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=gdm
+ X-GNOME-Bugzilla-Component=general
+--- gdm-2.6.0.6/gui/gdmflexiserver-xnest.desktop.in2	2004-07-13 21:46:30.865876104 +0100
++++ gdm-2.6.0.6-patrys/gui/gdmflexiserver-xnest.desktop.in	2004-12-06 20:19:28.000000000 +0200
+@@ -10,7 +10,7 @@
+ Icon=gdm-xnest
+ Terminal=false
+ Type=Application
+-Categories=Application;System;
++Categories=GTK;GNOME;Settings;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=gdm
+ X-GNOME-Bugzilla-Component=general
+--- gdm-2.6.0.6/gui/gdmflexiserver.desktop.in	2004-05-13 20:19:28.000000000 +0200
++++ gdm-2.6.0.6-patrys/gui/gdmflexiserver.desktop.in	2004-12-06 23:09:20.413390048 +0100
+@@ -7,7 +7,7 @@
+ Icon=gdm
+ Terminal=false
+ Type=Application
+-Categories=Application;System;
++Categories=GTK;GNOME;System;
  X-GNOME-Bugzilla-Bugzilla=GNOME
  X-GNOME-Bugzilla-Product=gdm
  X-GNOME-Bugzilla-Component=general
