@@ -29,7 +29,7 @@ BuildRequires:	gtk+2-devel >= 2.0.6
 BuildRequires:	intltool >= 0.22
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomecanvas-devel >= 2.0.3
-BuildRequires:	libgnome-devel >= 2.1.0-3
+BuildRequires:	libgnome-devel >= 2.0.6
 BuildRequires:	libgnomeui-devel >= 2.0.4
 BuildRequires:	librsvg-devel >= 2.0.1
 BuildRequires:	libtool
