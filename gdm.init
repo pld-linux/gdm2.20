@@ -5,7 +5,7 @@
 # Version:	@(#) /etc/rc.d/init.d/gdm 0.1
 #
 # chkconfig:	5 95 5
-# description:	Starts and stops the Gnome Display Manager at startup and
+# description:	Starts and stops the Gnome Display Manager at startup and \
 #		shutdown..
 #
 # config:	/etc/X11/gdm/gdm-config
