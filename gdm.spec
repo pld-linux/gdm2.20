@@ -195,16 +195,16 @@ rm -rf $RPM_BUILD_ROOT
 %pre
 if [ -n "`getgid xdm`" ]; then
 	if [ "`getgid xdm`" != "55" ]; then
-                echo "Error: group xdm doesn't have gid=55. Correct this before installing %{name}." 1>&2
-                exit 1
-        fi
+		echo "Error: group xdm doesn't have gid=55. Correct this before installing %{name}." 1>&2
+		exit 1
+	fi
 else
 	/usr/sbin/groupadd -g 55 -r -f xdm
 fi
 
 
 if [ -z "`id -u xdm 2>/dev/null`" ]; then
-       /usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
+	/usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
 fi
 
 %post
@@ -213,10 +213,10 @@ fi
 %postun
 /usr/bin/scrollkeeper-update
 if [ "$1" = "0" ]; then
-       if [ -n "`id -u xdm 2>/dev/null`" ]; then
-               /usr/sbin/userdel xdm
-       fi
-       /usr/sbin/groupdel xdm
+	if [ -n "`id -u xdm 2>/dev/null`" ]; then
+		/usr/sbin/userdel xdm
+	fi
+	/usr/sbin/groupdel xdm
 fi
 
 %post init
@@ -262,7 +262,7 @@ fi
 %config %{_sysconfdir}/gdm/PostLogin/Default.sample
 %config %{_sysconfdir}/gdm/modules/*
 
-%config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/gdm/gdm.conf
+%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gdm/gdm.conf
 %config %{_sysconfdir}/gdm/locale.alias
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
