@@ -1,23 +1,33 @@
 Summary:	GNOME Display Manager
+Summary(es):	Administrador de Entrada del GNOME
 Summary(pl):	gdm
+Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
-Version:	2.2.5.2
-Release:	2
+Version:	2.2.5.4
+Release:	1
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
+Group(es):	X11/Aplicaciones
 Group(pl):	X11/Aplikacje
+Group(pt_BR):	X11/Aplicações
+Group(pt):	X11/Aplicações
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
 Patch0:		%{name}-xdmcp.patch
-BuildRequires:	gnome-libs-devel
-BuildRequires:	gtk+-devel
+Patch1:		%{name}-am_fixes.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	esound-devel
 BuildRequires:	gdk-pixbuf-devel
+BuildRequires:	gettext-devel
+BuildRequires:	gnome-libs-devel
+BuildRequires:	gtk+-devel
 BuildRequires:	libglade-devel
+BuildRequires:	libtool
 BuildRequires:	libxml-devel
 BuildRequires:	perl-modules
 BuildRequires:	scrollkeeper
@@ -35,6 +45,7 @@ Obsoletes:	xdm kdm wdm
 %define		_datadir	%{_prefix}/share
 %define		_sbindir	%{_prefix}/sbin
 %define		_mandir		%{_prefix}/man
+%define		_localstatedir	/var/lib
 %define		_sysconfdir	/etc/X11
 %define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
 
@@ -42,50 +53,72 @@ Obsoletes:	xdm kdm wdm
 gdm manages local and remote displays and provides the user with a
 graphical login window.
 
+%description -l es
+Administrador de Entrada del GNOME.
+
 %description -l pl
 gdm zarz±dza lokalnymi i zdalnymi X serwerami i udostêpnia
 u¿ytkownikowi graficzne okienko logowania.
 
+%description -l pt_BR
+Gerenciador de Entrada do GNOME.
+
+%package Xnest
+Summary:	Xnest (ie embedded X) server for GDM
+Group:		X11/Applications
+Group(de):	X11/Applikationen
+Group(es):	X11/Aplicaciones
+Group(pl):	X11/Aplikacje
+Group(pt_BR):	X11/Aplicações
+Group(pt):	X11/Aplicações
+Requires:	%{name} = %{version}
+Requires:	XFree86-Xnest
+
+%description Xnest
+Gdm (the GNOME Display Manager) is a highly configurable
+reimplementation of xdm, the X Display Manager. Gdm allows you to log
+into your system with the X Window System running and supports running
+several different X sessions on your local machine at the same time.
+
+This package add support for Xnest server in gdm.
+
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
-CFLAGS="%{rpmcflags} -I/usr/X11R6/include/libglade-1.0" \
-./configure %{_target_platform} \
-	--prefix=%{_prefix} \
-	--sysconfdir=%{_sysconfdir} \
-	--localstatedir=/var/lib
+rm -f missing
+libtoolize --copy --force
+gettextize --copy --force
+aclocal -I %{_aclocaldir}/gnome
+autoconf
+automake -a -c
+%configure \
+	--with-xinerama=yes \
+	--with-xdmcp=yes \
+	--with-tcp-wrappers=yes \
+	--enable-console-helper
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d/ \
-	$RPM_BUILD_ROOT{%{_prefix},/etc/{pam.d,security}}
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security}
 
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
-
-%{__make} install prefix=$RPM_BUILD_ROOT%{_prefix} \
-	sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} \
-	localstatedir=$RPM_BUILD_ROOT/var/lib \
-	Settingsdir=$RPM_BUILD_ROOT%{_applnkdir}/Settings/GNOME \
-	Systemdir=$RPM_BUILD_ROOT%{_applnkdir}/System \
-	omf_dest_dir=$RPM_BUILD_ROOT%{_omf_dest_dir}/omf/%{name}
-
-sed -e "s#$RPM_BUILD_ROOT##g" config/gnomerc >config/gnomerc.X
-install config/gnomerc.X $RPM_BUILD_ROOT%{_sysconfdir}/gdm/gnomerc
-
-sed -e "s#$RPM_BUILD_ROOT##g" $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome \
-	> $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome.X
-
-mv -f $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome.X \
-	$RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	Settingsdir=%{_applnkdir}/Settings/GNOME \
+	Systemdir=%{_applnkdir}/System \
+	omf_dest_dir=%{_omf_dest_dir}/omf/%{name}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
+install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/gdm.conf
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/gdm.conf
+mv $RPM_BUILD_ROOT%{_applnkdir}/System/gdmconfig.desktop \
+	$RPM_BUILD_ROOT%{_applnkdir}/Settings/GNOME/
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
@@ -130,25 +163,36 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc *.gz
-%attr(775,root,xdm) %{_bindir}/*
-%attr(775,root,xdm) %{_sbindir}/*
-%attr(775,root,xdm) %config %{_sysconfdir}/gdm/Init
-%attr(775,root,xdm) %config %{_sysconfdir}/gdm/PreSession
-%attr(775,root,xdm) %config %{_sysconfdir}/gdm/Sessions
-%attr(775,root,xdm) %config %{_sysconfdir}/gdm/PostSession
-%attr(775,root,xdm) %config %{_sysconfdir}/gdm/gnomerc
-%attr(775,root,xdm) %config %{_sysconfdir}/gdm/XKeepsCrashing
-%attr(664,root,xdm) %config %{_sysconfdir}/gdm/factory-gdm.conf
-%attr(664,root,xdm) %config %{_sysconfdir}/gdm/gdm.conf
-%attr(664,root,xdm) %config %{_sysconfdir}/gdm/locale.alias
-%attr(775,root,xdm) %dir %{_sysconfdir}/gdm
+%attr(755,root,root) %{_bindir}/gdm
+%attr(755,root,root) %{_bindir}/gdmchooser
+%attr(755,root,root) %{_bindir}/gdmconfig
+%attr(755,root,root) %{_bindir}/gdmflexiserver
+%attr(755,root,root) %{_bindir}/gdmlogin
+%attr(755,root,root) %{_bindir}/gdmmktemp
+%attr(755,root,root) %{_bindir}/gdmphotosetup
+%attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %config %{_sysconfdir}/gdm/Init
+%attr(755,root,root) %config %{_sysconfdir}/gdm/PreSession
+%attr(755,root,root) %config %{_sysconfdir}/gdm/Sessions
+%attr(755,root,root) %config %{_sysconfdir}/gdm/PostSession
+%attr(755,root,root) %config %{_sysconfdir}/gdm/gnomerc
+%attr(755,root,root) %config %{_sysconfdir}/gdm/XKeepsCrashing
+%config %{_sysconfdir}/gdm/factory-gdm.conf
+%config %{_sysconfdir}/gdm/gdm.conf
+%config %{_sysconfdir}/gdm/locale.alias
+%attr(755,root,root) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(750,xdm,xdm) /var/lib/gdm
+%attr(750,root,xdm)  /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_pixmapsdir}/*
 # these lines to devel subpackage?
 %{_applnkdir}/Settings/GNOME/*
-%{_applnkdir}/System/*
+%{_applnkdir}/System/gdmflexiserver.desktop
 %{_datadir}/gdm
 %{_omf_dest_dir}/omf/%{name}
+
+%files Xnest
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gdmXnestchooser
+%{_applnkdir}/System/gdmflexiserver-xnest.desktop
