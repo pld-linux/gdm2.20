@@ -2,7 +2,7 @@
 #
 # gdm:		Starts the Gnome Display Manager
 #
-# Version:      @(#) /etc/rc.d/init.d/gdm 0.1
+# Version:	@(#) /etc/rc.d/init.d/gdm 0.1
 #
 # chkconfig:	5 95 5
 # description:	Starts and stops the Gnome Display Manager at startup and
@@ -16,7 +16,7 @@
 
 # Get service config
 if [ -f /etc/sysconfig/gdm ] ; then
-        . /etc/sysconfig/gdm
+	. /etc/sysconfig/gdm
 fi
 
 # See how we were called.
@@ -29,7 +29,8 @@ case "$1" in
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gdm
 	else
-		msg_Already_Running "Gnome Display Manager"
+		msg_already_running "Gnome Display Manager"
+		exit 1
 	fi
 	;;
   stop)
@@ -38,7 +39,8 @@ case "$1" in
 		killproc gdm
 		rm -f /var/lock/subsys/gdm
 	else
-		msg_Not_Running "Gnome Display Manager"
+		msg_not_running "Gnome Display Manager"
+		exit 1
 	fi
 	;;
   status)
@@ -49,7 +51,7 @@ case "$1" in
 	$0 start
 	;;
   *)
-	echo "Usage: $0 {start|stop|status|restart|reload}"
+	msg_usage "$0 {start|stop|restart|reload|status}"
 	exit 1
 esac
 
