@@ -15,7 +15,7 @@ Prereq:		/usr/sbin/groupdel
 Prereq:		/usr/sbin/useradd
 Prereq:		/usr/sbin/userdel
 Prereq:		/sbin/chkconfig
-BuildRoot:	/tmp/%{name}-%{version}-root
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	XFree86-devel
