@@ -17,6 +17,9 @@ Prereq:		/usr/sbin/userdel
 Prereq:		/sbin/chkconfig
 BuildRoot:	/tmp/%{name}-%{version}-root
 BuildRequires:	gnome-libs-devel
+BuildRequires:	gtk+-devel
+BuildRequires:	XFree86-devel
+BuildRequires:	esound-devel
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
