@@ -11,13 +11,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.6.0.4
-Release:	2
+Version:	2.6.0.5
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	3a6986217d4db2afd24fcdbf3b9af722
+# Source0-md5:	8fad6d36c0c9b8f83fceb947b3de1c31
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -28,9 +28,8 @@ Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
-Patch4:		%{name}-locale-names.patch
-Patch5:		%{name}-default_theme.patch
-Patch6:		%{name}-desktop.patch
+Patch4:		%{name}-default_theme.patch
+Patch5:		%{name}-desktop.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf
@@ -143,9 +142,6 @@ Skrypt init dla GDM-a.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
-
-rm po/no.po
 
 %build
 rm -f missing
@@ -186,6 +182,8 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
+
+rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name} --all-name --with-gnome
 
