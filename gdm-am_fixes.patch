@@ -1,0 +1,143 @@
+diff -u -r gdm-2.2.5.4/config/Makefile.am gdm-2.2.5.4.new/config/Makefile.am
+--- gdm-2.2.5.4/config/Makefile.am	Fri Dec  7 06:15:49 2001
++++ gdm-2.2.5.4.new/config/Makefile.am	Sun Oct 27 13:02:32 2002
+@@ -31,85 +31,26 @@
+ 	cat $^ | $(srcdir)/extract-shell.sh > gettextfoo.h
+ 
+ install-data-hook: gdm.conf gnomerc Gnome
+-	if test '!' -d $(confdir); then \
+-		$(mkinstalldirs) $(confdir); \
+-		chmod 755 $(confdir); \
+-	fi
+-	if test '!' -f $(confdir)/gdm.conf; then \
+-		$(INSTALL_DATA) gdm.conf $(confdir)/gdm.conf; \
+-	fi
+-	$(INSTALL_DATA) gdm.conf $(confdir)/factory-gdm.conf
+-
+-	$(INSTALL_SCRIPT) $(srcdir)/XKeepsCrashing $(confdir)/XKeepsCrashing
+-
+-	-if test -f $(localedir)/locale.alias; then \
+-		cp $(localedir)/locale.alias $(localedir)/locale.alias.orig; \
+-	fi
+-	$(INSTALL_DATA) $(srcdir)/locale.alias $(localedir)/locale.alias
+-
+-	if test '!' -d $(sessdir); then \
+-		$(mkinstalldirs) $(sessdir); \
+-		chmod 755 $(sessdir); \
+-	fi
+-
+-	-if test -f $(sessdir)/Xsession; then \
+-		cp $(sessdir)/Xsession $(sessdir)/Xsession.orig; \
+-	fi
+-	$(INSTALL_SCRIPT) $(srcdir)/Xsession $(sessdir)/Xsession
+-
+-	-if test -f $(sessdir)/Gnome; then \
+-		cp $(sessdir)/Gnome $(sessdir)/Gnome.orig; \
+-	fi
+-	$(INSTALL_SCRIPT) Gnome $(sessdir)/Gnome
+-
+-	-if test -f /etc/redhat-release; then \
+-		if test -f $(sessdir)/Default; then \
+-			cp $(sessdir)/Default $(sessdir)/Default.orig; \
+-		fi; \
+-		$(INSTALL_SCRIPT) $(srcdir)/Default.redhat $(sessdir)/Default; \
+-	fi
+-
+-	if test '!' -d $(initdir); then \
+-		$(mkinstalldirs) $(initdir); \
+-		chmod 755 $(initdir); \
+-	fi
+-	-if test -f $(initdir)/Default; then \
+-		cp $(initdir)/Default $(initdir)/Default.orig; \
+-	fi
+-	$(INSTALL_SCRIPT) $(srcdir)/Default $(initdir)/Default
+-
+-	if test '!' -d $(predir); then \
+-		$(mkinstalldirs) $(predir); \
+-		chmod 755 $(predir); \
+-	fi
+-	-if test -f $(predir)/Default; then \
+-		cp $(predir)/Default $(predir)/Default.orig; \
+-	fi
+-	$(INSTALL_SCRIPT) $(srcdir)/PreSession $(predir)/Default
+-
+-	if test '!' -d $(postdir); then \
+-		$(mkinstalldirs) $(postdir); \
+-		chmod 755 $(postdir); \
+-	fi
+-	-if test -f $(postdir)/Default; then \
+-		cp $(postdir)/Default $(postdir)/Default.orig; \
+-	fi
+-	$(INSTALL_SCRIPT) $(srcdir)/PostSession $(postdir)/Default
+-
+-	if test '!' -d $(gnomercdir); then \
+-		$(mkinstalldirs) $(gnomercdir); \
+-		chmod 755 $(gnomercdir); \
+-	fi
+-
+-	if test '!' -f $(gnomercdir)/gnomerc; then \
+-		$(INSTALL_SCRIPT) gnomerc $(gnomercdir)/gnomerc; \
+-	fi
+-
+-	if test '!' -d $(authdir); then \
+-		$(mkinstalldirs) $(authdir); \
+-		chown gdm.gdm $(authdir); \
+-		chmod 750 $(authdir); \
+-	fi
++	$(mkinstalldirs) $(DESTDIR)$(confdir) $(DESTDIR)$(localedir) \
++		$(DESTDIR)$(sessdir) $(DESTDIR)$(initdir) \
++		$(DESTDIR)$(predir) $(DESTDIR)$(postdir) \
++		$(DESTDIR)$(gnomercdir) $(DESTDIR)$(localstatedir)/gdm
++
++	$(INSTALL_DATA) gdm.conf $(DESTDIR)$(confdir)/gdm.conf; \
++	$(INSTALL_DATA) gdm.conf $(DESTDIR)$(confdir)/factory-gdm.conf
++	$(INSTALL_DATA) locale.alias $(DESTDIR)$(localedir)
++	$(INSTALL_SCRIPT) XKeepsCrashing Xsession Gnome $(DESTDIR)$(confdir)
++	$(INSTALL_SCRIPT) Xsession Gnome $(DESTDIR)$(sessdir)
++	$(INSTALL_SCRIPT) Default $(DESTDIR)$(initdir)
++	$(INSTALL_SCRIPT) PreSession $(DESTDIR)$(predir)/Default
++	$(INSTALL_SCRIPT) PostSession $(DESTDIR)$(postdir)/Default
++	$(INSTALL_SCRIPT) gnomerc $(DESTDIR)$(gnomercdir)/gnomerc
++	(echo "#!/bin/sh"; echo; echo "exec $(sessdir)/Xsession") > Default.pld
++	$(INSTALL_SCRIPT) Default.pld $(DESTDIR)$(sessdir)/Default
++
++	chown gdm $(DESTDIR)$(authdir) || :
++	chogrp gdm $(DESTDIR)$(authdir) || :
++	chmod 750 $(DESTDIR)$(authdir)
+ 
+ 	system=`uname`; \
+ 	if test -f /usr/include/security/pam_appl.h; then \
+@@ -124,6 +65,6 @@
+ 		$(INSTALL_DATA) gdm-autologin $(DESTDIR)$(PAM_PREFIX)/pam.d/gdm-autologin; \
+ 	   fi; \
+ 	   if test $$system = SunOS; then \
+-		echo "Please add PAM authentication for gdm and gdm-autologin in $(PAM_PREFIX)/pam.conf!"; \
++		echo "Please add PAM authentication for gdm and gdm-autologin in $(DESTDIR)$(PAM_PREFIX)/pam.conf!"; \
+ 	   fi; \
+ 	fi
+diff -u -r gdm-2.2.5.4/daemon/Makefile.am gdm-2.2.5.4.new/daemon/Makefile.am
+--- gdm-2.2.5.4/daemon/Makefile.am	Wed Dec  5 01:24:16 2001
++++ gdm-2.2.5.4.new/daemon/Makefile.am	Sun Oct 27 13:01:00 2002
+@@ -1,9 +1,6 @@
+ ## Process this file with automake to produce makefile.in
+-CFLAGS = @CFLAGS@ -g -Wall \
+-	-Wpointer-arith \
+-	-Wmissing-prototypes -Wmissing-declarations 
+ 
+-DEFS = @DEFS@ -DGDM_CONFIG_FILE=\"@sysconfdir@/gdm/gdm.conf\"
++DEFS = @DEFS@ -DGDM_CONFIG_FILE=\"$(sysconfdir)/gdm/gdm.conf\"
+ 
+ INCLUDES = \
+ 	-I.						\
+diff -u -r gdm-2.2.5.4/docs/sgmldocs.make gdm-2.2.5.4.new/docs/sgmldocs.make
+--- gdm-2.2.5.4/docs/sgmldocs.make	Fri Aug 24 09:18:15 2001
++++ gdm-2.2.5.4.new/docs/sgmldocs.make	Sun Oct 27 13:01:00 2002
+@@ -58,7 +58,7 @@
+ 	-cp $(docname)/index.html .
+ 
+ $(docname).sgml: $(sgml_ents)
+-        -ourdir=`pwd`;  \
++	ourdir=`pwd`;  \
+         cd $(srcdir);   \
+         cp $(sgml_ents) $$ourdir
+ 
