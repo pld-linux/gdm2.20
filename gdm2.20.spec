@@ -19,6 +19,7 @@ Source2:	%{name}.init
 Source3:	%{name}.conf
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-am_fixes.patch
+Patch2:		%{name}-permissions.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel
@@ -31,6 +32,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml-devel
 BuildRequires:	perl-modules
 BuildRequires:	scrollkeeper
+BuildRequires:	intltool >= 0.14
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
@@ -86,6 +88,7 @@ This package add support for Xnest server in gdm.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 %build
 rm -f missing
@@ -137,7 +140,7 @@ fi
 %post
 /sbin/chkconfig --add gdm
 if [ -f /var/lock/subsys/gdm ]; then
-        /etc/rc.d/init.d/gdm restart >&2
+	echo "Run \"/etc/rc.d/init.d/gdm restart\" to restart gdm." >&2
 else
         echo "Run \"/etc/rc.d/init.d/gdm start\" to start gdm." >&2
 fi
@@ -183,7 +186,7 @@ fi
 %attr(755,root,root) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(750,xdm,xdm)  /var/lib/gdm
+%attr(770,root,xdm)  /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_pixmapsdir}/*
 # these lines to devel subpackage?
