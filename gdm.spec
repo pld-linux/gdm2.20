@@ -1,12 +1,10 @@
 Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
-#Version:	2.0.0
 Version:	2.0beta4
-Release:	1
+Release:	2
 Source0:	ftp://socsci.auc.dk/~mkp/gdm/gdm-2.0beta4.tar.gz
-Source1:	gdm.initd
-Source2:	gdm.pamd
+Source1:	gdm.pamd
 Patch0:		gdm-gnomerc.patch
 Patch1:		gdm-config.patch
 Group:		X11/GNOME
@@ -52,7 +50,7 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{%{_prefix},/etc/{pam.d,security,rc.d/init.d}}
+install -d $RPM_BUILD_ROOT{%{_prefix},/etc/{pam.d,security}}
 
 make install prefix=$RPM_BUILD_ROOT%{_prefix} \
 	sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} \
@@ -67,8 +65,7 @@ sed -e "s#$RPM_BUILD_ROOT##g" $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome \
 mv -f $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome.X \
 	$RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
-install %{SOURCE2} $RPM_BUILD_ROOT/etc/pam.d/gdm
+install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
 strip $RPM_BUILD_ROOT%{_bindir}/* || :
@@ -88,12 +85,7 @@ if [ -z "`id -u xdm 2>/dev/null`" ]; then
 fi
 
 %post
-/sbin/chkconfig --add %{name}
-
-%preun
-if [ "$1" = "0" ]; then
-	/sbin/chkconfig --del %{name}
-fi
+ln -sf %{_bindir}/gdm %{_sysconfdir}/prefdm
 
 %postun
 if [ "$1" = "0" ]; then
@@ -102,6 +94,7 @@ if [ "$1" = "0" ]; then
 	fi
 	
 	/usr/sbin/groupdel xdm
+	rm -f  %{_sysconfdir}/prefdm
 fi
 
 %clean
@@ -123,6 +116,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,xdm,xdm) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(754,root,root) /etc/rc.d/init.d/gdm
 %attr(750,xdm,xdm) /var/state/gdm
 %{_datadir}/pixmaps/*
