@@ -11,8 +11,8 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.0.12
-Release:	2
+Version:	2.4.1.0
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
