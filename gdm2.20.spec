@@ -2,12 +2,28 @@ Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
 Version:	2.0beta4
-Release:	5
+Release:	6
 Source0:	ftp://socsci.auc.dk/~mkp/gdm/%{name}-%{version}.tar.gz
 Source1:	%{name}.pamd
 Source2:	%{name}.init
-Patch0:		%{name}-gnomerc.patch
-Patch1:		%{name}-config.patch
+Patch0:	%{name}-config.patch
+Patch1:	%{name}-gnomerc.patch
+Patch2:	%{name}-chpass.patch
+Patch3:	%{name}-daemonfixes.patch
+Patch4:	%{name}-dumberrmsg.patch
+Patch5:	%{name}-fdleak.patch
+Patch6:	%{name}-fixmessages.patch
+Patch7:	%{name}-i18n.patch
+Patch8:	%{name}-loopofdeath.patch
+Patch9:	%{name}-no_questions_asked.patch
+Patch10:	%{name}-pipewrite.patch
+Patch11:	%{name}-rhlang.patch
+Patch12:	%{name}-system-auth.patch
+Patch13:	%{name}-tolower.patch
+Patch14:	%{name}-usershell.patch
+Patch15:	%{name}-nonbash-shell.patch
+Patch16:	%{name}-xdmcp.patch
+Patch17:	%{name}-ypconfigure.patch
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
@@ -40,8 +56,24 @@ u¿ytkownikowi graficzne okienko logowania.
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
+%patch0 -p1	
+%patch1 -p1	
+%patch2 -p1	
+%patch3 -p1	
+%patch4 -p1	
+%patch5 -p1	
+%patch6 -p1	
+#%patch7 -p1	
+%patch8 -p1	
+%patch9 -p1	
+%patch10 -p1
+%patch11 -p1
+%patch12 -p1
+%patch13 -p1
+%patch14 -p1
+%patch15 -p1
+%patch16 -p1
+%patch17 -p1
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" \
@@ -119,9 +151,9 @@ rm -rf $RPM_BUILD_ROOT
 %files -f gdm.lang
 %defattr(644,root,root,755)
 %doc {AUTHORS,ChangeLog,NEWS,README,TODO}.gz
-%{_bindir}/gdm
-%{_bindir}/gdmlogin
-%{_bindir}/gdmchooser
+%attr(775,root,xdm) %{_bindir}/gdm
+%attr(775,root,xdm) %{_bindir}/gdmlogin
+%attr(775,root,xdm) %{_bindir}/gdmchooser
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/Init
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/PreSession
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/Sessions
@@ -132,6 +164,6 @@ rm -rf $RPM_BUILD_ROOT
 %attr(775,root,xdm) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(770,root,xdm) /var/lib/gdm
+%attr(750,xdm,xdm) /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_datadir}/pixmaps/*
