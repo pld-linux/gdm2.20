@@ -1,7 +1,7 @@
 Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
-Version:	2.2.4.1
+Version:	2.2.4.3
 Release:	1
 Epoch:		1
 License:	LGPL/GPL
@@ -51,7 +51,7 @@ u¿ytkownikowi graficzne okienko logowania.
 %patch -p1
 
 %build
-CFLAGS="%{rpmcflags}" \
+CFLAGS="%{rpmcflags} -I/usr/X11R6/include/libglade-1.0" \
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--sysconfdir=%{_sysconfdir} \
