@@ -6,16 +6,16 @@ Release:	6
 Source0:	ftp://socsci.auc.dk/~mkp/gdm/%{name}-%{version}.tar.gz
 Source1:	%{name}.pamd
 Source2:	%{name}.init
-Patch0:	%{name}-config.patch
-Patch1:	%{name}-gnomerc.patch
-Patch2:	%{name}-chpass.patch
-Patch3:	%{name}-daemonfixes.patch
-Patch4:	%{name}-dumberrmsg.patch
-Patch5:	%{name}-fdleak.patch
-Patch6:	%{name}-fixmessages.patch
-Patch7:	%{name}-i18n.patch
-Patch8:	%{name}-loopofdeath.patch
-Patch9:	%{name}-no_questions_asked.patch
+Patch0:		%{name}-config.patch
+Patch1:		%{name}-gnomerc.patch
+Patch2:		%{name}-chpass.patch
+Patch3:		%{name}-daemonfixes.patch
+Patch4:		%{name}-dumberrmsg.patch
+Patch5:		%{name}-fdleak.patch
+Patch6:		%{name}-fixmessages.patch
+Patch7:		%{name}-i18n.patch
+Patch8:		%{name}-loopofdeath.patch
+Patch9:		%{name}-no_questions_asked.patch
 Patch10:	%{name}-pipewrite.patch
 Patch11:	%{name}-rhlang.patch
 Patch12:	%{name}-system-auth.patch
@@ -76,7 +76,7 @@ u¿ytkownikowi graficzne okienko logowania.
 %patch17 -p1
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" \
+CFLAGS="%{rpmcflags}" \
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--sysconfdir=%{_sysconfdir} \
@@ -106,8 +106,6 @@ mv -f $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome.X \
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
-
-strip $RPM_BUILD_ROOT%{_bindir}/* || :
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO RELEASENOTES
 
