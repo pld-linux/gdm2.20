@@ -7,12 +7,12 @@ Summary(es):	Administrador de Entrada del GNOME
 Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
-Version:	2.4.0.7
+Version:	2.4.0.9
 Release:	1
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/GNOME/2.0.1/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
@@ -28,7 +28,7 @@ BuildRequires:	libgnome-devel >= 2.0.1
 BuildRequires:	libgnomeui-devel >= 2.0.1
 BuildRequires:	librsvg-devel >= 2.0.0
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.4.22
+BuildRequires:	libxml2-devel >= 2.4.24
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	scrollkeeper >= 0.3.6
@@ -170,6 +170,7 @@ fi
 %attr(755,root,root) %{_bindir}/gdmmktemp
 %attr(755,root,root) %{_bindir}/gdmphotosetup
 %attr(755,root,root) %{_bindir}/gdmsetup
+%attr(755,root,root) %{_bindir}/gdmthemetester
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %dir %{_sysconfdir}/gdm
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Init
