@@ -1,0 +1,51 @@
+#!/bin/sh
+#
+# gdm:		Starts the Gnome Display Manager
+#
+# Version:      @(#) /etc/rc.d/init.d/gdm 0.1
+#
+# chkconfig:	5 95 5
+# description:	Starts and stops the Gnome Display Manager at startup and
+#		shutdown..
+#
+# config:	/etc/X11/gdm/gdm-config
+# probe:	true
+# hide:		true
+
+. /etc/rc.d/init.d/functions
+
+# Get service config
+if [ -f /etc/sysconfig/gdm ] ; then
+        . /etc/sysconfig/gdm
+fi
+
+# See how we were called.
+case "$1" in
+  start)
+	# Check if the service is already running?
+	if [ ! -f /var/lock/subsys/gdm ]; then
+		msg_starting "Gnome Display Manager"
+		daemon /usr/X11R6/bin/gdm
+		touch /var/lock/subsys/gdm
+	else
+		msg_Already_Running "Gnome Display Manager"
+	fi
+	;;
+  stop)
+	msg_stopping "Gnome Display Manager"
+	killproc gdm
+	rm -f /var/lock/subsys/gdm
+	;;
+  status)
+	status gdm
+	;;
+  restart|reload)
+	$0 stop
+	$0 start
+	;;
+  *)
+	echo "Usage: $0 {start|stop|status|restart|reload}"
+	exit 1
+esac
+
+exit 0
