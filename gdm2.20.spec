@@ -12,6 +12,7 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/%{name}/%{name}-%{version}
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
+Source4:	%{name}-pld-logo.png
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-am_fixes.patch
 Patch2:		%{name}-permissions.patch
@@ -110,6 +111,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security}
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/gdm.conf
+install %{SOURCE4} $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
 mv $RPM_BUILD_ROOT%{_applnkdir}/System/gdmconfig.desktop \
