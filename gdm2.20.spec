@@ -20,17 +20,18 @@ Source3:	%{name}.conf
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	libtool
-BuildRequires:	perl-modules
-BuildRequires:	scrollkeeper >= 0.3.6
-BuildRequires:	intltool >= 0.22
 BuildRequires:	gtk+2-devel >= 2.0.3
+BuildRequires:	intltool >= 0.22
 BuildRequires:	libglade2-devel >= 2.0.0
+BuildRequires:	libgnomecanvas-devel >= 2.0.1
 BuildRequires:	libgnome-devel >= 2.0.1
 BuildRequires:	libgnomeui-devel >= 2.0.1
-BuildRequires:	libgnomecanvas-devel >= 2.0.1
 BuildRequires:	librsvg-devel >= 2.0.0
+BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.22
+BuildRequires:	pam-devel
+BuildRequires:	perl-modules
+BuildRequires:	scrollkeeper >= 0.3.6
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
 PreReq:		scrollkeeper
