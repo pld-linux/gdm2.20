@@ -6,22 +6,25 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.2.5.4
-Release:	13
+Version:	2.2.5.5
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gdm/2.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	958a589c378f2eae2167bbbd3abdea3b
+# Source0-md5:	95
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
 Source4:	%{name}-pld-logo.png
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-am_fixes.patch
-Patch2:		%{name}-permissions.patch
-Patch3:		%{name}-omf.patch
-Patch4:		%{name}-desktop.patch
+Patch2:		%{name}-po.patch
+Patch3:		%{name}-eu_xml.patch
+Patch4:		%{name}-permissions.patch
+Patch5:		%{name}-omf.patch
+Patch6:		%{name}-desktop.patch
+Patch7:		%{name}-xml_build_fix.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	esound-devel
@@ -111,6 +114,9 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
+%patch7 -p1
 
 %build
 rm -f missing
