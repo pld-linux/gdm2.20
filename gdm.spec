@@ -12,13 +12,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.4.1
+Version:	2.4.4.2
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	50e5fd07bf1a15b1638f41787415f81c
+# Source0-md5:	3028b6cd8dedc4e5c0cef37474bb3b46
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -248,6 +248,7 @@ fi
 %{_desktopdir}/gdmflexiserver.desktop
 %{_datadir}/gnome/capplets/*
 %{_datadir}/gdm
+%{_datadir}/xsessions
 %{_omf_dest_dir}/gdm
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
 %{_mandir}/man1/gdm*
