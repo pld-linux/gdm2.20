@@ -52,7 +52,6 @@ Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	libgnome >= 2.4.0
 Requires:	sessreg
 Requires:	which
-Requires:	glibc-localedb-all
 Requires:	pam >= 0.77.3
 Obsoletes:	xdm kdm wdm
 Conflicts:	gdkxft
