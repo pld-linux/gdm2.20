@@ -4,7 +4,7 @@ Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
 Version:	2.2.5.4
-Release:	6
+Release:	7
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
@@ -106,7 +106,7 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security}
 	DESTDIR=$RPM_BUILD_ROOT \
 	Settingsdir=%{_applnkdir}/Settings/GNOME \
 	Systemdir=%{_applnkdir}/System \
-	omf_dest_dir=%{_omf_dest_dir}/omf/%{name}
+	omf_dest_dir=%{_omf_dest_dir}/%{name}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
@@ -187,7 +187,7 @@ fi
 %{_applnkdir}/Settings/GNOME/*
 %{_applnkdir}/System/gdmflexiserver.desktop
 %{_datadir}/gdm
-%{_omf_dest_dir}/omf/%{name}
+%{_omf_dest_dir}/%{name}
 
 %files Xnest
 %defattr(644,root,root,755)
