@@ -13,7 +13,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.4.2
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -248,7 +248,7 @@ fi
 %{_desktopdir}/gdmflexiserver.desktop
 %{_datadir}/gnome/capplets/*
 %{_datadir}/gdm
-%{_datadir}/xsessions
+#%%{_datadir}/xsessions  -  moved to gnome-session
 %{_omf_dest_dir}/gdm
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
 %{_mandir}/man1/gdm*
