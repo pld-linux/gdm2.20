@@ -6,7 +6,7 @@ diff -urN aa/gdm-2.6.0.3/gui/gdmphotosetup.desktop.in gdm-2.6.0.3/gui/gdmphotose
  Terminal=false
  Type=Application
 -Categories=Application;Settings;AdvancedSettings;
-+Categories=GTK;GNOME;Settings;AdvancedSettings;
++Categories=GTK;GNOME;Settings;AdvancedSettings;Capplet;
  X-GNOME-Bugzilla-Bugzilla=GNOME
  X-GNOME-Bugzilla-Product=gdm
  X-GNOME-Bugzilla-Component=general
