@@ -39,7 +39,6 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.24
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	scrollkeeper >= 0.3.11
 Requires:	libgnome >= 2.1.0-3
 Requires:	which
 Requires:	sessreg
@@ -48,11 +47,10 @@ Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/userdel
 Requires(postun):	/usr/sbin/groupdel
-Requires(post,postun):	scrollkeeper
 Requires(post,preun):	/sbin/chkconfig
+Obsoletes:	xdm kdm wdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-Obsoletes:	xdm kdm wdm
 
 %define		_sysconfdir	/etc/X11
 %define		_localstatedir	/var/lib
@@ -171,11 +169,7 @@ if [ -z "`id -u xdm 2>/dev/null`" ]; then
        /usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
 fi
 
-%post
-/usr/bin/scrollkeeper-update
-
 %postun
-/usr/bin/scrollkeeper-update
 if [ "$1" = "0" ]; then
        if [ -n "`id -u xdm 2>/dev/null`" ]; then
                /usr/sbin/userdel xdm
