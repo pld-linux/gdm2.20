@@ -6,8 +6,8 @@ Summary(es):	Administrador de Entrada del GNOME
 Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
-Version:	2.3.90.3
-Release:	0.1
+Version:	2.3.90.6
+Release:	1
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
@@ -16,9 +16,6 @@ Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
 #Source4:	%{name}-pld-logo.png
-#Patch0:		%{name}-am.patch
-Patch1:		%{name}-DESTDIR.patch
-#Patch2:		%{name}-permissions.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
@@ -83,14 +80,11 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 
 %prep
 %setup -q
-#patch0 -p1
-%patch1 -p1
-#%patch2 -p1
 
 %build
 rm -f missing
 %{__libtoolize}
-%{__gettextize}
+glib-gettextize --copy --force
 %{__aclocal} -I %{_aclocaldir}/gnome2-macros
 %{__autoconf}
 %{__automake}
