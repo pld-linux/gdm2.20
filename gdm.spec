@@ -119,19 +119,19 @@ rm -rf $RPM_BUILD_ROOT
 %files -f gdm.lang
 %defattr(644,root,root,755)
 %doc {AUTHORS,ChangeLog,NEWS,README,TODO}.gz
-%attr(755,xdm,xdm) %{_bindir}/gdm
-%attr(755,xdm,xdm) %{_bindir}/gdmlogin
-%attr(755,xdm,xdm) %{_bindir}/gdmchooser
-%attr(755,xdm,xdm) %config %{_sysconfdir}/gdm/Init
-%attr(755,xdm,xdm) %config %{_sysconfdir}/gdm/PreSession
-%attr(755,xdm,xdm) %config %{_sysconfdir}/gdm/Sessions
-%attr(755,xdm,xdm) %config %{_sysconfdir}/gdm/PostSession
-%attr(755,xdm,xdm) %config %{_sysconfdir}/gdm/gnomerc
-%attr(644,xdm,xdm) %config %{_sysconfdir}/gdm/gdm.conf
-%attr(644,xdm,xdm) %config %{_sysconfdir}/gdm/locale.alias
-%attr(755,xdm,xdm) %dir %{_sysconfdir}/gdm
+%{_bindir}/gdm
+%{_bindir}/gdmlogin
+%{_bindir}/gdmchooser
+%attr(775,root,xdm) %config %{_sysconfdir}/gdm/Init
+%attr(775,root,xdm) %config %{_sysconfdir}/gdm/PreSession
+%attr(775,root,xdm) %config %{_sysconfdir}/gdm/Sessions
+%attr(775,root,xdm) %config %{_sysconfdir}/gdm/PostSession
+%attr(775,root,xdm) %config %{_sysconfdir}/gdm/gnomerc
+%attr(664,root,xdm) %config %{_sysconfdir}/gdm/gdm.conf
+%attr(664,root,xdm) %config %{_sysconfdir}/gdm/locale.alias
+%attr(775,root,xdm) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(750,xdm,xdm) /var/lib/gdm
+%attr(770,root,xdm) /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_datadir}/pixmaps/*
