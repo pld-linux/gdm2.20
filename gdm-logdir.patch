@@ -1,0 +1,12 @@
+diff -Nuard gdm-2.4.4.3.orig/configure.in gdm-2.4.4.3/configure.in
+--- gdm-2.4.4.3.orig/configure.in	2003-09-25 20:31:12.000000000 +0200
++++ gdm-2.4.4.3/configure.in	2003-09-26 21:26:59.000000000 +0200
+@@ -524,7 +524,7 @@
+ AC_SUBST(EXPANDED_AUTHDIR)
+ AC_DEFINE_UNQUOTED(EXPANDED_AUTHDIR,"$EXPANDED_AUTHDIR")
+ 
+-LOGDIR_TMP="$localstatedir/log/gdm"
++LOGDIR_TMP="$localstatedir/gdm"
+ EXPANDED_LOGDIR=`eval echo $LOGDIR_TMP`
+ AC_SUBST(EXPANDED_LOGDIR)
+ AC_DEFINE_UNQUOTED(EXPANDED_LOGDIR,"$EXPANDED_LOGDIR")
