@@ -4,7 +4,7 @@ Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
 Version:	2.2.5.4
-Release:	2
+Release:	3
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
