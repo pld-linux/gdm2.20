@@ -3,6 +3,9 @@
 # s=/dev/null=/home/services/xdm= in %%trigger for gracefull upgrade from xdm/kdm/gdm 2.2
 # check /etc/pam.d/gdm-autologin
 #
+# Conditiional build:
+%bcond_without	selinux	# without selinux
+#
 Summary:	GNOME Display Manager
 Summary(es):	Administrador de Entrada del GNOME
 Summary(ja):	GNOME ディスプレイマネージャ
@@ -44,7 +47,7 @@ BuildRequires:	libgnomecanvas-devel >= 2.6.1
 BuildRequires:	libgnomeui-devel >= 2.6.1
 BuildRequires:	libgsf-devel >= 1.9.0
 BuildRequires:	librsvg-devel >= 1:2.6.5
-BuildRequires:	libselinux-devel
+%{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
@@ -160,7 +163,7 @@ intltoolize --copy --force
 	--with-tcp-wrappers=yes \
 	--enable-authentication-scheme=pam \
 	--disable-console-helper \
-	--with-selinux
+	--with%{!?with_selinux:out}-selinux
 
 %{__make}
 
