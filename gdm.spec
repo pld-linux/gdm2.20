@@ -29,7 +29,7 @@ BuildRequires:	libglade2-devel >= 2.0.0
 BuildRequires:	libgnome-devel >= 2.0.1
 BuildRequires:	libgnomeui-devel >= 2.0.1
 BuildRequires:	libgnomecanvas-devel >= 2.0.1
-BuildRequires:	librsvg-devel >= 1.1.6
+BuildRequires:	librsvg-devel >= 2.0.0
 BuildRequires:	libxml2-devel >= 2.4.22
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
