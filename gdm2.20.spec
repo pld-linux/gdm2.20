@@ -34,6 +34,7 @@ BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnomecanvas-devel >= 2.0.3
 BuildRequires:	libgnome-devel >= 2.0.6
 BuildRequires:	libgnomeui-devel >= 2.3.3.1-2
+BuildRequires:	libart_lgpl-devel >= 2.3.14
 BuildRequires:	librsvg-devel >= 2.0.1
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.24
