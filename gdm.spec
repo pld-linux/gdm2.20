@@ -1,40 +1,44 @@
+# TODO:
+# s=/dev/null=/home/services/xdm= in %%trigger for gracefull upgrade from xdm/kdm/gdm 2.2
+#
 Summary:	GNOME Display Manager
 Summary(es):	Administrador de Entrada del GNOME
 Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
-Version:	2.2.5.4
-Release:	6
+Version:	2.3.90.3
+Release:	0.1
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
-Source4:	%{name}-pld-logo.png
-Patch0:		%{name}-xdmcp.patch
-Patch1:		%{name}-am_fixes.patch
-Patch2:		%{name}-permissions.patch
+#Source4:	%{name}-pld-logo.png
+#Patch0:		%{name}-am.patch
+Patch1:		%{name}-DESTDIR.patch
+#Patch2:		%{name}-permissions.patch
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	esound-devel
-BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	gettext-devel
-BuildRequires:	gnome-libs-devel
-BuildRequires:	gtk+-devel
-BuildRequires:	libglade-devel
 BuildRequires:	libtool
-BuildRequires:	libxml-devel
 BuildRequires:	perl-modules
-BuildRequires:	scrollkeeper
+BuildRequires:	scrollkeeper >= 0.1.4
 BuildRequires:	intltool >= 0.14
-Requires:	gnome-libs >= 1.0.0
+BuildRequires:	gtk+2-devel >= 2.0.2
+BuildRequires:	libglade2-devel >= 1.99.2
+BuildRequires:	libgnome-devel >= 1.99.0
+BuildRequires:	libgnomeui-devel >= 1.99.0
+BuildRequires:	libgnomecanvas-devel >= 1.109.0
+BuildRequires:	librsvg-devel >= 1.1.1
+BuildRequires:	libxml2-devel >= 2.4.12
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
 PreReq:		scrollkeeper
 PreReq:		shadow
 PreReq:		/sbin/chkconfig
+Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
@@ -79,45 +83,46 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 
 %prep
 %setup -q
-%patch0 -p1
+#patch0 -p1
 %patch1 -p1
-%patch2 -p1
+#%patch2 -p1
 
 %build
 rm -f missing
-libtoolize --copy --force
-gettextize --copy --force
-aclocal -I %{_aclocaldir}/gnome
-autoconf
-automake -a -c -f
+%{__libtoolize}
+%{__gettextize}
+%{__aclocal} -I %{_aclocaldir}/gnome2-macros
+%{__autoconf}
+%{__automake}
 %configure \
 	--with-xinerama=yes \
 	--with-xdmcp=yes \
+	--with-pam-prefix=/etc \
 	--with-tcp-wrappers=yes \
+	--enable-authentication-scheme=pam \
 	--disable-console-helper
 
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security}
+install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
+	$RPM_BUILD_ROOT/home/services/xdm
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	Settingsdir=%{_applnkdir}/Settings/GNOME \
 	Systemdir=%{_applnkdir}/System \
-	omf_dest_dir=%{_omf_dest_dir}/omf/%{name}
+	omf_dest_dir=%{_omf_dest_dir}/%{name}
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/gdm.conf
-install %{SOURCE4} $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
+#install %{SOURCE4} $RPM_BUILD_ROOT/usr/X11R6/share/pixmaps
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
-mv $RPM_BUILD_ROOT%{_applnkdir}/System/gdmconfig.desktop \
+mv $RPM_BUILD_ROOT%{_applnkdir}/System/gdmsetup.desktop \
 	$RPM_BUILD_ROOT%{_applnkdir}/Settings/GNOME/
-
-gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
 %find_lang %{name} --all-name --with-gnome
 
@@ -128,7 +133,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/sbin/groupadd -g 55 -r -f xdm
 
 if [ -z "`id -u xdm 2>/dev/null`" ]; then
-	/usr/sbin/useradd -u 55 -r -d /dev/null -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
+	/usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
 fi
 
 %post
@@ -159,15 +164,17 @@ fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc *.gz
+%doc AUTHORS ChangeLog NEWS README TODO
 %attr(755,root,root) %{_bindir}/gdm
 %attr(755,root,root) %{_bindir}/gdmchooser
-%attr(755,root,root) %{_bindir}/gdmconfig
 %attr(755,root,root) %{_bindir}/gdmflexiserver
+%attr(755,root,root) %{_bindir}/gdmgreeter
 %attr(755,root,root) %{_bindir}/gdmlogin
 %attr(755,root,root) %{_bindir}/gdmmktemp
 %attr(755,root,root) %{_bindir}/gdmphotosetup
+%attr(755,root,root) %{_bindir}/gdmsetup
 %attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %dir %{_sysconfdir}/gdm
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Init
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PreSession
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Sessions
@@ -177,17 +184,17 @@ fi
 %config %{_sysconfdir}/gdm/factory-gdm.conf
 %config %{_sysconfdir}/gdm/gdm.conf
 %config %{_sysconfdir}/gdm/locale.alias
-%attr(755,root,root) %dir %{_sysconfdir}/gdm
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm
+%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(770,root,xdm) /var/lib/gdm
+%attr(750,xdm,xdm) /var/lib/gdm
+%attr(750,xdm,xdm) /home/services/xdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_pixmapsdir}/*
 # these lines to devel subpackage?
 %{_applnkdir}/Settings/GNOME/*
 %{_applnkdir}/System/gdmflexiserver.desktop
 %{_datadir}/gdm
-%{_omf_dest_dir}/omf/%{name}
+#%{_omf_dest_dir}/%{name}
 
 %files Xnest
 %defattr(644,root,root,755)
