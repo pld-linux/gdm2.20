@@ -12,7 +12,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.0.11
-Release:	2
+Release:	3
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
