@@ -4,7 +4,7 @@ Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
 Version:	2.2.5.4
-Release:	1
+Release:	2
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
@@ -183,7 +183,7 @@ fi
 %attr(755,root,root) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(750,root,xdm)  /var/lib/gdm
+%attr(750,xdm,xdm)  /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_pixmapsdir}/*
 # these lines to devel subpackage?
