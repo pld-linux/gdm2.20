@@ -98,7 +98,7 @@ automake -a -c
 	--with-xinerama=yes \
 	--with-xdmcp=yes \
 	--with-tcp-wrappers=yes \
-	--enable-console-helper
+	--disable-console-helper
 
 %{__make}
 
