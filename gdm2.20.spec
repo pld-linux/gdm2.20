@@ -37,9 +37,9 @@ BuildRequires:	intltool >= 0.14
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
-Prereq:		scrollkeeper
-Prereq:		shadow
-Prereq:		/sbin/chkconfig
+PreReq:		scrollkeeper
+PreReq:		shadow
+PreReq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
@@ -52,22 +52,26 @@ Obsoletes:	xdm kdm wdm
 %define		_sysconfdir	/etc/X11
 %define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
 
-%description 
-gdm manages local and remote displays and provides the user with a
-graphical login window.
+%description
+Gdm (the GNOME Display Manager) is a highly configurable
+reimplementation of xdm, the X Display Manager. Gdm allows you to log
+into your system with the X Window System running and supports running
+several different X sessions on your local machine at the same time.
 
 %description -l es
 Administrador de Entrada del GNOME.
 
 %description -l pl
-gdm zarz±dza lokalnymi i zdalnymi X serwerami i udostêpnia
-u¿ytkownikowi graficzne okienko logowania.
+Gdm jest wysokokonfigurowaln± reimplementacj± xdma. Gdm pozwala
+logowaæ siê do systemu z poziomu X11 i wspiera jednoczesn± pracê kilku
+ró¿nych Xsesji na lokalnej maszynie.
 
 %description -l pt_BR
 Gerenciador de Entrada do GNOME.
 
 %package Xnest
 Summary:	Xnest (ie embedded X) server for GDM
+Summary(pl):	Serwer Xnest dla GDM
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(es):	X11/Aplicaciones
@@ -79,12 +83,10 @@ Requires:	%{name} = %{version}
 Requires:	XFree86-Xnest
 
 %description Xnest
-Gdm (the GNOME Display Manager) is a highly configurable
-reimplementation of xdm, the X Display Manager. Gdm allows you to log
-into your system with the X Window System running and supports running
-several different X sessions on your local machine at the same time.
-
 This package add support for Xnest server in gdm.
+
+%description Xnest -l pl
+Ten pakiet dodaje do gdm wsparcie dla Xnest.
 
 %prep
 %setup -q
@@ -144,14 +146,14 @@ fi
 if [ -f /var/lock/subsys/gdm ]; then
 	echo "Run \"/etc/rc.d/init.d/gdm restart\" to restart gdm." >&2
 else
-        echo "Run \"/etc/rc.d/init.d/gdm start\" to start gdm." >&2
+	echo "Run \"/etc/rc.d/init.d/gdm start\" to start gdm." >&2
 fi
 /usr/bin/scrollkeeper-update
 
 %preun
 if [ "$1" = "0" ]; then
 	if [ -f /var/lock/subsys/gdm ]; then
-		 /etc/rc.d/init.d/gdm stop >&2
+		/etc/rc.d/init.d/gdm stop >&2
 	fi
 	/sbin/chkconfig --del gdm
 fi
@@ -188,7 +190,7 @@ fi
 %attr(755,root,root) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(770,root,xdm)  /var/lib/gdm
+%attr(770,root,xdm) /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_pixmapsdir}/*
 # these lines to devel subpackage?
