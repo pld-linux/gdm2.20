@@ -1,6 +1,5 @@
-diff -ru gdm-2.2.5.4/daemon/gdm.c gdm-2.2.5.4-AX/daemon/gdm.c
---- gdm-2.2.5.4/daemon/gdm.c	Wed Dec  5 05:29:09 2001
-+++ gdm-2.2.5.4-AX/daemon/gdm.c	Tue Feb  5 01:21:32 2002
+--- gdm-2.2.5.5/daemon/gdm.c~	Sat Jan  3 11:14:39 2004
++++ gdm-2.2.5.5/daemon/gdm.c	Sat Jan  3 11:14:39 2004
 @@ -579,31 +579,31 @@
  	    gdm_fail (_("gdm_config_parse: Authdir %s is not a directory. Aborting."), GdmServAuthDir);
      }
@@ -27,8 +26,8 @@ diff -ru gdm-2.2.5.4/daemon/gdm.c gdm-2.2.5.4-AX/daemon/gdm.c
  	    char *s = g_strdup_printf (_("Server Authorization directory "
  					 "(daemon/ServAuthDir) is set to %s "
  					 "but has the wrong permissions, it "
--					 "should have permissions of 0750."
-+					 "should have permissions of 0770."
+-					 "should have permissions of 0750. "
++					 "should have permissions of 0770. "
  					 "Please correct the permissions or "
  					 "the gdm configuration %s and "
  					 "restart gdm."),
@@ -39,3 +38,1108 @@ diff -ru gdm-2.2.5.4/daemon/gdm.c gdm-2.2.5.4-AX/daemon/gdm.c
  		      GdmServAuthDir, statbuf.st_mode);
      }
  
+diff -u gdm-2.2.5.5/po.orig/az.po gdm-2.2.5.5/po/az.po
+--- gdm-2.2.5.5/po.orig/az.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/az.po	Sun Jan  4 02:28:12 2004
+@@ -307,17 +307,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: . %s icaz…ô qovluƒüunun s…ôhv s…ôlahiyy…ôtl…ôri vardir. 750 "
++"gdm_config_parse: . %s icaz…ô qovluƒüunun s…ôhv s…ôlahiyy…ôtl…ôri vardir. 0770 "
+ "olmalidir. √áƒ±xƒ±ram."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/bg.po gdm-2.2.5.5/po/bg.po
+--- gdm-2.2.5.5/po.orig/bg.po	Wed Mar 13 00:03:04 2002
++++ gdm-2.2.5.5/po/bg.po	Sun Jan  4 02:23:26 2004
+@@ -296,16 +296,16 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+-msgstr "gdm_config_parse: Authdir %s ËÏ‡ „Â¯ÂÌ ÂÊËÏ. “ˇ·‚‡ ‰‡ Â 750.  ‡È."
++msgstr "gdm_config_parse: Authdir %s ËÏ‡ „Â¯ÂÌ ÂÊËÏ. “ˇ·‚‡ ‰‡ Â 0770.  ‡È."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/ca.po gdm-2.2.5.5/po/ca.po
+--- gdm-2.2.5.5/po.orig/ca.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/ca.po	Sun Jan  4 02:27:46 2004
+@@ -326,17 +326,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s tÈ permissos %o erronis. Hauria de ser 750. "
++"gdm_config_parse: Authdir %s tÈ permissos %o erronis. Hauria de ser 0770. "
+ "S'est‡ avortant."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/cs.po gdm-2.2.5.5/po/cs.po
+--- gdm-2.2.5.5/po.orig/cs.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/cs.po	Sun Jan  4 02:23:16 2004
+@@ -303,14 +303,14 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr "gdm_config_parse: Uæivatel gdm nesmÌ b˝t root. KonËÌm!"
+ 
+diff -u gdm-2.2.5.5/po.orig/da.po gdm-2.2.5.5/po/da.po
+--- gdm-2.2.5.5/po.orig/da.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/da.po	Sun Jan  4 02:27:25 2004
+@@ -373,22 +373,22 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Servergodkendelsesmappen (daemon/ServAuthDir) er sat til at vÊre %s, men har "
+-"de forkerte adgangstilladelser, den b¯r have tilladelserne 0750. Ret venligt "
++"de forkerte adgangstilladelser, den b¯r have tilladelserne 0770. Ret venligt "
+ "tilladelserne eller GDM-konfigurationen %s og genstart GDM."
+ 
+ # src/gdm.c:258
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: Godkendelsesmappen %s har ikke rigtige adgangsrettigheder %"
+-"o. Skal vÊre 750. Afbryder."
++"o. Skal vÊre 0770. Afbryder."
+ 
+ # src/gdm.c:517
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/de.po gdm-2.2.5.5/po/de.po
+--- gdm-2.2.5.5/po.orig/de.po	Wed Mar 13 00:03:56 2002
++++ gdm-2.2.5.5/po/de.po	Sun Jan  4 02:23:04 2004
+@@ -378,22 +378,22 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Das Server-Autorisations-Verzeichnis (daemon/ServAuthDir) ist auf %s "
+ "gesetzt, doch es hat die falschen Zugriffsrechte.  Es sollte die "
+-"Zugriffsrechte 0750 haben. Bitte korrigieren Sie die Zugriffsrechte oder die "
++"Zugriffsrechte 0770 haben. Bitte korrigieren Sie die Zugriffsrechte oder die "
+ "gdm-Konfiguration %s und starten Sie gdm erneut."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: Das Autorisations-Verzeichnis (Authdir) %s hat die "
+-"falschen Zugriffsrechte %o. Sie sollten 750 sein. Abbruch."
++"falschen Zugriffsrechte %o. Sie sollten 0770 sein. Abbruch."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/el.po gdm-2.2.5.5/po/el.po
+--- gdm-2.2.5.5/po.orig/el.po	Wed Mar 13 00:04:13 2002
++++ gdm-2.2.5.5/po/el.po	Sun Jan  4 02:27:06 2004
+@@ -341,7 +341,7 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+@@ -349,10 +349,10 @@
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: œ Í·Ù‹ÎÔ„ÔÚ Authdir %s ›˜ÂÈ Î‹ËÔÚ ‰ÈÍ·È˛Ï·Ù·. ∏ÒÂÂ 750. "
++"gdm_config_parse: œ Í·Ù‹ÎÔ„ÔÚ Authdir %s ›˜ÂÈ Î‹ËÔÚ ‰ÈÍ·È˛Ï·Ù·. ∏ÒÂÂ 0770. "
+ "ƒÈ·ÍÔﬁ."
+ 
+ #
+diff -u gdm-2.2.5.5/po.orig/es.po gdm-2.2.5.5/po/es.po
+--- gdm-2.2.5.5/po.orig/es.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/es.po	Sun Jan  4 02:22:40 2004
+@@ -319,18 +319,18 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: El directorio de autorizaciones %s tiene permisos "
+-"incorrectos %o. DeberÌa ser 750. Abortando."
++"incorrectos %o. DeberÌa ser 0770. Abortando."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/et.po gdm-2.2.5.5/po/et.po
+--- gdm-2.2.5.5/po.orig/et.po	Wed Mar 13 00:04:43 2002
++++ gdm-2.2.5.5/po/et.po	Sun Jan  4 02:26:54 2004
+@@ -300,17 +300,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s loabitid (%o) on valed. Peaks olema 0750. "
++"gdm_config_parse: Authdir %s loabitid (%o) on valed. Peaks olema 0770. "
+ "Lıpetame."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/eu.po gdm-2.2.5.5/po/eu.po
+--- gdm-2.2.5.5/po.orig/eu.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/eu.po	Sun Jan  4 02:22:18 2004
+@@ -342,21 +342,21 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Zerbitzariaren autentifikazio-direktorioa (daemon/ServAuthDir) %s "
+-"gisakonfiguratuta dago, baina baimen okerrak ditu, 0750ren baimenak eduki "
++"gisakonfiguratuta dago, baina baimen okerrak ditu, 0770ren baimenak eduki "
+ "beharlituzke.Zuzendu baimenak edo gdm-ren %s konfigurazioa, eta berrabiarazi "
+ "gdm."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: %s authdir-ek %o baimen okerrak ditu. 0750 izan behar "
++"gdm_config_parse: %s authdir-ek %o baimen okerrak ditu. 0770 izan behar "
+ "luke. Abortatzen. "
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/fi.po gdm-2.2.5.5/po/fi.po
+--- gdm-2.2.5.5/po.orig/fi.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/fi.po	Sun Jan  4 02:26:45 2004
+@@ -312,18 +312,18 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: Valtuushakemistolla %s on v‰‰r‰t oikeustasot, pit‰isi olla "
+-"750. Keskeytet‰‰n."
++"0770. Keskeytet‰‰n."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/fr.po gdm-2.2.5.5/po/fr.po
+--- gdm-2.2.5.5/po.orig/fr.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/fr.po	Sun Jan  4 02:22:07 2004
+@@ -350,22 +350,22 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Le rÈpertoire d'autorisation serveur (dÈmon/ServAuthDir) est dÈfini sur %s "
+-"mais a les mauvaises permissions, il devrait avoir 0750 comme permissions. "
++"mais a les mauvaises permissions, il devrait avoir 0770 comme permissions. "
+ "Veuillez corriger les permissions ou la configuration de gdm %s et "
+ "redÈmarrer gdm."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse†: Authdir %s a de mauvais droits d'accËs %o. Les "
+-"permissions devraient Ítre fixÈes ‡ 0750. Abandon."
++"permissions devraient Ítre fixÈes ‡ 0770. Abandon."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/ga.po gdm-2.2.5.5/po/ga.po
+--- gdm-2.2.5.5/po.orig/ga.po	Wed Mar 13 00:05:11 2002
++++ gdm-2.2.5.5/po/ga.po	Sun Jan  4 02:26:29 2004
+@@ -289,14 +289,14 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ 
+diff -u gdm-2.2.5.5/po.orig/gdm.pot gdm-2.2.5.5/po/gdm.pot
+--- gdm-2.2.5.5/po.orig/gdm.pot	Wed Mar 13 00:01:48 2002
++++ gdm-2.2.5.5/po/gdm.pot	Sun Jan  4 02:32:38 2004
+@@ -290,14 +290,14 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ 
+diff -u gdm-2.2.5.5/po.orig/gl.po gdm-2.2.5.5/po/gl.po
+--- gdm-2.2.5.5/po.orig/gl.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/gl.po	Sun Jan  4 02:30:55 2004
+@@ -315,18 +315,18 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: O directorio de autenticaciÛn %s ten permisos %o errÛneos. "
+-"DeberÌan ser 750. Abortando."
++"DeberÌan ser 0770. Abortando."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/hu.po gdm-2.2.5.5/po/hu.po
+--- gdm-2.2.5.5/po.orig/hu.po	Wed Mar 13 00:05:51 2002
++++ gdm-2.2.5.5/po/hu.po	Sun Jan  4 02:26:21 2004
+@@ -320,17 +320,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: A %s authdir jogosults·gai rosszak. 750 kellene legyen. "
++"gdm_config_parse: A %s authdir jogosults·gai rosszak. 0770 kellene legyen. "
+ "M˚velet megszakÌt·sa."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/it.po gdm-2.2.5.5/po/it.po
+--- gdm-2.2.5.5/po.orig/it.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/it.po	Sun Jan  4 02:30:43 2004
+@@ -324,17 +324,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s con permessi errati %o. Dovrebbero valere 750. "
++"gdm_config_parse: Authdir %s con permessi errati %o. Dovrebbero valere 0770. "
+ "Chiusura."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/ja.po gdm-2.2.5.5/po/ja.po
+--- gdm-2.2.5.5/po.orig/ja.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/ja.po	Sun Jan  4 02:26:08 2004
+@@ -328,20 +328,20 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "•µ°º•–«ßæ⁄•«•£•Ï•Ø•»•Í (daemon/ServAuthDir) §œ %s §À¿ﬂƒÍ§µ§Ï§∆§§§ﬁ§π§¨°¢¥÷"
+-"∞„§√§ø•¢•Ø•ª•π∏¢§¨¿ﬂƒÍ§µ§Ï§∆§§§ﬁ§π°£•¢•Ø•ª•π∏¢§œ 0750 §«¿ﬂƒÍ§µ§Ï§Î§Ÿ§≠§«§π°£"
++"∞„§√§ø•¢•Ø•ª•π∏¢§¨¿ﬂƒÍ§µ§Ï§∆§§§ﬁ§π°£•¢•Ø•ª•π∏¢§œ 0770 §«¿ﬂƒÍ§µ§Ï§Î§Ÿ§≠§«§π°£"
+ "•¢•Ø•ª•π∏¢§¢§Î§§§œgdm¿ﬂƒÍ•’•°•§•Î %s §Úƒ˚¿µ§∑§∆gdm§Ú∫∆µØ∆∞§∑§∆§Ø§¿§µ§§"
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s §Œ•—°º•ﬂ•√•∑•Á•Û %o§¨¥÷∞„§√§∆§§§ﬁ§π°£750§«§ §±§Ï"
++"gdm_config_parse: Authdir %s §Œ•—°º•ﬂ•√•∑•Á•Û %o§¨¥÷∞„§√§∆§§§ﬁ§π°£0770§«§ §±§Ï"
+ "§–§§§±§ﬁ§ª§Û°£√Êªﬂ§∑§ﬁ§π°£"
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/ko.po gdm-2.2.5.5/po/ko.po
+--- gdm-2.2.5.5/po.orig/ko.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/ko.po	Sun Jan  4 02:30:32 2004
+@@ -302,17 +302,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s¿« ¡¢±Ÿ±««—¿Ã ∆≤∑»Ω¿¥œ¥Ÿ. 750¿ÃæÓæﬂ «’¥œ¥Ÿ. ¡ﬂ¡ˆ."
++"gdm_config_parse: Authdir %s¿« ¡¢±Ÿ±««—¿Ã ∆≤∑»Ω¿¥œ¥Ÿ. 0770¿ÃæÓæﬂ «’¥œ¥Ÿ. ¡ﬂ¡ˆ."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/lt.po gdm-2.2.5.5/po/lt.po
+--- gdm-2.2.5.5/po.orig/lt.po	Wed Mar 13 00:07:17 2002
++++ gdm-2.2.5.5/po/lt.po	Sun Jan  4 02:25:54 2004
+@@ -298,17 +298,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s yra su blogom privilegijom. Turi b˚ti 750. "
++"gdm_config_parse: Authdir %s yra su blogom privilegijom. Turi b˚ti 0770. "
+ "Nutraukiu."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/lv.po gdm-2.2.5.5/po/lv.po
+--- gdm-2.2.5.5/po.orig/lv.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/lv.po	Sun Jan  4 02:30:19 2004
+@@ -304,17 +304,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s ir nepareizas atÔaujas %o. VajadzÁtu b˚t 750. "
++"gdm_config_parse: Authdir %s ir nepareizas atÔaujas %o. VajadzÁtu b˚t 0770. "
+ "Izbeidzu."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/ms.po gdm-2.2.5.5/po/ms.po
+--- gdm-2.2.5.5/po.orig/ms.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/ms.po	Sun Jan  4 02:25:30 2004
+@@ -302,17 +302,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Tetapan kebenaran authdir %s %o salah. Sepatutnya 750. "
++"gdm_config_parse: Tetapan kebenaran authdir %s %o salah. Sepatutnya 0770. "
+ "Batal."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/nl.po gdm-2.2.5.5/po/nl.po
+--- gdm-2.2.5.5/po.orig/nl.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/nl.po	Sun Jan  4 02:30:07 2004
+@@ -336,20 +336,20 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Server identificatie map (daemon/ServAuthDir) is ingesteld op %s, maar heeft "
+-"de verkeerde attributen. Deze zouden 0750 moeten zijn. Corrigeer alstublieft "
++"de verkeerde attributen. Deze zouden 0770 moeten zijn. Corrigeer alstublieft "
+ "de configuratie %s en herstart GDM."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s heeft verkeerde attributen %o. Moet 0750 zijn. "
++"gdm_config_parse: Authdir %s heeft verkeerde attributen %o. Moet 0770 zijn. "
+ "Gestopt."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/nn.po gdm-2.2.5.5/po/nn.po
+--- gdm-2.2.5.5/po.orig/nn.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/nn.po	Sun Jan  4 02:25:10 2004
+@@ -294,14 +294,14 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr "gdm_config_parse: gdm gruppa kan ikkje vere root. Avsluttar"
+ 
+diff -u gdm-2.2.5.5/po.orig/no.po gdm-2.2.5.5/po/no.po
+--- gdm-2.2.5.5/po.orig/no.po	Wed Mar 13 00:08:30 2002
++++ gdm-2.2.5.5/po/no.po	Sun Jan  4 02:29:52 2004
+@@ -326,22 +326,22 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Autorisasjonskatalog for tjener (daemon/ServAuthDir) er satt til %s men har "
+-"ikke riktige rettigheter. Den burde ha tilgangsrettigheter lik 0750. "
++"ikke riktige rettigheter. Den burde ha tilgangsrettigheter lik 0770. "
+ "Vennligst korriger rettighetene eller gdm-konfigurasjon %s og start gdm pÂ "
+ "nytt."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: Autentiseringskatalogen %s har uriktige "
+-"tilgangsrettigheter %o. Skal vÊre 0750. Avbryter."
++"tilgangsrettigheter %o. Skal vÊre 0770. Avbryter."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/pl.po gdm-2.2.5.5/po/pl.po
+--- gdm-2.2.5.5/po.orig/pl.po	Wed Mar 13 00:08:31 2002
++++ gdm-2.2.5.5/po/pl.po	Sun Jan  4 02:25:00 2004
+@@ -350,21 +350,21 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Katalog autoryzacji (daemon/ServAuthDir) jest ustawiony na %s, lecz ma "
+-"niew≥a∂ciwe uprawnienia (powinny byÊ ustawione na 0750). Popraw konfiguracjÍ "
++"niew≥a∂ciwe uprawnienia (powinny byÊ ustawione na 0770). Popraw konfiguracjÍ "
+ "GDM-a w %s i uruchom go ponownie."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: Katalog autoryzacji %s ma niew≥a∂ciwe prawa %o. Powinno "
+-"byÊ 0750. Rezygnacja."
++"byÊ 0770. Rezygnacja."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/pt.po gdm-2.2.5.5/po/pt.po
+--- gdm-2.2.5.5/po.orig/pt.po	Wed Mar 13 00:08:54 2002
++++ gdm-2.2.5.5/po/pt.po	Sun Jan  4 02:29:40 2004
+@@ -336,21 +336,21 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "O directÛrio de AutorizaÁ„o do Servidor (daemon/ServAuthDir) est· definido "
+-"como %s mas tem as permissıes incorrectas, deveria ter permissıes de 0750. "
++"como %s mas tem as permissıes incorrectas, deveria ter permissıes de 0770. "
+ "Corrija as permissıes ou a configuraÁ„o %s do gdm e reinicie-o."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: Authdir %s tem as permissıes %o erradas. Deveriam ser "
+-"0750. A abortar."
++"0770. A abortar."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/pt_BR.po gdm-2.2.5.5/po/pt_BR.po
+--- gdm-2.2.5.5/po.orig/pt_BR.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/pt_BR.po	Sun Jan  4 02:24:41 2004
+@@ -314,18 +314,18 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: DiretÛrio %s de autenticaÁ„o tem permissıes erradas (%o).\n"
+-"Deveria ser 750. Abortando."
++"Deveria ser 0770. Abortando."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/ro.po gdm-2.2.5.5/po/ro.po
+--- gdm-2.2.5.5/po.orig/ro.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/ro.po	Sun Jan  4 02:29:24 2004
+@@ -310,18 +310,18 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: Directorul autentificare %s are permisiuni gre∫ite %o. Ar "
+-"trebui s„ fie 750. Abandonez!"
++"trebui s„ fie 0770. Abandonez!"
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/ru.po gdm-2.2.5.5/po/ru.po
+--- gdm-2.2.5.5/po.orig/ru.po	Wed Mar 13 00:09:35 2002
++++ gdm-2.2.5.5/po/ru.po	Sun Jan  4 02:24:24 2004
+@@ -312,17 +312,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Ó≈ –“¡◊…ÃÿŒŸ≈ “¡⁄“≈€≈Œ…— ’ authdir %s. ‰œÃ÷ŒŸ ¬Ÿ‘ÿ 750. "
++"gdm_config_parse: Ó≈ –“¡◊…ÃÿŒŸ≈ “¡⁄“≈€≈Œ…— ’ authdir %s. ‰œÃ÷ŒŸ ¬Ÿ‘ÿ 0770. "
+ "·◊¡“… Œœ≈ œÀœŒﬁ¡Œ…≈ “¡¬œ‘Ÿ!"
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/sk.po gdm-2.2.5.5/po/sk.po
+--- gdm-2.2.5.5/po.orig/sk.po	Wed Mar 13 00:09:36 2002
++++ gdm-2.2.5.5/po/sk.po	Sun Jan  4 02:29:07 2004
+@@ -325,21 +325,21 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Prieƒçinok pre overenie (d√©mon/ServAuthDir) je nastaven√Ω na %s, ale m√° "
+-"nespr√°vne pr√°va, mali by by≈• 0750. Pros√≠m, opravte pr√°va alebo nastavenie "
++"nespr√°vne pr√°va, mali by by≈• 0770. Pros√≠m, opravte pr√°va alebo nastavenie "
+ "gdm %s alebo re≈°tartujte gdm."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: Overovac√≠ prieƒçinok %s m√° nespr√°vne pr√°va %o. Maj√∫ by≈• "
+-"0750. Konƒç√≠m."
++"0770. Konƒç√≠m."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/sl.po gdm-2.2.5.5/po/sl.po
+--- gdm-2.2.5.5/po.orig/sl.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/sl.po	Sun Jan  4 02:24:12 2004
+@@ -308,17 +308,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s ima napaËna dovoljenja %o. Biti morajo 750. "
++"gdm_config_parse: Authdir %s ima napaËna dovoljenja %o. Biti morajo 0770. "
+ "Prekinjam."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/sv.po gdm-2.2.5.5/po/sv.po
+--- gdm-2.2.5.5/po.orig/sv.po	Wed Mar 13 00:09:55 2002
++++ gdm-2.2.5.5/po/sv.po	Sun Jan  4 02:28:51 2004
+@@ -334,20 +334,20 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ "Serverauktoriseringskatalogen (demon/ServAuthDir) ‰r inst‰lld till %s men "
+-"har fel r‰ttigheter, den borde ha r‰ttigheterna 0750. R‰tta till "
++"har fel r‰ttigheter, den borde ha r‰ttigheterna 0770. R‰tta till "
+ "r‰ttigheterna eller gdm-konfigurationen %s och starta om gdm."
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s har felaktiga r‰ttigheter (%o). Ska vara 0750. "
++"gdm_config_parse: Authdir %s har felaktiga r‰ttigheter (%o). Ska vara 0770. "
+ "Avbryter."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/ta.po gdm-2.2.5.5/po/ta.po
+--- gdm-2.2.5.5/po.orig/ta.po	Wed Mar 13 00:10:48 2002
++++ gdm-2.2.5.5/po/ta.po	Sun Jan  4 02:24:02 2004
+@@ -295,17 +295,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: Authdir %s ÏÃ ¿¢®∆¬°… ´—¡æ¢∏˚. 750 ¨∏ ≠’Ï∏ ß≈ÒŒı. ¶≈«¢ß¬⁄∏¢"
++"gdm_config_parse: Authdir %s ÏÃ ¿¢®∆¬°… ´—¡æ¢∏˚. 0770 ¨∏ ≠’Ï∏ ß≈ÒŒı. ¶≈«¢ß¬⁄∏¢"
+ "»–."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/tr.po gdm-2.2.5.5/po/tr.po
+--- gdm-2.2.5.5/po.orig/tr.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/tr.po	Sun Jan  4 02:28:41 2004
+@@ -304,17 +304,17 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+-"gdm_config_parse: %s izin dizinin yanl˝˛ eri˛im haklar˝ var. 750 olmas˝ "
++"gdm_config_parse: %s izin dizinin yanl˝˛ eri˛im haklar˝ var. 0770 olmas˝ "
+ "gerekiyor."
+ 
+ #: daemon/gdm.c:661
+diff -u gdm-2.2.5.5/po.orig/uk.po gdm-2.2.5.5/po/uk.po
+--- gdm-2.2.5.5/po.orig/uk.po	Sun Jan  4 02:20:15 2004
++++ gdm-2.2.5.5/po/uk.po	Sun Jan  4 02:23:50 2004
+@@ -299,14 +299,14 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+ msgstr ""
+ "gdm_config_parse: –ö–∞—Ç–∞–ª–æ–≥ –∞–≤—Ç–æ—Ä–∏–∑–∞—Ü—ñ—ó %s –º–∞—î –Ω–µ –≤—ñ—Ä–Ω—ñ –ø—Ä–∞–≤–∞. –ú–∞—é—Ç—å –±—É—Ç–∏ 750. "
+diff -u gdm-2.2.5.5/po.orig/zh_CN.po gdm-2.2.5.5/po/zh_CN.po
+--- gdm-2.2.5.5/po.orig/zh_CN.po	Wed Mar 13 00:11:26 2002
++++ gdm-2.2.5.5/po/zh_CN.po	Sun Jan  4 02:28:31 2004
+@@ -289,16 +289,16 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, fuzzy, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+-msgstr "gdm_config_parse: Authdir %s »®œﬁ¥ÌŒÛ. ”¶Œ™ 750. ÷–÷π."
++msgstr "gdm_config_parse: Authdir %s »®œﬁ¥ÌŒÛ. ”¶Œ™ 0770. ÷–÷π."
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+diff -u gdm-2.2.5.5/po.orig/zh_TW.po gdm-2.2.5.5/po/zh_TW.po
+--- gdm-2.2.5.5/po.orig/zh_TW.po	Wed Mar 13 00:11:27 2002
++++ gdm-2.2.5.5/po/zh_TW.po	Sun Jan  4 02:23:37 2004
+@@ -292,16 +292,16 @@
+ #, c-format
+ msgid ""
+ "Server Authorization directory (daemon/ServAuthDir) is set to %s but has the "
+-"wrong permissions, it should have permissions of 0750. Please correct the "
++"wrong permissions, it should have permissions of 0770. Please correct the "
+ "permissions or the gdm configuration %s and restart gdm."
+ msgstr ""
+ 
+ #: daemon/gdm.c:606
+ #, c-format
+ msgid ""
+-"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0750. "
++"gdm_config_parse: Authdir %s has wrong permissions %o. Should be 0770. "
+ "Aborting."
+-msgstr "gdm_config_parse°Gª{√“•ÿø˝ %s ™∫≈v≠≠ %o §£•øΩT°A¿≥¨∞ 0750°C©Ò±Û°C"
++msgstr "gdm_config_parse°Gª{√“•ÿø˝ %s ™∫≈v≠≠ %o §£•øΩT°A¿≥¨∞ 0770°C©Ò±Û°C"
+ 
+ #: daemon/gdm.c:661
+ msgid "gdm_daemonify: fork() failed!"
+--- gdm-2.2.5.5/docs/eu/gdm.sgml~	Sun Jan  4 02:46:37 2004
++++ gdm-2.2.5.5/docs/eu/gdm.sgml	Sun Jan  4 02:46:37 2004
+@@ -119,7 +119,7 @@
+ 
+ 	<para>Ongietorriak sistemako erabiltzaile guztientzat ikonoak dituen aurpegi-arakatzailea eskaintzen du.  Sistema-administratzaileak ikonoak modu orokorrean instala ditzake, baina erabiltzailearen etxeko direktorioan ere instala daitezke.</para>
+ 	
+-	<para> Aurpegi-direktorio orokorreko aurpegi-ikonoek gdm-erabiltzaileak irakurtzeko moduan egon behar dute. Baina daemon-aren, proxy-en erabiltzaileak ongietorrian marrazten du eta beraz, horiek ezingo ditu gdm-erabiltzaileak irakurri, root-ak baizik.</para>
++	<para> Aurpegi-direktorio orokorreko aurpegi-ikonoek xdm-erabiltzaileak irakurtzeko moduan egon behar dute. Baina daemon-aren, proxy-en erabiltzaileak ongietorrian marrazten du eta beraz, horiek ezingo ditu xdm-erabiltzaileak irakurri, root-ak baizik.</para>
+ 
+ 	<para>Kontuan hartu erabiltzailearen etxeko direktorioan aurpegi-ikonoak kargatzeak eta eskalatzeak denbora asko iraun dezakeela.  Bereziki sistema handietan edo NIS exekutatzen duten sistemetan. Arakatzaile hau erabiltzaile gutxi dituen sistementzat bakarrik dago pentsatuta.</para>
+ 
+@@ -134,7 +134,7 @@
+ 	  Logotipoa
+ 	</title>
+ 
+-	<para>Nahi izanez gero, ongietorriak logotipo bat bistara dezake saio-hasieraren leihoan.  Irudiak Imlib liburutegirako formatu irakurgarrian egon behar du (GIF, JPG, PNG, TIFF, XPM eta posible diren besteak), eta gdm-ren erabiltzailearentzat irakurgarria izan behar du. Lehenespenetarako ikus <filename>Logotipoa</filename> aukera erreferentzia-sekzioan .</para>
++	<para>Nahi izanez gero, ongietorriak logotipo bat bistara dezake saio-hasieraren leihoan.  Irudiak Imlib liburutegirako formatu irakurgarrian egon behar du (GIF, JPG, PNG, TIFF, XPM eta posible diren besteak), eta xdm-ren erabiltzailearentzat irakurgarria izan behar du. Lehenespenetarako ikus <filename>Logotipoa</filename> aukera erreferentzia-sekzioan .</para>
+ 
+       </sect2>
+ 
+@@ -229,7 +229,7 @@
+ 	  
+ 	  <varlistentry><term>Greeter</term> <listitem><synopsis>Greeter=bin/gdmlogin --disable-sound --disable-crash-dialog</synopsis> <para>Ongietorriaren bide-izen osoa eta izen exekutagarriak, hautazko argumentuez jarraiturik.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Group</term> <listitem><synopsis>Group=gdm</synopsis> <para><filename>gdmlogin</filename>/<filename>gdmchooser</filename> exekutatzeko taldearen IDa.</para></listitem></varlistentry>
++	  <varlistentry><term>Group</term> <listitem><synopsis>Group=xdm</synopsis> <para><filename>gdmlogin</filename>/<filename>gdmchooser</filename> exekutatzeko taldearen IDa.</para></listitem></varlistentry>
+ 	  
+ 	  <varlistentry><term>HaltCommand</term> <listitem><synopsis>HaltCommand=/sbin/shutdown -h now</synopsis> <para>Erabiltzaileak Sistema menuan Gelditu hautatzen duenean exekutatu behar den bide-izen osoa eta argumentuak.</para></listitem></varlistentry>
+ 	  
+@@ -247,7 +247,7 @@
+ 	  
+ 	  <varlistentry><term>RootPath</term> <listitem><synopsis>RootPath=/sbin:/usr/sbin:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin</synopsis> <para>Root-aren saioan zer bide-izen ezarriko den eta GDMk exekutatutako {Init,PreSession,PostSession} script-ak zehazten ditu.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ServAuthDir</term> <listitem><synopsis>ServAuthDir=/var/gdm</synopsis> <para>Pantaila indibidualentzako X autentifikazio-fitxategiak dituen direktorioa.   <filename>gdm.gdm</filename>-ren barnean egon behar luke 750 baimenekin. Direktorio hau daemon-ak gorde behar dituen fitxategi pribatuentzat ere erabiltzen da. Beste erabiltzaileek ezingo dute direktorio hori lortu eta bere edukia irakurri/gorde.</para></listitem></varlistentry>
++	  <varlistentry><term>ServAuthDir</term> <listitem><synopsis>ServAuthDir=/var/gdm</synopsis> <para>Pantaila indibidualentzako X autentifikazio-fitxategiak dituen direktorioa.   <filename>root.xdm</filename>-ren barnean egon behar luke 0770 baimenekin. Direktorio hau daemon-ak gorde behar dituen fitxategi pribatuentzat ere erabiltzen da. Beste erabiltzaileek ezingo dute direktorio hori lortu eta bere edukia irakurri/gorde.</para></listitem></varlistentry>
+ 	  
+ 	  <varlistentry><term>SessionDir</term> <listitem><synopsis>SessionDir=etc/gdm/Sessions</synopsis> <para>Sisteman erabilgarri dauden saio-mota guztien script-ak dituen direktorioa.</para></listitem></varlistentry>
+ 
+@@ -273,7 +273,7 @@
+ 
+ 	  <varlistentry><term>TimedLoginDelay</term> <listitem><synopsis>TimedLoginDelay=30</synopsis> <para>DenborazMugatutakoSaioHasiera aukeraren erabiltzailea saioa hasi aurretik atzeratuko den denbora. 10 edo handiagoa izan behar du.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>User</term> <listitem><synopsis>User=gdm</synopsis> <para> <filename>gdmlogin</filename> / <filename>gdmchooser</filename> exekutatzeko erabiltzaile-izena.</para></listitem></varlistentry>
++	  <varlistentry><term>User</term> <listitem><synopsis>User=xdm</synopsis> <para> <filename>gdmlogin</filename> / <filename>gdmchooser</filename> exekutatzeko erabiltzaile-izena.</para></listitem></varlistentry>
+ 	  
+ 	  <varlistentry><term>UserAuthDir</term> <listitem><synopsis>UserAuthDir=</synopsis> <para>Erabiltzailearen <filename>.Xauthority</filename> fitxategia gorde behar litzatekeen direktorioa.  Ezer zehazten ez denean, erabiltzailearen etxeko direktorioa erabiltzen da.</para></listitem></varlistentry>
+ 	  
+@@ -424,7 +424,7 @@
+ 
+ 	  <varlistentry><term>ConfigAvailable</term> <listitem><synopsis>ConfigAvailable=true</synopsis> <para>Konfiguratzailea ongietorrian exekutatzea baimentzen du.  Kontuan hartu erabiltzaileak root-aren pasahitza idatzi beharko duela konfiguratzailea exekutatu aurretik.   Ikus Configurator aukera daemon atalean.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>DefaultFace</term> <listitem><synopsis>DefaultFace=share/pixmaps/nophoto.png</synopsis> <para>Ikono-fitxategia lehenesten du <filename>~/gnome/photo</filename> fitxategian argazki pertsonalik ez duten erabiltzaileentzat. Irudiak Imlib formatuduna eta fitxategiak gdm erabiltzailearentzat irakurgarri izan behar du.</para></listitem></varlistentry>
++	  <varlistentry><term>DefaultFace</term> <listitem><synopsis>DefaultFace=share/pixmaps/nophoto.png</synopsis> <para>Ikono-fitxategia lehenesten du <filename>~/gnome/photo</filename> fitxategian argazki pertsonalik ez duten erabiltzaileentzat. Irudiak Imlib formatuduna eta fitxategiak xdm erabiltzailearentzat irakurgarri izan behar du.</para></listitem></varlistentry>
+ 	  
+ 	  <varlistentry><term>DefaultLocale</term> <listitem><synopsis>DefaultLocale=ingelesa</synopsis> <para>Hizkuntza hori erabiltzen da saiorako <filename>~user/.gnome/gdm</filename> fitxategian beste ezer zehazturik ez badago eta erabiltzaileak ongietorriko Lokala menuan hizkuntza aukeratu ez badu.</para></listitem></varlistentry>
+ 	  
+@@ -490,7 +490,7 @@
+ 
+ 	  <varlistentry><term>BackgroundImage</term> <listitem><synopsis>BackgroundImage=somefile.png</synopsis> <para>BackgroundType 1 bada, ongietorrian atzeko plano moduan bistaratu.</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>BackgroundProgram</term> <listitem><synopsis>BackgroundProgram=/usr/bin/xeyes</synopsis> <para>Programa hori ezarrita badago, atzeko planoan exekutatuko da saio-hasieraren leihoa bistaratzen den bitartean.   Kontuan hartu programa horiek guztiak ez direla modu horretan exekutatuko, gdm-k normalean ez baitu etxeko direktoriorik.  Etxeko direktorioa gdm erabiltzailearentzat ezar dezakezu, hori behar duten aplikazioak exekutatu nahi badituzu.</para></listitem></varlistentry>	
++	  <varlistentry><term>BackgroundProgram</term> <listitem><synopsis>BackgroundProgram=/usr/bin/xeyes</synopsis> <para>Programa hori ezarrita badago, atzeko planoan exekutatuko da saio-hasieraren leihoa bistaratzen den bitartean.   Kontuan hartu programa horiek guztiak ez direla modu horretan exekutatuko, xdm-k normalean ez baitu etxeko direktoriorik.  Etxeko direktorioa xdm erabiltzailearentzat ezar dezakezu, hori behar duten aplikazioak exekutatu nahi badituzu.</para></listitem></varlistentry>	
+ 
+ 	  <varlistentry><term>BackgroundRemoteOnlyColor</term> <listitem><synopsis>BackgroundRemoteOnlyColor=true</synopsis> <para>Urruneko pantailetan atzeko planoaren kolorea bakarrik ezartzen du.  Hori sareko karga arintzeko da.  BackgroundProgram ez da exekutatzen.</para></listitem></varlistentry>
+ 
+@@ -528,7 +528,7 @@
+ 	  
+ 	  <varlistentry><term>HostImageDir</term> <listitem><synopsis>HostImageDir=share/hosts</synopsis> <para>Ostalarien ikono-fitxategien biltegia.  Sistema-administratzaileak urruneko ostalarien ikonoak hemen ipin ditzake eta <filename>gdmchooser</filename> fitxategian agertuko dira.</para>
+ 	      
+-	      <para>Fitxategi-izenak ostalariaren izen guztiz kualifikatuarekin (FQDN) bat etorri behar du.  Ikonoak Imlib formatuan gorde behar dira eta gdm erabiltzailearentzat irakurgarriak izan behar dute.</para>
++	      <para>Fitxategi-izenak ostalariaren izen guztiz kualifikatuarekin (FQDN) bat etorri behar du.  Ikonoak Imlib formatuan gorde behar dira eta xdm erabiltzailearentzat irakurgarriak izan behar dute.</para>
+ 	      
+ 	    </listitem></varlistentry>
+ 
+--- gdm-2.2.5.5/docs/C/gdm.sgml~	Sun Jan  4 02:46:37 2004
++++ gdm-2.2.5.5/docs/C/gdm.sgml	Sun Jan  4 02:46:37 2004
+@@ -298,9 +298,9 @@
+ 	
+ 	<para>
+ 	  Face icons placed in the global face directory
+-	  must be readable to the gdm user.  However, the daemon, proxies
++	  must be readable to the xdm user.  However, the daemon, proxies
+ 	  user pictures to the greeter and thus those don't have be be
+-	  readable by the gdm user, but root.
++	  readable by the xdm user, but root.
+ 	</para>
+ 
+ 	<para>
+@@ -336,7 +336,7 @@
+ 	  The greeter can optionally display a logo in the login
+ 	  window. The image must be in a format readable to the Imlib
+ 	  library (GIF, JPG, PNG, TIFF, XPM and possibly others), and
+-	  it must be readable to the gdm user. See the <filename>
++	  it must be readable to the xdm user. See the <filename>
+ 	  Logo</filename> option in the reference section below for detauls.
+ 	</para>
+ 
+@@ -644,7 +644,7 @@
+ 	  <varlistentry>
+ 	    <term>Group</term>
+ 	    <listitem>
+-	      <synopsis>Group=gdm</synopsis>
++	      <synopsis>Group=xdm</synopsis>
+ 	      <para>
+ 		The group id under which
+ 		<filename>gdmlogin</filename>/<filename>gdmchooser</filename>
+@@ -752,7 +752,7 @@
+ 	      <para>
+ 		Directory containing the X authentication files for the
+ 		individual displays.  Should be owned by
+-		<filename>gdm.gdm</filename> with permissions 750.
++		<filename>root.xdm</filename> with permissions 0770.
+ 		This directory is also used for other private files that
+ 		the daemon needs to store.  Other user should not
+ 		have any way to get into this directory and read/change
+@@ -841,7 +841,7 @@
+ 	  <varlistentry>
+ 	    <term>User</term>
+ 	    <listitem>
+-	      <synopsis>User=gdm</synopsis>
++	      <synopsis>User=xdm</synopsis>
+ 	      <para>
+ 		The username under which <filename>gdmlogin</filename> /
+ 		<filename>gdmchooser</filename> are run.
+@@ -1360,7 +1360,7 @@
+ 		Default icon file for users without a personal picture
+ 		in <filename>~/gnome/photo</filename>. The image must be
+ 		in an Imlib supported format and the file must be
+-		readable for the gdm user.
++		readable for the xdm user.
+ 	      </para>
+ 	    </listitem>
+ 	  </varlistentry>
+@@ -1593,9 +1593,9 @@
+ 	      <para>
+ 		If set this program will be run in the background while
+                 the login window is being displayed.  Note that not all
+-		programs will run this way, since gdm does not usually have
++		programs will run this way, since xdm does not usually have
+ 		a home directory.  You could set up home directory for the
+-		gdm user if you wish to run applications which require it.
++		xdm user if you wish to run applications which require it.
+ 	      </para>
+ 	    </listitem>
+ 	  </varlistentry>	
+@@ -1750,7 +1750,7 @@
+ 	      <para>
+ 		The file name must match the fully qualified name (FQDN) for
+ 		the host.  The icons must be stored in Imlib supported formats
+-		and they must be readable to the gdm user.
++		and they must be readable to the xdm user.
+ 	      </para>
+ 	      
+ 	    </listitem>
