@@ -1,14 +1,14 @@
 Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
-Version:	2.2.3.2
+Version:	2.2.4.1
 Release:	1
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/sources/%{name}/%{name}-%{version}.tar.gz
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
@@ -30,6 +30,9 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
 %define		_prefix		/usr/X11R6
+%define		_bindir		%{_prefix}/bin
+%define		_datadir	%{_prefix}/share
+%define		_sbindir	%{_prefix}/sbin
 %define		_mandir		%{_prefix}/man
 %define		_sysconfdir	/etc/X11
 %define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
@@ -81,7 +84,7 @@ mv -f $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome.X \
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
-install %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/%{name}/gdm.conf
+install %{SOURCE3} $RPM_BUILD_ROOT%{_sysconfdir}/%{name}/gdm.conf
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
