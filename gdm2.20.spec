@@ -12,7 +12,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.4.0.12
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -51,13 +51,7 @@ Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
-%define		_prefix		/usr/X11R6
-%define		_bindir		%{_prefix}/bin
-%define		_datadir	%{_prefix}/share
-%define		_sbindir	%{_prefix}/sbin
-%define		_mandir		%{_prefix}/man
 %define		_localstatedir	/var/lib
-%define		_sysconfdir	/etc/X11
 
 %description
 Gdm (the GNOME Display Manager) is a highly configurable
