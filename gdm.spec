@@ -2,9 +2,10 @@ Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
 Version:	2.0beta4
-Release:	3
+Release:	4
 Source0:	ftp://socsci.auc.dk/~mkp/gdm/%{name}-%{version}.tar.gz
 Source1:	gdm.pamd
+Source2:	gdm.init
 Patch0:		gdm-gnomerc.patch
 Patch1:		gdm-config.patch
 Group:		X11/GNOME
@@ -52,7 +53,10 @@ make
 %install
 rm -rf $RPM_BUILD_ROOT
 
+install -d $RPM_BUILD_ROOT/etc/rc.d/init.d/
+
 install -d $RPM_BUILD_ROOT{%{_prefix},/etc/{pam.d,security}}
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
 make install prefix=$RPM_BUILD_ROOT%{_prefix} \
 	sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} \
@@ -87,16 +91,28 @@ if [ -z "`id -u xdm 2>/dev/null`" ]; then
 fi
 
 %post
-ln -sf %{_bindir}/gdm %{_sysconfdir}/prefdm
+/sbin/chkconfig --add gdm
+if [ -f /var/lock/subsys/gdm ]; then
+        /etc/rc.d/init.d/gdm restart >&2
+else
+        echo "Run \"/etc/rc.d/init.d/gdm start\" to start gdm." >&2
+fi
+
+%preun
+if [ -f /var/lock/subsys/gdm ]; then
+		 /etc/rc.d/init.d/gdm stop >&2
+fi
+/sbin/chkconfig --del gdm
 
 %postun
 if [ "$1" = "0" ]; then
+
 	if [ -n "`id -u xdm 2>/dev/null`" ]; then
 		/usr/sbin/userdel xdm
 	fi
 	
 	/usr/sbin/groupdel xdm
-	rm -f  %{_sysconfdir}/prefdm
+
 fi
 
 %clean
@@ -119,4 +135,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
 %attr(750,xdm,xdm) /var/lib/gdm
+%attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_datadir}/pixmaps/*
