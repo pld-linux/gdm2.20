@@ -2,7 +2,7 @@ Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
 Version:	2.2.2.1
-Release:	2
+Release:	3
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
@@ -11,6 +11,7 @@ Group(pl):	X11/Aplikacje
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
 Source1:	%{name}.pamd
 Source2:	%{name}.init
+Source3:	%{name}.conf
 Patch0:		%{name}-xdmcp.patch
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
@@ -74,6 +75,8 @@ mv -f $RPM_BUILD_ROOT%{_sysconfdir}/gdm/Sessions/Gnome.X \
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/%{name}/gdm.conf
+
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
 %find_lang gdm
@@ -116,14 +119,15 @@ rm -rf $RPM_BUILD_ROOT
 %files -f gdm.lang
 %defattr(644,root,root,755)
 %doc {AUTHORS,ChangeLog,NEWS,README,TODO}.gz
-%attr(775,root,xdm) %{_bindir}/gdm
-%attr(775,root,xdm) %{_bindir}/gdmlogin
-%attr(775,root,xdm) %{_bindir}/gdmchooser
+%attr(775,root,xdm) %{_bindir}/*
+%attr(775,root,xdm) %{_sbindir}/*
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/Init
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/PreSession
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/Sessions
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/PostSession
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/gnomerc
+%attr(775,root,xdm) %config %{_sysconfdir}/gdm/XKeepsCrashing
+%attr(664,root,xdm) %config %{_sysconfdir}/gdm/factory-gdm.conf
 %attr(664,root,xdm) %config %{_sysconfdir}/gdm/gdm.conf
 %attr(664,root,xdm) %config %{_sysconfdir}/gdm/locale.alias
 %attr(775,root,xdm) %dir %{_sysconfdir}/gdm
@@ -132,3 +136,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(750,xdm,xdm) /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_pixmapsdir}/*
+%{_datadir}/gnome/*
+# these lines to devel subpackage?
+%{_datadir}/gdm/*
+%{_datadir}/omf/%{name}
