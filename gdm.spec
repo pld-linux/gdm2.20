@@ -49,6 +49,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
+BuildRequires:	rpmbuild(macros) >= 1.159
 BuildRequires:	scrollkeeper
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
