@@ -58,7 +58,7 @@ install -d $RPM_BUILD_ROOT/etc/rc.d/init.d/
 install -d $RPM_BUILD_ROOT{%{_prefix},/etc/{pam.d,security}}
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
-make install prefix=$RPM_BUILD_ROOT%{_prefix} \
+%{__make} install prefix=$RPM_BUILD_ROOT%{_prefix} \
 	sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} \
 	localstatedir=$RPM_BUILD_ROOT/var/lib
 
