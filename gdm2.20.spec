@@ -12,13 +12,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.4.0
+Version:	2.4.4.1
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	f9321918669d6823e65220034e3b2398
+# Source0-md5:	50e5fd07bf1a15b1638f41787415f81c
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -28,16 +28,16 @@ URL:		http://www.jirka.org/gdm.html
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2.2.3
+BuildRequires:	gtk+2-devel >= 2.2.4
 BuildRequires:	intltool >= 0.22
 BuildRequires:	libglade2-devel >= 2.0.1
 BuildRequires:	libgnome-devel >= 2.4.0
 BuildRequires:	libgnomecanvas-devel >= 2.4.0
-BuildRequires:	libgnomeui-devel >= 2.3.7
-BuildRequires:	libgsf-devel >= 1.8.1-2
-BuildRequires:	librsvg-devel >= 2.0.1
+BuildRequires:	libgnomeui-devel >= 2.4.0.1
+BuildRequires:	libgsf-devel >= 1.8.2
+BuildRequires:	librsvg-devel >= 2.4.0
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.5.10
+BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 Requires(pre):	/bin/id
