@@ -11,13 +11,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.4.1.4
-Release:	1
+Version:	2.4.2.95
+Release:	0.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.4/%{name}-%{version}.tar.bz2
-# Source0-md5:	f1c0272f879abb8d8d412b1d45be5b6c
+# Source0-md5:	83190cb663db4168a19032a9adf205fc
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -52,6 +52,7 @@ Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
+%define		_sysconfdir	/etc/X11
 %define		_localstatedir	/var/lib
 
 %description
@@ -202,19 +203,24 @@ fi
 %attr(755,root,root) %{_bindir}/gdmflexiserver
 %attr(755,root,root) %{_bindir}/gdmgreeter
 %attr(755,root,root) %{_bindir}/gdmlogin
-%attr(755,root,root) %{_bindir}/gdmmktemp
+#%attr(755,root,root) %{_bindir}/gdmmktemp
 %attr(755,root,root) %{_bindir}/gdmphotosetup
 %attr(755,root,root) %{_bindir}/gdmsetup
 %attr(755,root,root) %{_bindir}/gdmthemetester
+%attr(755,root,root) %{_libdir}/gdmaskpass
+%attr(755,root,root) %{_libdir}/gdmopen
 %attr(755,root,root) %{_sbindir}/*
 %dir %{_sysconfdir}/gdm
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Init
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PreSession
-%attr(755,root,root) %config %{_sysconfdir}/gdm/Sessions
+#%attr(755,root,root) %config %{_sysconfdir}/gdm/Sessions
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PostSession
-%attr(755,root,root) %config %{_sysconfdir}/gdm/gnomerc
+#%attr(755,root,root) %config %{_sysconfdir}/gdm/gnomerc
 %attr(755,root,root) %config %{_sysconfdir}/gdm/XKeepsCrashing
+%attr(755,root,root) %config %{_sysconfdir}/gdm/Xsession
 %config %{_sysconfdir}/gdm/factory-gdm.conf
+%config %{_sysconfdir}/gdm/PostLogin/Default.sample
+%config %{_sysconfdir}/gdm/modules
 %config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/gdm/gdm.conf
 %config %{_sysconfdir}/gdm/locale.alias
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm*
@@ -226,6 +232,7 @@ fi
 %{_datadir}/applications/gdmflexiserver.desktop
 %{_datadir}/gnome/capplets/*
 %{_datadir}/gdm
+%attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
 
 %files Xnest
 %defattr(644,root,root,755)
