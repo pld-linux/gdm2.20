@@ -2,20 +2,16 @@ Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
 Version:	2.2.2.1
-Release:	1
-Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
-Source1:	%{name}.pamd
-Source2:	%{name}.init
+Release:	2
+Epoch:		1
+License:	LGPL/GPL
 Group:		X11/Applications
 Group(de):	X11/Applikationen
 Group(pl):	X11/Aplikacje
-License:	LGPL/GPL
-Prereq:		/usr/sbin/groupadd
-Prereq:		/usr/sbin/groupdel
-Prereq:		/usr/sbin/useradd
-Prereq:		/usr/sbin/userdel
-Prereq:		/sbin/chkconfig
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
+Source1:	%{name}.pamd
+Source2:	%{name}.init
+Patch0:		%{name}-xdmcp.patch
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	esound-devel
@@ -26,6 +22,8 @@ BuildRequires:	perl-modules
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
+Prereq:		shadow
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
 %define		_prefix		/usr/X11R6
@@ -42,6 +40,7 @@ u¿ytkownikowi graficzne okienko logowania.
 
 %prep
 %setup -q
+%patch -p1
 
 %build
 CFLAGS="%{rpmcflags}" \
@@ -49,14 +48,14 @@ CFLAGS="%{rpmcflags}" \
 	--prefix=%{_prefix} \
 	--sysconfdir=%{_sysconfdir} \
 	--localstatedir=/var/lib
+
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT/etc/rc.d/init.d/ \
+	$RPM_BUILD_ROOT{%{_prefix},/etc/{pam.d,security}}
 
-install -d $RPM_BUILD_ROOT/etc/rc.d/init.d/
-
-install -d $RPM_BUILD_ROOT{%{_prefix},/etc/{pam.d,security}}
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
 %{__make} install prefix=$RPM_BUILD_ROOT%{_prefix} \
