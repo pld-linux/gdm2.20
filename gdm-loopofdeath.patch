@@ -1,0 +1,411 @@
+--- gdm-2.0beta2/daemon/server.c.loopofdeath	Sun Aug 13 21:22:22 2000
++++ gdm-2.0beta2/daemon/server.c	Sun Aug 13 21:23:52 2000
+@@ -58,6 +58,79 @@
+ GdmDisplay *d;
+ sigset_t mask, omask;
+ 
++static gboolean
++gdm_server_check_loop (GdmDisplay *disp)
++{
++  time_t now;
++  time_t since_last;
++  
++  now = time (NULL);
++
++  if (disp->disabled)
++    return FALSE;
++  
++  if (disp->last_start_time > now || disp->last_start_time == 0)
++    {
++      /* Reset everything if this is the first time in this
++       * function, or if the system clock got reset backward.
++       */
++      disp->last_start_time = now;
++      disp->retry_count = 1;
++
++      gdm_debug ("Resetting counts for loop of death detection");
++      
++      return TRUE;
++    }
++
++  since_last = now - disp->last_start_time;
++
++  /* If it's been at least 1.5 minutes since the last startup
++   * attempt, then we reset everything.
++   */
++
++  if (since_last >= 90)
++    {
++      disp->last_start_time = now;
++      disp->retry_count = 1;
++
++      gdm_debug ("Resetting counts for loop of death detection, 90 seconds elapsed.");
++      
++      return TRUE;
++    }
++
++  /* If we've tried too many times we bail out. i.e. this means we
++   * tried too many times in the 90-second period.
++   */
++  if (disp->retry_count > 4)
++    {
++      gchar *msg;
++      msg = g_strdup_printf (_("Failed to start X server several times in a short time period; disabling display %s"), disp->name);
++      gdm_error (msg);
++      g_free (msg);
++      disp->disabled = TRUE;
++
++      gdm_debug ("Failed to start X server after several retries; aborting.");
++      
++      exit (SERVER_ABORT);
++    }
++  
++  /* At least 8 seconds between start attempts,
++   * so you can try to kill gdm from the console
++   * in these gaps.
++   */
++  if (since_last < 8)
++    {
++      gdm_debug ("Sleeping %d seconds before next X server restart attempt",
++                 8 - since_last);
++      sleep (8 - since_last);
++      now = time (NULL);
++    }
++
++  disp->retry_count += 1;
++  disp->last_start_time = now;
++
++  return TRUE;
++}
+ 
+ void
+ gdm_server_start (GdmDisplay *disp)
+@@ -74,6 +147,11 @@
+     d = disp;
+     
+     gdm_debug ("gdm_server_start: %s", d->name);
++
++    if (!gdm_server_check_loop (disp))
++      return;
++
++    gdm_debug ("Attempting to start X server");
+     
+     /* Catch USR1 from X server */
+     usr1.sa_handler = gdm_server_usr1_handler;
+@@ -161,7 +239,7 @@
+     d->servstat = SERVER_STARTED;
+     
+     /* Wait for X server to send ready signal */
+-    pause();
++    gdm_run ();
+ }
+ 
+ 
+@@ -280,6 +358,8 @@
+     sigprocmask (SIG_BLOCK, &usr1mask, NULL);
+     
+     gdm_display_manage (d);
++
++    gdm_quit ();
+ }
+ 
+ 
+@@ -313,6 +393,10 @@
+     d->sessionid = 0;
+     d->acctime = 0;
+     d->dsp = NULL;
++
++    d->last_start_time = 0;
++    d->retry_count = 0;
++    d->disabled = FALSE;
+     
+     g_free (dname);
+     g_free (hostname);
+--- gdm-2.0beta2/daemon/gdm.h.loopofdeath	Sun Aug 13 21:22:22 2000
++++ gdm-2.0beta2/daemon/gdm.h	Sun Aug 13 21:22:22 2000
+@@ -150,6 +150,9 @@
+     pid_t sesspid;
+     pid_t slavepid;
+     time_t acctime;
++    time_t last_start_time;
++    gint retry_count;
++    gboolean disabled;
+ };
+ 
+ 
+@@ -162,6 +165,21 @@
+     time_t acctime;
+ };
+ 
++typedef gboolean (*GSignalFunc) (gint8		signal,
++				 gpointer	data);
++guint	g_signal_add		(gint8		signal,
++				 GSignalFunc	function,
++				 gpointer    	data);
++guint   g_signal_add_full       (gint           priority,
++				 gint8          signal,
++				 GSignalFunc    function,
++				 gpointer       data,
++				 GDestroyNotify destroy);
++void    g_signal_notify         (gint8          signal);
++
++
++void gdm_run (void);
++void gdm_quit (void);
+ 
+ #endif /* __GDM_H__ */
+ 
+--- gdm-2.0beta2/daemon/gdm.c.loopofdeath	Sun Aug 13 21:22:22 2000
++++ gdm-2.0beta2/daemon/gdm.c	Sun Aug 13 21:22:22 2000
+@@ -376,9 +376,8 @@
+     return (TRUE);
+ }
+ 
+-
+-static void 
+-gdm_child_handler (gint sig)
++void
++gdm_cleanup_children (void)
+ {
+     pid_t pid;
+     gint exitstatus = 0, status = 0;
+@@ -487,8 +486,9 @@
+ 	    list = list->next;
+ 	}
+     }
+-}
+ 
++    gdm_quit ();
++}
+ 
+ static void
+ gdm_display_unmanage (GdmDisplay *d)
+@@ -524,27 +524,58 @@
+     }
+ }
+ 
++static void
++term_cleanup (void)
++{
++  sigset_t mask;
++  
++  gdm_debug ("gdm_term_handler: Got TERM/INT. Going down!");
++  
++  sigemptyset (&mask);
++  sigaddset (&mask, SIGCHLD);
++  sigprocmask (SIG_BLOCK, &mask, NULL); 
++  
++  g_slist_foreach (displays, (GFunc) gdm_display_unmanage, NULL);
++  
++  closelog();
++  unlink (GdmPidFile);
++  
++  exit (EXIT_SUCCESS);
++}
+ 
+ static void
+ gdm_term_handler (int sig)
+ {
+-    sigset_t mask;
+-
+-    gdm_debug ("gdm_term_handler: Got TERM/INT. Going down!");
++  g_signal_notify (sig);
++}
+ 
+-    sigemptyset (&mask);
+-    sigaddset (&mask, SIGCHLD);
+-    sigprocmask (SIG_BLOCK, &mask, NULL); 
++static void 
++gdm_child_handler (gint sig)
++{
++  g_signal_notify (sig);
++}
+ 
+-    g_slist_foreach (displays, (GFunc) gdm_display_unmanage, NULL);
++static gboolean
++mainloop_sig_callback (gint8 sig, gpointer data)
++{
++  switch (sig)
++    {
++    case SIGCHLD:
++      gdm_cleanup_children ();
++      break;
++
++    case SIGINT:
++    case SIGTERM:
++      term_cleanup ();
++      break;
+ 
+-    closelog();
+-    unlink (GdmPidFile);
++    default:
++      break;
++    }
+ 
+-    exit (EXIT_SUCCESS);
++  return TRUE;
+ }
+ 
+-
+ static void
+ gdm_daemonify (void)
+ {
+@@ -579,6 +610,19 @@
+     dup2 (0, 2);
+ }
+ 
++static GMainLoop *main_loop;    
++
++void
++gdm_run (void)
++{
++  g_main_run (main_loop);
++}
++
++void
++gdm_quit (void)
++{
++  g_main_quit (main_loop);
++}
+ 
+ int 
+ main (int argc, char *argv[])
+@@ -586,7 +630,6 @@
+     sigset_t mask;
+     struct sigaction term, child;
+     FILE *pf;
+-    GMainLoop *main_loop;    
+  
+     if (getuid()) {
+ 
+@@ -635,6 +678,10 @@
+ 	gdm_daemonify();
+ 
+     /* Signal handling */
++    g_signal_add (SIGCHLD, mainloop_sig_callback, NULL);
++    g_signal_add (SIGTERM, mainloop_sig_callback, NULL);
++    g_signal_add (SIGINT, mainloop_sig_callback, NULL);
++    
+     term.sa_handler = gdm_term_handler;
+     term.sa_flags = SA_RESTART;
+     sigemptyset (&term.sa_mask);
+@@ -674,9 +721,117 @@
+ 	gdm_xdmcp_run();
+     }
+ 
+-    g_main_run (main_loop);
+-
++    /* We always exit via exit(), and sadly we need to g_main_quit()
++     * at times not knowing if it's this main or a recursive one we're
++     * quitting.
++     */
++    while (1)
++      {
++        gdm_run ();
++      }
++        
+     return (EXIT_SUCCESS);
+ }
++
++/* signal main loop support */
++
++
++typedef struct _GSignalData GSignalData;
++struct _GSignalData
++{
++  guint8      index;
++  guint8      shift;
++  GSignalFunc callback;
++};
++
++static gboolean g_signal_prepare  (gpointer  source_data,
++				   GTimeVal *current_time,
++				   gint     *timeout);
++static gboolean g_signal_check    (gpointer  source_data,
++				   GTimeVal *current_time);
++static gboolean g_signal_dispatch (gpointer  source_data,
++				   GTimeVal *current_time,
++				   gpointer  user_data);
++
++static GSourceFuncs signal_funcs = {
++  g_signal_prepare,
++  g_signal_check,
++  g_signal_dispatch,
++  g_free
++};
++static	guint32	signals_notified[8] = { 0, 0, 0, 0, 0, 0, 0, 0 };
++
++static gboolean
++g_signal_prepare (gpointer  source_data,
++		  GTimeVal *current_time,
++		  gint     *timeout)
++{
++  GSignalData *signal_data = source_data;
++  
++  return signals_notified[signal_data->index] & (1 << signal_data->shift);
++}
++
++static gboolean
++g_signal_check (gpointer  source_data,
++		GTimeVal *current_time)
++{
++  GSignalData *signal_data = source_data;
++  
++  return signals_notified[signal_data->index] & (1 << signal_data->shift);
++}
++
++static gboolean
++g_signal_dispatch (gpointer  source_data,
++		   GTimeVal *current_time,
++		   gpointer  user_data)
++{
++  GSignalData *signal_data = source_data;
++  
++  signals_notified[signal_data->index] &= ~(1 << signal_data->shift);
++  
++  return signal_data->callback (-128 + signal_data->index * 32 + signal_data->shift, user_data);
++}
++
++guint
++g_signal_add (gint8	  signal,
++	      GSignalFunc function,
++	      gpointer    data)
++{
++  return g_signal_add_full (G_PRIORITY_DEFAULT, signal, function, data, NULL);
++}
++
++guint
++g_signal_add_full (gint           priority,
++		   gint8          signal,
++		   GSignalFunc    function,
++		   gpointer       data,
++		   GDestroyNotify destroy)
++{
++  GSignalData *signal_data;
++  guint s = 128 + signal;
++  
++  g_return_val_if_fail (function != NULL, 0);
++  
++  signal_data = g_new (GSignalData, 1);
++  signal_data->index = s / 32;
++  signal_data->shift = s % 32;
++  signal_data->callback = function;
++  
++  return g_source_add (priority, TRUE, &signal_funcs, signal_data, data, destroy);
++}
++
++void
++g_signal_notify (gint8 signal)
++{
++  guint index, shift;
++  guint s = 128 + signal;
++  
++  index = s / 32;
++  shift = s % 32;
++  
++  signals_notified[index] |= 1 << shift;
++}
++
++
+ 
+ /* EOF */

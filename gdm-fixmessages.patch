@@ -1,0 +1,50 @@
+--- gdm-2.0beta4/gui/gdmlogin.c.fixmessages	Tue Oct  3 14:28:29 2000
++++ gdm-2.0beta4/gui/gdmlogin.c	Tue Oct  3 14:29:03 2000
+@@ -64,6 +64,7 @@
+ static GtkWidget *label;
+ static GtkWidget *entry;
+ static GtkWidget *msg;
++static gboolean first_message = TRUE;
+ static GtkWidget *win;
+ static GtkWidget *sessmenu;
+ static GtkWidget *langmenu;
+@@ -812,6 +813,15 @@
+     case GDM_PROMPT:
+ 	g_io_channel_read (source, buf, PIPE_SIZE-1, &len);
+ 	buf[len-1] = '\0';
++
++	/* Turn off the message whenever the prompt changes,
++	   this is sort of a hack. Also, don't turn it off
++	   the first time. Yeah I know.  */
++	if (first_message)
++	  first_message = FALSE;
++	else
++	  gtk_label_set (GTK_LABEL(msg), "");
++
+ 	gtk_label_set (GTK_LABEL (label), buf);
+ 	gtk_widget_show (GTK_WIDGET (label));
+ 	gtk_entry_set_text (GTK_ENTRY (entry), "");
+@@ -824,6 +834,15 @@
+     case GDM_NOECHO:
+ 	g_io_channel_read (source, buf, PIPE_SIZE-1, &len);
+ 	buf[len-1] = '\0';
++
++	/* Turn off the message whenever the prompt changes,
++	   this is sort of a hack. Also, don't turn it off
++	   the first time. Yeah I know.  */
++	if (first_message)
++	  first_message = FALSE;
++	else
++	  gtk_label_set (GTK_LABEL(msg), "");
++
+ 	gtk_label_set (GTK_LABEL(label), buf);
+ 	gtk_widget_show (GTK_WIDGET (label));
+ 	gtk_entry_set_text (GTK_ENTRY (entry), "");
+@@ -1254,6 +1273,7 @@
+ 		      (GtkAttachOptions) (GTK_FILL), 0, 10);
+         
+     msg = gtk_label_new (_("Please enter your login"));
++    first_message = TRUE;
+     gtk_widget_set_name(msg, "Message");
+     gtk_widget_ref (msg);
+     gtk_object_set_data_full (GTK_OBJECT (login), "msg", msg,

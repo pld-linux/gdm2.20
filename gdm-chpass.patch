@@ -1,0 +1,16 @@
+--- gdm-2.0beta4/daemon/verify.c~	Wed Sep 22 20:30:47 1999
++++ gdm-2.0beta4/daemon/verify.c	Thu Apr 27 23:37:59 2000
+@@ -146,7 +146,12 @@
+ 	goto pamerr;
+     }
+     
+-    if ((pamerr = pam_acct_mgmt (pamh, 0)) != PAM_SUCCESS) {
++    pamerr = pam_acct_mgmt (pamh, 0);
++    if (pamerr == PAM_NEW_AUTHTOK_REQD) {
++	pamerr = pam_chauthtok(pamh, PAM_CHANGE_EXPIRED_AUTHTOK);
++    }
++
++    if (pamerr != PAM_SUCCESS) {
+ 	gdm_error (_("Couldn't set acct. mgmt for %s"), login);
+ 	goto pamerr;
+     }

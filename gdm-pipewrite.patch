@@ -1,0 +1,18 @@
+--- gdm-2.0beta4/daemon/slave.c~	Wed Sep 29 18:56:35 1999
++++ gdm-2.0beta4/daemon/slave.c	Thu Apr 27 18:14:16 2000
+@@ -423,6 +423,15 @@
+ 	/* Restore sigmask inherited from init */
+ 	sigprocmask (SIG_SETMASK, &sysmask, NULL);
+ 	
++	for(i = 0; i < sysconf(_SC_OPEN_MAX); i++)
++	  close(i);
++
++	/* No error checking here - if it's messed the best response
++           is to ignore & try to continue */
++	open("/dev/null", O_RDONLY); /* open stdin - fd 0 */
++	open("/dev/null", O_RDWR); /* open stdout - fd 1 */
++	open("/dev/null", O_RDWR); /* open stderr - fd 2 */
++
+ 	execl (sesspath, NULL);
+ 	
+ 	gdm_error (_("gdm_slave_session_start: Could not start session `%s'"), sesspath);

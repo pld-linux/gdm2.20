@@ -1,0 +1,67 @@
+--- gdm-2.0beta2/configure.in.sopwith	Thu Sep  9 12:12:34 1999
++++ gdm-2.0beta2/configure.in	Thu Sep  9 12:15:59 1999
+@@ -70,7 +70,10 @@
+ 
+ if test -n "$LIBWRAP_PATH"; then
+ 	AC_MSG_RESULT(yes)
+-	AC_CHECK_LIB(nsl, yp_get_default_domain, LIBS="$LIBS -lnsl")
++	OLD_LIBS="$LIBS"
++	LIBS=""
++	AC_CHECK_LIB(nsl, yp_get_default_domain)
++	LIBS="$LIBS $OLD_LIBS"
+ else
+ 	AC_MSG_RESULT(no)
+ fi
+--- gdm-2.0beta2/configure.sopwith	Thu Sep  9 12:16:07 1999
++++ gdm-2.0beta2/configure	Thu Sep  9 12:16:12 1999
+@@ -5034,8 +5034,10 @@
+ 
+ if test -n "$LIBWRAP_PATH"; then
+ 	echo "$ac_t""yes" 1>&6
++	OLD_LIBS="$LIBS"
++	LIBS=""
+ 	echo $ac_n "checking for yp_get_default_domain in -lnsl""... $ac_c" 1>&6
+-echo "configure:5039: checking for yp_get_default_domain in -lnsl" >&5
++echo "configure:5041: checking for yp_get_default_domain in -lnsl" >&5
+ ac_lib_var=`echo nsl'_'yp_get_default_domain | sed 'y%./+-%__p_%'`
+ if eval "test \"`echo '$''{'ac_cv_lib_$ac_lib_var'+set}'`\" = set"; then
+   echo $ac_n "(cached) $ac_c" 1>&6
+@@ -5043,7 +5045,7 @@
+   ac_save_LIBS="$LIBS"
+ LIBS="-lnsl  $LIBS"
+ cat > conftest.$ac_ext <<EOF
+-#line 5047 "configure"
++#line 5049 "configure"
+ #include "confdefs.h"
+ /* Override any gcc2 internal prototype to avoid an error.  */
+ /* We use char because int might match the return type of a gcc2
+@@ -5054,7 +5056,7 @@
+ yp_get_default_domain()
+ ; return 0; }
+ EOF
+-if { (eval echo configure:5058: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
++if { (eval echo configure:5060: \"$ac_link\") 1>&5; (eval $ac_link) 2>&5; } && test -s conftest${ac_exeext}; then
+   rm -rf conftest*
+   eval "ac_cv_lib_$ac_lib_var=yes"
+ else
+@@ -5069,11 +5071,19 @@
+ fi
+ if eval "test \"`echo '$ac_cv_lib_'$ac_lib_var`\" = yes"; then
+   echo "$ac_t""yes" 1>&6
+-  LIBS="$LIBS -lnsl"
++    ac_tr_lib=HAVE_LIB`echo nsl | sed -e 's/[^a-zA-Z0-9_]/_/g' \
++    -e 'y/abcdefghijklmnopqrstuvwxyz/ABCDEFGHIJKLMNOPQRSTUVWXYZ/'`
++  cat >> confdefs.h <<EOF
++#define $ac_tr_lib 1
++EOF
++
++  LIBS="-lnsl $LIBS"
++
+ else
+   echo "$ac_t""no" 1>&6
+ fi
+ 
++	LIBS="$LIBS $OLD_LIBS"
+ else
+ 	echo "$ac_t""no" 1>&6
+ fi
