@@ -88,34 +88,19 @@ gzip -9nf AUTHORS ChangeLog NEWS README TODO
 %find_lang %{name} --all-name --with-gnome
 
 %pre
-/usr/sbin/groupadd -g 55 -r -f xdm
-
-if [ -z "`id -u xdm 2>/dev/null`" ]; then
-	/usr/sbin/useradd -u 55 -r -d /dev/null -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
-fi
+GROUP=xdm; GID=55; %groupadd
+USER=xdm; UID=55; HOMEDIR=/dev/null; COMMENT="X Display Manager"; %useradd
 
 %post
-/sbin/chkconfig --add gdm
-if [ -f /var/lock/subsys/gdm ]; then
-        /etc/rc.d/init.d/gdm restart >&2
-else
-        echo "Run \"/etc/rc.d/init.d/gdm start\" to start gdm." >&2
-fi
+%chkconfig_add
 /usr/bin/scrollkeeper-update
 
 %preun
-if [ -f /var/lock/subsys/gdm ]; then
-		 /etc/rc.d/init.d/gdm stop >&2
-fi
-/sbin/chkconfig --del gdm
+%chkconfig_del
 
 %postun
-if [ "$1" = "0" ]; then
-	if [ -n "`id -u xdm 2>/dev/null`" ]; then
-		/usr/sbin/userdel xdm
-	fi
-	/usr/sbin/groupdel xdm
-fi
+USER=xdm; %userdel
+GROUP=xdm; %groupdel
 /usr/bin/scrollkeeper-update
 
 %clean
