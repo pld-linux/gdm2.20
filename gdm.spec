@@ -7,12 +7,12 @@ Summary(es):	Administrador de Entrada del GNOME
 Summary(pl):	gdm
 Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Name:		gdm
-Version:	2.4.0.2
+Version:	2.4.0.7
 Release:	1
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
-Source0:	ftp://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0:	http://ftp.gnome.org/pub/gnome/pre-gnome2/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
