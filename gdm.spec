@@ -1,8 +1,8 @@
 Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
-Version:	2.2.2.1
-Release:	3
+Version:	2.2.3
+Release:	1
 Epoch:		1
 License:	LGPL/GPL
 Group:		X11/Applications
@@ -20,9 +20,11 @@ BuildRequires:	gdk-pixbuf-devel
 BuildRequires:	libglade-devel
 BuildRequires:	libxml-devel
 BuildRequires:	perl-modules
+BuildRequires:	scrollkeeper
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
+Prereq:		scrollkeeper
 Prereq:		shadow
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
@@ -30,6 +32,7 @@ Obsoletes:	xdm kdm wdm
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 %define		_sysconfdir	/etc/X11
+%define		_omf_dest_dir	%(scrollkeeper-config --omfdir)
 
 %description 
 gdm manages local and remote displays and provides the user with a
@@ -61,7 +64,10 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
 %{__make} install prefix=$RPM_BUILD_ROOT%{_prefix} \
 	sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} \
-	localstatedir=$RPM_BUILD_ROOT/var/lib
+	localstatedir=$RPM_BUILD_ROOT/var/lib \
+	Settingsdir=$RPM_BUILD_ROOT%{_applnkdir}/Settings/GNOME \
+	Systemdir=$RPM_BUILD_ROOT%{_applnkdir}/System \
+	omf_dest_dir=$RPM_BUILD_ROOT%{_omf_dest_dir}/omf/%{name}
 
 sed -e "s#$RPM_BUILD_ROOT##g" config/gnomerc >config/gnomerc.X
 install config/gnomerc.X $RPM_BUILD_ROOT%{_sysconfdir}/gdm/gnomerc
@@ -79,7 +85,7 @@ install %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/%{name}/gdm.conf
 
 gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
-%find_lang gdm
+%find_lang %{name} --all-name --with-gnome
 
 %pre
 /usr/sbin/groupadd -g 55 -r -f xdm
@@ -95,6 +101,7 @@ if [ -f /var/lock/subsys/gdm ]; then
 else
         echo "Run \"/etc/rc.d/init.d/gdm start\" to start gdm." >&2
 fi
+/usr/bin/scrollkeeper-update
 
 %preun
 if [ -f /var/lock/subsys/gdm ]; then
@@ -104,21 +111,19 @@ fi
 
 %postun
 if [ "$1" = "0" ]; then
-
 	if [ -n "`id -u xdm 2>/dev/null`" ]; then
 		/usr/sbin/userdel xdm
 	fi
-	
 	/usr/sbin/groupdel xdm
-
 fi
+/usr/bin/scrollkeeper-update
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%files -f gdm.lang
+%files -f %{name}.lang
 %defattr(644,root,root,755)
-%doc {AUTHORS,ChangeLog,NEWS,README,TODO}.gz
+%doc *.gz
 %attr(775,root,xdm) %{_bindir}/*
 %attr(775,root,xdm) %{_sbindir}/*
 %attr(775,root,xdm) %config %{_sysconfdir}/gdm/Init
@@ -136,7 +141,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(750,xdm,xdm) /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
 %{_pixmapsdir}/*
-%{_datadir}/gnome/*
 # these lines to devel subpackage?
-%{_datadir}/gdm/*
-%{_datadir}/omf/%{name}
+%{_applnkdir}/Settings/GNOME/*
+%{_applnkdir}/System/*
+%{_datadir}/gdm
+%{_omf_dest_dir}/omf/%{name}
