@@ -34,6 +34,7 @@ Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
 Patch4:		%{name}-default_theme.patch
 Patch5:		%{name}-desktop.patch
+patch6:		%{name}-vt_9.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf
@@ -147,6 +148,7 @@ Skrypt init dla GDM-a.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 %build
 rm -f missing
