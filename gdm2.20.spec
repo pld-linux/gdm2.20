@@ -18,7 +18,6 @@ Prereq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
-BuildRequires:	XFree86-devel
 BuildRequires:	esound-devel
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
