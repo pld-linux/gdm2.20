@@ -1,0 +1,24 @@
+--- gdm-2.2.5.5/docs/eu/Makefile.am~	Sun Jan  4 00:42:39 2004
++++ gdm-2.2.5.5/docs/eu/Makefile.am	Sun Jan  4 00:42:39 2004
+@@ -14,17 +14,18 @@
+ 	-cd $(srcdir) && cp gdm/index.html gdm.html
+ 
+ gdm/index.html: $(SGML_FILES)
+-	-cd $(srcdir) && db2html gdm.sgml
++	-cd $(srcdir) && db2html gdm.sgml; \
++	ln -s book1.html gdm/index.html
+ 
+ dist-hook:
+ 	mkdir $(distdir)/gdm
+-	-cp $(srcdir)/gdm/*.html gdm/*.css $(distdir)/gdm
++	-cp $(srcdir)/gdm/*.html $(distdir)/gdm
+ 	-cp $(srcdir)/gdm.html $(distdir)
+ 	-cp $(srcdir)/gdm.html $(distdir)/gdm/index.html
+ 
+ install-data-local: gdm.html
+ 	$(mkinstalldirs) $(DESTDIR)$(gdm_helpdir)/images
+-	-for file in $(srcdir)/gdm/*.html $(srcdir)/gdm/*.css; do \
++	-for file in $(srcdir)/gdm/*.html; do \
+ 	basefile=`basename $$file`; \
+ 	$(INSTALL_DATA) $$file $(DESTDIR)$(gdm_helpdir)/$$basefile; \
+ 	done
