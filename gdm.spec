@@ -12,7 +12,7 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/gdm/2.2/%{name}-%{version}.tar.bz2
-# Source0-md5:	95
+# Source0-md5:	32085157d128caab9b53c110a9818d61
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}.conf
