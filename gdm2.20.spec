@@ -166,4 +166,4 @@ rm -rf $RPM_BUILD_ROOT
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
 %attr(750,xdm,xdm) /var/lib/gdm
 %attr(754,root,root) /etc/rc.d/init.d/gdm
-%{_datadir}/pixmaps/*
+%{_pixmapsdir}/*
