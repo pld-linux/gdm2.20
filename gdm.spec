@@ -88,8 +88,8 @@ rm -f missing
 libtoolize --copy --force
 gettextize --copy --force
 aclocal -I %{_aclocaldir}/gnome
-autoconf
-automake -a -c -f
+%{__autoconf}
+%{__automake}
 %configure \
 	--with-xinerama=yes \
 	--with-xdmcp=yes \
