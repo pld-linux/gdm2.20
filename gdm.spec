@@ -106,6 +106,7 @@ Summary:	Init script for GDM
 Summary(pl):	Skrypt init dla GDM-a
 Group:		X11/Applications
 Requires:	%{name} = %{version}
+Requires:	open
 
 %description init
 Init script for GDM.
