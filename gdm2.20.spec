@@ -27,6 +27,7 @@ Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
 Patch4:		%{name}-locale-names.patch
 URL:		http://www.jirka.org/gdm.html
+BuildRequires:	attr-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
