@@ -13,7 +13,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.6.0.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -38,7 +38,7 @@ BuildRequires:	libgnome-devel >= 2.5.90
 BuildRequires:	libgnomecanvas-devel >= 2.5.90
 BuildRequires:	libgnomeui-devel >= 2.5.90
 BuildRequires:	libgsf-devel >= 1.8.2
-BuildRequires:	librsvg-devel >= 1:2.6.1
+BuildRequires:	librsvg-devel >= 1:2.6.1-2
 BuildRequires:	libselinux-devel
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
