@@ -12,7 +12,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.6.0.3
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -30,6 +30,7 @@ Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
 Patch4:		%{name}-locale-names.patch
 Patch5:		%{name}-default_theme.patch
+Patch6:		%{name}-desktop.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf
@@ -136,6 +137,7 @@ Skrypt init dla GDM-a.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 
 mv po/{no,nb}.po
 
