@@ -2,7 +2,7 @@ Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
 Version:	2.2.2
-Release:	1
+Release:	2
 Source0:	ftp://ftp.gnome.org/pub/GNOME/stable/latest/sources/%{name}-%{version}.tar.gz
 Source1:	%{name}.pamd
 Source2:	%{name}.init
@@ -19,6 +19,10 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	esound-devel
+BuildRequires:	gdk-pixbuf-devel
+BuildRequires:	libglade-devel
+BuildRequires:	libxml-devel
+BuildRequires:	perl-modules
 Requires:	gnome-libs >= 1.0.0
 Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
