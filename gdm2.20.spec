@@ -39,6 +39,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.4.24
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
+BuildRequires:	libgsf-devel
 Requires:	libgnome >= 2.1.0-3
 Requires:	which
 Requires:	sessreg
