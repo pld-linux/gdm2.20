@@ -2,7 +2,7 @@ Summary:	GNOME Display Manager
 Summary(pl):	gdm
 Name:		gdm
 Version:	2.0beta4
-Release:	2
+Release:	3
 Source0:	ftp://socsci.auc.dk/~mkp/gdm/gdm-2.0beta4.tar.gz
 Source1:	gdm.pamd
 Patch0:		gdm-gnomerc.patch
@@ -47,7 +47,7 @@ CFLAGS="$RPM_OPT_FLAGS" \
 ./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--sysconfdir=/etc/X11 \
-	--localstatedir=/var/state
+	--localstatedir=/var/lib
 make
 
 %install
@@ -57,7 +57,7 @@ install -d $RPM_BUILD_ROOT{%{_prefix},/etc/{pam.d,security}}
 
 make install prefix=$RPM_BUILD_ROOT%{_prefix} \
 	sysconfdir=$RPM_BUILD_ROOT%{_sysconfdir} \
-	localstatedir=$RPM_BUILD_ROOT/var/state
+	localstatedir=$RPM_BUILD_ROOT/var/lib
 
 sed -e "s#$RPM_BUILD_ROOT##g" config/gnomerc >config/gnomerc.X
 install config/gnomerc.X $RPM_BUILD_ROOT/etc/X11/gdm/gnomerc
@@ -119,5 +119,5 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,xdm,xdm) %dir %{_sysconfdir}/gdm
 %attr(640,root,root) %config %verify(not size mtime md5) /etc/pam.d/gdm
 %attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
-%attr(750,xdm,xdm) /var/state/gdm
+%attr(750,xdm,xdm) /var/lib/gdm
 %{_datadir}/pixmaps/*
