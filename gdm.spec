@@ -9,7 +9,7 @@ Release: %rel
 Source: ftp://ftp.socsci.auc.dk/pub/empl/mkp/gdm-%{PACKAGE_VERSION}.tar.gz
 Group: X11/Utilities
 Copyright: LGPL/GPL
-BuildRoot: /var/tmp/gdm-%{PACKAGE_VERSION}-root
+BuildRoot:	/tmp/%{name}-%{version}-root
 Prefix: %{prefix}
 Docdir: %{prefix}/doc
 Requires: gnome-libs >= 1.0.0
