@@ -29,6 +29,7 @@ BuildRequires:	gnome-libs-devel
 BuildRequires:	gtk+-devel
 BuildRequires:	intltool >= 0.14
 BuildRequires:	libglade-gnome-devel
+BuildRequires:	libtool
 BuildRequires:	libxml-devel
 BuildRequires:	perl-modules
 BuildRequires:	scrollkeeper
@@ -114,7 +115,7 @@ rm -f missing
 %{__libtoolize}
 %{__gettextize}
 intltoolize --copy --force
-aclocal -I %{_aclocaldir}/gnome
+%{__aclocal} -I %{_aclocaldir}/gnome
 %{__autoconf}
 %{__automake}
 %configure \
