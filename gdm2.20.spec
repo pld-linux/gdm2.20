@@ -86,9 +86,6 @@ gzip -9nf AUTHORS ChangeLog NEWS README TODO RELEASENOTES
 
 if [ -z "`id -u xdm 2>/dev/null`" ]; then
 	/usr/sbin/useradd -u 55 -r -d /dev/null -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
-	if [ -f /var/db/passwd/db ]; then
-		/usr/sbin/update-db 1>&2
-	fi
 fi
 
 %post
