@@ -26,6 +26,7 @@ Requires:	which
 Requires:	/usr/X11R6/bin/sessreg
 Prereq:		scrollkeeper
 Prereq:		shadow
+Prereq:		/sbin/chkconfig
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
 
@@ -90,6 +91,9 @@ gzip -9nf AUTHORS ChangeLog NEWS README TODO
 
 %find_lang %{name} --all-name --with-gnome
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %pre
 /usr/sbin/groupadd -g 55 -r -f xdm
 
@@ -107,10 +111,12 @@ fi
 /usr/bin/scrollkeeper-update
 
 %preun
-if [ -f /var/lock/subsys/gdm ]; then
+if [ "$1" = "0" ]; then
+	if [ -f /var/lock/subsys/gdm ]; then
 		 /etc/rc.d/init.d/gdm stop >&2
+	fi
+	/sbin/chkconfig --del gdm
 fi
-/sbin/chkconfig --del gdm
 
 %postun
 if [ "$1" = "0" ]; then
@@ -120,9 +126,6 @@ if [ "$1" = "0" ]; then
 	/usr/sbin/groupdel xdm
 fi
 /usr/bin/scrollkeeper-update
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
