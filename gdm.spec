@@ -64,6 +64,7 @@ Requires:	pam >= 0.77.3-7
 Provides:	group(xdm)
 Provides:	user(xdm)
 Obsoletes:	X11-xdm
+Obsoletes:	entrance
 Obsoletes:	kdm
 Obsoletes:	wdm
 Obsoletes:	xdm
