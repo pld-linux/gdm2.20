@@ -25,11 +25,11 @@ graphical login window.
 # Needed for snapshot releases.
 if [ ! -f configure ]; then
 	CFLAGS="$RPM_OPT_FLAGS" \
-	./autogen.sh %{_target} \
+	./autogen.sh %{_target_platform} \
 		--prefix=%prefix
 else
 	CFLAGS="$RPM_OPT_FLAGS" \
-	./configure %{_target} \
+	./configure %{_target_platform} \
 		--prefix=%prefix
 fi
 make
