@@ -12,7 +12,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.6.0.3
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -21,6 +21,9 @@ Source0:	http://ftp.gnome.org/pub/GNOME/sources/%{name}/2.6/%{name}-%{version}.t
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
+# http://cvs.pld-linux.org/cgi-bin/cvsweb/pld-artwork/gdm/storky/
+Source4:	%{name}-storky.tar.gz
+# Source4-md5:	e293fbe4a60004056f6894463b874ae8
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
@@ -125,12 +128,14 @@ Init script for GDM.
 Skrypt init dla GDM-a.
 
 %prep
-%setup -q
+%setup -q -a4
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+install -d $RPM_BUILD_ROOT%{_datadir}/%{name}/themes/storky
+install storky/*.* $RPM_BUILD_ROOT%{_datadir}/%{name}/themes/storky/
 
 mv po/{no,nb}.po
 
@@ -156,7 +161,8 @@ intltoolize --copy --force
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
-	$RPM_BUILD_ROOT{/home/services/xdm,/var/log/gdm}
+	$RPM_BUILD_ROOT{/home/services/xdm,/var/log/gdm} \
+	$RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -168,6 +174,8 @@ install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
+
+install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
