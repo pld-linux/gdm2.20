@@ -158,6 +158,8 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
+mv $RPM_BUILD_ROOT{%{_sysconfdir}/dm/Sessions/default.desktop,%{_datadir}/xsessions}
+
 %find_lang %{name} --all-name --with-gnome
 
 # Remove useless files
@@ -235,7 +237,6 @@ fi
 %config %{_sysconfdir}/gdm/factory-gdm.conf
 %config %{_sysconfdir}/gdm/PostLogin/Default.sample
 %config %{_sysconfdir}/gdm/modules/*
-%{_sysconfdir}/dm/Sessions/*.desktop
 
 %config(noreplace)  %verify(not size mtime md5) %{_sysconfdir}/gdm/gdm.conf
 %config %{_sysconfdir}/gdm/locale.alias
@@ -249,6 +250,7 @@ fi
 %{_datadir}/gnome/capplets/*
 %{_datadir}/gdm
 #%%{_datadir}/xsessions  -  moved to gnome-session
+%{_datadir}/xsessions/default.desktop
 %{_omf_dest_dir}/gdm
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
 %{_mandir}/man1/gdm*
