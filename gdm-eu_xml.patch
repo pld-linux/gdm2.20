@@ -1,0 +1,439 @@
+--- gdm-2.2.5.5/docs/eu/gdm.sgml~	Sat Jan  3 17:02:20 2004
++++ gdm-2.2.5.5/docs/eu/gdm.sgml	Sat Jan  3 17:58:31 2004
+@@ -193,28 +193,28 @@
+ 	<title>Daemon konfigurazioa</title>
+ 
+ 	<variablelist>
+-	  <title>[daemon-a]</title>
++	  <title>[daemon]</title>
+ 
+-	  <varlistentry><term>BerrabiaraziBetiZerbitzaria</term> <listitem><synopsis>BerrabiaraziBetiZerbitzaria=faltsua</synopsis> <para>Egia bada, gdm ez da inoiz saiatuko lehendik dauden X zerbitzariak berriro hasieratuz berriro erabiltzen.  Lehendik dagoen zerbitzaria hil eta berriro hasiko da.  Normalean, berriro hasieratzea abiatzeko modu egokiagoa da, baina X zerbitzariaren memoria gero eta gehiago erabiltzen bada, aukera seguruagoa izan daiteke.</para></listitem></varlistentry>
++	  <varlistentry><term>AlwaysRestartServer</term> <listitem><synopsis>AlwaysRestartServer=false</synopsis> <para>Egia bada, gdm ez da inoiz saiatuko lehendik dauden X zerbitzariak berriro hasieratuz berriro erabiltzen.  Lehendik dagoen zerbitzaria hil eta berriro hasiko da.  Normalean, berriro hasieratzea abiatzeko modu egokiagoa da, baina X zerbitzariaren memoria gero eta gehiago erabiltzen bada, aukera seguruagoa izan daiteke.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>SaioHasieraAutomatikoaGaitu</term> <listitem><synopsis>SaioHasieraAutomatikoaGaitu=faltsua</synopsis> <para>SaioHasieraAutomatikoaren erabiltzaileak saioa lehen abioaren ondoren hasi behar luke.  Ez da pasahitzik eskatzen.  Hori erabilgarria da erabiltzaile bakarreko lan-estazioetarako, non bertako segurtasun-kontsola arazo bat ez den.   Terminal publikoentzako ere erabilgarria izan daiteke, baina kasu horretarako ikus DenborazMugatutakoSaioHasiera.</para></listitem></varlistentry>
++	  <varlistentry><term>AutomaticLoginEnable</term> <listitem><synopsis>AutomaticLoginEnable=false</synopsis> <para>SaioHasieraAutomatikoaren erabiltzaileak saioa lehen abioaren ondoren hasi behar luke.  Ez da pasahitzik eskatzen.  Hori erabilgarria da erabiltzaile bakarreko lan-estazioetarako, non bertako segurtasun-kontsola arazo bat ez den.   Terminal publikoentzako ere erabilgarria izan daiteke, baina kasu horretarako ikus DenborazMugatutakoSaioHasiera.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>SaioHasieraAutomatikoa</term> <listitem><synopsis>SaioHasieraAutomatikoa=</synopsis> <para>Erabiltzaileak automatikoki hasi behar luke saioa lehen abioaren ondoren.  SaioHasieraAutomatikoaGaitu aukerak egia izan behar du eta horretarako erabiltzaileak baliozkoa izan behar du.  &quot;Root-a&quot; inoiz ezin da automatikoki hasi eta gdm-ek ez du hori egingo, nahiz eta zuk horretarako konfiguratu.</para></listitem></varlistentry>
++	  <varlistentry><term>AutomaticLogin</term> <listitem><synopsis>AutomaticLogin=</synopsis> <para>Erabiltzaileak automatikoki hasi behar luke saioa lehen abioaren ondoren.  SaioHasieraAutomatikoaGaitu aukerak egia izan behar du eta horretarako erabiltzaileak baliozkoa izan behar du.  &quot;Root-a&quot; inoiz ezin da automatikoki hasi eta gdm-ek ez du hori egingo, nahiz eta zuk horretarako konfiguratu.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Hautatzailea</term> <listitem><synopsis>Hautatzailea=bin/gdmchooser --disable-sound --disable-crash-dialog</synopsis> <para>Hautatzailearen bide-izen osoa eta izen exekutagarriak, hautazko argumentuaz jarraiturik.</para></listitem></varlistentry>
++	  <varlistentry><term>Chooser</term> <listitem><synopsis>Chooser=bin/gdmchooser --disable-sound --disable-crash-dialog</synopsis> <para>Hautatzailearen bide-izen osoa eta izen exekutagarriak, hautazko argumentuaz jarraiturik.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>Konfiguratzailea</term> <listitem><synopsis>Konfiguratzailea=bin/gdmconfig --disable-sound --disable-crash-dialog</synopsis><para>Konfigurazio bitarraren bide-izena.  Ongietorriko KonfigErabilgarri aukera egia moduan jarrita badago, orduan bitar hori exekutatu norbaitek sistema-menuan Konfigurazioa aukeratzen duenean. Hala ere GDMk aurrena root-aren pasahitza eskatuko dizu. Hori ezingo da urruneko pantaila batetik egin.</para></listitem></varlistentry>
++	  <varlistentry><term>Configurator</term> <listitem><synopsis>Configurator=bin/gdmconfig --disable-sound --disable-crash-dialog</synopsis><para>Konfigurazio bitarraren bide-izena.  Ongietorriko KonfigErabilgarri aukera egia moduan jarrita badago, orduan bitar hori exekutatu norbaitek sistema-menuan Konfigurazioa aukeratzen duenean. Hala ere GDMk aurrena root-aren pasahitza eskatuko dizu. Hori ezingo da urruneko pantaila batetik egin.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>BideIzenLehenetsia</term> <listitem><synopsis>BideIzenLehenetsia=/bin:/usr/bin:/usr/bin/X11:/usr/local/bin</synopsis> <para>Erabiltzailearen saioa zer bide-izenekin ezarriko den zehazten du.</para></listitem></varlistentry>
++	  <varlistentry><term>DefaultPath</term> <listitem><synopsis>DefaultPath=/bin:/usr/bin:/usr/bin/X11:/usr/local/bin</synopsis> <para>Erabiltzailearen saioa zer bide-izenekin ezarriko den zehazten du.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>BistaratuHasiDir</term> <listitem><synopsis>BistaratuHasiDir=etc/gdm/Init</synopsis> <para>Pantailako hasieratu script-a duen direktorioa. Informazio gehiagotarako ikus ``Script direktorioak'' sekzioa.</para></listitem></varlistentry>
++	  <varlistentry><term>DisplayInitDir</term> <listitem><synopsis>DisplayInitDir=etc/gdm/Init</synopsis> <para>Pantailako hasieratu script-a duen direktorioa. Informazio gehiagotarako ikus ``Script direktorioak'' sekzioa.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>FailsafeXZerbitzaria</term> <listitem><synopsis>FailsafeXZerbitzaria=</synopsis> <para>X zerbitzari arrunta hasi ezin dugun kasurako X komando-lerroa. Bereizmen txikiko zerbitzaria exekutatzeko script-motaren bat izan behar luke.  XKeepsCrashing script-a exekutatu aurretik egiten da.</para></listitem></varlistentry>
++	  <varlistentry><term>FailsafeXServer</term> <listitem><synopsis>FailsafeXServer=</synopsis> <para>X zerbitzari arrunta hasi ezin dugun kasurako X komando-lerroa. Bereizmen txikiko zerbitzaria exekutatzeko script-motaren bat izan behar luke.  XKeepsCrashing script-a exekutatu aurretik egiten da.</para></listitem></varlistentry>
+ 
+   <varlistentry>
+-    <term>XZerbitzariMalguak</term>
++    <term>FlexibleXServers</term>
+     <listitem>
+-      <synopsis>XZerbitzariMalguak=5</synopsis>
++      <synopsis>FlexibleXServers=5</synopsis>
+       <para>
+ Onartzen den gehienezko zerbitzari malguen kopurua. Zerbitzari hauek
+ /tmp/.gdm_socket socket-konexioa erabiliz exekuta daitezke.   
+@@ -225,36 +225,36 @@
+   </varlistentry>
+ 
+   <varlistentry>
+-<term>GnomeSaioLehenetsia</term> <listitem><synopsis>GnomeSaioLehenetsia=share/gnome/default.session</synopsis> <para>GDMk irakurri behar lukeen fitxategia, erabiltzaile bakoitzeko GNOMEren saio-fitxategirik ez badago, eta erabiltzaileak Gnome-ren Hautatzaile-saioa eskatu badu.</para></listitem></varlistentry>
++<term>GnomeDefaultSession</term> <listitem><synopsis>GnomeDefaultSession=share/gnome/default.session</synopsis> <para>GDMk irakurri behar lukeen fitxategia, erabiltzaile bakoitzeko GNOMEren saio-fitxategirik ez badago, eta erabiltzaileak Gnome-ren Hautatzaile-saioa eskatu badu.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Ongietorria</term> <listitem><synopsis>Ongietorria=bin/gdmlogin --disable-sound --disable-crash-dialog</synopsis> <para>Ongietorriaren bide-izen osoa eta izen exekutagarriak, hautazko argumentuez jarraiturik.</para></listitem></varlistentry>
++	  <varlistentry><term>Greeter</term> <listitem><synopsis>Greeter=bin/gdmlogin --disable-sound --disable-crash-dialog</synopsis> <para>Ongietorriaren bide-izen osoa eta izen exekutagarriak, hautazko argumentuez jarraiturik.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Taldea</term> <listitem><synopsis>Taldea=gdm</synopsis> <para><filename>gdmlogin</filename>/<filename>gdmchooser</filename> exekutatzeko taldearen IDa.</para></listitem></varlistentry>
++	  <varlistentry><term>Group</term> <listitem><synopsis>Group=gdm</synopsis> <para><filename>gdmlogin</filename>/<filename>gdmchooser</filename> exekutatzeko taldearen IDa.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>GeldituKomandoa</term> <listitem><synopsis>GeldituKomandoa=/sbin/shutdown -h now</synopsis> <para>Erabiltzaileak Sistema menuan Gelditu hautatzen duenean exekutatu behar den bide-izen osoa eta argumentuak.</para></listitem></varlistentry>
++	  <varlistentry><term>HaltCommand</term> <listitem><synopsis>HaltCommand=/sbin/shutdown -h now</synopsis> <para>Erabiltzaileak Sistema menuan Gelditu hautatzen duenean exekutatu behar den bide-izen osoa eta argumentuak.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>HilInitBezeroak</term> <listitem><synopsis>HilInitBezeroak=egia</synopsis> <para>GDMk init script-ekin hasieratu diren X bezeroak hil behar dituen edo ez erabakitzen du, erabiltzaileak saioa hasten duenean.</para></listitem></varlistentry>
++	  <varlistentry><term>KillInitClients</term> <listitem><synopsis>KillInitClients=true</synopsis> <para>GDMk init script-ekin hasieratu diren X bezeroak hil behar dituen edo ez erabakitzen du, erabiltzaileak saioa hasten duenean.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>SaioHasieraDir</term> <listitem><synopsis>SaioHasieraDir=var/gdm</synopsis> <para>Pantaila indibidualentzako egunkari-fitxategiak dituen direktorioa.  Lehenespenez ZerbAuthDir-en berdina da.</para></listitem></varlistentry>
++	  <varlistentry><term>LogDir</term> <listitem><synopsis>LogDir=var/gdm</synopsis> <para>Pantaila indibidualentzako egunkari-fitxategiak dituen direktorioa.  Lehenespenez ZerbAuthDir-en berdina da.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>PidFitx</term> <listitem><synopsis>PidFitx=var/run/gdm.pid</synopsis> <para> <filename>gdm</filename> prozesuaren IDa duen fitxategiaren izena.</para></listitem></varlistentry>
++	  <varlistentry><term>PidFile</term> <listitem><synopsis>PidFile=var/run/gdm.pid</synopsis> <para> <filename>gdm</filename> prozesuaren IDa duen fitxategiaren izena.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>PostSaioScriptDir</term> <listitem><synopsis>PostSaioScriptDir=etc/gdm/PostSession</synopsis> <para>Erabiltzaileak saiotik irten ondoren exekutatutako script-ak dituen direktorioa.   Informazio gehiagotarako ikus ``Script direktorioak'' sekzioa.</para></listitem></varlistentry>
++	  <varlistentry><term>PostSessionScriptDir</term> <listitem><synopsis>PostSessionScriptDir=etc/gdm/PostSession</synopsis> <para>Erabiltzaileak saiotik irten ondoren exekutatutako script-ak dituen direktorioa.   Informazio gehiagotarako ikus ``Script direktorioak'' sekzioa.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>PreSaioScriptDir</term> <listitem><synopsis>PreSaioScriptDir=etc/gdm/PreSession</synopsis> <para>Erabiltzaileak saioa hasi aurretik exekutatutako script-ak dituen direktorioa. Informazio gehiagotarako ikus ``Script direktorioak'' atala.</para></listitem></varlistentry>
++	  <varlistentry><term>PreSessionScriptDir</term> <listitem><synopsis>PreSessionScriptDir=etc/gdm/PreSession</synopsis> <para>Erabiltzaileak saioa hasi aurretik exekutatutako script-ak dituen direktorioa. Informazio gehiagotarako ikus ``Script direktorioak'' atala.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>BerrabiaraziKomandoa</term> <listitem><synopsis>BerrabiaraziKomandoa=/sbin/shutdown -r now</synopsis> <para>Erabiltzaileak Sistema menuan Berrabiarazi hautatzen duenean exekutatu behar den programaren bide-izen osoa eta hautazko argumentuak.</para></listitem></varlistentry>
++	  <varlistentry><term>RebootCommand</term> <listitem><synopsis>RebootCommand=/sbin/shutdown -r now</synopsis> <para>Erabiltzaileak Sistema menuan Berrabiarazi hautatzen duenean exekutatu behar den programaren bide-izen osoa eta hautazko argumentuak.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>RootBideIzena</term> <listitem><synopsis>RootBideIzena=/sbin:/usr/sbin:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin</synopsis> <para>Root-aren saioan zer bide-izen ezarriko den eta GDMk exekutatutako {Init,PreSession,PostSession} script-ak zehazten ditu.</para></listitem></varlistentry>
++	  <varlistentry><term>RootPath</term> <listitem><synopsis>RootPath=/sbin:/usr/sbin:/bin:/usr/bin:/usr/bin/X11:/usr/local/bin</synopsis> <para>Root-aren saioan zer bide-izen ezarriko den eta GDMk exekutatutako {Init,PreSession,PostSession} script-ak zehazten ditu.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ZerbAuthDir</term> <listitem><synopsis>ZerbAuthDir=/var/gdm</synopsis> <para>Pantaila indibidualentzako X autentifikazio-fitxategiak dituen direktorioa.   <filename>gdm.gdm</filename>-ren barnean egon behar luke 750 baimenekin. Direktorio hau daemon-ak gorde behar dituen fitxategi pribatuentzat ere erabiltzen da. Beste erabiltzaileek ezingo dute direktorio hori lortu eta bere edukia irakurri/gorde.</para></listitem></varlistentry>
++	  <varlistentry><term>ServAuthDir</term> <listitem><synopsis>ServAuthDir=/var/gdm</synopsis> <para>Pantaila indibidualentzako X autentifikazio-fitxategiak dituen direktorioa.   <filename>gdm.gdm</filename>-ren barnean egon behar luke 750 baimenekin. Direktorio hau daemon-ak gorde behar dituen fitxategi pribatuentzat ere erabiltzen da. Beste erabiltzaileek ezingo dute direktorio hori lortu eta bere edukia irakurri/gorde.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>SaioDir</term> <listitem><synopsis>SaioDir=etc/gdm/Sessions</synopsis> <para>Sisteman erabilgarri dauden saio-mota guztien script-ak dituen direktorioa.</para></listitem></varlistentry>
++	  <varlistentry><term>SessionDir</term> <listitem><synopsis>SessionDir=etc/gdm/Sessions</synopsis> <para>Sisteman erabilgarri dauden saio-mota guztien script-ak dituen direktorioa.</para></listitem></varlistentry>
+ 
+   <varlistentry>
+-    <term>XzerbitzariEstandarra</term>
++    <term>StandardXServer</term>
+     <listitem>
+-      <synopsis>XzerbitzariEstandarra=/usr/bin/X11/X</synopsis>
++      <synopsis>StandardXServer=/usr/bin/X11/X</synopsis>
+       <para>
+ X zerbitzari estandarraren komandorako bide-izen eta argumentu osoak.
+ Hau gdm-k bestelako definiziorik aurkitzen ez duenean erabiltzen da,
+@@ -265,27 +265,27 @@
+   </varlistentry>
+ 
+   <varlistentry>
+-<term>EsekiKomandoa</term> <listitem><synopsis>EsekiKomandoa=</synopsis> <para>Erabiltzaileak Sistema menuan Eseki hautatzen duenean exekutatu behar diren bide-izen osoa eta argumentuak.  Hutsik badago, menu-elementu hori ez da egongo.</para></listitem></varlistentry>
++<term>SuspendCommand</term> <listitem><synopsis>SuspendCommand=</synopsis> <para>Erabiltzaileak Sistema menuan Eseki hautatzen duenean exekutatu behar diren bide-izen osoa eta argumentuak.  Hutsik badago, menu-elementu hori ez da egongo.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>DenborazMugatutakoSaioHasieraGaitu</term> <listitem><synopsis>DenborazMugatutakoSaioHasieraGaitu=faltsua</synopsis> <para>DenborazMugatutakoSaioHasieraren erabiltzaileak saioa saio-hasierako pantaila segundo batzuetan (SaioHasieraAtzerapena aukerarekin ezarria) inaktibo egon ondoren hasi behar luke.  Hau erabilgarria da atzipen publikoko terminalentzat, edo baita etxeko erabilpenerako ere.   Erabiltzaileak teklatua erabili edo menuak arakatzen baditu, denbora-muga SaioHasieraAtzerapena aukeran edo 30 segundotan berrezarriko da, beti ere bietatik handiagoa dena.   Kontuan hartu pasa-hitzik ez dela eskatzen, beraz erabiltzaileak kontuz ibili behar luke.</para></listitem></varlistentry>
++	  <varlistentry><term>TimedLoginEnable</term> <listitem><synopsis>TimedLoginEnable=false</synopsis> <para>DenborazMugatutakoSaioHasieraren erabiltzaileak saioa saio-hasierako pantaila segundo batzuetan (SaioHasieraAtzerapena aukerarekin ezarria) inaktibo egon ondoren hasi behar luke.  Hau erabilgarria da atzipen publikoko terminalentzat, edo baita etxeko erabilpenerako ere.   Erabiltzaileak teklatua erabili edo menuak arakatzen baditu, denbora-muga SaioHasieraAtzerapena aukeran edo 30 segundotan berrezarriko da, beti ere bietatik handiagoa dena.   Kontuan hartu pasa-hitzik ez dela eskatzen, beraz erabiltzaileak kontuz ibili behar luke.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>DenborazMugatutakoSaioHasiera</term> <listitem><synopsis>DenborazMugatutakoSaioHasiera=</synopsis> <para>Segundo kopuru jakin bat inaktibo egon ondoren saioa hasi  behar lukeen erabiltzailea da.  Erabiltzaile hori ez da  inoiz &quot;root-a&quot; izango eta gdm-ek ez du utziko root-a horrela hasten.</para></listitem></varlistentry>
++	  <varlistentry><term>TimedLogin</term> <listitem><synopsis>TimedLogin=</synopsis> <para>Segundo kopuru jakin bat inaktibo egon ondoren saioa hasi  behar lukeen erabiltzailea da.  Erabiltzaile hori ez da  inoiz &quot;root-a&quot; izango eta gdm-ek ez du utziko root-a horrela hasten.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>SaioHasieraAtzerapena</term> <listitem><synopsis>SaioHasieraAtzerapena=30</synopsis> <para>DenborazMugatutakoSaioHasiera aukeraren erabiltzailea saioa hasi aurretik atzeratuko den denbora. 10 edo handiagoa izan behar du.</para></listitem></varlistentry>
++	  <varlistentry><term>TimedLoginDelay</term> <listitem><synopsis>TimedLoginDelay=30</synopsis> <para>DenborazMugatutakoSaioHasiera aukeraren erabiltzailea saioa hasi aurretik atzeratuko den denbora. 10 edo handiagoa izan behar du.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Erabiltzailea</term> <listitem><synopsis>Erabiltzailea=gdm</synopsis> <para> <filename>gdmlogin</filename> / <filename>gdmchooser</filename> exekutatzeko erabiltzaile-izena.</para></listitem></varlistentry>
++	  <varlistentry><term>User</term> <listitem><synopsis>User=gdm</synopsis> <para> <filename>gdmlogin</filename> / <filename>gdmchooser</filename> exekutatzeko erabiltzaile-izena.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ErabiltzaileAuthDir</term> <listitem><synopsis>ErabiltzaileAuthDir=</synopsis> <para>Erabiltzailearen <filename>.Xauthority</filename> fitxategia gorde behar litzatekeen direktorioa.  Ezer zehazten ez denean, erabiltzailearen etxeko direktorioa erabiltzen da.</para></listitem></varlistentry>
++	  <varlistentry><term>UserAuthDir</term> <listitem><synopsis>UserAuthDir=</synopsis> <para>Erabiltzailearen <filename>.Xauthority</filename> fitxategia gorde behar litzatekeen direktorioa.  Ezer zehazten ez denean, erabiltzailearen etxeko direktorioa erabiltzen da.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ErabiltzaileAuthFBDir</term> <listitem><synopsis>ErabiltzaileAuthFBDir=/tmp</synopsis> <para> GDMk erabiltzailearen <filename>.Xauthority</filename> fitxategia eguneratzean huts egiten badu, laguntza-cookie-a sortuko da direktorio honetan.</para></listitem></varlistentry>
++	  <varlistentry><term>UserAuthFBDir</term> <listitem><synopsis>UserAuthFBDir=/tmp</synopsis> <para> GDMk erabiltzailearen <filename>.Xauthority</filename> fitxategia eguneratzean huts egiten badu, laguntza-cookie-a sortuko da direktorio honetan.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ErabiltzaileAuthFitx</term> <listitem><synopsis>ErabiltzaileAuthFitx=.Xauthority</synopsis> <para>Erabiltzailearen cookie-ak gordetzeko erabiltzen den fitxategiaren izena.</para></listitem></varlistentry>
++	  <varlistentry><term>UserAuthFile</term> <listitem><synopsis>UserAuthFile=.Xauthority</synopsis> <para>Erabiltzailearen cookie-ak gordetzeko erabiltzen den fitxategiaren izena.</para></listitem></varlistentry>
+ 
+ 	  <varlistentry><term>XKeepsCrashing</term> <listitem><synopsis>XKeepsCrashing=etc/gdm/XKeepsCrashing</synopsis> <para>
+ Xk bertan behera gelditzen jarraitzen duenean exekutatu behar den script-a. Hau X konfigurazioa edo beste zerbait exekutatzeko, horrela X konfigurazioa ibil dadin.  Adibide gisa, ikusi banaketarekin batera etorri zen script-a.  XKeepsCrashing script-a RedHat-en probatu da, baina beste edozein programetan ere ibil daiteke.  Sistema-integratzaileak script hau zure sistemarako eguneratuta dagoela ziurtatu behar du.
+-</para> <para>FailsafeXZerbitzaria instalatuta badago, aurrena hori erabiliko da, baina babes moduan soilik, nahiz eta zerbitzariak bertan behera gelditzen jarraitu.</para></listitem></varlistentry>
++</para> <para>FailsafeXServer instalatuta badago, aurrena hori erabiliko da, baina babes moduan soilik, nahiz eta zerbitzariak bertan behera gelditzen jarraitu.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term> Xnest</term> <listitem><synopsis> Xnest=/usr/bin/X11/Xnest </synopsis> <para>
++	  <varlistentry><term>Xnest</term> <listitem><synopsis>Xnest=/usr/bin/X11/Xnest </synopsis> <para>
+ Xnest komandorako bide-izen eta argumentu osoak. Xnest zerbitzari malguetan erabiltzen da. Horrela, erabiltzaileak saio-hasierako pantaila berriak habiaratutako leihoan has ditzake. Lan honetarako Xnest zerbitzaria X zerbitzariaren paketeetatik instalatuta eduki behar duzu.
+ </para></listitem></varlistentry></variablelist>
+ 	
+@@ -295,31 +295,31 @@
+ 	<title>Segurtasun aukerak</title>
+ 	
+ 	<variablelist>
+-	  <title>[segurtasuna]</title>
++	  <title>[security]</title>
+ 	  
+-	  <varlistentry><term>BaimenduRoot</term> <listitem><synopsis>BaimenduRoot=egia</synopsis> <para>Root-ari (erabiltzaile pribilegiatuari) GDMren bidez saioa hastea baimentzen dio.  Modu horretako saio-hasierak debekatu nahi badituzu, aukera horretan faltsua jarri.</para> <para>PAM onartzen duten sistemetan, parametro hori ez da oso erabilgarria, PAM funtzio berdinerako, eta baita gauza gehiagotarako ere, erabil baitaiteke.  Oraindik, ordea, erabiltzen da, beraz PAM sistemetan ere egiazkoa jarri beharko zenuke.</para></listitem></varlistentry>
++	  <varlistentry><term>AllowRoot</term> <listitem><synopsis>AllowRoot=true</synopsis> <para>Root-ari (erabiltzaile pribilegiatuari) GDMren bidez saioa hastea baimentzen dio.  Modu horretako saio-hasierak debekatu nahi badituzu, aukera horretan faltsua jarri.</para> <para>PAM onartzen duten sistemetan, parametro hori ez da oso erabilgarria, PAM funtzio berdinerako, eta baita gauza gehiagotarako ere, erabil baitaiteke.  Oraindik, ordea, erabiltzen da, beraz PAM sistemetan ere egiazkoa jarri beharko zenuke.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>BaimenduRootUrrunetik</term> <listitem><synopsis>BaimenduRootUrrunetik=egia</synopsis> <para>Root-ari (erabiltzaile pribilegiatuari) GDMren bidez saioa urrunetik hastea baimendu.  Modu horretako saio-hasierak debekatu nahi badituzu, aukera horretan faltsua jarri.   Urruneko saio-hasierak xdmcp-ren bidez egiten diren saio-hasierak dira.</para> <para>PAM onartzen duten sistemetan, parametro hori ez da oso erabilgarria, PAM funtzio berdinerako, eta baita gauza gehiagotarako ere, erabil baitaiteke.  Oraindik ordea erabiltzen da, beraz PAM sistemetan ere egiazkoa jarri beharko zenuke.</para></listitem></varlistentry>
++	  <varlistentry><term>AllowRemoteRoot</term> <listitem><synopsis>AllowRemoteRoot=true</synopsis> <para>Root-ari (erabiltzaile pribilegiatuari) GDMren bidez saioa urrunetik hastea baimendu.  Modu horretako saio-hasierak debekatu nahi badituzu, aukera horretan faltsua jarri.   Urruneko saio-hasierak xdmcp-ren bidez egiten diren saio-hasierak dira.</para> <para>PAM onartzen duten sistemetan, parametro hori ez da oso erabilgarria, PAM funtzio berdinerako, eta baita gauza gehiagotarako ere, erabil baitaiteke.  Oraindik ordea erabiltzen da, beraz PAM sistemetan ere egiazkoa jarri beharko zenuke.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>BaimenduAutomatikokiUrrunetik</term> <listitem><synopsis>BaimenduAutomatikokiUrrunetik=faltsua</synopsis> <para>Denboraz mugatutako saio-hasiera aukera urrunetik egitea baimentzen du.   Hau da, XDMCPren bidez egindako urruneko konexioak baimenduko dira erabiltzaileak saioa &quot;TimedLogin&quot; moduan hasteko, saio-hasieraren leihoa denboraz kanpo utziz, lehen kontsolako erabiltzaile lokalaren moduan.</para> <para>Kontuan hartu horrela sistema bat nahiko segurua dela, eta beraz lehenespenez desaktibatuta egongo da. </para></listitem></varlistentry>
++	  <varlistentry><term>AllowRemoteAutoLogin</term> <listitem><synopsis>AllowRemoteAutoLogin=false</synopsis> <para>Denboraz mugatutako saio-hasiera aukera urrunetik egitea baimentzen du.   Hau da, XDMCPren bidez egindako urruneko konexioak baimenduko dira erabiltzaileak saioa &quot;TimedLogin&quot; moduan hasteko, saio-hasieraren leihoa denboraz kanpo utziz, lehen kontsolako erabiltzaile lokalaren moduan.</para> <para>Kontuan hartu horrela sistema bat nahiko segurua dela, eta beraz lehenespenez desaktibatuta egongo da. </para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ErlaxazioBaimenak</term> <listitem><synopsis>ErlaxazioBaimenak=0</synopsis> <para>Lehenespenez, fitxategi eta direktorioen jabea ez den erabiltzaileak bertan idatz badezake, GDMk ez ditu fitxategi eta direktorio horiek kontuan hartuko.</para> 
++	  <varlistentry><term>RelaxPermissions</term> <listitem><synopsis>RelaxPermissions=0</synopsis> <para>Lehenespenez, fitxategi eta direktorioen jabea ez den erabiltzaileak bertan idatz badezake, GDMk ez ditu fitxategi eta direktorio horiek kontuan hartuko.</para> 
+ 	      
+-	      <para>ErlaxazioBaimenen balioa aldatuz, ondorengo jokabidea ere alda dezakezu:</para>
++	      <para>RelaxPermissions balioa aldatuz, ondorengo jokabidea ere alda dezakezu:</para>
+ 	      
+ 	      <para>0 - Paranoia aukera. Erabiltzailearen fitxategiak eta direktorioak bakarrik onartzen ditu.</para> <para>1 - Baimendu taldeak idatzi ditzakeen fitxategi eta direktorioak.</para> <para>2 - Baimendu munduan zehar idatz daitezkeen fitxategi eta direktorioak.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>BerriroSaiatuAtzerapena</term> <listitem><synopsis>BerriroSaiatuAtzerapena=3</synopsis> <para>GDMk sarrera-eremua berriro aktibatu aurretik itxaron behar lukeen segundo kopurua, saio-hasierak huts egiten badu.</para></listitem></varlistentry>
++	  <varlistentry><term>RetryDelay</term> <listitem><synopsis>RetryDelay=3</synopsis> <para>GDMk sarrera-eremua berriro aktibatu aurretik itxaron behar lukeen segundo kopurua, saio-hasierak huts egiten badu.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>SaioFitxGehien</term> <listitem><synopsis>SaioFitxGehien=524288</synopsis> <para>GDMk kopuru hori baino handiagoko saio-fitxategiak ez ditu irakurriko (bytetan zehaztuta).  Hori ErabiltzaileFitxGehien baino handiagoa izan daiteke, ez baitira inoiz memorian irakurtzen, eta horrela, zailagoa da gdm-ri &quot;eraso&quot; egitea.</para>
++	  <varlistentry><term>SessionMaxFile</term> <listitem><synopsis>SessionMaxFile=524288</synopsis> <para>GDMk kopuru hori baino handiagoko saio-fitxategiak ez ditu irakurriko (bytetan zehaztuta).  Hori ErabiltzaileFitxGehien baino handiagoa izan daiteke, ez baitira inoiz memorian irakurtzen, eta horrela, zailagoa da gdm-ri &quot;eraso&quot; egitea.</para>
+ 	      
+-	      <para>Tamaina-kontrolaz gain, <filename>gdm</filename> eta <filename>gdmlogin</filename> programak ez dira hain erraz erabiltzailearen direktorioko fitxategietan sartzen. Ez die esteka sinbolikoei jarraituko eta, hala nahi badute, fitxategi eta direktorioetan haien jabea ez den norbaitek idatz badezake, ez ditu irakurriko. Informazio gehiagorako ikus ErlaxazioBaimenak aukera.</para>
++	      <para>Tamaina-kontrolaz gain, <filename>gdm</filename> eta <filename>gdmlogin</filename> programak ez dira hain erraz erabiltzailearen direktorioko fitxategietan sartzen. Ez die esteka sinbolikoei jarraituko eta, hala nahi badute, fitxategi eta direktorioetan haien jabea ez den norbaitek idatz badezake, ez ditu irakurriko. Informazio gehiagorako ikus RelaxPermissions aukera.</para>
+ 
+ 	      <para>GDM saio-fitxategietarako, ordea, ez da hain hautakorra.  ErlaxazioBaimenak 0-n ezartzen badituzu, saio-fitxategietarako 1 dela suposatuko du GDMk.  Tamalez horrela da, saio-fitxategiak orduan ezingo baitira inoiz irakurri.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ErabiltzaileFitxGehien</term> <listitem><synopsis>ErabiltzaileFitxGehien=65536</synopsis> <para>GDMk kopuru hori baino handiagoko fitxategiak ez ditu irakurri/idatziko (bytetan zehaztuta).</para>
++	  <varlistentry><term>UserMaxFile</term> <listitem><synopsis>UserMaxFile=65536</synopsis> <para>GDMk kopuru hori baino handiagoko fitxategiak ez ditu irakurri/idatziko (bytetan zehaztuta).</para>
+ 	      
+-	      <para>Tamaina-kontrolaz gain, <filename>gdm</filename> eta <filename>gdmlogin</filename> programak ez dira hain erraz erabiltzailearen direktorioko fitxategietan sartzen. Ez die esteka sinbolikoei jarraituko eta, hala nahi badute, fitxategi eta direktorioetan haien jabea ez den norbaitek idatz badezake, ez ditu irakurriko. Informazio gehiagorako ikus ErlaxazioBaimenak aukera.</para></listitem></varlistentry>
++	      <para>Tamaina-kontrolaz gain, <filename>gdm</filename> eta <filename>gdmlogin</filename> programak ez dira hain erraz erabiltzailearen direktorioko fitxategietan sartzen. Ez die esteka sinbolikoei jarraituko eta, hala nahi badute, fitxategi eta direktorioetan haien jabea ez den norbaitek idatz badezake, ez ditu irakurriko. Informazio gehiagorako ikus RelaxPermissions aukera.</para></listitem></varlistentry>
+ 	  
+ </variablelist>
+ 	
+@@ -341,7 +341,7 @@
+ 
+ </listitem></varlistentry>
+ 
+-	  <varlistentry><term>Gaitu</term> <listitem><synopsis>Gaitu=faltsua</synopsis> <para>Aukera horretan egiazkoa jartzeak XDMCP euskarria gaitzen du, eta horrela urruneko pantailak/X teminalak GDMren bidez kudea daitezke.</para>
++	  <varlistentry><term>Enable</term> <listitem><synopsis>Enable=false</synopsis> <para>Aukera horretan egiazkoa jartzeak XDMCP euskarria gaitzen du, eta horrela urruneko pantailak/X teminalak GDMren bidez kudea daitezke.</para>
+ 	      
+ 	      <para><filename>gdm</filename>-k UDPren 177 atakaren mezua jasotzen du. Informazio gehiagotarako ikus Ataka aukera.</para>
+ 	      
+@@ -355,27 +355,27 @@
+ 	      
+ 	      <para>Kontuan hartu XDMCP ez dela zehazki protokolo segurua eta ideia ona izango litzateke UDPren 177 ataka suebakian blokeatzea, behar ez baduzu behintzat.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ErrespetatuZehark</term> <listitem><synopsis>ErrespetatuZehark=egia</synopsis> <para>X terminaletarako XDMCP INDIRECT aukeratzea gaitzen du (hau da, <filename>gdmchooser</filename>-en urruneko exekuzioa), terminal horiek ez baitute beraien pantaila-arakatzaile propioa ematen.</para></listitem></varlistentry>
++	  <varlistentry><term>HonorIndirect</term> <listitem><synopsis>HonorIndirect=true</synopsis> <para>X terminaletarako XDMCP INDIRECT aukeratzea gaitzen du (hau da, <filename>gdmchooser</filename>-en urruneko exekuzioa), terminal horiek ez baitute beraien pantaila-arakatzaile propioa ematen.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ZainDaudenGehien</term> <listitem><synopsis>ZainDaudenGehien=4</synopsis> <para>Zerbitzu-erasoen ukapena eragozteko, GDMk zain dauden konexio-ilaren tamaina finko bat dauka. ZainDaudenGehien pantailak bakarrik has daitezke aldi berean.</para>
++	  <varlistentry><term>MaxPending</term> <listitem><synopsis>MaxPending=4</synopsis> <para>Zerbitzu-erasoen ukapena eragozteko, GDMk zain dauden konexio-ilaren tamaina finko bat dauka. MaxPending pantailak bakarrik has daitezke aldi berean.</para>
+ 	      
+ 	      <para>Kontuan hartu parametro horrek *ez* duela kudea daitezkeen urruneko pantailen kopurua mugatzen. Konexioa aldi berean hasten duten pantailen kopurua bakarrik mugatzen du.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ZainDaudenZeharkGehien</term> <listitem><synopsis>ZainDaudenZeharkGehien=4</synopsis> <para>GDMk ZainDaudenZeharkGehien pantailak aldi bereko ostalari-hautatzailearekin bakarrik eskainiko ditu.</para></listitem></varlistentry>
++	  <varlistentry><term>MaxPendingIndirect</term> <listitem><synopsis>MaxPendingIndirect=4</synopsis> <para>GDMk MaxPendingIndirect pantailak aldi bereko ostalari-hautatzailearekin bakarrik eskainiko ditu.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>GehienSaio</term> <listitem><synopsis>GehienSaio=16</synopsis> <para>Aldi berean kudeatuko diren urruneko pantailen gehienezko kopurua  zehazten du, hau da, ostalariak erabil ditzakeen urruneko pantailen kopuru osoa.</para></listitem></varlistentry>
++	  <varlistentry><term>MaxSessions</term> <listitem><synopsis>MaxSessions=16</synopsis> <para>Aldi berean kudeatuko diren urruneko pantailen gehienezko kopurua  zehazten du, hau da, ostalariak erabil ditzakeen urruneko pantailen kopuru osoa.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ZainEgotekoGehien</term> <listitem><synopsis>ZainEgotekoGehien=30</synopsis> <para>GDM pantaila kudeatzeko prest dagoenean, ACCEPT paketea bidaltzen du saioko ID bakarrarekin. ID hori etorkizuneko XDMCP elkarrizketetan erabiliko da.</para>
++	  <varlistentry><term>MaxWait</term> <listitem><synopsis>MaxWait=30</synopsis> <para>GDM pantaila kudeatzeko prest dagoenean, ACCEPT paketea bidaltzen du saioko ID bakarrarekin. ID hori etorkizuneko XDMCP elkarrizketetan erabiliko da.</para>
+ 	      
+ 	      <para>Orduan, GDMk saioaren IDa itxaron-ilaran ezartzen du eta pantailak MANAGE eskaerari erantzun arte zain egongo da.</para>
+ 	      
+ 	      <para>MaxWait aukerako segundoen buruan erantzunik jasotzen ez bada, GDMk pantaila hilda dagoela esango du eta itxaron-ilaratik kenduko du, beste pantaila batzuentzako erretenak libratuz. </para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>ZainEgotekoZeharkGehien</term> <listitem><synopsis>ZainEgotekoZeharkGehien=30</synopsis> <para>ZainEgotekoZeharkGehien parametroak bi ekintza hauen arteko segundo-kopurua zehazten du: erabiltzaileak ostalaria aukeratzen duen denboraren eta erabiltzailea hurrengo zeharkako kontsultan ostalariari konektaturik dagoen denboraren artekoa.   Denbora-muga gainditzen denean, aukeratutako ostalariari buruzko informazioa kendu eta zeharkako erretenak libratuko ditu beste pantailentzat.</para></listitem></varlistentry>
++	  <varlistentry><term>MaxWaitIndirect</term> <listitem><synopsis>MaxWaitIndirect=30</synopsis> <para>MaxWaitIndirect parametroak bi ekintza hauen arteko segundo-kopurua zehazten du: erabiltzaileak ostalaria aukeratzen duen denboraren eta erabiltzailea hurrengo zeharkako kontsultan ostalariari konektaturik dagoen denboraren artekoa.   Denbora-muga gainditzen denean, aukeratutako ostalariari buruzko informazioa kendu eta zeharkako erretenak libratuko ditu beste pantailentzat.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Ataka</term> <listitem><synopsis>Ataka=177</synopsis> <para><filename>gdm</filename>-k XDMCPren eskaeratarako jaso behar lukeen UDP atakaren zenbakia. Ez aldatu, ez badakizu zer egiten ari zaren.</para></listitem></varlistentry>
++	  <varlistentry><term>Port</term> <listitem><synopsis>Port=177</synopsis> <para><filename>gdm</filename>-k XDMCPren eskaeratarako jaso behar lukeen UDP atakaren zenbakia. Ez aldatu, ez badakizu zer egiten ari zaren.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>PingEgitekoTartea</term> <listitem><synopsis>PingEgitekoTartea=5</synopsis> <para>X zerbitzarian ping egiteko tartea minututan.  X zerbitzariak hurrena guk ping egin aurretik erantzuten ez badu, konexioa gelditu eta saioa amaituko da.  xdm-ren PingTartea eta PingDenboraMuga aukeren arteko konbinazioa da.</para></listitem></varlistentry>
++	  <varlistentry><term>PingInterval</term> <listitem><synopsis>PingInterval=5</synopsis> <para>X zerbitzarian ping egiteko tartea minututan.  X zerbitzariak hurrena guk ping egin aurretik erantzuten ez badu, konexioa gelditu eta saioa amaituko da.  xdm-ren PingInterval eta PingTimeout aukeren arteko konbinazioa da.</para></listitem></varlistentry>
+ 
+   <varlistentry>
+     <term>Willing</term>
+@@ -407,9 +407,9 @@
+ 	  
+ 	  <varlistentry><term>Gtkrc</term> <listitem><synopsis>Gtkrc=</synopsis> <para> <filename>gdmlogin</filename> / <filename>gdmchooser</filename> aukeretan erabili behar den gaia duen <filename>gtkrc</filename>-rako bide-izena.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>IkonoGehienZabalera</term> <listitem><synopsis>IkonoGehienZabalera=128</synopsis> <para>Aurpegi-arakatzaileak bistaratuko dituen ikonoen gehienezko zabalera zehazten du (pixeletan).  Ikono hori baino handiagoak eskalatu egingo dira.</para></listitem></varlistentry>
++	  <varlistentry><term>MaxIconWidth</term> <listitem><synopsis>MaxIconWidth=128</synopsis> <para>Aurpegi-arakatzaileak bistaratuko dituen ikonoen gehienezko zabalera zehazten du (pixeletan).  Ikono hori baino handiagoak eskalatu egingo dira.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>IkonoGehienAltuera</term> <listitem><synopsis>IkonoGehienAltuera=128</synopsis> <para>Aurpegi-arakatzaileak bistaratuko dituen ikonoen gehienezko altuera zehazten du (pixeletan).  Ikono hori baino handiagoak eskalatu egingo dira.</para></listitem></varlistentry></variablelist>
++	  <varlistentry><term>MaxIconHeight</term> <listitem><synopsis>MaxIconHeight=128</synopsis> <para>Aurpegi-arakatzaileak bistaratuko dituen ikonoen gehienezko altuera zehazten du (pixeletan).  Ikono hori baino handiagoak eskalatu egingo dira.</para></listitem></varlistentry></variablelist>
+ 	
+       </sect2>
+ 	
+@@ -418,21 +418,21 @@
+ 	<title>Ongietorriaren konfigurazioa</title>
+ 
+ 	<variablelist>
+-	  <title>[ongietorria]</title>
++	  <title>[greeter]</title>
+ 	  
+-	  <varlistentry><term>Arakatzailea</term> <listitem><synopsis>Arakatzailea=egia</synopsis> <para>Egiazkoa ezarri aurpegi-arakatzailea gaitzeko. Aurpegi-arakatzaileari buruzko informazio gehiagotarako ikus ``Ongietorria'' atala.</para></listitem></varlistentry>
++	  <varlistentry><term>Browser</term> <listitem><synopsis>Browser=true</synopsis> <para>Egiazkoa ezarri aurpegi-arakatzailea gaitzeko. Aurpegi-arakatzaileari buruzko informazio gehiagotarako ikus ``Ongietorria'' atala.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>KonfigErabilgarri</term> <listitem><synopsis>KonfigErabilgarri=egia</synopsis> <para>Konfiguratzailea ongietorrian exekutatzea baimentzen du.  Kontuan hartu erabiltzaileak root-aren pasahitza idatzi beharko duela konfiguratzailea exekutatu aurretik.   Ikus Konfiguratzailea aukera daemon atalean.</para></listitem></varlistentry>
++	  <varlistentry><term>ConfigAvailable</term> <listitem><synopsis>ConfigAvailable=true</synopsis> <para>Konfiguratzailea ongietorrian exekutatzea baimentzen du.  Kontuan hartu erabiltzaileak root-aren pasahitza idatzi beharko duela konfiguratzailea exekutatu aurretik.   Ikus Configurator aukera daemon atalean.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>AurpegiLehents</term> <listitem><synopsis>AurpegiLehenets=share/pixmaps/nophoto.png</synopsis> <para>Ikono-fitxategia lehenesten du <filename>~/gnome/photo</filename> fitxategian argazki pertsonalik ez duten erabiltzaileentzat. Irudiak Imlib formatuduna eta fitxategiak gdm erabiltzailearentzat irakurgarri izan behar du.</para></listitem></varlistentry>
++	  <varlistentry><term>DefaultFace</term> <listitem><synopsis>DefaultFace=share/pixmaps/nophoto.png</synopsis> <para>Ikono-fitxategia lehenesten du <filename>~/gnome/photo</filename> fitxategian argazki pertsonalik ez duten erabiltzaileentzat. Irudiak Imlib formatuduna eta fitxategiak gdm erabiltzailearentzat irakurgarri izan behar du.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>LokalLehenets</term> <listitem><synopsis>LokalLehenets=ingelesa</synopsis> <para>Hizkuntza hori erabiltzen da saiorako <filename>~user/.gnome/gdm</filename> fitxategian beste ezer zehazturik ez badago eta erabiltzaileak ongietorriko Lokala menuan hizkuntza aukeratu ez badu.</para></listitem></varlistentry>
++	  <varlistentry><term>DefaultLocale</term> <listitem><synopsis>DefaultLocale=ingelesa</synopsis> <para>Hizkuntza hori erabiltzen da saiorako <filename>~user/.gnome/gdm</filename> fitxategian beste ezer zehazturik ez badago eta erabiltzaileak ongietorriko Lokala menuan hizkuntza aukeratu ez badu.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Baztertu</term> <listitem><synopsis>Baztertu=bin,daemon,adm,lp,sync,shutdown,halt,mail,...</synopsis> <para>Aurpegi-arakatzailetik kendu behar den komaz bereizitako erabiltzaile-izenen zerrenda. Kapoan utzitako erabiltzaileak oraindik saioa hasi ahal izango dute.</para></listitem></varlistentry>
++	  <varlistentry><term>Exclude</term> <listitem><synopsis>Exclude=bin,daemon,adm,lp,sync,shutdown,halt,mail,...</synopsis> <para>Aurpegi-arakatzailetik kendu behar den komaz bereizitako erabiltzaile-izenen zerrenda. Kapoan utzitako erabiltzaileak oraindik saioa hasi ahal izango dute.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Letra-tipoa</term> <listitem><synopsis>Letra-tipoa=-adobe-helvetica-bold-r-normal-*-*-180-*-*-*-*-*-*</synopsis> <para>Ongietorriko ongietorri-mezuaren letra-tipoa.</para></listitem></varlistentry>
++	  <varlistentry><term>Font</term> <listitem><synopsis>Font=-adobe-helvetica-bold-r-normal-*-*-180-*-*-*-*-*-*</synopsis> <para>Ongietorriko ongietorri-mezuaren letra-tipoa.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>AurpegiOrokorDir</term> <listitem><synopsis>AurpegiOrokorDir=share/faces/</synopsis> <para>Aurpegi-fitxategien systemwide direktorioa. Sistema-adiministratzaileak erabiltzaileei ikonoak hemen ipin diezaizkieke beraien etxeko direktorioak ukitu gabe. Aurpegiei beraien erabiltzaileen saio-hasieraren arabera ezartzen zaie izena.</para>
++	  <varlistentry><term>GlobalFaceDir</term> <listitem><synopsis>GlobalFaceDir=share/faces/</synopsis> <para>Aurpegi-fitxategien systemwide direktorioa. Sistema-adiministratzaileak erabiltzaileei ikonoak hemen ipin diezaizkieke beraien etxeko direktorioak ukitu gabe. Aurpegiei beraien erabiltzaileen saio-hasieraren arabera ezartzen zaie izena.</para>
+ 	      
+ 	      <para>Hau da, <filename>&lt;GlobalFaceDir&gt;/johndoe</filename> aukerak ``johndoe'' erabiltzailearen ikono-aurpegia edukiko luke. Ez litzateke irudi-formatuaren luzapena zehaztu behar.</para>
+ 	      
+@@ -440,22 +440,22 @@
+ 	      
+ 	      <para>Erabiltzailearen ikono-fitxategiak beti edukiko du lehentasuna sistema-administratzaileak emandakoaren gainetik.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Ikonoa</term> <listitem><synopsis>Ikonoa=share/pixmaps/gdm.xpm</synopsis> <para><filename>gdmlogin</filename>-en erabili behar den ikonoa ikonotu-egoeran dagoenean.  Irudiak Imlib formatuduna eta GDM erabiltzailearentzat irakurgarria izan behar du.  Fitxategirik ez badago zehaztuta, ikonotzeko eginbidea desgaitu egingo da.</para></listitem></varlistentry>
++	  <varlistentry><term>Icon</term> <listitem><synopsis>Icon=share/pixmaps/gdm.xpm</synopsis> <para><filename>gdmlogin</filename>-en erabili behar den ikonoa ikonotu-egoeran dagoenean.  Irudiak Imlib formatuduna eta GDM erabiltzailearentzat irakurgarria izan behar du.  Fitxategirik ez badago zehaztuta, ikonotzeko eginbidea desgaitu egingo da.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>FitxategiLokala</term> <listitem><synopsis>FitxategiLokala=etc/gdm/locale.alias</synopsis> <para>Sistemako hizkuntza guztietarako sarrerak dituen GNU formatu lokaleko fitxategia.</para></listitem></varlistentry>
++	  <varlistentry><term>LocaleFile</term> <listitem><synopsis>LocaleFile=etc/gdm/locale.alias</synopsis> <para>Sistemako hizkuntza guztietarako sarrerak dituen GNU formatu lokaleko fitxategia.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Logotipoa</term> <listitem><synopsis>Logotipoa=share/pixmaps/gnome-logo-large.png</synopsis> <para>Logotipoaren laukian bistaratuko den irudi-fitxategia. Fitxategiak Imlib formatuduna eta GDM erabiltzailearentzat irakurgarria izan behar du. Fitxategirik ez badago zehaztuta, logotipo-eginbidea desgaitu egingo da.</para></listitem></varlistentry>
++	  <varlistentry><term>Logo</term> <listitem><synopsis>Logo=share/pixmaps/gnome-logo-large.png</synopsis> <para>Logotipoaren laukian bistaratuko den irudi-fitxategia. Fitxategiak Imlib formatuduna eta GDM erabiltzailearentzat irakurgarria izan behar du. Fitxategirik ez badago zehaztuta, logotipo-eginbidea desgaitu egingo da.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>Dar-dar egin</term> <listitem><synopsis>Dar-dar egin=egia</synopsis> <para> <filename>gdmlogin</filename>-ek pantaila astindu behar lukeen kontrolatzen du, erabiltzaile-izen/pasahitz okerra sartzen denean.</para></listitem></varlistentry>
++	  <varlistentry><term>Quiver</term> <listitem><synopsis>Quiver=true</synopsis> <para> <filename>gdmlogin</filename>-ek pantaila astindu behar lukeen kontrolatzen du, erabiltzaile-izen/pasahitz okerra sartzen denean.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>SistemaMenua</term> <listitem><synopsis>SistemaMenua=faltsua</synopsis> <para>Itzali/Gelditu menua aktibatzen/desaktibatzen du.</para></listitem></varlistentry>
++	  <varlistentry><term>SystemMenu</term> <listitem><synopsis>SystemMenu=false</synopsis> <para>Itzali/Gelditu menua aktibatzen/desaktibatzen du.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>TituluBarra</term> <listitem><synopsis>TituluBarra=egia</synopsis> <para>Ongietorrian titulu-barra bistaratzen du.</para></listitem></varlistentry>
++	  <varlistentry><term>TitleBar</term> <listitem><synopsis>TitleBar=true</synopsis> <para>Ongietorrian titulu-barra bistaratzen du.</para></listitem></varlistentry>
+ 	  
+ 	  <varlistentry>
+-    <term>Erabili24Erlojua</term>
++    <term>Use24Clock</term>
+     <listitem>
+-      <synopsis>Erabili24Erlojua=faltsua</synopsis>
++      <synopsis>Use24Clock=false</synopsis>
+       <para>
+ 24 orduko erlojua erabiltzera behartu, nahiz eta lokalak
+ lehenespen gisa 12 orduko erloju eduki. Orokorrean 24 
+@@ -466,17 +466,17 @@
+   </varlistentry>
+   
+   <varlistentry>
+-<term>Ongi etorri</term> <listitem><synopsis>Ongi etorri=Ongi etorri &percnt;n -(e)ra</synopsis> <para>Ongietorrian logotipo-irudiaren ondoren zer testu bistaratu behar den kontrolatzen du. Honako kontrol-karaktereak onartzen dira:</para>
++<term>Welcome</term> <listitem><synopsis>Welcome=Ongi etorri &percnt;n -(e)ra</synopsis> <para>Ongietorrian logotipo-irudiaren ondoren zer testu bistaratu behar den kontrolatzen du. Honako kontrol-karaktereak onartzen dira:</para>
+ 	      
+-	      <para&percnt;&percnt; &mdash; `&percnt;' karakterea</para>
++	      <para>&percnt;&percnt; &mdash; `&percnt;' karakterea</para>
+ 	      
+ 	      <para>&percnt;d karaktereak &mdash; ostalari-izena bistaratzen du</para>
+ 	      
+-	      <para&percnt;h &mdash; Guztiz kualifikatutako ostalari-izena</para>
++	      <para>&percnt;h &mdash; Guztiz kualifikatutako ostalari-izena</para>
+ 
+-	      <para&percnt;m &mdash; ordenagailua (prozesadore-mota)</para>
++	      <para>&percnt;m &mdash; ordenagailua (prozesadore-mota)</para>
+ 
+-	      <para&percnt;n &mdash; Nodo-izena (hau da, domeinurik gabeko ostalari-izena)</para>
++	      <para>&percnt;n &mdash; Nodo-izena (hau da, domeinurik gabeko ostalari-izena)</para>
+ 	      
+ 	      <para>&percnt;r &mdash; edizioa (SE bertsioa)</para>
+ 	      
+@@ -484,32 +484,32 @@
+ 	      	      
+ 	    </listitem></varlistentry>
+ 
+-	  <varlistentry><term>XineramaPantaila</term> <listitem><synopsis>XineramaPantaila=0</synopsis> <para>Xinerama luzapena saio-hasieraren leihoan aktiboa badago, pantaila fisiko honetan zentratuko da (0 erabili lehen pantailarentzat, 1 bigarrenarentzat...).</para></listitem></varlistentry>	
++	  <varlistentry><term>XineramaScreen</term> <listitem><synopsis>XineramaScreen=0</synopsis> <para>Xinerama luzapena saio-hasieraren leihoan aktiboa badago, pantaila fisiko honetan zentratuko da (0 erabili lehen pantailarentzat, 1 bigarrenarentzat...).</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>AtzekoPlanoKolorea</term> <listitem><synopsis>AtzekoPlanoKolorea=#007777</synopsis> <para>AtzekoPlanoMota 2 bada, kolore hori erabili ongietorriaren atzeko planoan.  Atzeko irudi garden moduan ere erabili atzeko planoan, KoloreaUrrunekoetanBakarrik ezarrita badago eta urruneko pantaila bada.</para></listitem></varlistentry>	
++	  <varlistentry><term>BackgroundColor</term> <listitem><synopsis>BackgroundColor=#007777</synopsis> <para>AtzekoPlanoMota 2 bada, kolore hori erabili ongietorriaren atzeko planoan.  Atzeko irudi garden moduan ere erabili atzeko planoan, BackgroundRemoteOnlyColor ezarrita badago eta urruneko pantaila bada.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>AtzekoPlanoIrudia</term> <listitem><synopsis>AtzekoPlanoIrudia=somefile.png</synopsis> <para>AtzekoPlanoMota 1 bada, ongietorrian atzeko plano moduan bistaratu.</para></listitem></varlistentry>	
++	  <varlistentry><term>BackgroundImage</term> <listitem><synopsis>BackgroundImage=somefile.png</synopsis> <para>BackgroundType 1 bada, ongietorrian atzeko plano moduan bistaratu.</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>AtzekoPlanoPrograma</term> <listitem><synopsis>AtzekoPlanoPrograma=/usr/bin/xeyes</synopsis> <para>Programa hori ezarrita badago, atzeko planoan exekutatuko da saio-hasieraren leihoa bistaratzen den bitartean.   Kontuan hartu programa horiek guztiak ez direla modu horretan exekutatuko, gdm-k normalean ez baitu etxeko direktoriorik.  Etxeko direktorioa gdm erabiltzailearentzat ezar dezakezu, hori behar duten aplikazioak exekutatu nahi badituzu.</para></listitem></varlistentry>	
++	  <varlistentry><term>BackgroundProgram</term> <listitem><synopsis>BackgroundProgram=/usr/bin/xeyes</synopsis> <para>Programa hori ezarrita badago, atzeko planoan exekutatuko da saio-hasieraren leihoa bistaratzen den bitartean.   Kontuan hartu programa horiek guztiak ez direla modu horretan exekutatuko, gdm-k normalean ez baitu etxeko direktoriorik.  Etxeko direktorioa gdm erabiltzailearentzat ezar dezakezu, hori behar duten aplikazioak exekutatu nahi badituzu.</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>KoloreaUrrunekoetanBakarrik</term> <listitem><synopsis>KoloreaUrrunekoetanBakarrik=egia</synopsis> <para>Urruneko pantailetan atzeko planoaren kolorea bakarrik ezartzen du.  Hori sareko karga arintzeko da.  AtzekoPlanoPrograma ez da exekutatzen.</para></listitem></varlistentry>	
++	  <varlistentry><term>BackgroundRemoteOnlyColor</term> <listitem><synopsis>BackgroundRemoteOnlyColor=true</synopsis> <para>Urruneko pantailetan atzeko planoaren kolorea bakarrik ezartzen du.  Hori sareko karga arintzeko da.  BackgroundProgram ez da exekutatzen.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>EskalatuDoitzeko</term> <listitem><synopsis>EskalatuDoitzeko=egia</synopsis> <para>Atzeko planoko irudia eskalatzen du pantaila doitzeko.</para></listitem></varlistentry>	
++	  <varlistentry><term>BackgroundScaleToFit</term> <listitem><synopsis>BackgroundScaleToFit=true</synopsis> <para>Atzeko planoko irudia eskalatzen du pantaila doitzeko.</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>AtzekoPlanoMota</term> <listitem><synopsis>AtzekoPlanoMota=2</synopsis> <para>Ezarri behar den atzeko plano mota.  0 bat ere ez, 1 irudia eta 2 kolorea da.</para></listitem></varlistentry>	
++	  <varlistentry><term>BackgroundType</term> <listitem><synopsis>BackgroundType=2</synopsis> <para>Ezarri behar den atzeko plano mota.  0 bat ere ez, 1 irudia eta 2 kolorea da.</para></listitem></varlistentry>	
+ 
+ 
+-	  <varlistentry><term>KonfigKokalekua</term> <listitem><synopsis>KonfigKokalekua=egia</synopsis> <para>Egia bada, saio-hasieraren leihoaren kokalekua zehaztuko da XKokalekua/YKokalekua aukeraren bidez.</para></listitem></varlistentry>	
++	  <varlistentry><term>SetPosition</term> <listitem><synopsis>SetPosition=true</synopsis> <para>Egia bada, saio-hasieraren leihoaren kokalekua zehaztuko da PositionX/PositionY aukeraren bidez.</para></listitem></varlistentry>
+ 
+-	  <varlistentry><term>XKokalekua</term> <listitem><synopsis>XKokalekua=200</synopsis> <para>Saio-hasieraren leihoaren kokaleku horizontala.</para></listitem></varlistentry>	
++	  <varlistentry><term>PositionX</term> <listitem><synopsis>PositionX=200</synopsis> <para>Saio-hasieraren leihoaren kokaleku horizontala.</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>YKokalekua</term> <listitem><synopsis>YKokalekua=100</synopsis> <para>Saio-hasieraren leihoaren kokaleku bertikala.</para></listitem></varlistentry>	
++	  <varlistentry><term>PositionY</term> <listitem><synopsis>PositionY=100</synopsis> <para>Saio-hasieraren leihoaren kokaleku bertikala.</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>ErakutsiGnomeHautatzaileSaioa</term> <listitem><synopsis>ErakutsiGnomeHautatzaileSaioa=egia</synopsis> <para>Ongietorriak Gnome-ren Hautatzailea saioa erakutsi behar duen zehazten du, 'Gnome' izeneko saioa agertzen denean.</para></listitem></varlistentry>	
++	  <varlistentry><term>ShowGnomeChooserSession</term> <listitem><synopsis>ShowGnomeChooserSession=true</synopsis> <para>Ongietorriak Gnome-ren Hautatzailea saioa erakutsi behar duen zehazten du, 'Gnome' izeneko saioa agertzen denean.</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>ErakutsiGnomeFailsafeSaioa</term> <listitem><synopsis>ErakutsiGnomeFailsafeSaioa=egia</synopsis> <para>Ongietorriak saio-zerrendan Gnome-ren Failsafe saioa erakutsi behar duen zehazten du.</para></listitem></varlistentry>	
++	  <varlistentry><term>ShowGnomeFailsafeSession</term> <listitem><synopsis>ShowGnomeFailsafeSession=true</synopsis> <para>Ongietorriak saio-zerrendan Gnome-ren Failsafe saioa erakutsi behar duen zehazten du.</para></listitem></varlistentry>	
+ 
+-	  <varlistentry><term>ErakutsiXtermFailsafeSaioa</term> <listitem><synopsis>ErakutsiXtermFailsafeSaioa=egia</synopsis> <para>Ongietorriak saio-zerrendan Xterm Failsafe saioa erakutsi behar duen zehazten du.</para></listitem></varlistentry>	
++	  <varlistentry><term>ShowXtermFailsafeSession</term> <listitem><synopsis>ShowXtermFailsafeSession=true</synopsis> <para>Ongietorriak saio-zerrendan Xterm Failsafe saioa erakutsi behar duen zehazten du.</para></listitem></varlistentry>	
+ 
+ 	</variablelist>
+ 
+@@ -520,21 +520,21 @@
+ 	<title>XDCMP hautatzailearen aukerak</title>
+ 
+ 	<variablelist>
+-	  <title>[hautatzailea]</title>
++	  <title>[chooser]</title>
+ 
+-	  <varlistentry><term>Broadcast</term> <listitem><synopsis>Broadcast=egia</synopsis> <para>Egia bada, hautatzaileak sare lokalari kontsulta bat transmititu eta erantzunak jasoko ditu.  Horrela, hautatzaileak beti erakutsiko ditu sareko kudeatzaile erabilgarri guztiak.  Sare honi lokalak ez diren ostalariak gehitu behar badizkiozu, edo Broadcast erabili nahi ez baduzu, Ostalariak teklan zerrenda ditzakezu.</para></listitem></varlistentry>
++	  <varlistentry><term>Broadcast</term> <listitem><synopsis>Broadcast=true</synopsis> <para>Egia bada, hautatzaileak sare lokalari kontsulta bat transmititu eta erantzunak jasoko ditu.  Horrela, hautatzaileak beti erakutsiko ditu sareko kudeatzaile erabilgarri guztiak.  Sare honi lokalak ez diren ostalariak gehitu behar badizkiozu, edo Broadcast erabili nahi ez baduzu, Ostalariak teklan zerrenda ditzakezu.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>OstalariIrudiLehenets</term> <listitem><synopsis>OstalariIrudiLehents=share/pixmaps/nohost.png</synopsis> <para>Lehenetsitako ostalari-ikonoaren fitxategi-izena. Irudi hori bistaratuko da, ostalari jakin batentzat ikonorik zehazten ez bada.  Fitxategiak Imlib formatuduna eta GDM erabiltzaileak irakurtzeko modukoa izan behar du.</para></listitem></varlistentry>
++	  <varlistentry><term>DefaultHostImage</term> <listitem><synopsis>DefaultHostImage=share/pixmaps/nohost.png</synopsis> <para>Lehenetsitako ostalari-ikonoaren fitxategi-izena. Irudi hori bistaratuko da, ostalari jakin batentzat ikonorik zehazten ez bada.  Fitxategiak Imlib formatuduna eta GDM erabiltzaileak irakurtzeko modukoa izan behar du.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>OstalariIrudiDir</term> <listitem><synopsis>OstalariIrudiDir=share/hosts</synopsis> <para>Ostalarien ikono-fitxategien biltegia.  Sistema-administratzaileak urruneko ostalarien ikonoak hemen ipin ditzake eta <filename>gdmchooser</filename> fitxategian agertuko dira.</para>
++	  <varlistentry><term>HostImageDir</term> <listitem><synopsis>HostImageDir=share/hosts</synopsis> <para>Ostalarien ikono-fitxategien biltegia.  Sistema-administratzaileak urruneko ostalarien ikonoak hemen ipin ditzake eta <filename>gdmchooser</filename> fitxategian agertuko dira.</para>
+ 	      
+ 	      <para>Fitxategi-izenak ostalariaren izen guztiz kualifikatuarekin (FQDN) bat etorri behar du.  Ikonoak Imlib formatuan gorde behar dira eta gdm erabiltzailearentzat irakurgarriak izan behar dute.</para>
+ 	      
+ 	    </listitem></varlistentry>
+ 
+-	  <varlistentry><term>Ostalariak</term> <listitem><synopsis>Ostalariak=1.ostalaria,2.ostalaria</synopsis> <para>Hautatzailean zerrendatu behar diren ostalariak.  Hautatzaileak erantzuten badute bakarrik zerrendatuko ditu.   Transmititzeaz gain, hori ere egiten da (Broadcast konfiguratuta badago), beraz, ez dituzu ostalariak sare lokalean zerrendatu behar.  Hori erabilgarria da zure sareko konfigurazioak transmisio-pakete baten bidez lor daitezkeen ostalari guztiak onartzen ez baditu.</para></listitem></varlistentry>
++	  <varlistentry><term>Hosts</term> <listitem><synopsis>Hosts=1.ostalaria,2.ostalaria</synopsis> <para>Hautatzailean zerrendatu behar diren ostalariak.  Hautatzaileak erantzuten badute bakarrik zerrendatuko ditu.   Transmititzeaz gain, hori ere egiten da (Broadcast konfiguratuta badago), beraz, ez dituzu ostalariak sare lokalean zerrendatu behar.  Hori erabilgarria da zure sareko konfigurazioak transmisio-pakete baten bidez lor daitezkeen ostalari guztiak onartzen ez baditu.</para></listitem></varlistentry>
+ 	  
+-	  <varlistentry><term>EskanDenbora</term> <listitem><synopsis>EskanDenbora=3</synopsis> <para>Hautatzaileak BROADCAST_KONTSULTA kontsultari erantzuteko zenbat segundo zain egon behar duen zehazten du.</para></listitem></varlistentry></variablelist>
++	  <varlistentry><term>ScanTime</term> <listitem><synopsis>ScanTime=3</synopsis> <para>Hautatzaileak BROADCAST_KONTSULTA kontsultari erantzuteko zenbat segundo zain egon behar duen zehazten du.</para></listitem></varlistentry></variablelist>
+ 	
+       </sect2>
+ 
+@@ -564,12 +564,12 @@
+ </para>
+ 
+ <variablelist>
+-  <title>[zerbitzari-Estandarra]</title>
++  <title>[server-Standard]</title>
+ 
+   <varlistentry>
+-    <term>izena</term>
++    <term>name</term>
+     <listitem>
+-      <synopsis>izena=Zerbitzari estandarra</synopsis>
++      <synopsis>name=Zerbitzari estandarra</synopsis>
+       <para>
+ Izen hori erabiltzaileari erakutsiko zaio.
+       </para>
+@@ -577,9 +577,9 @@
+   </varlistentry>
+   
+   <varlistentry>
+-    <term>komandoa</term>
++    <term>command</term>
+     <listitem>
+-      <synopsis>komandoa=/usr/bin/X11/X</synopsis>
++      <synopsis>command=/usr/bin/X11/X</synopsis>
+       <para>
+ Exekutatu behar den komandoa, X zerbitzariaren 
+ bitarraren bide-izen osoarekin eta behar diren 
+@@ -589,9 +589,9 @@
+   </varlistentry>
+ 
+   <varlistentry>
+-    <term>malgua</term>
++    <term>flexible</term>
+     <listitem>
+-      <synopsis>malgua=egia</synopsis>
++      <synopsis>flexible=true</synopsis>
+       <para>
+ Erabiltzaile batek zerbitzari malgua exekutatu 
+ nahi duenean zerbitzari hori erabilgarri dagoen
+@@ -611,7 +611,7 @@
+ 	<title>X zerbitzariaren konfigurazio lokala </title>
+ 	
+ 	<variablelist>
+-	  <title>[zerbitzariak]</title>
++	  <title>[servers]</title>
+ 	  
+ 	  <varlistentry><term>0</term> <listitem><synopsis>0=Standard </synopsis> <para>X zerbitzari lokalen kontrol-sekzioa. Lerro bakoitzak pantaila lokalen kopurua eta X zerbitzaria(k) hasieratzeko exekutatu behar den komandoa adierazten du.</para>
+ 	      
