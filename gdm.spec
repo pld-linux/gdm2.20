@@ -145,7 +145,7 @@ Skrypt init dla GDM-a.
 %patch5 -p1
 %patch6 -p1
 
-mv po/{no,nb}.po
+rm po/no.po
 
 %build
 rm -f missing
