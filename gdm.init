@@ -26,15 +26,20 @@ case "$1" in
 	if [ ! -f /var/lock/subsys/gdm ]; then
 		msg_starting "Gnome Display Manager"
 		daemon /usr/X11R6/bin/gdm
-		touch /var/lock/subsys/gdm
+		RETVAL=$?
+		$RETVAL -eq 0 ] && touch /var/lock/subsys/gdm
 	else
 		msg_Already_Running "Gnome Display Manager"
 	fi
 	;;
   stop)
-	msg_stopping "Gnome Display Manager"
-	killproc gdm
-	rm -f /var/lock/subsys/gdm
+	if [ -f /var/lock/subsys/gdm ]; then
+		msg_stopping "Gnome Display Manager"
+		killproc gdm
+		rm -f /var/lock/subsys/gdm
+	else
+		msg_Not_Running "Gnome Display Manager"
+	fi
 	;;
   status)
 	status gdm
@@ -48,4 +53,4 @@ case "$1" in
 	exit 1
 esac
 
-exit 0
+exit $RETVAL
