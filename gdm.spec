@@ -43,13 +43,13 @@ BuildRequires:	scrollkeeper >= 0.3.11
 Requires:	libgnome >= 2.1.0-3
 Requires:	which
 Requires:	sessreg
-Requires(pre): /bin/id
-Requires(pre): /usr/sbin/groupadd
-Requires(pre): /usr/sbin/useradd
-Requires(postun):      /usr/sbin/userdel
-Requires(postun):      /usr/sbin/groupdel
-Requires(post,postun):scrollkeeper
-Requires(post,preun):/sbin/chkconfig
+Requires(pre):	/bin/id
+Requires(pre):	/usr/sbin/groupadd
+Requires(pre):	/usr/sbin/useradd
+Requires(postun):	/usr/sbin/userdel
+Requires(postun):	/usr/sbin/groupdel
+Requires(post,postun):	scrollkeeper
+Requires(post,preun):	/sbin/chkconfig
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	xdm kdm wdm
@@ -233,8 +233,8 @@ fi
 %attr(750,xdm,xdm) /var/lib/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
-%{_datadir}/applications/gdmsetup.desktop
-%{_datadir}/applications/gdmflexiserver.desktop
+%{_desktopdir}/gdmsetup.desktop
+%{_desktopdir}/gdmflexiserver.desktop
 %{_datadir}/gnome/capplets/*
 %{_datadir}/gdm
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
@@ -242,7 +242,7 @@ fi
 %files Xnest
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gdmXnestchooser
-%{_datadir}/applications/gdmflexiserver-xnest.desktop
+%{_desktopdir}/gdmflexiserver-xnest.desktop
 
 %files init
 %defattr(644,root,root,755)
