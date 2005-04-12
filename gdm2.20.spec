@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.6.0.8
-Release:	2
+Version:	2.6.0.9
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	2c51b452686378097bb58e5fc02e2d04
+# Source0-md5:	d845fe205412bb101d4c66d1e88a317d
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -53,8 +53,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	rpmbuild(macros) >= 1.159
-BuildRequires:	scrollkeeper
+BuildRequires:	rpmbuild(macros) >= 1.197
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
@@ -151,10 +150,9 @@ Skrypt init dla GDM-a.
 %patch6 -p1
 
 %build
-rm -f missing
 %{__libtoolize}
-glib-gettextize --copy --force
-intltoolize --copy --force
+%{__glib_gettextize}
+%{__intltoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -223,10 +221,10 @@ else
 fi
 
 %post
-/usr/bin/scrollkeeper-update
+%scrollkeeper_update_post
 
 %postun
-/usr/bin/scrollkeeper-update
+%scrollkeeper_update_postun
 if [ "$1" = "0" ]; then
 	%userremove xdm
 	%groupremove xdm
