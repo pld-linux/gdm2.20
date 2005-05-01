@@ -53,7 +53,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	rpmbuild(macros) >= 1.197
+BuildRequires:	rpmbuild(macros) >= 1.202
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
@@ -203,22 +203,8 @@ rm -f $RPM_BUILD_ROOT%{_datadir}/xsessions/gnome.desktop
 rm -rf $RPM_BUILD_ROOT
 
 %pre
-if [ -n "`getgid xdm`" ]; then
-	if [ "`getgid xdm`" != "55" ]; then
-		echo "Error: group xdm doesn't have gid=55. Correct this before installing %{name}." 1>&2
-		exit 1
-	fi
-else
-	/usr/sbin/groupadd -g 55 -r -f xdm
-fi
-if [ -n "`/bin/id -u xdm 2>/dev/null`" ]; then
-	if [ "`/bin/id -u xdm`" != "55" ]; then
-		echo "Error: user xdm doesn't have UID=55. Correct this before installing xdm." 1>&2
-		exit 1
-	fi
-else
-	/usr/sbin/useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm 1>&2
-fi
+%groupadd -g 55 -r -f xdm
+%useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm
 
 %post
 %scrollkeeper_update_post
