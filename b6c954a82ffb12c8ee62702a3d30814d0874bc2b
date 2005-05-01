@@ -1,0 +1,5 @@
+- updated to 2.2.3,
+- added scrollkeeper support,
+- added --all-name --with-gnome to %find_lang parameters and updated %files
+  for this,
+- install in proper paths desktop files (using %{_applnkdir} macro).
