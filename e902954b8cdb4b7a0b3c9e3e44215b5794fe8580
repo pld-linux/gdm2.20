@@ -1,0 +1,2 @@
+- rel 2
+- %{_datadir}/xsessions/gnome.desktop moved to gnome-session
