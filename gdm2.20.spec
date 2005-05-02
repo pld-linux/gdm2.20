@@ -259,10 +259,10 @@ fi
 %config %{_sysconfdir}/gdm/PostLogin/Default.sample
 %config %{_sysconfdir}/gdm/modules/*
 
-%config(noreplace) %verify(not size mtime md5) %{_sysconfdir}/gdm/gdm.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/gdm.conf
 %config %{_sysconfdir}/gdm/locale.alias
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/pam.d/gdm*
-%attr(640,root,root) %config(noreplace) %verify(not size mtime md5) /etc/security/blacklist.gdm
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
 %attr(750,xdm,xdm) /var/lib/gdm
 %attr(750,xdm,xdm) /var/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
