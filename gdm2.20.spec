@@ -15,7 +15,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.6.0.9
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -63,7 +63,7 @@ Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	libgnome >= 2.6.1
 Requires:	sessreg
 Requires:	which
-Requires:	pam >= 0.77.3-7
+Requires:	pam >= 0.79.0
 Provides:	group(xdm)
 Provides:	user(xdm)
 Obsoletes:	X11-xdm
