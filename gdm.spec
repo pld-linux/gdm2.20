@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.6.0.9
-Release:	2
+Version:	2.8.0.1
+Release:	0.1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.6/%{name}-%{version}.tar.bz2
-# Source0-md5:	d845fe205412bb101d4c66d1e88a317d
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.8/%{name}-%{version}.tar.bz2
+# Source0-md5:	b3925c68b828fbb63994eba577c4b4fd
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -53,7 +53,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	rpmbuild(macros) >= 1.202
+BuildRequires:	rpmbuild(macros) >= 1.231
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
@@ -218,35 +218,28 @@ fi
 
 %post init
 /sbin/chkconfig --add gdm
-if [ -f /var/lock/subsys/gdm ]; then
-	echo "Run \"/etc/rc.d/init.d/gdm restart\" to restart gdm." >&2
-else
-	echo "Run \"/etc/rc.d/init.d/gdm start\" to start gdm." >&2
-fi
+%service gdm restart
 
 %preun init
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/gdm ]; then
-		/etc/rc.d/init.d/gdm stop >&2
-	fi
+	%service -q gdm stop
 	/sbin/chkconfig --del gdm
 fi
 
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_bindir}/gdm
-%attr(755,root,root) %{_bindir}/gdm-binary
-%attr(755,root,root) %{_bindir}/gdmchooser
+%attr(755,root,root) %{_bindir}/gdm-dmx-reconnect-proxy
+%attr(755,root,root) %{_bindir}/gdmdynamic
 %attr(755,root,root) %{_bindir}/gdmflexiserver
-%attr(755,root,root) %{_bindir}/gdmgreeter
-%attr(755,root,root) %{_bindir}/gdmlogin
 %attr(755,root,root) %{_bindir}/gdmphotosetup
-%attr(755,root,root) %{_bindir}/gdmsetup
 %attr(755,root,root) %{_bindir}/gdmthemetester
 %attr(755,root,root) %{_libdir}/gdmaskpass
 %attr(755,root,root) %{_libdir}/gdmopen
 %attr(755,root,root) %{_libdir}/gdmtranslate
+%attr(755,root,root) %{_libdir}/gdmchooser
+%attr(755,root,root) %{_libdir}/gdmgreeter
+%attr(755,root,root) %{_libdir}/gdmlogin
 %attr(755,root,root) %{_sbindir}/*
 %dir %{_sysconfdir}/gdm
 %dir %{_sysconfdir}/gdm/modules
@@ -280,6 +273,7 @@ fi
 
 %files Xnest
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_bindir}/gdmXnest
 %attr(755,root,root) %{_bindir}/gdmXnestchooser
 %{_desktopdir}/gdmflexiserver-xnest.desktop
 
