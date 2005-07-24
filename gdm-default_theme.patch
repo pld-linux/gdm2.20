@@ -1,12 +1,12 @@
 diff -urN gdm-2.6.0.3-orig/config/gdm.conf.in gdm-2.6.0.3/config/gdm.conf.in
 --- gdm-2.6.0.3-orig/config/gdm.conf.in	2004-06-25 09:05:34.000000000 +0200
 +++ gdm-2.6.0.3/config/gdm.conf.in	2004-06-25 09:07:40.923727008 +0200
-@@ -344,7 +344,7 @@
- #UseCirclesInEntry=false
- # These two keys are for the new greeter.  Circles is the standard
- # shipped theme
+@@ -382,7 +382,7 @@
+ # then provide a list that is delimited by /: to the GraphicalThemes key and 
+ # set GraphicalThemeRand to true.  Otherwise use GraphicalTheme and specify
+ # just one theme.
 -#GraphicalTheme=circles
 +GraphicalTheme=storky
+ #GraphicalThemes=circles/:happygnome
  GraphicalThemeDir=@EXPANDED_DATADIR@/gdm/themes/
- # If InfoMsgFile points to a file, the greeter will display the contents of the
- # file in a modal dialog box before the user is allowed to log in.
+ GraphicalThemeRand=false

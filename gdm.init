@@ -26,7 +26,7 @@ case "$1" in
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gdm ]; then
 		msg_starting "Gnome Display Manager"
-		daemon open /usr/bin/gdm
+		daemon open /usr/sbin/gdm
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gdm
 	else
