@@ -15,7 +15,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.8.0.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -218,11 +218,18 @@ fi
 
 %post init
 /sbin/chkconfig --add gdm
-%service gdm restart
+if [ -f /var/lock/subsys/gdm ]; then
+        echo "Run \"service gdm restart\" to restart gdm." >&2
+        echo "WARNING: it will terminate all sessions opened from gdm!" >&2
+else
+        echo "Run \"service gdm start\" to start gdm." >&2
+fi
 
 %preun init
 if [ "$1" = "0" ]; then
-	%service -q gdm stop
+	if [ -f /var/lock/subsys/gdm ]; then
+		/etc/rc.d/init.d/gdm stop >&2
+	fi
 	/sbin/chkconfig --del gdm
 fi
 
