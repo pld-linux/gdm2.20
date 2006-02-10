@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.8.0.7
+Version:	2.13.0.7
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	566a1e3d656b6b536414f287ead2db7e
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.13/%{name}-%{version}.tar.bz2
+# Source0-md5:	70e469f85686ad861c1a8208ca231e9f
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -32,9 +32,7 @@ Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
-Patch4:		%{name}-default_theme.patch
-Patch5:		%{name}-desktop.patch
-Patch6:		%{name}-vt_9.patch
+Patch4:		%{name}-desktop.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf
@@ -61,7 +59,7 @@ Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	libgnome >= 2.6.1
-Requires:	sessreg
+Requires:	xorg-app-sessreg
 Requires:	which
 Requires:	pam >= 0.79.0
 Provides:	group(xdm)
@@ -117,7 +115,7 @@ Summary:	Xnest (ie embedded X) server for GDM
 Summary(pl):	Serwer Xnest dla GDM
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	XFree86-Xnest
+Requires:	xorg-xserver-Xnest
 
 %description Xnest
 This package add support for Xnest server in gdm.
@@ -144,10 +142,8 @@ Skrypt init dla GDM-a.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
+#%patch3 -p1
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
 %{__libtoolize}
@@ -157,13 +153,14 @@ Skrypt init dla GDM-a.
 %{__autoconf}
 %{__automake}
 %configure \
-	--with-xinerama=yes \
-	--with-xdmcp=yes \
+	--disable-console-helper \
+	--disable-scrollkeeper \
+	--enable-authentication-scheme=pam \
 	--with-pam-prefix=/etc \
 	--with-tcp-wrappers=yes \
-	--enable-authentication-scheme=pam \
-	--disable-console-helper \
-	--with%{!?with_selinux:out}-selinux
+	--with%{!?with_selinux:out}-selinux \
+	--with-xdmcp=yes \
+	--with-xinerama=yes
 
 %{__make}
 
@@ -260,6 +257,7 @@ fi
 %config %{_sysconfdir}/gdm/modules/*
 
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/gdm.conf
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/gdm.conf-custom
 %config %{_sysconfdir}/gdm/locale.alias
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
