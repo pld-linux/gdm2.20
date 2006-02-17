@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.13.0.7
+Version:	2.13.0.8
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.13/%{name}-%{version}.tar.bz2
-# Source0-md5:	70e469f85686ad861c1a8208ca231e9f
+# Source0-md5:	085bbbe90579f00d0ab5dc19d9c8765a
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -72,7 +72,6 @@ Obsoletes:	xdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_sysconfdir	/etc/X11
 %define		_localstatedir	/var/lib
 
 %description
@@ -142,7 +141,7 @@ Skrypt init dla GDM-a.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-#%patch3 -p1
+%patch3 -p1
 %patch4 -p1
 
 %build
@@ -174,7 +173,8 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PAM_PREFIX=/etc
 
-mv $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop $RPM_BUILD_ROOT%{_datadir}/xsessions
+mv $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop \
+	$RPM_BUILD_ROOT%{_datadir}/xsessions
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
@@ -211,6 +211,11 @@ rm -rf $RPM_BUILD_ROOT
 if [ "$1" = "0" ]; then
 	%userremove xdm
 	%groupremove xdm
+fi
+
+%triggerpostun -- %{name} < 1:2.13.0.8-1
+if [ -f /etc/X11/gdm/gdm.conf-custom.rpmsave ]; then
+    mv /etc/X11/gdm/gdm.conf-custom.rpmsave /etc/gdm/custom.conf
 fi
 
 %post init
@@ -252,13 +257,12 @@ fi
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PostSession
 %attr(755,root,root) %config %{_sysconfdir}/gdm/XKeepsCrashing
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Xsession
-%config %{_sysconfdir}/gdm/factory-gdm.conf
 %config %{_sysconfdir}/gdm/PostLogin/Default.sample
+%config %{_sysconfdir}/gdm/locale.alias
 %config %{_sysconfdir}/gdm/modules/*
 
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/gdm.conf
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/gdm.conf-custom
-%config %{_sysconfdir}/gdm/locale.alias
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/
+
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
 %attr(750,xdm,xdm) /var/lib/gdm
