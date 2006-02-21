@@ -15,7 +15,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.13.0.8
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -52,6 +52,10 @@ BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(macros) >= 1.231
+BuildRequires:	xorg-lib-libdmx-devel
+BuildRequires:	xorg-lib-libXdmcp-devel
+BuildRequires:	xorg-lib-libXi-devel
+BuildRequires:	xorg-lib-libXinerama-devel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
