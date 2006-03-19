@@ -1,0 +1,69 @@
+--- gdm-2.14.0/configure.ac.orig	2006-03-19 18:04:56.000000000 +0000
++++ gdm-2.14.0/configure.ac	2006-03-19 18:05:38.000000000 +0000
+@@ -990,62 +990,10 @@
+         ;;
+ esac
+ 
+-# First check with "! -h" for /usr/X11R6 and /usr/X11 since they often
+-# symlink to each other, and configure should use the more stable
+-# location (the real directory) if possible.
+-#
+-if test ! -h /usr/X11R6 -a -x /usr/X11R6/bin/X; then
+-   X_PATH="/usr/X11R6/bin"
+-   X_SERVER_PATH="/usr/X11R6/bin"
+-   X_SERVER="/usr/X11R6/bin/X"
+-   GDM_USER_PATH="$GDM_USER_PATH:/usr/X11R6/bin"
+-   X_CONFIG_OPTIONS="-audit 0"
+-elif test ! -h /usr/X11 -a -x /usr/X11/bin/X; then
+-   X_PATH="/usr/X11/bin"
+-   X_SERVER_PATH="/usr/X11/bin"
+-   X_SERVER="/usr/X11/bin/X"
+-   GDM_USER_PATH="$GDM_USER_PATH:/usr/X11/bin"
+-   X_CONFIG_OPTIONS="-audit 0"
+-elif test -x /usr/X11R6/bin/X; then
+-   X_PATH="/usr/X11R6/bin"
+-   X_SERVER_PATH="/usr/X11R6/bin"
+-   X_SERVER="/usr/X11R6/bin/X"
+-   GDM_USER_PATH="$GDM_USER_PATH:/usr/X11R6/bin"
+-   X_CONFIG_OPTIONS="-audit 0"
+-elif test -x /usr/X11/bin/X; then
+-   X_PATH="/usr/X11/bin"
+-   X_SERVER_PATH="/usr/X11/bin"
+-   X_SERVER="/usr/X11/bin/X"
+-   GDM_USER_PATH="$GDM_USER_PATH:/usr/X11/bin"
+-   X_CONFIG_OPTIONS="-audit 0"
+-elif test -x /usr/openwin/bin/Xsun; then
+-   # Do not add /usr/openwin/bin here because on Solaris you need 
+-   # /usr/openwin/bin in your PATH even if you are using the Xorg
+-   # Xserver.  We add this to the path below.
+-   X_PATH="/usr/openwin/bin"
+-   X_SERVER_PATH="/usr/openwin/bin"
+-   X_SERVER="/usr/openwin/bin/Xsun"
+-   X_CONFIG_OPTIONS="-audit 0 -nobanner"
+-elif test -x /opt/X11R6/bin/X; then
+-   X_PATH="/opt/X11R6/bin"
+-   X_SERVER_PATH="/opt/X11R6/bin"
+-   X_SERVER="/opt/X11R6/bin/X"
+-   GDM_USER_PATH="$GDM_USER_PATH:/opt/X11R6/bin"
+-   X_CONFIG_OPTIONS="-audit 0"   
+-elif test -x /usr/bin/X; then
+-   X_PATH="/usr/bin"
+-   X_SERVER_PATH="/usr/bin"
+-   X_SERVER="/usr/bin/X"
+-   X_CONFIG_OPTIONS="-audit 0"
+-else
+-   # what to do, what to do, this is wrong, but this just sets the
+-   # defaults, perhaps this user is cross compiling or some such
+-   X_PATH="/usr/bin/X11:/usr/X11R6/bin:/opt/X11R6/bin"
+-   X_SERVER_PATH="/usr/X11R6/bin"
+-   X_SERVER="/usr/X11R6/bin/X"
+-   GDM_USER_PATH="$GDM_USER_PATH:/usr/bin/X11:/usr/X11R6/bin:/usr/local/bin:/opt/X11R6/bin"
+-   X_CONFIG_OPTIONS="-audit 0"
+-fi
++X_PATH="/usr/bin"
++X_SERVER_PATH="/usr/bin"
++X_SERVER="/usr/bin/X"
++X_CONFIG_OPTIONS="-audit 0"
+ 
+ # Don't add EXPANDED_BINDIR to GDM_USER_PATH if it is already in the PATH.
+ # If it is /usr/bin, for example.
