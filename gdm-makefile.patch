@@ -1,0 +1,10 @@
+diff -u -r1.36 -r1.37
+--- gui/greeter/Makefile.am	2006/03/28 23:43:23	1.36
++++ gui/greeter/Makefile.am	2006/04/11 20:19:21	1.37
+@@ -91,5 +91,5 @@
+ 	-lX11
+ 
+ EXTRA_DIST = \
+-	gdmthemetester \
++	gdmthemetester.in \
+ 	greeter.dtd
