@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.14.0
-Release:	2
+Version:	2.14.1
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.14/%{name}-%{version}.tar.bz2
-# Source0-md5:	1f82485c4e8cd8ca2f1523a91a624eff
+# Source0-md5:	5bafb764f36d7caf5d2217de0b6ceba5
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -28,12 +28,14 @@ Source3:	%{name}-pld-logo.png
 Source4:	%{name}-storky.tar.gz
 # Source4-md5:	e293fbe4a60004056f6894463b874ae8
 Source5:	%{name}-autologin.pamd
+Source6:	%{name}-gdmthemetester.in
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
 Patch4:		%{name}-desktop.patch
 Patch5:		%{name}-xorg.patch
+Patch6:		%{name}-makefile.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf
@@ -149,6 +151,9 @@ Skrypt init dla GDM-a.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p0
+
+cp %{SOURCE6} gui/greeter/gdmthemetester.in
 
 %build
 %{__libtoolize}
