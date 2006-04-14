@@ -15,7 +15,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.8.0.6
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -53,7 +53,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	rpmbuild(macros) >= 1.231
+BuildRequires:	rpmbuild(macros) >= 1.268
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
@@ -204,7 +204,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %pre
 %groupadd -g 55 -r -f xdm
-%useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm
+%useradd -u 55 -r -d /home/services/xdm -s /bin/false -c "X Display Manager" -g xdm xdm
 
 %post
 %scrollkeeper_update_post
@@ -219,17 +219,15 @@ fi
 %post init
 /sbin/chkconfig --add gdm
 if [ -f /var/lock/subsys/gdm ]; then
-        echo "Run \"service gdm restart\" to restart gdm." >&2
-        echo "WARNING: it will terminate all sessions opened from gdm!" >&2
+	echo "Run \"/sbin/service gdm restart\" to restart gdm." >&2
+	echo "WARNING: it will terminate all sessions opened from gdm!" >&2
 else
-        echo "Run \"service gdm start\" to start gdm." >&2
+	echo "Run \"/sbin/service gdm start\" to start gdm." >&2
 fi
 
 %preun init
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/gdm ]; then
-		/etc/rc.d/init.d/gdm stop >&2
-	fi
+	%service gdm stop
 	/sbin/chkconfig --del gdm
 fi
 
