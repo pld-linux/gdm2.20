@@ -35,8 +35,8 @@ diff -aurN gdm-2.13.0.7.orig/gui/gdmphotosetup.desktop.in gdm-2.13.0.7/gui/gdmph
  X-GNOME-Bugzilla-Product=gdm
  X-GNOME-Bugzilla-Component=general
 diff -aurN gdm-2.13.0.7.orig/gui/gdmsetup.desktop.in gdm-2.13.0.7/gui/gdmsetup.desktop.in
---- gdm-2.13.0.7.orig/gui/gdmsetup.desktop.in	2005-11-04 01:55:31.000000000 +0100
-+++ gdm-2.13.0.7/gui/gdmsetup.desktop.in	2006-02-05 17:23:29.727522000 +0100
+--- gdm-2.13.0.7.orig/gui/gdmsetup.desktop.in.in	2005-11-04 01:55:31.000000000 +0100
++++ gdm-2.13.0.7/gui/gdmsetup.desktop.in.in	2006-02-05 17:23:29.727522000 +0100
 @@ -9,7 +9,7 @@
  StartupNotify=true
  Terminal=false
