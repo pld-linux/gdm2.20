@@ -1,24 +1,24 @@
-diff -Nuard gdm-2.4.4.3.orig/config/Makefile.am gdm-2.4.4.3/config/Makefile.am
---- gdm-2.4.4.3.orig/config/Makefile.am	2003-09-23 00:13:12.000000000 +0200
-+++ gdm-2.4.4.3/config/Makefile.am	2003-09-27 12:00:18.000000000 +0200
-@@ -6,7 +6,7 @@
+diff -aurN gdm-2.14.1.orig/config/Makefile.am gdm-2.14.1/config/Makefile.am
+--- gdm-2.14.1.orig/config/Makefile.am	2006-03-29 01:43:20.000000000 +0200
++++ gdm-2.14.1/config/Makefile.am	2006-04-12 17:38:22.703380096 +0200
+@@ -5,7 +5,7 @@
  instsessdir = $(datadir)/xsessions
- initdir = $(sysconfdir)/gdm/Init
+ initdir = $(gdmconfdir)/Init
  authdir = $(localstatedir)/gdm
 -logdir = $(localstatedir)/log/gdm
 +logdir = /var/log/gdm
- gnomercdir = $(sysconfdir)/gdm
- postdir = $(sysconfdir)/gdm/PostSession
- predir = $(sysconfdir)/gdm/PreSession
-diff -Nuard gdm-2.4.4.3.orig/configure.in gdm-2.4.4.3/configure.in
---- gdm-2.4.4.3.orig/configure.in	2003-09-25 20:31:12.000000000 +0200
-+++ gdm-2.4.4.3/configure.in	2003-09-27 11:59:52.000000000 +0200
-@@ -524,7 +524,7 @@
- AC_SUBST(EXPANDED_AUTHDIR)
- AC_DEFINE_UNQUOTED(EXPANDED_AUTHDIR,"$EXPANDED_AUTHDIR")
+ gnomercdir = $(gdmconfdir)
+ postdir = $(gdmconfdir)/PostSession
+ predir = $(gdmconfdir)/PreSession
+diff -aurN gdm-2.14.1.orig/configure.ac gdm-2.14.1/configure.ac
+--- gdm-2.14.1.orig/configure.ac	2006-04-10 22:08:15.000000000 +0200
++++ gdm-2.14.1/configure.ac	2006-04-12 17:39:15.822304792 +0200
+@@ -793,7 +793,7 @@
+ #
+ AC_SUBST(authdir, ${localstatedir}/gdm)
+ AC_SUBST(gdmlocaledir, ${gdmconfdir})
+-AC_SUBST(logdir, ${localstatedir}/log/gdm)
++AC_SUBST(logdir, /var/log/gdm)
+ AC_SUBST(pixmapdir, ${datadir}/pixmaps)
  
--LOGDIR_TMP="$localstatedir/log/gdm"
-+LOGDIR_TMP="/var/log/gdm"
- EXPANDED_LOGDIR=`eval echo $LOGDIR_TMP`
- AC_SUBST(EXPANDED_LOGDIR)
- AC_DEFINE_UNQUOTED(EXPANDED_LOGDIR,"$EXPANDED_LOGDIR")
+ withval=""
