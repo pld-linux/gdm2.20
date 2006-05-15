@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.8.0.6
-Release:	2
+Version:	2.14.5
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.8/%{name}-%{version}.tar.bz2
-# Source0-md5:	6be27ec9f4783abaf1e087e3020e74fa
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.14/%{name}-%{version}.tar.bz2
+# Source0-md5:	d857a56eec8aeb02342da4a36a311021
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -32,9 +32,8 @@ Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
-Patch4:		%{name}-default_theme.patch
-Patch5:		%{name}-desktop.patch
-Patch6:		%{name}-vt_9.patch
+Patch4:		%{name}-desktop.patch
+Patch5:		%{name}-xorg.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf
@@ -43,9 +42,9 @@ BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.4.3
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.4.1
-BuildRequires:	libgnome-devel >= 2.6.1
-BuildRequires:	libgnomecanvas-devel >= 2.6.1
-BuildRequires:	libgnomeui-devel >= 2.10.0-2
+BuildRequires:	libgnome-devel >= 2.14.1
+BuildRequires:	libgnomecanvas-devel >= 2.14.0
+BuildRequires:	libgnomeui-devel >= 2.14.1
 BuildRequires:	libgsf-devel >= 1.9.0
 BuildRequires:	librsvg-devel >= 1:2.6.5
 %{?with_selinux:BuildRequires:	libselinux-devel}
@@ -147,7 +146,6 @@ Skrypt init dla GDM-a.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
-%patch6 -p1
 
 %build
 %{__libtoolize}
@@ -157,13 +155,14 @@ Skrypt init dla GDM-a.
 %{__autoconf}
 %{__automake}
 %configure \
-	--with-xinerama=yes \
-	--with-xdmcp=yes \
+	--disable-console-helper \
+	--disable-scrollkeeper \
+	--enable-authentication-scheme=pam \
 	--with-pam-prefix=/etc \
 	--with-tcp-wrappers=yes \
-	--enable-authentication-scheme=pam \
-	--disable-console-helper \
-	--with%{!?with_selinux:out}-selinux
+	--with%{!?with_selinux:out}-selinux \
+	--with-xdmcp=yes \
+	--with-xinerama=yes
 
 %{__make}
 
@@ -177,7 +176,8 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PAM_PREFIX=/etc
 
-mv $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop $RPM_BUILD_ROOT%{_datadir}/xsessions
+mv $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop \
+	$RPM_BUILD_ROOT%{_datadir}/xsessions
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
 install %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
@@ -188,8 +188,6 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
-
-rm -r $RPM_BUILD_ROOT%{_datadir}/locale/no
 
 %find_lang %{name} --all-name --with-gnome
 
@@ -253,12 +251,12 @@ fi
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PostSession
 %attr(755,root,root) %config %{_sysconfdir}/gdm/XKeepsCrashing
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Xsession
-%config %{_sysconfdir}/gdm/factory-gdm.conf
 %config %{_sysconfdir}/gdm/PostLogin/Default.sample
+%config %{_sysconfdir}/gdm/locale.alias
 %config %{_sysconfdir}/gdm/modules/*
 
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/gdm.conf
-%config %{_sysconfdir}/gdm/locale.alias
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/
+
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
 %attr(750,xdm,xdm) /var/lib/gdm
