@@ -21,7 +21,7 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.14/%{name}-%{version}.tar.bz2
-# Source0-md5:	4327f96814552d7b04c7cfdc19483b41
+# Source0-md5:	0ad3cb1eefd6fe216a3e2f0f7cd8944f
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
