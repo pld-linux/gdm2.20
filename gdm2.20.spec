@@ -1,3 +1,4 @@
+#
 # TODO:
 # /etc/X11/dm dir should belong to XFree? It is common for KDE and GNOME
 # s=/dev/null=/home/services/xdm= in %%trigger for gracefull upgrade from xdm/kdm/gdm 2.2
@@ -14,8 +15,8 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.14.6
-Release:	1
+Version:	2.14.7
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -34,7 +35,6 @@ Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-logdir.patch
 Patch4:		%{name}-desktop.patch
 Patch5:		%{name}-xorg.patch
-Patch6:		%{name}-install.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf
@@ -43,17 +43,17 @@ BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.4.3
 BuildRequires:	intltool >= 0.30
 BuildRequires:	libglade2-devel >= 1:2.4.1
-BuildRequires:	libgnome-devel >= 2.6.1
-BuildRequires:	libgnomecanvas-devel >= 2.6.1
-BuildRequires:	libgnomeui-devel >= 2.10.0-2
+BuildRequires:	libgnome-devel >= 2.14.1
+BuildRequires:	libgnomecanvas-devel >= 2.14.0
+BuildRequires:	libgnomeui-devel >= 2.14.1
 BuildRequires:	libgsf-devel >= 1.9.0
-BuildRequires:	librsvg-devel >= 1:2.6.5
+BuildRequires:	librsvg-devel >= 1:2.14.3
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	rpmbuild(macros) >= 1.231
+BuildRequires:	rpmbuild(macros) >= 1.268
 BuildRequires:	xorg-lib-libdmx-devel
 BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
@@ -64,8 +64,10 @@ Requires(pre):	/usr/sbin/useradd
 Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires(post,postun):	/usr/bin/scrollkeeper-update
-Requires:	libgnome >= 2.6.1
-Requires:	xorg-app-sessreg
+Requires:	libgnome >= 2.14.1
+Requires:	libgnomecanvas >= 2.14.0
+Requires:	libgnomeui >= 2.14.1
+Requires:	sessreg
 Requires:	which
 Requires:	pam >= 0.79.0
 Provides:	group(xdm)
@@ -149,8 +151,6 @@ Skrypt init dla GDM-a.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
 %{__libtoolize}
@@ -207,7 +207,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %pre
 %groupadd -g 55 -r -f xdm
-%useradd -u 55 -r -d /home/services/xdm -s /bin/false -c 'X Display Manager' -g xdm xdm
+%useradd -u 55 -r -d /home/services/xdm -s /bin/false -c "X Display Manager" -g xdm xdm
 
 %post
 %scrollkeeper_update_post
@@ -227,17 +227,15 @@ fi
 %post init
 /sbin/chkconfig --add gdm
 if [ -f /var/lock/subsys/gdm ]; then
-        echo "Run \"service gdm restart\" to restart gdm." >&2
-        echo "WARNING: it will terminate all sessions opened from gdm!" >&2
+	echo "Run \"/sbin/service gdm restart\" to restart gdm." >&2
+	echo "WARNING: it will terminate all sessions opened from gdm!" >&2
 else
-        echo "Run \"service gdm start\" to start gdm." >&2
+	echo "Run \"/sbin/service gdm start\" to start gdm." >&2
 fi
 
 %preun init
 if [ "$1" = "0" ]; then
-	if [ -f /var/lock/subsys/gdm ]; then
-		/etc/rc.d/init.d/gdm stop >&2
-	fi
+	%service gdm stop
 	/sbin/chkconfig --del gdm
 fi
 
