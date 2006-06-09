@@ -53,22 +53,22 @@ BuildRequires:	libxml2-devel >= 2.5.11
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(macros) >= 1.268
-BuildRequires:	xorg-lib-libdmx-devel
 BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
+BuildRequires:	xorg-lib-libdmx-devel
+Requires(post,postun):	/usr/bin/scrollkeeper-update
+Requires(postun):	/usr/sbin/groupdel
+Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires(postun):	/usr/sbin/groupdel
-Requires(postun):	/usr/sbin/userdel
-Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires:	libgnome >= 2.14.1
 Requires:	libgnomecanvas >= 2.14.0
 Requires:	libgnomeui >= 2.14.1
+Requires:	pam >= 0.79.0
 Requires:	sessreg
 Requires:	which
-Requires:	pam >= 0.79.0
 Provides:	group(xdm)
 Provides:	user(xdm)
 Obsoletes:	X11-xdm
@@ -133,9 +133,9 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 Summary:	Init script for GDM
 Summary(pl):	Skrypt init dla GDM-a
 Group:		X11/Applications
+Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	open
-Requires(post,preun):	/sbin/chkconfig
 
 %description init
 Init script for GDM.
