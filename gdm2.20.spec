@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.14.8
+Version:	2.15.4
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.14/%{name}-%{version}.tar.bz2
-# Source0-md5:	03ecfced7b4331542b35746f3b4b92a4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.15/%{name}-%{version}.tar.bz2
+# Source0-md5:	47d435318d56837ec8a2199338a33087
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -39,17 +39,15 @@ BuildRequires:	attr-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.4.3
-BuildRequires:	intltool >= 0.30
-BuildRequires:	libglade2-devel >= 1:2.4.1
-BuildRequires:	libgnome-devel >= 2.14.1
-BuildRequires:	libgnomecanvas-devel >= 2.14.0
-BuildRequires:	libgnomeui-devel >= 2.14.1
-BuildRequires:	libgsf-devel >= 1.9.0
-BuildRequires:	librsvg-devel >= 1:2.14.3
+BuildRequires:	gtk+2-devel >= 2:2.9.2
+BuildRequires:	intltool >= 0.35
+BuildRequires:	libglade2-devel >= 1:2.5.1
+BuildRequires:	libgnomeui-devel >= 2.15.1
+BuildRequires:	libgsf-devel >= 1.14.1
+BuildRequires:	librsvg-devel >= 1:2.15.0
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.5.11
+BuildRequires:	libxml2-devel >= 2.6.26
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -63,12 +61,10 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	libgnome >= 2.14.1
-Requires:	libgnomecanvas >= 2.14.0
-Requires:	libgnomeui >= 2.14.1
+Requires:	libgnomeui >= 2.15.1
 Requires:	pam >= 0.79.0
-Requires:	sessreg
 Requires:	which
+Requires:	xorg-app-sessreg
 Provides:	group(xdm)
 Provides:	user(xdm)
 Obsoletes:	X11-xdm
