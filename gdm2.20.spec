@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.15.4
+Version:	2.15.5
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.15/%{name}-%{version}.tar.bz2
-# Source0-md5:	47d435318d56837ec8a2199338a33087
+# Source0-md5:	dd4475699ff58fdbf29b4e56ffdc74e1
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -47,7 +47,7 @@ BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	librsvg-devel >= 1:2.15.0
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 2.6.26
+BuildRequires:	libxml2-devel >= 1:2.6.26
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(macros) >= 1.268
