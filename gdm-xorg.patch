@@ -1,6 +1,7 @@
---- gdm-2.14.0/configure.ac.orig	2006-03-19 18:04:56.000000000 +0000
-+++ gdm-2.14.0/configure.ac	2006-03-19 18:05:38.000000000 +0000
-@@ -990,62 +990,10 @@
+diff -aurN gdm-2.15.9.orig/configure.ac gdm-2.15.9/configure.ac
+--- gdm-2.15.9.orig/configure.ac	2006-08-07 21:56:22.000000000 +0200
++++ gdm-2.15.9/configure.ac	2006-08-09 22:21:36.737065346 +0200
+@@ -965,67 +965,10 @@
          ;;
  esac
  
@@ -25,6 +26,11 @@
 -   X_SERVER_PATH="/usr/X11R6/bin"
 -   X_SERVER="/usr/X11R6/bin/X"
 -   GDM_USER_PATH="$GDM_USER_PATH:/usr/X11R6/bin"
+-   X_CONFIG_OPTIONS="-audit 0"
+-elif test -x /usr/bin/Xorg; then
+-   X_PATH="/usr/bin"
+-   X_SERVER_PATH="/usr/bin"
+-   X_SERVER="/usr/bin/Xorg"
 -   X_CONFIG_OPTIONS="-audit 0"
 -elif test -x /usr/X11/bin/X; then
 -   X_PATH="/usr/X11/bin"
@@ -65,5 +71,5 @@
 +X_SERVER="/usr/bin/X"
 +X_CONFIG_OPTIONS="-audit 0"
  
- # Don't add EXPANDED_BINDIR to GDM_USER_PATH if it is already in the PATH.
- # If it is /usr/bin, for example.
+ # Don't add bindir to GDM_USER_PATH if it is already in the PATH.
+ # If it is /bin or /usr/bin, for example.
