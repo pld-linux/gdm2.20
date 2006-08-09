@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.15.8
+Version:	2.15.9
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.15/%{name}-%{version}.tar.bz2
-# Source0-md5:	18a243dc1a3e89522a4824eabc919d4b
+# Source0-md5:	91efa2f43374b5f3f7ff7e0a8a696421
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -42,7 +42,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.10.1
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeui-devel >= 2.15.90
+BuildRequires:	libgnomeui-devel >= 2.15.91
 BuildRequires:	libgsf-devel >= 1.14.1
 BuildRequires:	librsvg-devel >= 1:2.15.0
 %{?with_selinux:BuildRequires:	libselinux-devel}
@@ -61,7 +61,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	libgnomeui >= 2.15.90
+Requires:	libgnomeui >= 2.15.91
 Requires:	pam >= 0.79.0
 Requires:	which
 Requires:	xorg-app-sessreg
