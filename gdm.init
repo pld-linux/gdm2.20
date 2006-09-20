@@ -43,7 +43,7 @@ case "$1" in
 	fi
 	;;
   status)
-	status gdm
+	status gdm gdm-binary
 	exit $?
 	;;
   restart|force-reload)
