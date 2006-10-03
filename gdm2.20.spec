@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.16.0
+Version:	2.16.1
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.16/%{name}-%{version}.tar.bz2
-# Source0-md5:	641116667d3486eca842dd1a2fc792c7
+# Source0-md5:	a0bf247fdaf32add6d5a69495a433bbf
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -39,11 +39,11 @@ BuildRequires:	attr-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.10.3
+BuildRequires:	gtk+2-devel >= 2:2.10.5
 BuildRequires:	intltool >= 0.35
 BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgnomeui-devel >= 2.16.0
-BuildRequires:	libgsf-devel >= 1.14.1
+BuildRequires:	libgsf-devel >= 1.14.2
 BuildRequires:	librsvg-devel >= 1:2.16.0
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
@@ -189,6 +189,8 @@ install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
+
+rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/si
 
 %find_lang %{name} --all-name --with-gnome
 
