@@ -190,8 +190,6 @@ install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
-rm -rf $RPM_BUILD_ROOT%{_datadir}/locale/si
-
 %find_lang %{name} --all-name --with-gnome
 
 # Remove useless files
