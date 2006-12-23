@@ -15,7 +15,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.14.10
-Release:	5
+Release:	6
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -70,6 +70,7 @@ Provides:	user(xdm)
 Obsoletes:	X11-xdm
 Obsoletes:	entrance
 Obsoletes:	kdm
+Obsoletes:	slim
 Obsoletes:	wdm
 Obsoletes:	xdm
 Conflicts:	gdkxft
