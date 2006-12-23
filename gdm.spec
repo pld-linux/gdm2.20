@@ -73,6 +73,7 @@ Provides:	user(xdm)
 Obsoletes:	X11-xdm
 Obsoletes:	entrance
 Obsoletes:	kdm
+Obsoletes:	slim
 Obsoletes:	wdm
 Obsoletes:	xdm
 Conflicts:	gdkxft
