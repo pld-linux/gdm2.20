@@ -14,13 +14,13 @@ Summary(pt_BR):	Gerenciador de Entrada do GNOME
 Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.16.4
+Version:	2.16.5
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.16/%{name}-%{version}.tar.bz2
-# Source0-md5:	7eb4a475cccba73d78af9e0852b7e82a
+# Source0-md5:	8f223458b0e957650f6d865a06a271e4
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -40,7 +40,7 @@ BuildRequires:	attr-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.10.6
+BuildRequires:	gtk+2-devel >= 2:2.10.9
 BuildRequires:	intltool >= 0.35.0
 BuildRequires:	libglade2-devel >= 1:2.6.0
 BuildRequires:	libgnomeui-devel >= 2.16.1
@@ -48,7 +48,7 @@ BuildRequires:	libgsf-devel >= 1.14.2
 BuildRequires:	librsvg-devel >= 1:2.16.0
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.26
+BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -56,7 +56,7 @@ BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libdmx-devel
-Requires(post,postun):	gtk+2 >= 2:2.10.6
+Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(postun):	/usr/sbin/groupdel
