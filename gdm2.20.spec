@@ -15,7 +15,7 @@ Summary(ru):	Дисплейный менеджер GNOME
 Summary(uk):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.16.5
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -65,7 +65,7 @@ Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires:	libgnomeui >= 2.16.1
-Requires:	pam >= 0.79.0
+Requires:	pam >= 0.99.7.1
 Requires:	which
 Requires:	xorg-app-sessreg
 Provides:	group(xdm)
