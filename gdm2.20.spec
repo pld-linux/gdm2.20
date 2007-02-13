@@ -7,12 +7,12 @@
 %bcond_without	selinux	# without selinux
 #
 Summary:	GNOME Display Manager
-Summary(es.UTF-8):   Administrador de Entrada del GNOME
-Summary(ja.UTF-8):   GNOME ディスプレイマネージャ
-Summary(pl.UTF-8):   gdm - zarządca ekranów GNOME
-Summary(pt_BR.UTF-8):   Gerenciador de Entrada do GNOME
-Summary(ru.UTF-8):   Дисплейный менеджер GNOME
-Summary(uk.UTF-8):   Дисплейний менеджер GNOME
+Summary(es.UTF-8):	Administrador de Entrada del GNOME
+Summary(ja.UTF-8):	GNOME ディスプレイマネージャ
+Summary(pl.UTF-8):	gdm - zarządca ekranów GNOME
+Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
+Summary(ru.UTF-8):	Дисплейный менеджер GNOME
+Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.16.5
 Release:	2
@@ -118,7 +118,7 @@ Window та підтримує роботу кількох різних X сеа
 
 %package Xnest
 Summary:	Xnest (ie embedded X) server for GDM
-Summary(pl.UTF-8):   Serwer Xnest dla GDM
+Summary(pl.UTF-8):	Serwer Xnest dla GDM
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	xorg-xserver-Xnest
@@ -131,7 +131,7 @@ Ten pakiet dodaje do gdm wsparcie dla Xnest.
 
 %package init
 Summary:	Init script for GDM
-Summary(pl.UTF-8):   Skrypt init dla GDM-a
+Summary(pl.UTF-8):	Skrypt init dla GDM-a
 Group:		X11/Applications
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
