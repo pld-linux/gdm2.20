@@ -1,26 +1,27 @@
 #
 # TODO:
-# s=/dev/null=/home/services/xdm= in %%trigger for graceful upgrade from xdm/kdm/gdm 2.2
-# check /etc/pam.d/gdm-autologin
+# - s=/dev/null=/home/services/xdm= in %%trigger for graceful upgrade from xdm/kdm/gdm 2.2
+# - check /etc/pam.d/gdm-autologin
+# - ConsoleKit support
 #
 # Conditiional build:
 %bcond_without	selinux	# without selinux
 #
 Summary:	GNOME Display Manager
-Summary(es):	Administrador de Entrada del GNOME
-Summary(ja):	GNOME ╔г╔ё╔╧╔в╔Л╔╓╔ч╔м║╪╔╦╔Ц
-Summary(pl):	gdm - zarz╠dca ekranСw GNOME
-Summary(pt_BR):	Gerenciador de Entrada do GNOME
-Summary(ru):	Дисплейный менеджер GNOME
-Summary(uk):	Дисплейний менеджер GNOME
+Summary(es.UTF-8):	Administrador de Entrada del GNOME
+Summary(ja.UTF-8):	GNOME Ц┐┤Ц┌ёЦ┌╧Ц┐≈Ц┐╛Ц┌╓Ц┐·Ц┐█Ц┐╪Ц┌╦Ц┐ё
+Summary(pl.UTF-8):	gdm - zarzд┘dca ekranцЁw GNOME
+Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
+Summary(ru.UTF-8):	п■п╦я│п©п╩п╣п╧п╫я▀п╧ п╪п╣п╫п╣п╢п╤п╣я─ GNOME
+Summary(uk.UTF-8):	п■п╦я│п©п╩п╣п╧п╫п╦п╧ п╪п╣п╫п╣п╢п╤п╣я─ GNOME
 Name:		gdm
-Version:	2.16.5
-Release:	2
+Version:	2.17.8
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.16/%{name}-%{version}.tar.bz2
-# Source0-md5:	8f223458b0e957650f6d865a06a271e4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.17/%{name}-%{version}.tar.bz2
+# Source0-md5:	0f93eaada0d5805c79b604c885b653eb
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -37,21 +38,24 @@ Patch5:		%{name}-xorg.patch
 Patch6:		%{name}-sessreg.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
+BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.10.9
-BuildRequires:	intltool >= 0.35.0
+BuildRequires:	intltool >= 0.35.5
+BuildRequires:	libart_lgpl-devel >= 2.3.19
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeui-devel >= 2.16.1
+BuildRequires:	libgnomeui-devel >= 2.17.92
 BuildRequires:	libgsf-devel >= 1.14.2
-BuildRequires:	librsvg-devel >= 1:2.16.0
+BuildRequires:	librsvg-devel >= 1:2.16.1
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	scrollkeeper
 BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
@@ -64,7 +68,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	libgnomeui >= 2.16.1
+Requires:	libgnomeui >= 2.17.92
 Requires:	pam >= 0.99.7.1
 Requires:	which
 Requires:	xorg-app-sessreg
@@ -87,38 +91,38 @@ reimplementation of xdm, the X Display Manager. Gdm allows you to log
 into your system with the X Window System running and supports running
 several different X sessions on your local machine at the same time.
 
-%description -l es
+%description -l es.UTF-8
 Administrador de Entrada del GNOME.
 
-%description -l ja
-Gdm (the GNOME Display Manager) ╓о║╒╧Беы╓кюъдЙ╡дг╫╓й xdm X Display
-Manager ╓н╨ф╪баУхг╓г╓╧║ё Gdm ╓Р╩х╓╕╓х║╒ X Window System
-╓╛ф╟╓╓╓ф╓╓╓К╓╒╓й╓©╓н
-╔╥╔╧╔ф╔Ю╓к╓╓╓М╓╓╓М╓й╔╩╔ц╔╥╔Г╔С╓Ра╙бР╓╥╓ф╔М╔╟╔╓╔С╓╧╓К╓Ё╓х╓╛╓г╓╜╓ч╓╧║ё
+%description -l ja.UTF-8
+Gdm (the GNOME Display Manager) Ц│╞Ц─│И╚≤Е╨╕Ц│╚Х╗╜Е╝ Е▐╞Х┐╫Ц│╙ xdm X Display
+Manager Ц│╝Е├█Е╝÷Хё┘Г┴┬Ц│╖Ц│≥Ц─┌ Gdm Ц┌▓Д╫©Ц│├Ц│╗Ц─│ X Window System
+Ц│▄Е▀∙Ц│└Ц│╕Ц│└Ц┌▀Ц│┌Ц│╙Ц│÷Ц│╝
+Ц┌╥Ц┌╧Ц┐├Ц┐═Ц│╚Ц│└Ц┌█Ц│└Ц┌█Ц│╙Ц┌╩Ц┐┐Ц┌╥Ц┐╖Ц┐ЁЦ┌▓И│╦Ф┼·Ц│≈Ц│╕Ц┐╜Ц┌╟Ц┌╓Ц┐ЁЦ│≥Ц┌▀Ц│⌠Ц│╗Ц│▄Ц│╖Ц│█Ц│╬Ц│≥Ц─┌
 
-╓Ё╓н╔п║╪╔╦╔Г╔С╓н Gdm ╓г╓о║╒Ёф╪О╦ю╦Л╓Д║╒XIM ╓Ра╙бР╓╧╓К╓Ё╓х╓Б╡дг╫╓г╓╧║ё
+Ц│⌠Ц│╝Ц┐░Ц┐╪Ц┌╦Ц┐╖Ц┐ЁЦ│╝ Gdm Ц│╖Ц│╞Ц─│Е░└Г╗╝Х╗─Х╙·Ц┌└Ц─│XIM Ц┌▓И│╦Ф┼·Ц│≥Ц┌▀Ц│⌠Ц│╗Ц┌┌Е▐╞Х┐╫Ц│╖Ц│≥Ц─┌
 
-%description -l pl
-Gdm jest wysokokonfigurowaln╠ reimplementacj╠ xdma. Gdm pozwala
-logowaФ siЙ do systemu z poziomu X11 i wspiera jednoczesn╠ pracЙ kilku
-rС©nych sesji X na lokalnej maszynie.
+%description -l pl.UTF-8
+Gdm jest wysokokonfigurowalnд┘ reimplementacjд┘ xdma. Gdm pozwala
+logowaд┤ siд≥ do systemu z poziomu X11 i wspiera jednoczesnд┘ pracд≥ kilku
+rцЁе╪nych sesji X na lokalnej maszynie.
 
-%description -l pt_BR
+%description -l pt_BR.UTF-8
 Gerenciador de Entrada do GNOME.
 
-%description -l ru
-GDM (GNOME Display Manager) - это реимплементация xdm (X Display
-Manager). GDM позволяет вам входить в систему, на которой запущено X
-Window и поддерживает работу нескольуих разных X сеансов одновременно.
+%description -l ru.UTF-8
+GDM (GNOME Display Manager) - я█я┌п╬ я─п╣п╦п╪п©п╩п╣п╪п╣п╫я┌п╟я├п╦я▐ xdm (X Display
+Manager). GDM п©п╬п╥п╡п╬п╩я▐п╣я┌ п╡п╟п╪ п╡я┘п╬п╢п╦я┌я▄ п╡ я│п╦я│я┌п╣п╪я┐, п╫п╟ п╨п╬я┌п╬я─п╬п╧ п╥п╟п©я┐я┴п╣п╫п╬ X
+Window п╦ п©п╬п╢п╢п╣я─п╤п╦п╡п╟п╣я┌ я─п╟п╠п╬я┌я┐ п╫п╣я│п╨п╬п╩я▄я┐п╦я┘ я─п╟п╥п╫я▀я┘ X я│п╣п╟п╫я│п╬п╡ п╬п╢п╫п╬п╡я─п╣п╪п╣п╫п╫п╬.
 
-%description -l uk
-GDM (GNOME Display Manager) - це ре╕мплементац╕я xdm (X Display
-Manager). GDM дозволя╓ вам входити в систему, на як╕й запущено X
-Window та п╕дтриму╓ роботу к╕лькох р╕зних X сеанс╕в одночасно.
+%description -l uk.UTF-8
+GDM (GNOME Display Manager) - я├п╣ я─п╣я√п╪п©п╩п╣п╪п╣п╫я┌п╟я├я√я▐ xdm (X Display
+Manager). GDM п╢п╬п╥п╡п╬п╩я▐я■ п╡п╟п╪ п╡я┘п╬п╢п╦я┌п╦ п╡ я│п╦я│я┌п╣п╪я┐, п╫п╟ я▐п╨я√п╧ п╥п╟п©я┐я┴п╣п╫п╬ X
+Window я┌п╟ п©я√п╢я┌я─п╦п╪я┐я■ я─п╬п╠п╬я┌я┐ п╨я√п╩я▄п╨п╬я┘ я─я√п╥п╫п╦я┘ X я│п╣п╟п╫я│я√п╡ п╬п╢п╫п╬я┤п╟я│п╫п╬.
 
 %package Xnest
 Summary:	Xnest (ie embedded X) server for GDM
-Summary(pl):	Serwer Xnest dla GDM
+Summary(pl.UTF-8):	Serwer Xnest dla GDM
 Group:		X11/Applications
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Requires:	xorg-xserver-Xnest
@@ -126,12 +130,12 @@ Requires:	xorg-xserver-Xnest
 %description Xnest
 This package add support for Xnest server in gdm.
 
-%description Xnest -l pl
+%description Xnest -l pl.UTF-8
 Ten pakiet dodaje do gdm wsparcie dla Xnest.
 
 %package init
 Summary:	Init script for GDM
-Summary(pl):	Skrypt init dla GDM-a
+Summary(pl.UTF-8):	Skrypt init dla GDM-a
 Group:		X11/Applications
 Requires(post,preun):	/sbin/chkconfig
 Requires:	%{name} = %{epoch}:%{version}-%{release}
@@ -140,7 +144,7 @@ Requires:	open
 %description init
 Init script for GDM.
 
-%description init -l pl
+%description init -l pl.UTF-8
 Skrypt init dla GDM-a.
 
 %prep
