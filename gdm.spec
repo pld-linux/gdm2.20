@@ -1,7 +1,8 @@
 #
 # TODO:
-# s=/dev/null=/home/services/xdm= in %%trigger for graceful upgrade from xdm/kdm/gdm 2.2
-# check /etc/pam.d/gdm-autologin
+# - s=/dev/null=/home/services/xdm= in %%trigger for graceful upgrade from xdm/kdm/gdm 2.2
+# - check /etc/pam.d/gdm-autologin
+# - ConsoleKit support
 #
 # Conditiional build:
 %bcond_without	selinux	# without selinux
@@ -14,13 +15,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.16.5
-Release:	2
+Version:	2.18.0
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.16/%{name}-%{version}.tar.bz2
-# Source0-md5:	8f223458b0e957650f6d865a06a271e4
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.18/%{name}-%{version}.tar.bz2
+# Source0-md5:	0f93eaada0d5805c79b604c885b653eb
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -37,21 +38,24 @@ Patch5:		%{name}-xorg.patch
 Patch6:		%{name}-sessreg.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
+BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
 BuildRequires:	gtk+2-devel >= 2:2.10.9
-BuildRequires:	intltool >= 0.35.0
+BuildRequires:	intltool >= 0.35.5
+BuildRequires:	libart_lgpl-devel >= 2.3.19
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeui-devel >= 2.16.1
+BuildRequires:	libgnomeui-devel >= 2.18.0
 BuildRequires:	libgsf-devel >= 1.14.2
-BuildRequires:	librsvg-devel >= 1:2.16.0
+BuildRequires:	librsvg-devel >= 1:2.16.1
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.27
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(macros) >= 1.268
+BuildRequires:	scrollkeeper
 BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
@@ -64,7 +68,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	libgnomeui >= 2.16.1
+Requires:	libgnomeui >= 2.18.0
 Requires:	pam >= 0.99.7.1
 Requires:	which
 Requires:	xorg-app-sessreg
