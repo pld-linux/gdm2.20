@@ -15,13 +15,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.18.0
+Version:	2.18.1
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	a569a8275f0e0396e6ef5f63c5f56ad5
+# Source0-md5:	a80e26d98adbe485aac0f9aee64b92b1
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -42,11 +42,11 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.10.9
+BuildRequires:	gtk+2-devel >= 2:2.10.10
 BuildRequires:	intltool >= 0.35.5
 BuildRequires:	libart_lgpl-devel >= 2.3.19
 BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeui-devel >= 2.18.0
+BuildRequires:	libgnomeui-devel >= 2.18.1
 BuildRequires:	libgsf-devel >= 1.14.2
 BuildRequires:	librsvg-devel >= 1:2.16.1
 %{?with_selinux:BuildRequires:	libselinux-devel}
@@ -68,7 +68,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	libgnomeui >= 2.18.0
+Requires:	libgnomeui >= 2.18.1
 Requires:	pam >= 0.99.7.1
 Requires:	which
 Requires:	xorg-app-sessreg
