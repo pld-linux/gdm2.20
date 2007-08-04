@@ -16,7 +16,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.18.3
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -75,11 +75,6 @@ Requires:	xorg-app-sessreg
 Provides:	group(xdm)
 Provides:	user(xdm)
 Obsoletes:	X11-xdm
-Obsoletes:	entrance
-Obsoletes:	kdm
-Obsoletes:	slim
-Obsoletes:	wdm
-Obsoletes:	xdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
