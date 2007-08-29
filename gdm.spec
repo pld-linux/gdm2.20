@@ -15,13 +15,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.18.4
+Version:	2.19.7
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	53e5f5820fa67abf55c37ea7570807b7
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.19/%{name}-%{version}.tar.bz2
+# Source0-md5:	27f04ecfaeabcd238f8df66660d50d7b
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -32,10 +32,7 @@ Source5:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
-Patch3:		%{name}-logdir.patch
 Patch4:		%{name}-desktop.patch
-Patch5:		%{name}-xorg.patch
-Patch6:		%{name}-sessreg.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	attr-devel
 BuildRequires:	autoconf >= 2.52
@@ -147,10 +144,7 @@ Skrypt init dla GDM-a.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
 %{__libtoolize}
@@ -276,9 +270,6 @@ fi
 %attr(750,xdm,xdm) /var/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
-%{_desktopdir}/gdmsetup.desktop
-%{_desktopdir}/gdmflexiserver.desktop
-%{_desktopdir}/gdmphotosetup.desktop
 %{_datadir}/gdm
 #%%{_datadir}/xsessions  -  moved to gnome-session
 %{_datadir}/xsessions/default.desktop
@@ -291,7 +282,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gdmXnest
 %attr(755,root,root) %{_bindir}/gdmXnestchooser
-%{_desktopdir}/gdmflexiserver-xnest.desktop
 
 %files init
 %defattr(644,root,root,755)
