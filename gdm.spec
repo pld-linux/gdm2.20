@@ -72,9 +72,9 @@ Requires:	libgnomeui >= 2.18.1
 Requires:	pam >= 0.99.7.1
 Requires:	which
 Requires:	xorg-app-sessreg
+Provides:	XDM
 Provides:	group(xdm)
 Provides:	user(xdm)
-Obsoletes:	X11-xdm
 Conflicts:	gdkxft
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
