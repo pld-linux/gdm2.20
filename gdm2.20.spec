@@ -34,6 +34,7 @@ Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
 Patch4:		%{name}-desktop.patch
 URL:		http://www.jirka.org/gdm.html
+BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
