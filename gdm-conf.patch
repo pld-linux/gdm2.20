@@ -2,9 +2,9 @@ diff -aurN gdm-2.13.0.7.orig/config/gdm.conf.in gdm-2.13.0.7/config/gdm.conf.in
 --- gdm-2.13.0.7.orig/config/gdm.conf.in	2006-01-28 00:11:50.000000000 +0100
 +++ gdm-2.13.0.7/config/gdm.conf.in	2006-02-05 17:27:41.737522000 +0100
 @@ -92,8 +92,8 @@
- # User and group used for running GDM GUI applicaitons.  By default this is set
+ # User and group used for running GDM GUI applications.  By default this is set
  # to user "gdm" and group "gdm".  This user/group should have very limited
- # permissions and access to ony the gdm directories and files.
+ # permissions and access to only the gdm directories and files.
 -User=gdm
 -Group=gdm
 +User=xdm

@@ -1,6 +1,7 @@
 #%PAM-1.0
 auth		required	pam_listfile.so item=user sense=deny file=/etc/security/blacklist.gdm onerr=succeed
 auth		include		system-auth
+auth		optional	pam_gnome_keyring.so
 account		required	pam_shells.so
 account		required	pam_nologin.so
 account		required 	pam_access.so
@@ -9,3 +10,4 @@ password	include		system-auth
 session		optional	pam_keyinit.so force revoke
 session		include		system-auth
 session		optional	pam_console.so
+session		optional	pam_gnome_keyring.so auto_start
