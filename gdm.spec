@@ -15,13 +15,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.18.4
+Version:	2.20.0
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.18/%{name}-%{version}.tar.bz2
-# Source0-md5:	53e5f5820fa67abf55c37ea7570807b7
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/%{name}-%{version}.tar.bz2
+# Source0-md5:	cf374113a1f837b0df916572625b5078
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -32,26 +32,24 @@ Source5:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
-Patch3:		%{name}-logdir.patch
 Patch4:		%{name}-desktop.patch
-Patch5:		%{name}-xorg.patch
-Patch6:		%{name}-sessreg.patch
 URL:		http://www.jirka.org/gdm.html
+BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.10.10
-BuildRequires:	intltool >= 0.35.5
+BuildRequires:	gtk+2-devel >= 2:2.10.14
+BuildRequires:	intltool >= 0.36.1
 BuildRequires:	libart_lgpl-devel >= 2.3.19
-BuildRequires:	libglade2-devel >= 1:2.6.0
-BuildRequires:	libgnomeui-devel >= 2.18.1
-BuildRequires:	libgsf-devel >= 1.14.2
-BuildRequires:	librsvg-devel >= 1:2.16.1
+BuildRequires:	libglade2-devel >= 1:2.6.2
+BuildRequires:	libgnomeui-devel >= 2.19.1
+BuildRequires:	libgsf-devel >= 1.14.6
+BuildRequires:	librsvg-devel >= 1:2.18.1
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.27
+BuildRequires:	libxml2-devel >= 1:2.6.29
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(macros) >= 1.268
@@ -68,7 +66,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	libgnomeui >= 2.18.1
+Requires:	libgnomeui >= 2.19.1
 Requires:	pam >= 0.99.7.1
 Requires:	which
 Requires:	xorg-app-sessreg
@@ -147,10 +145,7 @@ Skrypt init dla GDM-a.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 %patch4 -p1
-%patch5 -p1
-%patch6 -p1
 
 %build
 %{__libtoolize}
@@ -276,9 +271,6 @@ fi
 %attr(750,xdm,xdm) /var/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
-%{_desktopdir}/gdmsetup.desktop
-%{_desktopdir}/gdmflexiserver.desktop
-%{_desktopdir}/gdmphotosetup.desktop
 %{_datadir}/gdm
 #%%{_datadir}/xsessions  -  moved to gnome-session
 %{_datadir}/xsessions/default.desktop
@@ -291,7 +283,6 @@ fi
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/gdmXnest
 %attr(755,root,root) %{_bindir}/gdmXnestchooser
-%{_desktopdir}/gdmflexiserver-xnest.desktop
 
 %files init
 %defattr(644,root,root,755)
