@@ -16,7 +16,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.20.0
-Release:	1
+Release:	2
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -32,7 +32,8 @@ Source5:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
-Patch4:		%{name}-desktop.patch
+Patch3:		%{name}-desktop.patch
+Patch4:		%{name}-defaults.patch
 URL:		http://www.jirka.org/gdm.html
 BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel
@@ -145,6 +146,7 @@ Skrypt init dla GDM-a.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 %patch4 -p1
 
 %build
