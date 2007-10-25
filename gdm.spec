@@ -16,7 +16,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.20.0
-Release:	3
+Release:	4
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -159,6 +159,7 @@ Skrypt init dla GDM-a.
 %configure \
 	--disable-console-helper \
 	--disable-scrollkeeper \
+	--with-console-kit \
 	--enable-authentication-scheme=pam \
 	--with-pam-prefix=/etc \
 	--with-tcp-wrappers=yes \
