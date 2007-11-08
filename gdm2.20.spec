@@ -2,7 +2,6 @@
 # TODO:
 # - s=/dev/null=/home/services/xdm= in %%trigger for graceful upgrade from xdm/kdm/gdm 2.2
 # - check /etc/pam.d/gdm-autologin
-# - ConsoleKit support
 #
 # Conditiional build:
 %bcond_without	selinux	# without selinux
@@ -15,13 +14,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.20.0
-Release:	5
+Version:	2.20.1
+Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/%{name}-%{version}.tar.bz2
-# Source0-md5:	cf374113a1f837b0df916572625b5078
+# Source0-md5:	ed7b7efcb7fd97cc400e2416e0093e71
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -34,18 +33,18 @@ Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-desktop.patch
 Patch4:		%{name}-defaults.patch
-URL:		http://www.jirka.org/gdm.html
+URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
-BuildRequires:	gtk+2-devel >= 2:2.10.14
+BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	intltool >= 0.36.1
 BuildRequires:	libart_lgpl-devel >= 2.3.19
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.19.1
+BuildRequires:	libgnomeui-devel >= 2.20.0
 BuildRequires:	libgsf-devel >= 1.14.6
 BuildRequires:	librsvg-devel >= 1:2.18.1
 %{?with_selinux:BuildRequires:	libselinux-devel}
@@ -53,7 +52,9 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.29
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-BuildRequires:	rpmbuild(macros) >= 1.268
+# support for --with-omf in find_lang.sh
+BuildRequires:	rpm-build >= 4.4.9-10
+BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
 BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
@@ -67,7 +68,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	libgnomeui >= 2.19.1
+Requires:	libgnomeui >= 2.20.0
 Requires:	pam >= 0.99.7.1
 Requires:	which
 Requires:	xorg-app-sessreg
@@ -196,7 +197,7 @@ touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
 [ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
 	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
-%find_lang %{name} --all-name --with-gnome
+%find_lang %{name} --with-gnome --with-omf --all-name
 
 # Remove useless files
 rm -f $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/modules/*.{la,a}
@@ -282,7 +283,6 @@ fi
 #%%{_datadir}/xsessions  -  moved to gnome-session
 %{_datadir}/xsessions/default.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
-%{_omf_dest_dir}/gdm
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
 %{_mandir}/man1/gdm*
 
