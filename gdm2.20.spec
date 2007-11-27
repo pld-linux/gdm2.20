@@ -52,8 +52,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.29
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
-# support for --with-omf in find_lang.sh
-BuildRequires:	rpm-build >= 4.4.9-10
+BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
 BuildRequires:	xorg-lib-libXdmcp-devel
