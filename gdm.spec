@@ -152,8 +152,8 @@ Skrypt init dla GDM-a.
 %patch3 -p1
 %patch4 -p1
 
-sed -i -e 's#sr\@Latn#sr\@latin#' po/LINGUAS
-mv po/sr\@{Latn,latin}.po
+sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
+mv po/sr@{Latn,latin}.po
 
 %build
 %{__libtoolize}
