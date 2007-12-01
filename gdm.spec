@@ -14,13 +14,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.20.1
+Version:	2.20.2
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/%{name}-%{version}.tar.bz2
-# Source0-md5:	ed7b7efcb7fd97cc400e2416e0093e71
+# Source0-md5:	65b5319561ce8464e35750f9c3d594fa
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -55,6 +55,7 @@ BuildRequires:	perl-modules
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
+BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
@@ -151,6 +152,9 @@ Skrypt init dla GDM-a.
 %patch3 -p1
 %patch4 -p1
 
+sed -i -e 's#sr\@Latn#sr\@latin#' po/LINGUAS
+mv po/sr\@{Latn,latin}.po
+
 %build
 %{__libtoolize}
 %{__glib_gettextize}
@@ -194,8 +198,6 @@ install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
-[ -d $RPM_BUILD_ROOT%{_datadir}/locale/sr@latin ] || \
-	mv -f $RPM_BUILD_ROOT%{_datadir}/locale/sr@{Latn,latin}
 %find_lang %{name} --with-gnome --with-omf --all-name
 
 # Remove useless files
@@ -282,6 +284,7 @@ fi
 #%%{_datadir}/xsessions  -  moved to gnome-session
 %{_datadir}/xsessions/default.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
+%{_iconsdir}/hicolor/*/apps/*.svg
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
 %{_mandir}/man1/gdm*
 
