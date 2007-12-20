@@ -1,6 +1,6 @@
-diff -urN gdm-2.6.0.3.orig/config/Xsession.in gdm-2.6.0.3/config/Xsession.in
---- gdm-2.6.0.3.orig/config/Xsession.in	2004-05-28 21:50:17.000000000 +0200
-+++ gdm-2.6.0.3/config/Xsession.in	2004-07-09 15:07:16.039478016 +0200
+diff -urN gdm-2.6.0.3.orig/data/Xsession.in gdm-2.6.0.3/data/Xsession.in
+--- gdm-2.6.0.3.orig/data/Xsession.in	2004-05-28 21:50:17.000000000 +0200
++++ gdm-2.6.0.3/data/Xsession.in	2004-07-09 15:07:16.039478016 +0200
 @@ -35,6 +35,10 @@
  test -f /etc/xprofile && . /etc/xprofile
  test -f "$HOME/.xprofile" && . "$HOME/.xprofile"
