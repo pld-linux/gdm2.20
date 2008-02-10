@@ -14,13 +14,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.21.4
+Version:	2.21.6
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.21/%{name}-%{version}.tar.bz2
-# Source0-md5:	2fe013e31f44bd383c1f6f31a3977034
+# Source0-md5:	4925de50d3c56b992254c75bee9e08f2
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -67,6 +67,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
+Requires:	gnome-settings-daemon
 Requires:	libgnomeui >= 2.20.0
 Requires:	pam >= 0.99.7.1
 Requires:	which
@@ -251,14 +252,15 @@ fi
 %attr(755,root,root) %{_libexecdir}/gdm-factory-slave
 %attr(755,root,root) %{_libexecdir}/gdm-product-slave
 %attr(755,root,root) %{_libexecdir}/gdm-session-worker
-%attr(755,root,root) %{_libexecdir}/gdm-settings-daemon
 %attr(755,root,root) %{_libexecdir}/gdm-simple-chooser
 %attr(755,root,root) %{_libexecdir}/gdm-simple-greeter
 %attr(755,root,root) %{_libexecdir}/gdm-simple-slave
+%attr(755,root,root) %{_libexecdir}/gdm-xdmcp-chooser-slave
 %attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_bindir}/*
 %dir %{_sysconfdir}/gdm
 %dir %{_sysconfdir}/gdm/Init
-%attr(755,root,root) %config %{_sysconfdir}/gdm/Init
+%attr(755,root,root) %config %{_sysconfdir}/gdm/Init/Default
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PreSession
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PostSession
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Xsession
@@ -277,11 +279,11 @@ fi
 %{_datadir}/gdm
 %{_iconsdir}/hicolor/*/apps/*.png
 #%{_iconsdir}/hicolor/*/apps/*.svg
-%dir %{_libdir}/gdm
-%dir %{_libdir}/gdm/settings
-%dir %{_libdir}/gdm/settings/plugins
-%attr(755,root,root) %{_libdir}/gdm/settings/plugins/lib*.so
-%{_libdir}/gdm/settings/plugins/*-plugin
+#%dir %{_libdir}/gdm
+#%dir %{_libdir}/gdm/settings
+#%dir %{_libdir}/gdm/settings/plugins
+#%attr(755,root,root) %{_libdir}/gdm/settings/plugins/lib*.so
+#%{_libdir}/gdm/settings/plugins/*-plugin
 
 %files Xnest
 %defattr(644,root,root,755)
