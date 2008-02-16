@@ -14,13 +14,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.21.6
+Version:	2.21.7
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.21/%{name}-%{version}.tar.bz2
-# Source0-md5:	4925de50d3c56b992254c75bee9e08f2
+# Source0-md5:	d79229d9d293e85c04edb7047605211f
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -39,6 +39,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel >= 1:2.15.0
 BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	intltool >= 0.36.1
 BuildRequires:	libart_lgpl-devel >= 2.3.19
@@ -211,11 +212,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %gconf_schema_install gdm-simple-greeter.schemas
+%gconf_schema_install gdm-user-switch-applet.schemas
 %scrollkeeper_update_post
 %update_icon_cache hicolor
 
 %preun
 %gconf_schema_uninstall gdm-simple-greeter.schemas
+%gconf_schema_uninstall gdm-user-switch-applet.schemas
 
 %postun
 %scrollkeeper_update_postun
@@ -255,6 +258,7 @@ fi
 %attr(755,root,root) %{_libexecdir}/gdm-simple-chooser
 %attr(755,root,root) %{_libexecdir}/gdm-simple-greeter
 %attr(755,root,root) %{_libexecdir}/gdm-simple-slave
+%attr(755,root,root) %{_libexecdir}/gdm-user-switch-applet
 %attr(755,root,root) %{_libexecdir}/gdm-xdmcp-chooser-slave
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_bindir}/*
@@ -269,6 +273,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/custom.conf
 %{_sysconfdir}/gdm/gdm.schemas
 %{_sysconfdir}/gconf/schemas/gdm-simple-greeter.schemas
+%{_sysconfdir}/gconf/schemas/gdm-user-switch-applet.schemas
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
@@ -278,17 +283,13 @@ fi
 %{_pixmapsdir}/*
 %{_datadir}/gdm
 %{_iconsdir}/hicolor/*/apps/*.png
-#%{_iconsdir}/hicolor/*/apps/*.svg
-#%dir %{_libdir}/gdm
-#%dir %{_libdir}/gdm/settings
-#%dir %{_libdir}/gdm/settings/plugins
-#%attr(755,root,root) %{_libdir}/gdm/settings/plugins/lib*.so
-#%{_libdir}/gdm/settings/plugins/*-plugin
+%{_datadir}/gnome-2.0/ui/GNOME_GdmUserSwitchApplet.xml
+%{_libdir}/bonobo/servers/*.server
+/var/lib/lib/gdm/.gconf.path
+/var/lib/lib/gdm/.gconf.mandatory
 
 %files Xnest
 %defattr(644,root,root,755)
-#%attr(755,root,root) %{_bindir}/gdmXnest
-#%attr(755,root,root) %{_bindir}/gdmXnestchooser
 
 %files init
 %defattr(644,root,root,755)
