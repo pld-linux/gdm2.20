@@ -99,17 +99,6 @@
                                                                G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
          g_object_class_install_property (object_class,
                                           PROP_SERVER_ADDRESS,
---- gdm-2.21.7/daemon/gdm-session-direct.c~	2008-02-12 04:52:46.000000000 +0100
-+++ gdm-2.21.7/daemon/gdm-session-direct.c	2008-02-16 04:23:07.796367792 +0100
-@@ -2099,7 +2099,7 @@
-                                          g_param_spec_string ("service-name",
-                                                               "service name",
-                                                               "service name",
--                                                              "gdm",
-+                                                              "xdm",
-                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-         g_object_class_install_property (object_class,
-                                          PROP_DISPLAY_NAME,
 --- gdm-2.21.7/daemon/gdm-xdmcp-chooser-slave.c~	2008-02-06 17:43:37.000000000 +0100
 +++ gdm-2.21.7/daemon/gdm-xdmcp-chooser-slave.c	2008-02-16 04:24:26.290973037 +0100
 @@ -190,7 +190,7 @@
