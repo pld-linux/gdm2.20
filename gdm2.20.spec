@@ -285,8 +285,7 @@ fi
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_datadir}/gnome-2.0/ui/GNOME_GdmUserSwitchApplet.xml
 %{_libdir}/bonobo/servers/*.server
-/var/lib/lib/gdm/.gconf.path
-/var/lib/lib/gdm/.gconf.mandatory
+/var/lib/lib/gdm
 
 %files Xnest
 %defattr(644,root,root,755)
