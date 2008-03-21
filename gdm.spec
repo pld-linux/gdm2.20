@@ -71,6 +71,7 @@ Requires(pre):	/usr/sbin/useradd
 Requires:	libgnomeui >= 2.20.0
 Requires:	pam >= 0.99.7.1
 Requires:	which
+Requires:	xorg-app-xmodmap
 Requires:	xorg-app-sessreg
 Provides:	XDM
 Provides:	group(xdm)
