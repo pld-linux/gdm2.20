@@ -14,7 +14,7 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.20.5
+Version:	2.20.7
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
