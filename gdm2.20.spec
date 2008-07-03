@@ -25,7 +25,7 @@ Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
 # http://cvs.pld-linux.org/cgi-bin/cvsweb/pld-artwork/gdm/storky/
-#Source4:	%{name}-storky.tar.gz
+Source4:	%{name}-storky.tar.gz
 # Source4-md5:	e293fbe4a60004056f6894463b874ae8
 Source5:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
