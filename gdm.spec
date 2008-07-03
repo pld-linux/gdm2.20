@@ -20,12 +20,12 @@ Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/%{name}-%{version}.tar.bz2
-# Source0-md5:	151d90901abc2088a0825ee1dd8da7f6
+# Source0-md5:	15be72743003cb1e36c9ce2ac2de5381
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
 # http://cvs.pld-linux.org/cgi-bin/cvsweb/pld-artwork/gdm/storky/
-Source4:	%{name}-storky.tar.gz
+#Source4:	%{name}-storky.tar.gz
 # Source4-md5:	e293fbe4a60004056f6894463b874ae8
 Source5:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
