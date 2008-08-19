@@ -81,8 +81,6 @@ Conflicts:	gdkxft
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_localstatedir	/var/lib
-
 %description
 Gdm (the GNOME Display Manager) is a highly configurable
 reimplementation of xdm, the X Display Manager. Gdm allows you to log
@@ -282,15 +280,15 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
-%attr(750,xdm,xdm) /var/lib/gdm
-%attr(750,xdm,xdm) /var/log/gdm
+%attr(750,xdm,xdm) %{_localstatedir}/gdm
+%attr(750,xdm,xdm) %{_localstatedir}/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
 %{_datadir}/gdm
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_datadir}/gnome-2.0/ui/GNOME_FastUserSwitchApplet.xml
 %{_libdir}/bonobo/servers/*.server
-/var/lib/lib/gdm
+%{_localstatedir}/lib/gdm
 
 %files Xnest
 %defattr(644,root,root,755)
