@@ -14,13 +14,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.21.7
+Version:	2.23.2
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.21/%{name}-%{version}.tar.bz2
-# Source0-md5:	d79229d9d293e85c04edb7047605211f
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.23/%{name}-%{version}.tar.bz2
+# Source0-md5:	d1e464916f13e50aa6e83c1aa2a1e450
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -212,13 +212,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %gconf_schema_install gdm-simple-greeter.schemas
-%gconf_schema_install gdm-user-switch-applet.schemas
+#%%gconf_schema_install gdm-user-switch-applet.schemas
 %scrollkeeper_update_post
 %update_icon_cache hicolor
 
 %preun
 %gconf_schema_uninstall gdm-simple-greeter.schemas
-%gconf_schema_uninstall gdm-user-switch-applet.schemas
+#%%gconf_schema_uninstall gdm-user-switch-applet.schemas
 
 %postun
 %scrollkeeper_update_postun
@@ -252,7 +252,9 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
+%attr(755,root,root) %{_libexecdir}/gdm-crash-logger
 %attr(755,root,root) %{_libexecdir}/gdm-factory-slave
+%attr(755,root,root) %{_libexecdir}/gdm-host-chooser
 %attr(755,root,root) %{_libexecdir}/gdm-product-slave
 %attr(755,root,root) %{_libexecdir}/gdm-session-worker
 %attr(755,root,root) %{_libexecdir}/gdm-simple-chooser
@@ -273,7 +275,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/custom.conf
 %{_sysconfdir}/gdm/gdm.schemas
 %{_sysconfdir}/gconf/schemas/gdm-simple-greeter.schemas
-%{_sysconfdir}/gconf/schemas/gdm-user-switch-applet.schemas
+#%{_sysconfdir}/gconf/schemas/gdm-user-switch-applet.schemas
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
@@ -283,7 +285,7 @@ fi
 %{_pixmapsdir}/*
 %{_datadir}/gdm
 %{_iconsdir}/hicolor/*/apps/*.png
-%{_datadir}/gnome-2.0/ui/GNOME_GdmUserSwitchApplet.xml
+%{_datadir}/gnome-2.0/ui/GNOME_FastUserSwitchApplet.xml
 %{_libdir}/bonobo/servers/*.server
 /var/lib/lib/gdm
 
