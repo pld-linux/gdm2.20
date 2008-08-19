@@ -1,123 +1,332 @@
---- gdm-2.21.4/data/gdm.conf~	2007-11-19 21:57:34.000000000 +0100
-+++ gdm-2.21.4/data/gdm.conf	2007-12-20 00:06:06.245930315 +0100
-@@ -31,7 +31,7 @@
-           send_member="SetValue"/>
-   </policy>
- 
--  <policy user="gdm">
-+  <policy user="xdm">
-     <allow send_interface="org.gnome.DisplayManager.Manager"/>
-     <allow send_interface="org.gnome.DisplayManager.Display"/>
-     <allow send_destination="org.gnome.DisplayManager"
---- gdm-2.21.4/daemon/gdm-display.c~	2007-11-19 21:57:32.000000000 +0100
-+++ gdm-2.21.4/daemon/gdm-display.c	2007-12-20 00:38:21.612916949 +0100
-@@ -158,7 +158,7 @@
-         g_return_val_if_fail (display->priv->access_file == NULL, FALSE);
- 
-         error = NULL;
--        access_file = _create_access_file_for_user (display, "gdm", &error);
-+        access_file = _create_access_file_for_user (display, "xdm", &error);
- 
-         if (access_file == NULL) {
-             g_critical ("could not create display access file: %s", error->message);
---- gdm-2.21.4/daemon/gdm-simple-slave.c~	2007-11-19 21:57:32.000000000 +0100
-+++ gdm-2.21.4/daemon/gdm-simple-slave.c	2007-12-20 00:54:11.047664460 +0100
-@@ -579,7 +579,7 @@
-         }
- 
-         /* Run the init script. gdmslave suspends until script has terminated */
--        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "gdm");
-+        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "xdm");
- 
-         create_new_session (slave);
- 
---- gdm-2.21.4/daemon/gdm-factory-slave.c~	2007-11-19 21:57:32.000000000 +0100
-+++ gdm-2.21.4/daemon/gdm-factory-slave.c	2007-12-20 00:55:29.542269705 +0100
-@@ -460,7 +460,7 @@
-         /* FIXME: send a signal back to the master */
- 
-         /* Run the init script. gdmslave suspends until script has terminated */
--        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "gdm");
-+        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "xdm");
- 
-         slave->priv->greeter_server = gdm_greeter_server_new (display_id);
-         g_signal_connect (slave->priv->greeter_server,
---- gdm-2.21.7/daemon/gdm-chooser-server.c~	2008-01-30 20:39:16.000000000 +0100
-+++ gdm-2.21.7/daemon/gdm-chooser-server.c	2008-02-16 03:59:56.223027208 +0100
-@@ -549,14 +549,14 @@
-                                          g_param_spec_string ("user-name",
-                                                               "user name",
-                                                               "user name",
--                                                              "gdm",
-+                                                              "xdm",
-                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-         g_object_class_install_property (object_class,
-                                          PROP_GROUP_NAME,
-                                          g_param_spec_string ("group-name",
-                                                               "group name",
-                                                               "group name",
--                                                              "gdm",
-+                                                              "xdm",
-                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-         signals [HOSTNAME_SELECTED] =
-                 g_signal_new ("hostname-selected",
---- gdm-2.21.7/daemon/gdm-greeter-server.c~	2008-01-31 22:42:02.000000000 +0100
-+++ gdm-2.21.7/daemon/gdm-greeter-server.c	2008-02-16 04:01:05.718250959 +0100
-@@ -931,14 +931,14 @@
-                                          g_param_spec_string ("user-name",
-                                                               "user name",
-                                                               "user name",
--                                                              "gdm",
-+                                                              "xdm",
-                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-         g_object_class_install_property (object_class,
-                                          PROP_GROUP_NAME,
-                                          g_param_spec_string ("group-name",
-                                                               "group name",
-                                                               "group name",
--                                                              "gdm",
-+                                                              "xdm",
-                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-         signals [BEGIN_VERIFICATION] =
-                 g_signal_new ("begin-verification",
---- gdm-2.21.7/daemon/gdm-welcome-session.c~	2008-02-02 00:56:22.000000000 +0100
-+++ gdm-2.21.7/daemon/gdm-welcome-session.c	2008-02-16 04:02:03.686015025 +0100
-@@ -1093,14 +1093,14 @@
-                                          g_param_spec_string ("user-name",
-                                                               "user name",
-                                                               "user name",
--                                                              "gdm",
-+                                                              "xdm",
-                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-         g_object_class_install_property (object_class,
-                                          PROP_GROUP_NAME,
-                                          g_param_spec_string ("group-name",
-                                                               "group name",
-                                                               "group name",
--                                                              "gdm",
-+                                                              "xdm",
-                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
-         g_object_class_install_property (object_class,
-                                          PROP_SERVER_ADDRESS,
---- gdm-2.21.7/daemon/gdm-xdmcp-chooser-slave.c~	2008-02-06 17:43:37.000000000 +0100
-+++ gdm-2.21.7/daemon/gdm-xdmcp-chooser-slave.c	2008-02-16 04:24:26.290973037 +0100
-@@ -190,7 +190,7 @@
-         }
- 
-         /* Run the init script. gdmslave suspends until script has terminated */
--        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "gdm");
-+        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "xdm");
- 
-         slave->priv->chooser_server = gdm_chooser_server_new (display_id);
-         g_signal_connect (slave->priv->chooser_server,
---- gdm-2.21.7/gui/simple-greeter/gdm-user-manager.c~	2008-02-05 16:33:02.000000000 +0100
-+++ gdm-2.21.7/gui/simple-greeter/gdm-user-manager.c	2008-02-16 04:25:41.785784450 +0100
-@@ -73,7 +73,7 @@
+--- gui/simple-greeter/gdm-user-manager.c	(wersja 6390)
++++ gui/simple-greeter/gdm-user-manager.c	(kopia robocza)
+@@ -89,7 +89,7 @@ 
                                    "uucp",       \
                                    "operator",   \
                                    "nobody",     \
 -                                  "gdm",        \
-+                                  "xdm",        \
++                                  GDM_USERNAME, \
                                    "postgres",   \
                                    "pvm",        \
                                    "rpm",        \
+--- configure.ac	(wersja 6390)
++++ configure.ac	(kopia robocza)
+@@ -445,7 +445,35 @@ 
+ fi
+ AC_MSG_RESULT($fstype)
+ 
++dnl GDM user
++withval=""
++AC_ARG_WITH(user,
++            AS_HELP_STRING([--with-user=<username>],
++                           [specify gdm's user name]))
+ 
++if test x$withval != x; then
++	GDM_USERNAME="$withval"
++else
++	GDM_USERNAME=gdm
++fi
++AC_SUBST(GDM_USERNAME)
++AC_DEFINE_UNQUOTED([GDM_USERNAME], "$GDM_USERNAME", [User to use])
++
++dnl GDM group
++withval=""
++AC_ARG_WITH(group,
++            AS_HELP_STRING([--with-group=<username>],
++                           [specify gdm's user name]))
++
++if test x$withval != x; then
++	GDM_GROUPNAME="$withval"
++else
++	GDM_GROUPNAME=gdm
++fi
++AC_SUBST(GDM_GROUPNAME)
++AC_DEFINE_UNQUOTED([GDM_GROUPNAME], "$GDM_GROUPNAME", [Group to use])
++
++
+ dnl ---------------------------------------------------------------------------
+ dnl - Check for PAM stuff
+ dnl ---------------------------------------------------------------------------
+@@ -1415,6 +1443,7 @@ 
+ gui/simple-chooser/Makefile
+ gui/user-switch-applet/Makefile
+ utils/Makefile
++data/gdm.conf
+ data/Makefile
+ data/faces/Makefile
+ data/pixmaps/Makefile
+@@ -1452,6 +1481,9 @@ 
+ 	cflags:		          ${CFLAGS}
+         Maintainer mode:          ${USE_MAINTAINER_MODE}
+ 
++        user:                     ${GDM_USERNAME}
++        group:                    ${GDM_GROUPNAME}
++
+         dbus-1 system.d dir:      ${DBUS_SYS_DIR}
+         PAM prefix:               ${PAM_PREFIX}
+         X server:                 ${X_SERVER}
+--- daemon/gdm-display.c	(wersja 6390)
++++ daemon/gdm-display.c	(kopia robocza)
+@@ -161,7 +161,7 @@ 
+         g_return_val_if_fail (display->priv->access_file == NULL, FALSE);
+ 
+         error = NULL;
+-        access_file = _create_access_file_for_user (display, "gdm", &error);
++        access_file = _create_access_file_for_user (display, GDM_USERNAME, &error);
+ 
+         if (access_file == NULL) {
+                 g_critical ("could not create display access file: %s", error->message);
+--- daemon/gdm-chooser-server.c	(wersja 6390)
++++ daemon/gdm-chooser-server.c	(kopia robocza)
+@@ -552,14 +552,14 @@ 
+                                          g_param_spec_string ("user-name",
+                                                               "user name",
+                                                               "user name",
+-                                                              "gdm",
++                                                              GDM_USERNAME,
+                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+         g_object_class_install_property (object_class,
+                                          PROP_GROUP_NAME,
+                                          g_param_spec_string ("group-name",
+                                                               "group name",
+                                                               "group name",
+-                                                              "gdm",
++                                                              GDM_GROUPNAME,
+                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+         signals [HOSTNAME_SELECTED] =
+                 g_signal_new ("hostname-selected",
+--- daemon/gdm-welcome-session.c	(wersja 6390)
++++ daemon/gdm-welcome-session.c	(kopia robocza)
+@@ -1122,14 +1122,14 @@ 
+                                          g_param_spec_string ("user-name",
+                                                               "user name",
+                                                               "user name",
+-                                                              "gdm",
++                                                              GDM_USERNAME,
+                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+         g_object_class_install_property (object_class,
+                                          PROP_GROUP_NAME,
+                                          g_param_spec_string ("group-name",
+                                                               "group name",
+                                                               "group name",
+-                                                              "gdm",
++                                                              GDM_GROUPNAME,
+                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+         g_object_class_install_property (object_class,
+                                          PROP_SERVER_ADDRESS,
+--- daemon/gdm-factory-slave.c	(wersja 6390)
++++ daemon/gdm-factory-slave.c	(kopia robocza)
+@@ -489,7 +489,7 @@ 
+         /* FIXME: send a signal back to the master */
+ 
+         /* Run the init script. gdmslave suspends until script has terminated */
+-        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "gdm");
++        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", GDM_USERNAME);
+ 
+         slave->priv->greeter_server = gdm_greeter_server_new (display_id);
+         g_signal_connect (slave->priv->greeter_server,
+--- daemon/gdm-greeter-server.c	(wersja 6390)
++++ daemon/gdm-greeter-server.c	(kopia robocza)
+@@ -1113,14 +1113,14 @@ 
+                                          g_param_spec_string ("user-name",
+                                                               "user name",
+                                                               "user name",
+-                                                              "gdm",
++                                                              GDM_USERNAME,
+                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+         g_object_class_install_property (object_class,
+                                          PROP_GROUP_NAME,
+                                          g_param_spec_string ("group-name",
+                                                               "group name",
+                                                               "group name",
+-                                                              "gdm",
++                                                              GDM_GROUPNAME,
+                                                               G_PARAM_READWRITE | G_PARAM_CONSTRUCT));
+         signals [BEGIN_VERIFICATION] =
+                 g_signal_new ("begin-verification",
+--- daemon/gdm-simple-slave.c	(wersja 6390)
++++ daemon/gdm-simple-slave.c	(kopia robocza)
+@@ -367,7 +367,7 @@ 
+         queue_start_session (slave);
+ 
+         /* Run the PostLogin script. gdmslave suspends until script has terminated */
+-        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/PostLogin", "gdm");
++        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/PostLogin", GDM_USERNAME);
+ }
+ 
+ static void
+@@ -855,7 +855,7 @@ 
+         }
+ 
+         /* Run the init script. gdmslave suspends until script has terminated */
+-        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "gdm");
++        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", GDM_USERNAME);
+ 
+         create_new_session (slave);
+ 
+--- daemon/gdm-xdmcp-chooser-slave.c	(wersja 6390)
++++ daemon/gdm-xdmcp-chooser-slave.c	(kopia robocza)
+@@ -190,7 +190,7 @@ 
+         }
+ 
+         /* Run the init script. gdmslave suspends until script has terminated */
+-        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", "gdm");
++        gdm_slave_run_script (GDM_SLAVE (slave), GDMCONFDIR "/Init", GDM_USERNAME);
+ 
+         slave->priv->chooser_server = gdm_chooser_server_new (display_id);
+         g_signal_connect (slave->priv->chooser_server,
+--- data/gdm.conf	(wersja 6390)
++++ data/gdm.conf	(kopia robocza)
+@@ -1,60 +0,0 @@ 
+-<!DOCTYPE busconfig PUBLIC
+- "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+- "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
+-<busconfig>
+-
+-  <!-- Only root can own the service -->
+-  <policy user="root">
+-    <allow own="org.gnome.DisplayManager"/>
+-
+-    <allow send_interface="org.gnome.DisplayManager.Manager"/>
+-    <allow send_interface="org.gnome.DisplayManager.Display"/>
+-    <allow send_interface="org.gnome.DisplayManager.LocalDisplayFactory"/>
+-    <allow send_interface="org.gnome.DisplayManager.Settings"/>
+-    <allow send_interface="org.gnome.DisplayManager.Slave"/>
+-    <allow send_interface="org.gnome.DisplayManager.Session"/>
+-    <allow send_destination="org.gnome.DisplayManager"
+-           send_interface="org.gnome.DBus.Properties" />
+-  </policy>
+-
+-  <policy context="default">
+-    <deny send_interface="org.gnome.DisplayManager.Manager"/>
+-    <deny send_interface="org.gnome.DisplayManager.Display"/>
+-    <deny send_interface="org.gnome.DisplayManager.LocalDisplayFactory"/>
+-    <deny send_interface="org.gnome.DisplayManager.Settings"/>
+-    <deny send_interface="org.gnome.DisplayManager.Slave"/>
+-    <deny send_interface="org.gnome.DisplayManager.Session"/>
+-    <deny send_destination="org.gnome.DisplayManager"
+-          send_interface="org.gnome.DBus.Properties" />
+-
+-    <allow send_interface="org.gnome.DisplayManager.Display"
+-           send_member="GetId"/>
+-    <allow send_interface="org.gnome.DisplayManager.Display"
+-           send_member="GetRemoteHostname"/>
+-    <allow send_interface="org.gnome.DisplayManager.Display"
+-           send_member="GetSeatId"/>
+-    <allow send_interface="org.gnome.DisplayManager.Display"
+-           send_member="GetX11DisplayName"/>
+-    <allow send_interface="org.gnome.DisplayManager.Display"
+-           send_member="GetX11DisplayNumber"/>
+-    <allow send_interface="org.gnome.DisplayManager.Display"
+-           send_member="IsLocal"/>
+-
+-    <allow send_interface="org.gnome.DisplayManager.LocalDisplayFactory"
+-           send_member="CreateTransientDisplay"/>
+-
+-    <allow send_interface="org.gnome.DisplayManager.Manager"
+-           send_member="GetDisplays"/>
+-
+-  </policy>
+-
+-  <policy user="gdm">
+-    <allow send_interface="org.gnome.DisplayManager.Manager"/>
+-    <allow send_interface="org.gnome.DisplayManager.Display"/>
+-    <allow send_interface="org.gnome.DisplayManager.LocalDisplayFactory"/>
+-    <allow send_interface="org.gnome.DisplayManager.Settings"/>
+-    <allow send_destination="org.gnome.DisplayManager"
+-           send_interface="org.gnome.DBus.Properties" />
+-  </policy>
+-
+-</busconfig>
+--- data/gdm.conf.in	(wersja 0)
++++ data/gdm.conf.in	(wersja 0)
+@@ -0,0 +1,60 @@ 
++<!DOCTYPE busconfig PUBLIC
++ "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
++ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd">
++<busconfig>
++
++  <!-- Only root can own the service -->
++  <policy user="root">
++    <allow own="org.gnome.DisplayManager"/>
++
++    <allow send_interface="org.gnome.DisplayManager.Manager"/>
++    <allow send_interface="org.gnome.DisplayManager.Display"/>
++    <allow send_interface="org.gnome.DisplayManager.LocalDisplayFactory"/>
++    <allow send_interface="org.gnome.DisplayManager.Settings"/>
++    <allow send_interface="org.gnome.DisplayManager.Slave"/>
++    <allow send_interface="org.gnome.DisplayManager.Session"/>
++    <allow send_destination="org.gnome.DisplayManager"
++           send_interface="org.gnome.DBus.Properties" />
++  </policy>
++
++  <policy context="default">
++    <deny send_interface="org.gnome.DisplayManager.Manager"/>
++    <deny send_interface="org.gnome.DisplayManager.Display"/>
++    <deny send_interface="org.gnome.DisplayManager.LocalDisplayFactory"/>
++    <deny send_interface="org.gnome.DisplayManager.Settings"/>
++    <deny send_interface="org.gnome.DisplayManager.Slave"/>
++    <deny send_interface="org.gnome.DisplayManager.Session"/>
++    <deny send_destination="org.gnome.DisplayManager"
++          send_interface="org.gnome.DBus.Properties" />
++
++    <allow send_interface="org.gnome.DisplayManager.Display"
++           send_member="GetId"/>
++    <allow send_interface="org.gnome.DisplayManager.Display"
++           send_member="GetRemoteHostname"/>
++    <allow send_interface="org.gnome.DisplayManager.Display"
++           send_member="GetSeatId"/>
++    <allow send_interface="org.gnome.DisplayManager.Display"
++           send_member="GetX11DisplayName"/>
++    <allow send_interface="org.gnome.DisplayManager.Display"
++           send_member="GetX11DisplayNumber"/>
++    <allow send_interface="org.gnome.DisplayManager.Display"
++           send_member="IsLocal"/>
++
++    <allow send_interface="org.gnome.DisplayManager.LocalDisplayFactory"
++           send_member="CreateTransientDisplay"/>
++
++    <allow send_interface="org.gnome.DisplayManager.Manager"
++           send_member="GetDisplays"/>
++
++  </policy>
++
++  <policy user="@GDM_USERNAME@">
++    <allow send_interface="org.gnome.DisplayManager.Manager"/>
++    <allow send_interface="org.gnome.DisplayManager.Display"/>
++    <allow send_interface="org.gnome.DisplayManager.LocalDisplayFactory"/>
++    <allow send_interface="org.gnome.DisplayManager.Settings"/>
++    <allow send_destination="org.gnome.DisplayManager"
++           send_interface="org.gnome.DBus.Properties" />
++  </policy>
++
++</busconfig>
+--- data/Makefile.am	(wersja 6390)
++++ data/Makefile.am	(kopia robocza)
+@@ -34,7 +34,8 @@ 
+ 		<$(srcdir)/gdm.conf-custom.in >gdm.conf-custom
+ 
+ dbusconfdir = $(DBUS_SYS_DIR)
+-dbusconf_DATA = gdm.conf
++dbusconf_in_files = gdm.conf.in
++dbusconf_DATA = $(dbusconf_in_files:.conf.in=.conf)
+ 
+ @INTLTOOL_SCHEMAS_RULE@
+ 
+@@ -72,7 +73,7 @@ 
+ EXTRA_DIST =			\
+ 	$(schemas_in_files)	\
+ 	$(schemas_DATA)		\
+-	$(dbusconf_DATA)	\
++	$(dbusconf_in_files)	\
+ 	gdm.schemas.in.in	\
+ 	gdm.conf-custom.in 	\
+ 	Xsession.in 		\
+@@ -95,6 +96,7 @@ 
+ 	$(NULL)
+ 
+ DISTCLEANFILES =			\
++	$(dbusconf_DATA)			\
+ 	gdm.schemas			\
+ 	$(NULL)
+ 
