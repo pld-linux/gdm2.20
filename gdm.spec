@@ -148,7 +148,7 @@ Skrypt init dla GDM-a.
 %prep
 %setup -q -a4
 %patch0 -p1
-%patch1 -p1
+%patch1 -p0
 %patch2 -p1
 %patch4 -p1
 
@@ -160,6 +160,7 @@ mv po/sr@{Latn,latin}.po
 %{__glib_gettextize}
 %{__intltoolize}
 %{__aclocal}
+%{__autoheader}
 %{__autoconf}
 %{__automake}
 %configure \
@@ -171,7 +172,9 @@ mv po/sr@{Latn,latin}.po
 	--with-tcp-wrappers=yes \
 	--with%{!?with_selinux:out}-selinux \
 	--with-xdmcp=yes \
-	--with-xinerama=yes
+	--with-xinerama=yes \
+	--with-user=xdm \
+	--with-group=xdm
 
 %{__make}
 
