@@ -330,3 +330,42 @@
  	gdm.schemas			\
  	$(NULL)
  
+--- daemon/gdm-display-access-file.c~	2008-07-31 02:19:06.000000000 +0200
++++ daemon/gdm-display-access-file.c	2008-08-20 10:51:12.092856608 +0200
+@@ -254,7 +254,7 @@
+                 }
+ 
+                 g_chmod (GDM_XAUTH_DIR, S_ISVTX | S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+-                _get_uid_and_gid_for_user ("gdm", &uid, &gid);
++                _get_uid_and_gid_for_user (GDM_USERNAME, &uid, &gid);
+                 if (chown (GDM_XAUTH_DIR, 0, gid) != 0) {
+                         g_warning ("Unable to change owner of '%s'",
+                                    GDM_XAUTH_DIR);
+--- data/gdm.schemas.in.in~	2008-07-03 21:57:25.000000000 +0200
++++ data/gdm.schemas.in.in	2008-08-20 10:59:55.120863811 +0200
+@@ -4,12 +4,12 @@
+     <schema>
+       <key>daemon/User</key>
+       <signature>s</signature>
+-      <default>gdm</default>
++      <default>@GDM_USERNAME@</default>
+     </schema>
+     <schema>
+       <key>daemon/Group</key>
+       <signature>s</signature>
+-      <default>gdm</default>
++      <default>@GDM_GROUPNAME@</default>
+     </schema>
+     <schema>
+       <key>daemon/TimedLoginEnable</key>
+--- data/Makefile.am~	2008-08-20 11:00:48.000000000 +0200
++++ data/Makefile.am	2008-08-20 11:04:27.274257897 +0200
+@@ -47,6 +47,8 @@
+ 	sed	-e 's,[@]GDMPREFETCHCMD[@],$(GDMPREFETCHCMD),g' \
+ 		-e 's,[@]GDM_CUSTOM_CONF[@],$(GDM_CUSTOM_CONF),g' \
+ 		-e 's,[@]GDM_USER_PATH[@],$(GDM_USER_PATH),g' \
++		-e 's,[@]GDM_USERNAME[@],$(GDM_USERNAME),g' \
++		-e 's,[@]GDM_GROUPNAME[@],$(GDM_GROUPNAME),g' \
+ 		-e 's,[@]HALT_COMMAND[@],$(HALT_COMMAND),g' \
+ 		-e 's,[@]REBOOT_COMMAND[@],$(REBOOT_COMMAND),g' \
+ 		-e 's,[@]SOUND_PROGRAM[@],$(SOUND_PROGRAM),g' \
