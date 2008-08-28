@@ -67,6 +67,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
+Requires:	gnome-session >= 2.23.90
 Requires:	gnome-settings-daemon >= 2.23.90
 Requires:	libgnomeui >= 2.20.0
 Requires:	pam >= 0.99.7.1
