@@ -14,13 +14,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.23.2
+Version:	2.23.90
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.23/%{name}-%{version}.tar.bz2
-# Source0-md5:	d1e464916f13e50aa6e83c1aa2a1e450
+# Source0-md5:	b3308fcd684b77f9010981493fb188d6
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -29,7 +29,6 @@ Source4:	%{name}-storky.tar.gz
 # Source4-md5:	e293fbe4a60004056f6894463b874ae8
 Source5:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
-Patch1:		%{name}-user.patch
 Patch2:		%{name}-xsession.patch
 Patch4:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
@@ -68,7 +67,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	gnome-settings-daemon
+Requires:	gnome-settings-daemon >= 2.23.90
 Requires:	libgnomeui >= 2.20.0
 Requires:	pam >= 0.99.7.1
 Requires:	which
@@ -146,12 +145,8 @@ Skrypt init dla GDM-a.
 %prep
 %setup -q -a4
 %patch0 -p1
-%patch1 -p0
 %patch2 -p1
 %patch4 -p1
-
-sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-mv po/sr@{Latn,latin}.po
 
 %build
 %{__libtoolize}
