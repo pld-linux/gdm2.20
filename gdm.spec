@@ -14,24 +14,19 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.20.7
+Version:	2.24.0
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/%{name}-%{version}.tar.bz2
-# Source0-md5:	15be72743003cb1e36c9ce2ac2de5381
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	c38e3debe8a02ad385f1c7077d21de9e
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
-# http://cvs.pld-linux.org/cgi-bin/cvsweb/pld-artwork/gdm/storky/
-Source4:	%{name}-storky.tar.gz
-# Source4-md5:	e293fbe4a60004056f6894463b874ae8
-Source5:	%{name}-autologin.pamd
+#Source4:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
-Patch1:		%{name}-conf.patch
 Patch2:		%{name}-xsession.patch
-Patch3:		%{name}-desktop.patch
 Patch4:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
@@ -40,6 +35,7 @@ BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.73
 BuildRequires:	gettext-devel
+BuildRequires:	glib2-devel >= 1:2.15.0
 BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	intltool >= 0.36.1
 BuildRequires:	libart_lgpl-devel >= 2.3.19
@@ -68,6 +64,8 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
+Requires:	gnome-session >= 2.23.90
+Requires:	gnome-settings-daemon >= 2.23.90
 Requires:	libgnomeui >= 2.20.0
 Requires:	pam >= 0.99.7.1
 Requires:	which
@@ -80,8 +78,6 @@ Conflicts:	gdkxft
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
-
-%define		_localstatedir	/var/lib
 
 %description
 Gdm (the GNOME Display Manager) is a highly configurable
@@ -146,21 +142,17 @@ Init script for GDM.
 Skrypt init dla GDM-a.
 
 %prep
-%setup -q -a4
+%setup -q 
 %patch0 -p1
-%patch1 -p1
 %patch2 -p1
-%patch3 -p1
 %patch4 -p1
-
-sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-mv po/sr@{Latn,latin}.po
 
 %build
 %{__libtoolize}
 %{__glib_gettextize}
 %{__intltoolize}
 %{__aclocal}
+%{__autoheader}
 %{__autoconf}
 %{__automake}
 %configure \
@@ -172,7 +164,9 @@ mv po/sr@{Latn,latin}.po
 	--with-tcp-wrappers=yes \
 	--with%{!?with_selinux:out}-selinux \
 	--with-xdmcp=yes \
-	--with-xinerama=yes
+	--with-xinerama=yes \
+	--with-user=xdm \
+	--with-group=xdm
 
 %{__make}
 
@@ -180,22 +174,16 @@ mv po/sr@{Latn,latin}.po
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 	$RPM_BUILD_ROOT{/home/services/xdm,/var/log/gdm} \
-	$RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PAM_PREFIX=/etc
 
-mv $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop \
-	$RPM_BUILD_ROOT%{_datadir}/xsessions
-
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
-install %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
+#install %{SOURCE4} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
-
-install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
@@ -215,8 +203,14 @@ rm -rf $RPM_BUILD_ROOT
 %useradd -u 55 -r -d /home/services/xdm -s /bin/false -c "X Display Manager" -g xdm xdm
 
 %post
+%gconf_schema_install gdm-simple-greeter.schemas
+#%%gconf_schema_install gdm-user-switch-applet.schemas
 %scrollkeeper_update_post
 %update_icon_cache hicolor
+
+%preun
+%gconf_schema_uninstall gdm-simple-greeter.schemas
+#%%gconf_schema_uninstall gdm-user-switch-applet.schemas
 
 %postun
 %scrollkeeper_update_postun
@@ -250,49 +244,45 @@ fi
 %files -f %{name}.lang
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_bindir}/gdm-dmx-reconnect-proxy
-%attr(755,root,root) %{_bindir}/gdmdynamic
-%attr(755,root,root) %{_bindir}/gdmflexiserver
-%attr(755,root,root) %{_bindir}/gdmphotosetup
-%attr(755,root,root) %{_bindir}/gdmthemetester
-%attr(755,root,root) %{_libdir}/gdmaskpass
-%attr(755,root,root) %{_libdir}/gdmopen
-%attr(755,root,root) %{_libdir}/gdmtranslate
-%attr(755,root,root) %{_libdir}/gdmchooser
-%attr(755,root,root) %{_libdir}/gdmgreeter
-%attr(755,root,root) %{_libdir}/gdmlogin
+%attr(755,root,root) %{_libexecdir}/gdm-crash-logger
+%attr(755,root,root) %{_libexecdir}/gdm-factory-slave
+%attr(755,root,root) %{_libexecdir}/gdm-host-chooser
+%attr(755,root,root) %{_libexecdir}/gdm-product-slave
+%attr(755,root,root) %{_libexecdir}/gdm-session-worker
+%attr(755,root,root) %{_libexecdir}/gdm-simple-chooser
+%attr(755,root,root) %{_libexecdir}/gdm-simple-greeter
+%attr(755,root,root) %{_libexecdir}/gdm-simple-slave
+%attr(755,root,root) %{_libexecdir}/gdm-user-switch-applet
+%attr(755,root,root) %{_libexecdir}/gdm-xdmcp-chooser-slave
 %attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_bindir}/*
 %dir %{_sysconfdir}/gdm
-%dir %{_sysconfdir}/gdm/modules
-%attr(755,root,root) %config %{_sysconfdir}/gdm/Init
+%dir %{_sysconfdir}/gdm/Init
+%attr(755,root,root) %config %{_sysconfdir}/gdm/Init/Default
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PreSession
 %attr(755,root,root) %config %{_sysconfdir}/gdm/PostSession
-%attr(755,root,root) %config %{_sysconfdir}/gdm/XKeepsCrashing
 %attr(755,root,root) %config %{_sysconfdir}/gdm/Xsession
+%dir %{_sysconfdir}/gdm/PostLogin
 %config %{_sysconfdir}/gdm/PostLogin/Default.sample
-%config %{_sysconfdir}/gdm/locale.alias
-%config %{_sysconfdir}/gdm/modules/*
-
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/
-
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/custom.conf
+%{_sysconfdir}/gdm/gdm.schemas
+%{_sysconfdir}/gconf/schemas/gdm-simple-greeter.schemas
+#%{_sysconfdir}/gconf/schemas/gdm-user-switch-applet.schemas
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
-%attr(750,xdm,xdm) /var/lib/gdm
-%attr(750,xdm,xdm) /var/log/gdm
+%attr(750,xdm,xdm) %{_localstatedir}/gdm
+%attr(750,xdm,xdm) %{_localstatedir}/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
 %{_datadir}/gdm
-#%%{_datadir}/xsessions  -  moved to gnome-session
-%{_datadir}/xsessions/default.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
-%{_iconsdir}/hicolor/*/apps/*.svg
-%attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
-%{_mandir}/man1/gdm*
+%{_datadir}/gnome-2.0/ui/GNOME_FastUserSwitchApplet.xml
+%{_libdir}/bonobo/servers/*.server
+%{_localstatedir}/lib/gdm
 
 %files Xnest
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/gdmXnest
-%attr(755,root,root) %{_bindir}/gdmXnestchooser
 
 %files init
 %defattr(644,root,root,755)
