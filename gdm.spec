@@ -14,20 +14,17 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.23.90
+Version:	2.24.0
 Release:	1
 Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.23/%{name}-%{version}.tar.bz2
-# Source0-md5:	b3308fcd684b77f9010981493fb188d6
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.24/%{name}-%{version}.tar.bz2
+# Source0-md5:	c38e3debe8a02ad385f1c7077d21de9e
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
-# http://cvs.pld-linux.org/cgi-bin/cvsweb/pld-artwork/gdm/storky/
-Source4:	%{name}-storky.tar.gz
-# Source4-md5:	e293fbe4a60004056f6894463b874ae8
-Source5:	%{name}-autologin.pamd
+#Source4:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
 Patch2:		%{name}-xsession.patch
 Patch4:		%{name}-defaults.patch
@@ -144,7 +141,7 @@ Init script for GDM.
 Skrypt init dla GDM-a.
 
 %prep
-%setup -q -a4
+%setup -q 
 %patch0 -p1
 %patch2 -p1
 %patch4 -p1
@@ -176,19 +173,16 @@ Skrypt init dla GDM-a.
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 	$RPM_BUILD_ROOT{/home/services/xdm,/var/log/gdm} \
-	$RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PAM_PREFIX=/etc
 
 install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
-install %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
+#install %{SOURCE4} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
-
-install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
