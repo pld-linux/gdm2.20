@@ -16,7 +16,7 @@ Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.24.1
 Release:	1
-Epoch:		2
+Epoch:		1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.24/%{name}-%{version}.tar.bz2
