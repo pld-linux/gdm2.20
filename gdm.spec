@@ -278,7 +278,7 @@ fi
 
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
-%attr(1750,root,xdm) /var/lib/gdm
+%attr(1770,root,xdm) /var/lib/gdm
 %attr(750,xdm,xdm) /var/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
