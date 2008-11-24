@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.20.8
-Release:	1
+Release:	2
 Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -278,7 +278,7 @@ fi
 
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
-%attr(750,xdm,xdm) /var/lib/gdm
+%attr(1750,root,xdm) /var/lib/gdm
 %attr(750,xdm,xdm) /var/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
