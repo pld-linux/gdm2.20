@@ -1,4 +1,11 @@
 #
+# BIG FAT WARNING!
+#
+#	DO NOT even think of moving this (2.24) to HEAD or sending
+#	to builders/ftp. Despite it being newer, it's just a pathetic
+#	excuse for a display manager and does not even come close
+#	feature-wise to 2.20.
+#
 # TODO:
 # - s=/dev/null=/home/services/xdm= in %%trigger for graceful upgrade from xdm/kdm/gdm 2.2
 # - check /etc/pam.d/gdm-autologin
@@ -15,8 +22,8 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.24.1
-Release:	1
-Epoch:		1
+Release:	1.1
+Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.24/%{name}-%{version}.tar.bz2
