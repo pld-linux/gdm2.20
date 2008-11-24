@@ -1,4 +1,11 @@
 #
+# BIG FAT WARNING!
+#
+#	DO NOT even think of moving this (2.24) to HEAD or sending
+#	to builders/ftp. Despite it being newer, it's just a pathetic
+#	excuse for a display manager and does not even come close
+#	feature-wise to 2.20.
+#
 # TODO:
 # - s=/dev/null=/home/services/xdm= in %%trigger for graceful upgrade from xdm/kdm/gdm 2.2
 # - check /etc/pam.d/gdm-autologin
@@ -14,13 +21,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.24.0
-Release:	1
-Epoch:		1
+Version:	2.24.1
+Release:	1.1
+Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.24/%{name}-%{version}.tar.bz2
-# Source0-md5:	c38e3debe8a02ad385f1c7077d21de9e
+# Source0-md5:	31139d7a79096463b127b4790058b056
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -30,28 +37,30 @@ Patch2:		%{name}-xsession.patch
 Patch4:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
+BuildRequires:	GConf2-devel >= 2.24.0
+BuildRequires:	PolicyKit-gnome-devel >= 0.8
 BuildRequires:	attr-devel
-BuildRequires:	autoconf >= 2.52
-BuildRequires:	automake
-BuildRequires:	dbus-glib-devel >= 0.73
+BuildRequires:	audit-libs-devel
+BuildRequires:	autoconf >= 2.60
+BuildRequires:	automake >= 1:1.9
+BuildRequires:	check >= 0.9.4
+BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.15.0
-BuildRequires:	gtk+2-devel >= 2:2.12.0
-BuildRequires:	intltool >= 0.36.1
-BuildRequires:	libart_lgpl-devel >= 2.3.19
+BuildRequires:	glib2-devel >= 1:2.16.0
+BuildRequires:	gnome-doc-utils
+BuildRequires:	gnome-panel-devel >= 2.24.0
+BuildRequires:	gtk+2-devel >= 2:2.14.0
+BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
-BuildRequires:	libgnomeui-devel >= 2.20.0
-BuildRequires:	libgsf-devel >= 1.14.6
-BuildRequires:	librsvg-devel >= 1:2.18.1
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
-BuildRequires:	libxml2-devel >= 1:2.6.29
+BuildRequires:	libxklavier-devel >= 3.5
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
-BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
@@ -64,16 +73,18 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	gnome-session >= 2.23.90
-Requires:	gnome-settings-daemon >= 2.23.90
-Requires:	libgnomeui >= 2.20.0
+Requires:	PolicyKit-gnome >= 0.8
+Requires:	gnome-session >= 2.24.0
+Requires:	gnome-settings-daemon >= 2.24.0
+Requires:	libgnomeui >= 2.24.0
 Requires:	pam >= 0.99.7.1
 Requires:	which
-Requires:	xorg-app-xmodmap
 Requires:	xorg-app-sessreg
+Requires:	xorg-app-xmodmap
 Provides:	XDM
 Provides:	group(xdm)
 Provides:	user(xdm)
+Obsoletes:	gdm-Xnest
 Conflicts:	gdkxft
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
@@ -114,19 +125,6 @@ GDM (GNOME Display Manager) - це реімплементація xdm (X Display
 Manager). GDM дозволяє вам входити в систему, на якій запущено X
 Window та підтримує роботу кількох різних X сеансів одночасно.
 
-%package Xnest
-Summary:	Xnest (ie embedded X) server for GDM
-Summary(pl.UTF-8):	Serwer Xnest dla GDM
-Group:		X11/Applications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
-Requires:	xorg-xserver-Xnest
-
-%description Xnest
-This package add support for Xnest server in gdm.
-
-%description Xnest -l pl.UTF-8
-Ten pakiet dodaje do gdm wsparcie dla Xnest.
-
 %package init
 Summary:	Init script for GDM
 Summary(pl.UTF-8):	Skrypt init dla GDM-a
@@ -142,7 +140,7 @@ Init script for GDM.
 Skrypt init dla GDM-a.
 
 %prep
-%setup -q 
+%setup -q
 %patch0 -p1
 %patch2 -p1
 %patch4 -p1
@@ -204,13 +202,11 @@ rm -rf $RPM_BUILD_ROOT
 
 %post
 %gconf_schema_install gdm-simple-greeter.schemas
-#%%gconf_schema_install gdm-user-switch-applet.schemas
 %scrollkeeper_update_post
 %update_icon_cache hicolor
 
 %preun
 %gconf_schema_uninstall gdm-simple-greeter.schemas
-#%%gconf_schema_uninstall gdm-user-switch-applet.schemas
 
 %postun
 %scrollkeeper_update_postun
@@ -267,7 +263,6 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/custom.conf
 %{_sysconfdir}/gdm/gdm.schemas
 %{_sysconfdir}/gconf/schemas/gdm-simple-greeter.schemas
-#%{_sysconfdir}/gconf/schemas/gdm-user-switch-applet.schemas
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
@@ -280,9 +275,6 @@ fi
 %{_datadir}/gnome-2.0/ui/GNOME_FastUserSwitchApplet.xml
 %{_libdir}/bonobo/servers/*.server
 %{_localstatedir}/lib/gdm
-
-%files Xnest
-%defattr(644,root,root,755)
 
 %files init
 %defattr(644,root,root,755)
