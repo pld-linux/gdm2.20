@@ -21,13 +21,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.24.1
-Release:	1.1
+Version:	2.26.0
+Release:	1
 Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.24/%{name}-%{version}.tar.bz2
-# Source0-md5:	31139d7a79096463b127b4790058b056
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.26/%{name}-%{version}.tar.bz2
+# Source0-md5:	b1a8db2f0e058d3c7b4c9a4600839a14
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -144,6 +144,7 @@ Skrypt init dla GDM-a.
 %patch0 -p1
 %patch2 -p1
 %patch4 -p1
+rm -f data/gdm.schemas.in
 
 %build
 %{__libtoolize}
