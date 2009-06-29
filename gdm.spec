@@ -33,6 +33,7 @@ Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
 #Source4:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
+Patch1:		%{name}-libxklavier40.patch
 Patch2:		%{name}-xsession.patch
 Patch4:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
@@ -143,6 +144,7 @@ Skrypt init dla GDM-a.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 %patch2 -p1
 %patch4 -p1
 rm -f data/gdm.schemas.in
