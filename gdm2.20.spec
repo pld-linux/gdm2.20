@@ -33,12 +33,12 @@ Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
 #Source4:	%{name}-autologin.pamd
 Patch0:		%{name}-xdmcp.patch
+Patch1:		%{name}-polkit.patch
 Patch2:		%{name}-xsession.patch
 Patch4:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
 BuildRequires:	GConf2-devel >= 2.24.0
-BuildRequires:	PolicyKit-gnome-devel >= 0.8
 BuildRequires:	attr-devel
 BuildRequires:	audit-libs-devel
 BuildRequires:	autoconf >= 2.60
@@ -54,10 +54,11 @@ BuildRequires:	intltool >= 0.40.0
 BuildRequires:	libglade2-devel >= 1:2.6.2
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
-BuildRequires:	libxklavier-devel >= 4.0
+BuildRequires:	libxklavier-devel >= 4.0-2
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	pkgconfig
+BuildRequires:	polkit-gnome-devel >= 0.92
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
@@ -74,11 +75,11 @@ Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires:	/usr/bin/Xorg
-Requires:	PolicyKit-gnome >= 0.8
 Requires:	gnome-session >= 2.24.0
 Requires:	gnome-settings-daemon >= 2.24.0
 Requires:	libgnomeui >= 2.24.0
 Requires:	pam >= 0.99.7.1
+Requires:	polkit-gnome >= 0.92
 Requires:	which
 Requires:	xorg-app-sessreg
 Requires:	xorg-app-xmodmap
@@ -143,6 +144,7 @@ Skrypt init dla GDM-a.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 %patch2 -p1
 %patch4 -p1
 rm -f data/gdm.schemas.in
@@ -273,8 +275,9 @@ fi
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
 %{_datadir}/gdm
-%{_iconsdir}/hicolor/*/apps/*.png
 %{_datadir}/gnome-2.0/ui/GNOME_FastUserSwitchApplet.xml
+%{_datadir}/polkit-1/actions/gdm.policy
+%{_iconsdir}/hicolor/*/apps/*.png
 %{_libdir}/bonobo/servers/*.server
 %{_localstatedir}/lib/gdm
 
