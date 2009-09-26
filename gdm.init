@@ -14,6 +14,8 @@
 
 . /etc/rc.d/init.d/functions
 
+GDM_VT=vt9
+
 # Get service config
 if [ -f /etc/sysconfig/gdm ]; then
 	. /etc/sysconfig/gdm
@@ -26,7 +28,7 @@ case "$1" in
 	# Check if the service is already running?
 	if [ ! -f /var/lock/subsys/gdm ]; then
 		msg_starting "Gnome Display Manager"
-		start-stop-daemon --start -b --exec /usr/sbin/gdm
+		start-stop-daemon --start -b --exec /usr/sbin/gdm ${GDM_VT}
 		ok
 		RETVAL=$?
 		[ $RETVAL -eq 0 ] && touch /var/lock/subsys/gdm
