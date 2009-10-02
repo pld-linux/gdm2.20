@@ -20,7 +20,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.28.0
-Release:	7
+Release:	8
 Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -34,6 +34,8 @@ Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-polkit.patch
 Patch2:		%{name}-xsession.patch
 Patch4:		%{name}-defaults.patch
+# http://bugzilla.gnome.org/show_bug.cgi?id=597050
+Patch5:		%{name}-dont-hardcode-path.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel >= 0.4.1
 BuildRequires:	GConf2-devel >= 2.24.0
@@ -43,12 +45,14 @@ BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
 BuildRequires:	check >= 0.9.4
 BuildRequires:	dbus-glib-devel >= 0.74
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
 BuildRequires:	glib2-devel >= 1:2.16.0
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gnome-panel-devel >= 2.24.0
 BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.40.0
+BuildRequires:	iso-codes
 BuildRequires:	libcanberra-gtk-devel >= 0.4
 BuildRequires:	libglade2-devel >= 1:2.6.2
 %{?with_selinux:BuildRequires:	libselinux-devel}
@@ -57,7 +61,6 @@ BuildRequires:	libxklavier-devel >= 4.0-2
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	pkgconfig
-BuildRequires:	polkit-gnome-devel >= 0.92
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
@@ -65,7 +68,7 @@ BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libdmx-devel
-BuildRequires:	docbook-dtd412-xml
+Requires(post,preun):	GConf2
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	/usr/bin/scrollkeeper-update
@@ -77,7 +80,6 @@ Requires(pre):	/usr/sbin/useradd
 Requires:	/usr/bin/Xorg
 Requires:	gnome-session >= 2.24.0
 Requires:	gnome-settings-daemon >= 2.24.0
-Requires:	libgnomeui >= 2.24.0
 Requires:	pam >= 0.99.7.1
 Requires:	polkit-gnome >= 0.92
 Requires:	which
@@ -141,12 +143,29 @@ Init script for GDM.
 %description init -l pl.UTF-8
 Skrypt init dla GDM-a.
 
+%package user-switch-applet
+Summary:	GNOME applet for fast user switching
+Summary(pl.UTF-8):	Aplet GNOME do szybkiego przełączania użytkowników
+Group:		X11/Applications
+Requires:	gdm >= 2:2.22.0
+Provides:	gnome-applet-fast-user-switch = %{epoch}:%{version}-%{release}
+Obsoletes:	gnome-applet-fast-user-switch
+
+%description user-switch-applet
+The GDM User Switch Applet is an applet for the GNOME panel which
+provides a mechanism for switching between users.
+
+%description user-switch-applet -l pl.UTF-8
+GDM User Switch Applet to aplet panelu GNOME udostępniający mechanizm
+do przełączania między użytkownikami.
+
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
 %patch4 -p1
+%patch5 -p1
 rm -f data/gdm.schemas.in
 
 %build
@@ -252,7 +271,6 @@ fi
 %attr(755,root,root) %{_libexecdir}/gdm-simple-chooser
 %attr(755,root,root) %{_libexecdir}/gdm-simple-greeter
 %attr(755,root,root) %{_libexecdir}/gdm-simple-slave
-%attr(755,root,root) %{_libexecdir}/gdm-user-switch-applet
 %attr(755,root,root) %{_libexecdir}/gdm-xdmcp-chooser-slave
 %attr(755,root,root) %{_sbindir}/*
 %attr(755,root,root) %{_bindir}/*
@@ -270,18 +288,26 @@ fi
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
-%attr(750,xdm,xdm) %{_localstatedir}/gdm
+%attr(1770,root,xdm) %{_localstatedir}/gdm
+%attr(1755,root,xdm) %{_localstatedir}/cache/gdm
+%attr(1770,root,xdm) %dir %{_localstatedir}/lib/gdm
+%attr(1750,root,xdm) %dir %{_localstatedir}/lib/gdm/.gconf.mandatory
+%attr(1640,root,xdm) %{_localstatedir}/lib/gdm/.gconf.mandatory/*.xml
+%attr(644,root,xdm) %{_localstatedir}/lib/gdm/.gconf.path
 %attr(750,xdm,xdm) %{_localstatedir}/log/gdm
+%attr(1777,root,xdm) %{_localstatedir}/run/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
 %{_datadir}/gdm
-%{_datadir}/gnome-2.0/ui/GNOME_FastUserSwitchApplet.xml
 %{_datadir}/polkit-1/actions/gdm.policy
 %{_iconsdir}/hicolor/*/apps/*.png
-%{_libdir}/bonobo/servers/*.server
-%{_localstatedir}/lib/gdm
-%attr(750,xdm,xdm) %dir /var/cache/gdm
 
 %files init
 %defattr(644,root,root,755)
 %attr(754,root,root) /etc/rc.d/init.d/gdm
+
+%files user-switch-applet
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libexecdir}/gdm-user-switch-applet
+%{_libdir}/bonobo/servers/GNOME_FastUserSwitchApplet.server
+%{_datadir}/gnome-2.0/ui/GNOME_FastUserSwitchApplet.xml
