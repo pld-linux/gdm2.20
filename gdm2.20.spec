@@ -20,7 +20,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.28.0
-Release:	4
+Release:	5
 Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -279,6 +279,8 @@ fi
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_libdir}/bonobo/servers/*.server
 %{_localstatedir}/lib/gdm
+%dir /var/cache/gdm
+%attr(750,xdm,xdm) /var/cache/gdm
 
 %files init
 %defattr(644,root,root,755)
