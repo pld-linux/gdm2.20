@@ -20,7 +20,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.28.0
-Release:	3
+Release:	4
 Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -35,7 +35,7 @@ Patch1:		%{name}-polkit.patch
 Patch2:		%{name}-xsession.patch
 Patch4:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
-BuildRequires:	ConsoleKit-devel
+BuildRequires:	ConsoleKit-devel >= 0.4.1
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	attr-devel
 BuildRequires:	audit-libs-devel
