@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=.Xclients
+Comment=Run ~/.Xclients script
+Exec=default
+Icon=
+Type=Application
+# vi: encoding=utf-8

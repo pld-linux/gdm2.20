@@ -20,7 +20,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
 Version:	2.28.1
-Release:	1
+Release:	2
 Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
@@ -30,6 +30,8 @@ Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
 #Source4:	%{name}-autologin.pamd
+Source5:	%{name}-custom.desktop
+Source6:	%{name}-default.desktop
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-polkit.patch
 Patch2:		%{name}-xsession.patch
@@ -61,6 +63,7 @@ BuildRequires:	libxklavier-devel >= 4.0-2
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	pkgconfig
+BuildRequires:	polkit-gnome-devel >= 0.92
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
@@ -69,9 +72,9 @@ BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libdmx-devel
 Requires(post,preun):	GConf2
+Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
-Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
@@ -85,6 +88,7 @@ Requires:	polkit-gnome >= 0.92
 Requires:	which
 Requires:	xorg-app-sessreg
 Requires:	xorg-app-xmodmap
+Suggests:	zenity
 Provides:	XDM
 Provides:	group(xdm)
 Provides:	user(xdm)
@@ -195,6 +199,7 @@ rm -f data/gdm.schemas.in
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 	$RPM_BUILD_ROOT{/home/services/xdm,/var/log/gdm} \
+	$RPM_BUILD_ROOT%{_datadir}/xsessions
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -210,11 +215,9 @@ touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
 %find_lang %{name} --with-gnome --with-omf --all-name
 
-# Remove useless files
-rm -f $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/modules/*.{la,a}
-
-# moved to gnome-session
-rm -f $RPM_BUILD_ROOT%{_datadir}/xsessions/gnome.desktop
+# allow executing ~/.Xclients and ~/.xsession
+install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/xsessions/custom.desktop
+install %{SOURCE6} $RPM_BUILD_ROOT%{_datadir}/xsessions/default.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -285,7 +288,7 @@ fi
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/custom.conf
 %{_sysconfdir}/gdm/gdm.schemas
 %{_sysconfdir}/gconf/schemas/gdm-simple-greeter.schemas
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/dbus-1/system.d/*
+%config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
 %attr(1770,root,xdm) %{_localstatedir}/gdm
@@ -300,6 +303,8 @@ fi
 %{_pixmapsdir}/*
 %{_datadir}/gdm
 %{_datadir}/polkit-1/actions/gdm.policy
+%{_datadir}/xsessions/custom.desktop
+%{_datadir}/xsessions/default.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
 
 %files init

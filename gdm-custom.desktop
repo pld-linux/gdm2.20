@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=.xsession
+Comment=Run ~/.xsession script
+Exec=custom
+Icon=
+Type=Application
+# vi: encoding=utf-8
