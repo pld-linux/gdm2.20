@@ -171,6 +171,8 @@ do przełączania między użytkownikami.
 %patch4 -p1
 %patch5 -p1
 rm -f data/gdm.schemas.in
+sed -i 's/^en@shaw//' po/LINGUAS
+rm po/en@shaw.po
 
 %build
 %{__libtoolize}
