@@ -80,7 +80,7 @@ Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
-Requires:	/usr/bin/Xorg
+Requires:	/usr/bin/X
 Requires:	gnome-session >= 2.24.0
 Requires:	gnome-settings-daemon >= 2.24.0
 Requires:	pam >= 0.99.7.1
