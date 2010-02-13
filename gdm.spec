@@ -291,14 +291,13 @@ fi
 %config(noreplace) %verify(not md5 mtime size) /etc/dbus-1/system.d/*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
-%attr(1770,root,xdm) %{_localstatedir}/gdm
-%attr(1755,root,xdm) %{_localstatedir}/cache/gdm
-%attr(1770,root,xdm) %dir %{_localstatedir}/lib/gdm
-%attr(1750,root,xdm) %dir %{_localstatedir}/lib/gdm/.gconf.mandatory
-%attr(1640,root,xdm) %{_localstatedir}/lib/gdm/.gconf.mandatory/*.xml
-%attr(644,root,xdm) %{_localstatedir}/lib/gdm/.gconf.path
-%attr(750,xdm,xdm) %{_localstatedir}/log/gdm
-%attr(1777,root,xdm) %{_localstatedir}/run/gdm
+%attr(1755,root,xdm) /var/cache/gdm
+%attr(1770,root,xdm) %dir /var/lib/gdm
+%attr(1750,root,xdm) %dir /var/lib/gdm/.gconf.mandatory
+%attr(1640,root,xdm) /var/lib/gdm/.gconf.mandatory/*.xml
+%attr(644,root,xdm) /var/lib/gdm/.gconf.path
+%attr(750,xdm,xdm) /var/log/gdm
+%attr(1777,root,xdm) /var/run/gdm
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
 %{_datadir}/gdm
