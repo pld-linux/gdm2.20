@@ -19,13 +19,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.29.0
+Version:	2.29.92
 Release:	1
 Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.29/%{name}-%{version}.tar.bz2
-# Source0-md5:	857cdf033e39b72f14fd520a93a31a1c
+# Source0-md5:	a82bbab661b66767870a65e53cb52630
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -35,11 +35,10 @@ Source6:	%{name}-default.desktop
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-polkit.patch
 Patch2:		%{name}-xsession.patch
-Patch4:		%{name}-defaults.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=597050
-Patch5:		%{name}-dont-hardcode-path.patch
+Patch3:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel >= 0.4.1
+BuildRequires:	DeviceKit-power-devel >= 008
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	attr-devel
 BuildRequires:	audit-libs-devel
@@ -49,14 +48,13 @@ BuildRequires:	check >= 0.9.4
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.16.0
+BuildRequires:	glib2-devel >= 1:2.22.0
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gnome-panel-devel >= 2.24.0
 BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	iso-codes
 BuildRequires:	libcanberra-gtk-devel >= 0.4
-BuildRequires:	libglade2-devel >= 1:2.6.2
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 4.0-2
@@ -81,10 +79,10 @@ Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires:	/usr/bin/Xorg
-Requires:	gnome-session >= 2.24.0
+Requires:	gnome-session >= 2.29.92
 Requires:	gnome-settings-daemon >= 2.24.0
 Requires:	pam >= 0.99.7.1
-Requires:	polkit-gnome >= 0.92
+Requires:	polkit-gnome >= 0.93
 Requires:	which
 Requires:	xorg-app-sessreg
 Requires:	xorg-app-xmodmap
@@ -168,8 +166,7 @@ do przełączania między użytkownikami.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch4 -p1
-%patch5 -p1
+%patch3 -p1
 rm -f data/gdm.schemas.in
 sed -i 's/^en@shaw//' po/LINGUAS
 rm po/en@shaw.po
