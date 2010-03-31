@@ -19,13 +19,13 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm
-Version:	2.28.2
+Version:	2.30.0
 Release:	1
 Epoch:		2
 License:	GPL/LGPL
 Group:		X11/Applications
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.28/%{name}-%{version}.tar.bz2
-# Source0-md5:	9607c6bac31c9d8bd3446e66a4576c2e
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.30/%{name}-%{version}.tar.bz2
+# Source0-md5:	0da84637abbcbf1666529d6192a81e6b
 Source1:	%{name}.pamd
 Source2:	%{name}.init
 Source3:	%{name}-pld-logo.png
@@ -35,12 +35,11 @@ Source6:	%{name}-default.desktop
 Patch0:		%{name}-xdmcp.patch
 Patch1:		%{name}-polkit.patch
 Patch2:		%{name}-xsession.patch
-Patch4:		%{name}-defaults.patch
-# http://bugzilla.gnome.org/show_bug.cgi?id=597050
-Patch5:		%{name}-dont-hardcode-path.patch
+Patch3:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel >= 0.4.1
 BuildRequires:	GConf2-devel >= 2.24.0
+BuildRequires:	UPower-devel
 BuildRequires:	attr-devel
 BuildRequires:	audit-libs-devel
 BuildRequires:	autoconf >= 2.60
@@ -49,14 +48,13 @@ BuildRequires:	check >= 0.9.4
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
-BuildRequires:	glib2-devel >= 1:2.16.0
+BuildRequires:	glib2-devel >= 1:2.22.0
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gnome-panel-devel >= 2.24.0
 BuildRequires:	gtk+2-devel >= 2:2.14.0
 BuildRequires:	intltool >= 0.40.0
 BuildRequires:	iso-codes
 BuildRequires:	libcanberra-gtk-devel >= 0.4
-BuildRequires:	libglade2-devel >= 1:2.6.2
 %{?with_selinux:BuildRequires:	libselinux-devel}
 BuildRequires:	libtool
 BuildRequires:	libxklavier-devel >= 4.0-2
@@ -71,20 +69,20 @@ BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libdmx-devel
-Requires(post,preun):	GConf2
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
+Requires(post,preun):	GConf2
 Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
 Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires:	/usr/bin/X
-Requires:	gnome-session >= 2.24.0
+Requires:	gnome-session >= 2.30.0
 Requires:	gnome-settings-daemon >= 2.24.0
 Requires:	pam >= 0.99.7.1
-Requires:	polkit-gnome >= 0.92
+Requires:	polkit-gnome >= 0.93
 Requires:	which
 Requires:	xorg-app-sessreg
 Requires:	xorg-app-xmodmap
@@ -151,7 +149,7 @@ Skrypt init dla GDM-a.
 Summary:	GNOME applet for fast user switching
 Summary(pl.UTF-8):	Aplet GNOME do szybkiego przełączania użytkowników
 Group:		X11/Applications
-Requires:	gdm >= 2:2.22.0
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Provides:	gnome-applet-fast-user-switch = %{epoch}:%{version}-%{release}
 Obsoletes:	gnome-applet-fast-user-switch
 
@@ -168,9 +166,10 @@ do przełączania między użytkownikami.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch4 -p1
-%patch5 -p1
+%patch3 -p1
 rm -f data/gdm.schemas.in
+sed -i 's/^en@shaw//' po/LINGUAS
+rm po/en@shaw.po
 
 %build
 %{__libtoolize}
@@ -183,6 +182,7 @@ rm -f data/gdm.schemas.in
 %configure \
 	--disable-console-helper \
 	--disable-scrollkeeper \
+	--disable-silent-rules \
 	--with-console-kit \
 	--enable-authentication-scheme=pam \
 	--with-pam-prefix=/etc \
