@@ -5,9 +5,9 @@ Subject: [PATCH 1/2] Add PolicyKit support to GDM settings D-Bus interface
 Ubuntu: https://bugs.launchpad.net/ubuntu/+source/gdm/+bug/395299
 Upstream: http://bugzilla.gnome.org/show_bug.cgi?id=587750
 
-diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/common/gdm-settings.c gdm-2.27.4.new/common/gdm-settings.c
---- gdm-2.27.4/common/gdm-settings.c	2009-05-19 16:18:12.000000000 +0100
-+++ gdm-2.27.4.new/common/gdm-settings.c	2009-08-07 09:25:34.000000000 +0100
+diff -urN gdm-2.29.92/common/gdm-settings.c gdm-2.29.92.new//common/gdm-settings.c
+--- gdm-2.29.92/common/gdm-settings.c	2010-03-08 22:53:57.000000000 +0100
++++ gdm-2.29.92.new//common/gdm-settings.c	2010-03-14 21:01:32.864403121 +0100
 @@ -36,6 +36,7 @@
  #define DBUS_API_SUBJECT_TO_CHANGE
  #include <dbus/dbus-glib.h>
@@ -153,9 +153,9 @@ diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/common/gdm-settings.c gdm-2.27.4.new/co
  }
  
  static gboolean
-diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/common/gdm-settings.h gdm-2.27.4.new/common/gdm-settings.h
---- gdm-2.27.4/common/gdm-settings.h	2009-05-19 16:18:12.000000000 +0100
-+++ gdm-2.27.4.new/common/gdm-settings.h	2009-08-07 09:25:34.000000000 +0100
+diff -urN gdm-2.29.92/common/gdm-settings.h gdm-2.29.92.new//common/gdm-settings.h
+--- gdm-2.29.92/common/gdm-settings.h	2010-03-08 22:53:57.000000000 +0100
++++ gdm-2.29.92.new//common/gdm-settings.h	2010-03-14 21:01:32.864403121 +0100
 @@ -23,6 +23,7 @@
  #define __GDM_SETTINGS_H
  
@@ -178,9 +178,9 @@ diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/common/gdm-settings.h gdm-2.27.4.new/co
  
  G_END_DECLS
  
-diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/common/gdm-settings.xml gdm-2.27.4.new/common/gdm-settings.xml
---- gdm-2.27.4/common/gdm-settings.xml	2009-05-19 16:18:12.000000000 +0100
-+++ gdm-2.27.4.new/common/gdm-settings.xml	2009-08-07 09:25:34.000000000 +0100
+diff -urN gdm-2.29.92/common/gdm-settings.xml gdm-2.29.92.new//common/gdm-settings.xml
+--- gdm-2.29.92/common/gdm-settings.xml	2010-03-08 22:53:57.000000000 +0100
++++ gdm-2.29.92.new//common/gdm-settings.xml	2010-03-14 21:01:32.864403121 +0100
 @@ -5,7 +5,12 @@
        <arg name="key" direction="in" type="s"/>
        <arg name="value" direction="out" type="s"/>
@@ -194,18 +194,29 @@ diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/common/gdm-settings.xml gdm-2.27.4.new/
        <arg name="key" direction="in" type="s"/>
        <arg name="value" direction="in" type="s"/>
      </method>
-diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/configure.ac gdm-2.27.4.new/configure.ac
---- gdm-2.27.4/configure.ac	2009-08-07 09:25:33.000000000 +0100
-+++ gdm-2.27.4.new/configure.ac	2009-08-07 09:25:34.000000000 +0100
+diff -urN gdm-2.29.92/common/Makefile.am gdm-2.29.92.new//common/Makefile.am
+--- gdm-2.29.92/common/Makefile.am	2010-03-08 22:53:57.000000000 +0100
++++ gdm-2.29.92.new//common/Makefile.am	2010-03-14 21:01:32.867730975 +0100
+@@ -110,6 +110,7 @@
+ 	$(NULL)
+ 
+ libgdmcommon_la_LIBADD =		\
++	$(COMMON_LIBS)			\
+ 	$(NULL)
+ 
+ libgdmcommon_la_LDFLAGS = 	\
+diff -urN gdm-2.29.92/configure.ac gdm-2.29.92.new//configure.ac
+--- gdm-2.29.92/configure.ac	2010-03-08 23:09:47.000000000 +0100
++++ gdm-2.29.92.new//configure.ac	2010-03-14 21:03:28.747726327 +0100
 @@ -40,6 +40,7 @@
  dnl ---------------------------------------------------------------------------
  
  DBUS_GLIB_REQUIRED_VERSION=0.74
 +POLKIT_GOBJECT_REQUIRED_VERSION=0.92
- GLIB_REQUIRED_VERSION=2.15.4
- GTK_REQUIRED_VERSION=2.10.0
+ GLIB_REQUIRED_VERSION=2.22.0
+ GTK_REQUIRED_VERSION=2.12.0
  PANGO_REQUIRED_VERSION=1.3.0
-@@ -59,6 +60,7 @@
+@@ -60,6 +61,7 @@
  
  PKG_CHECK_MODULES(COMMON,
          dbus-glib-1 >= $DBUS_GLIB_REQUIRED_VERSION
@@ -213,17 +224,17 @@ diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/configure.ac gdm-2.27.4.new/configure.a
          gobject-2.0 >= $GLIB_REQUIRED_VERSION
          gio-2.0 >= $GLIB_REQUIRED_VERSION
  )
-@@ -67,6 +69,7 @@
+@@ -68,6 +70,7 @@
  
  PKG_CHECK_MODULES(DAEMON,
          dbus-glib-1 >= $DBUS_GLIB_REQUIRED_VERSION
 +        polkit-gobject-1 >= $POLKIT_GOBJECT_REQUIRED_VERSION
          gobject-2.0 >= $GLIB_REQUIRED_VERSION
- 	hal
+         gio-2.0 >= $GLIB_REQUIRED_VERSION
  )
-diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/data/gdm.conf.in gdm-2.27.4.new/data/gdm.conf.in
---- gdm-2.27.4/data/gdm.conf.in	2009-07-17 20:38:19.000000000 +0100
-+++ gdm-2.27.4.new/data/gdm.conf.in	2009-08-07 09:25:34.000000000 +0100
+diff -urN gdm-2.29.92/data/gdm.conf.in gdm-2.29.92.new//data/gdm.conf.in
+--- gdm-2.29.92/data/gdm.conf.in	2010-03-08 22:53:57.000000000 +0100
++++ gdm-2.29.92.new//data/gdm.conf.in	2010-03-14 21:01:32.867730975 +0100
 @@ -34,8 +34,6 @@
      <deny send_destination="org.gnome.DisplayManager"
            send_interface="org.gnome.DisplayManager.LocalDisplayFactory"/>
@@ -244,9 +255,9 @@ diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/data/gdm.conf.in gdm-2.27.4.new/data/gd
      <allow send_destination="org.gnome.DisplayManager"
             send_interface="org.gnome.DisplayManager.Display"
             send_member="GetId"/>
-diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/data/gdm.policy.in gdm-2.27.4.new/data/gdm.policy.in
---- gdm-2.27.4/data/gdm.policy.in	1970-01-01 01:00:00.000000000 +0100
-+++ gdm-2.27.4.new/data/gdm.policy.in	2009-08-07 09:25:34.000000000 +0100
+diff -urN gdm-2.29.92/data/gdm.policy.in gdm-2.29.92.new//data/gdm.policy.in
+--- gdm-2.29.92/data/gdm.policy.in	1970-01-01 01:00:00.000000000 +0100
++++ gdm-2.29.92.new//data/gdm.policy.in	2010-03-14 21:01:32.867730975 +0100
 @@ -0,0 +1,18 @@
 +<?xml version="1.0" encoding="UTF-8"?>
 +<!DOCTYPE policyconfig PUBLIC
@@ -266,10 +277,10 @@ diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/data/gdm.policy.in gdm-2.27.4.new/data/
 +    </defaults>
 +  </action>
 +</policyconfig>
-diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/data/Makefile.am gdm-2.27.4.new/data/Makefile.am
---- gdm-2.27.4/data/Makefile.am	2009-05-19 16:18:12.000000000 +0100
-+++ gdm-2.27.4.new/data/Makefile.am	2009-08-07 09:25:34.000000000 +0100
-@@ -44,6 +44,8 @@
+diff -urN gdm-2.29.92/data/Makefile.am gdm-2.29.92.new//data/Makefile.am
+--- gdm-2.29.92/data/Makefile.am	2010-03-08 22:53:57.000000000 +0100
++++ gdm-2.29.92.new//data/Makefile.am	2010-03-14 21:06:01.074377153 +0100
+@@ -46,6 +46,8 @@
  schemas_in_files = gdm.schemas.in
  schemas_DATA = $(schemas_in_files:.schemas.in=.schemas)
  
@@ -278,9 +289,9 @@ diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/data/Makefile.am gdm-2.27.4.new/data/Ma
  gdm.schemas.in: $(srcdir)/gdm.schemas.in.in
  	sed	-e 's,[@]GDMPREFETCHCMD[@],$(GDMPREFETCHCMD),g' \
  		-e 's,[@]GDM_CUSTOM_CONF[@],$(GDM_CUSTOM_CONF),g' \
-@@ -73,10 +75,17 @@
- 		-e 's,[@]sbindir[@],$(sbindir),g' \
- 		<$(srcdir)/gdm.schemas.in.in >gdm.schemas.in
+@@ -78,11 +80,18 @@
+ localealiasdir = $(datadir)/gdm
+ localealias_DATA = locale.alias
  
 +polkitdir = $(datadir)/polkit-1/actions
 +polkit_in_files = gdm.policy.in
@@ -292,27 +303,18 @@ diff -Nur -x '*.orig' -x '*~' gdm-2.27.4/data/Makefile.am gdm-2.27.4.new/data/Ma
  	$(schemas_in_files)	\
  	$(schemas_DATA)		\
  	$(dbusconf_in_files)	\
+ 	$(localealias_DATA)	\
 +	$(polkit_in_files)	\
  	gdm.schemas.in.in	\
  	gdm.conf-custom.in 	\
  	Xsession.in 		\
-@@ -99,7 +108,8 @@
+@@ -105,7 +114,8 @@
  	$(NULL)
  
  DISTCLEANFILES =			\
 -	$(dbusconf_DATA)			\
 +	$(dbusconf_DATA)		\
-+	$(polkit_DATA)	 		\
++	$(polkit_DATA)			\
  	gdm.schemas			\
  	$(NULL)
  
---- gdm-2.27.4/common/Makefile.am~	2009-05-19 17:18:12.000000000 +0200
-+++ gdm-2.27.4/common/Makefile.am	2009-08-20 12:17:16.150977333 +0200
-@@ -110,6 +110,7 @@
- 	$(NULL)
- 
- libgdmcommon_la_LIBADD =		\
-+	$(COMMON_LIBS)			\
- 	$(NULL)
- 
- libgdmcommon_la_LDFLAGS = 	\
