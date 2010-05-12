@@ -37,14 +37,14 @@ Patch1:		%{name}-polkit.patch
 Patch2:		%{name}-xsession.patch
 Patch3:		%{name}-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
-BuildRequires:	ConsoleKit-devel >= 0.4.1
+#BuildRequires:	ConsoleKit-devel >= 0.4.1
 BuildRequires:	GConf2-devel >= 2.24.0
 BuildRequires:	UPower-devel
 BuildRequires:	attr-devel
 BuildRequires:	audit-libs-devel
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake >= 1:1.9
-BuildRequires:	check >= 0.9.4
+#BuildRequires:	check >= 0.9.4
 BuildRequires:	dbus-glib-devel >= 0.74
 BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
@@ -61,14 +61,15 @@ BuildRequires:	libxklavier-devel >= 4.0-2
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	pkgconfig
-BuildRequires:	polkit-gnome-devel >= 0.92
+BuildRequires:	polkit-devel
+#BuildRequires:	polkit-gnome-devel >= 0.92
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
-BuildRequires:	scrollkeeper
+#BuildRequires:	scrollkeeper
 BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
-BuildRequires:	xorg-lib-libdmx-devel
+#BuildRequires:	xorg-lib-libdmx-devel
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
