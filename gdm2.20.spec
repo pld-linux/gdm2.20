@@ -276,18 +276,22 @@ fi
 %attr(755,root,root) %{_libdir}/gdmgreeter
 %attr(755,root,root) %{_libdir}/gdmlogin
 %attr(755,root,root) %{_sbindir}/*
-%dir %{_sysconfdir}/gdm
-%dir %{_sysconfdir}/gdm/modules
-%attr(755,root,root) %config %{_sysconfdir}/gdm/Init
-%attr(755,root,root) %config %{_sysconfdir}/gdm/PreSession
-%attr(755,root,root) %config %{_sysconfdir}/gdm/PostSession
-%attr(755,root,root) %config %{_sysconfdir}/gdm/XKeepsCrashing
-%attr(755,root,root) %config %{_sysconfdir}/gdm/Xsession
-%config %{_sysconfdir}/gdm/PostLogin/Default.sample
-%config %{_sysconfdir}/gdm/locale.alias
-%config %{_sysconfdir}/gdm/modules/*
 
-%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/
+%dir %{_sysconfdir}/gdm
+%dir %{_sysconfdir}/gdm/Init
+%dir %{_sysconfdir}/gdm/PreSession
+%dir %{_sysconfdir}/gdm/PostSession
+%dir %{_sysconfdir}/gdm/PostLogin
+%dir %{_sysconfdir}/gdm/modules
+%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/Init/Default
+%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/PostLogin/Default.sample
+%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/PostSession/Default
+%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/PreSession/Default
+%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/XKeepsCrashing
+%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/Xsession
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/locale.alias
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/modules/*
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/custom.conf
 
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
