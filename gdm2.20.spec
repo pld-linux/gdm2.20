@@ -35,6 +35,7 @@ Patch4:		gdm-defaults.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel
+BuildRequires:	audit-libs-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.73
@@ -60,6 +61,7 @@ BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libdmx-devel
+BuildRequires:	zenity
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
 Requires(post,postun):	/usr/bin/scrollkeeper-update
@@ -73,11 +75,13 @@ Requires:	pam >= 0.99.7.1
 Requires:	which
 Requires:	xorg-app-xmodmap
 Requires:	xorg-app-sessreg
+Suggests:	zenity
 Provides:	XDM
 Provides:	group(xdm)
 Provides:	user(xdm)
+Obsoletes:	gdm < 2.21
 Conflicts:	gdkxft
-Conflicts:	gdm
+Conflicts:	gdm >= 2.21
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -147,7 +151,7 @@ Init script for GDM.
 Skrypt init dla GDM-a.
 
 %prep
-%setup -q -a4
+%setup -q -a4 -n gdm-%{version}
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
@@ -167,13 +171,17 @@ mv po/sr@{Latn,latin}.po
 %configure \
 	--disable-console-helper \
 	--disable-scrollkeeper \
-	--with-console-kit \
+	--with-console-kit=yes \
 	--enable-authentication-scheme=pam \
+	--enable-secureremote \
 	--with-pam-prefix=/etc \
 	--with-tcp-wrappers=yes \
 	--with%{!?with_selinux:out}-selinux \
+	--with-libaudit=yes \
 	--with-xdmcp=yes \
-	--with-xinerama=yes
+	--with-xinerama=yes \
+	--with-dmx=yes \
+	--enable-ipv6=yes
 
 %{__make}
 
@@ -256,6 +264,7 @@ fi
 %attr(755,root,root) %{_bindir}/gdmflexiserver
 %attr(755,root,root) %{_bindir}/gdmphotosetup
 %attr(755,root,root) %{_bindir}/gdmthemetester
+%attr(755,root,root) %{_libdir}/gdm-ssh-session
 %attr(755,root,root) %{_libdir}/gdmaskpass
 %attr(755,root,root) %{_libdir}/gdmopen
 %attr(755,root,root) %{_libdir}/gdmtranslate
@@ -285,6 +294,7 @@ fi
 %{_datadir}/gdm
 #%%{_datadir}/xsessions  -  moved to gnome-session
 %{_datadir}/xsessions/default.desktop
+%{_datadir}/xsessions/ssh.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
 %{_iconsdir}/hicolor/*/apps/*.svg
 %attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
