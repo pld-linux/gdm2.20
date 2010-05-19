@@ -1,14 +1,17 @@
 diff -urN gdm-2.20.0/configure.ac gdm-2.20.0.new/configure.ac
 --- gdm-2.20.0/configure.ac	2007-09-17 16:46:22.000000000 +0200
 +++ gdm-2.20.0.new/configure.ac	2007-09-21 17:29:32.000000000 +0200
-@@ -1206,6 +1201,10 @@
-    X_SERVER="/usr/X11R6/bin/X"
+@@ -1201,10 +1201,9 @@
+ else
+    # what to do, what to do, this is wrong, but this just sets the
+    # defaults, perhaps this user is cross compiling or some such
+-   X_PATH="/usr/bin/X11:/usr/X11R6/bin:/opt/X11R6/bin"
+-   X_SERVER_PATH="/usr/X11R6/bin"
+-   X_SERVER="/usr/X11R6/bin/X"
+-   GDM_USER_PATH="$GDM_USER_PATH:/usr/bin/X11:/usr/X11R6/bin:/usr/local/bin:/opt/X11R6/bin"
++   X_PATH="/usr/bin"
++   X_SERVER_PATH="/usr/bin"
++   X_SERVER="/usr/bin/Xorg"
     X_CONFIG_OPTIONS="-audit 0"
  fi
-+X_PATH="/usr/bin"
-+X_SERVER_PATH="/usr/bin"
-+X_SERVER="/usr/bin/Xorg vt9"
-+X_CONFIG_OPTIONS="-audit 0"
  
- dnl ---------------------------------------------------------------------------
- dnl - Check for Xnest / Xephyr support
