@@ -79,9 +79,9 @@ Suggests:	zenity
 Provides:	XDM
 Provides:	group(xdm)
 Provides:	user(xdm)
-Obsoletes:	gdm < 2.21
+Obsoletes:	gdm < 2:2.21
 Conflicts:	gdkxft
-Conflicts:	gdm >= 2.21
+Conflicts:	gdm >= 2:2.21
 # sr@Latn vs. sr@latin
 Conflicts:	glibc-misc < 6:2.7
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -127,7 +127,7 @@ Window та підтримує роботу кількох різних X сеа
 Summary:	Xnest (ie embedded X) server for GDM
 Summary(pl.UTF-8):	Serwer Xnest dla GDM
 Group:		X11/Applications
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Requires:	xorg-xserver-Xnest
 
 %description Xnest
@@ -141,7 +141,7 @@ Summary:	Init script for GDM
 Summary(pl.UTF-8):	Skrypt init dla GDM-a
 Group:		X11/Applications
 Requires(post,preun):	/sbin/chkconfig
-Requires:	%{name} = %{epoch}:%{version}-%{release}
+Requires:	%{name} = %{version}-%{release}
 Requires:	open
 
 %description init
