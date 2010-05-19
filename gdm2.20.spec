@@ -39,7 +39,9 @@ BuildRequires:	audit-libs-devel
 BuildRequires:	autoconf >= 2.52
 BuildRequires:	automake
 BuildRequires:	dbus-glib-devel >= 0.73
+BuildRequires:	docbook-dtd412-xml
 BuildRequires:	gettext-devel
+BuildRequires:	gnome-common
 BuildRequires:	gnome-doc-utils
 BuildRequires:	gtk+2-devel >= 2:2.12.0
 BuildRequires:	intltool >= 0.36.1
@@ -53,6 +55,7 @@ BuildRequires:	libtool
 BuildRequires:	libxml2-devel >= 1:2.6.29
 BuildRequires:	pam-devel
 BuildRequires:	perl-modules
+BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.23
 BuildRequires:	rpmbuild(macros) >= 1.311
 BuildRequires:	scrollkeeper
@@ -62,9 +65,9 @@ BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libdmx-devel
 BuildRequires:	zenity
+Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post,postun):	gtk+2
 Requires(post,postun):	hicolor-icon-theme
-Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
 Requires(pre):	/bin/id
@@ -73,8 +76,8 @@ Requires(pre):	/usr/sbin/useradd
 Requires:	libgnomeui >= 2.20.0
 Requires:	pam >= 0.99.7.1
 Requires:	which
-Requires:	xorg-app-xmodmap
 Requires:	xorg-app-sessreg
+Requires:	xorg-app-xmodmap
 Suggests:	zenity
 Provides:	XDM
 Provides:	gdm = 2:%{version}
