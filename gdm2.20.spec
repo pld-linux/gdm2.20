@@ -283,15 +283,15 @@ fi
 %dir %{_sysconfdir}/gdm/PostSession
 %dir %{_sysconfdir}/gdm/PostLogin
 %dir %{_sysconfdir}/gdm/modules
-%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/Init/Default
-%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/PostLogin/Default.sample
-%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/PostSession/Default
-%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/PreSession/Default
-%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/XKeepsCrashing
-%config(noreplace) %verify(not md5 mtime size) %attr(755,root,root) %{_sysconfdir}/gdm/Xsession
+%attr(755,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/Init/Default
+%attr(755,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/PostLogin/Default.sample
+%attr(755,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/PostSession/Default
+%attr(755,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/PreSession/Default
+%attr(755,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/XKeepsCrashing
+%attr(755,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/Xsession
+%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/custom.conf
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/locale.alias
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/modules/*
-%attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/gdm/custom.conf
 
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/pam.d/gdm*
 %attr(640,root,root) %config(noreplace) %verify(not md5 mtime size) /etc/security/blacklist.gdm
@@ -300,7 +300,6 @@ fi
 %attr(750,xdm,xdm) /home/services/xdm
 %{_pixmapsdir}/*
 %{_datadir}/gdm
-#%%{_datadir}/xsessions  -  moved to gnome-session
 %{_datadir}/xsessions/default.desktop
 %{_datadir}/xsessions/ssh.desktop
 %{_iconsdir}/hicolor/*/apps/*.png
