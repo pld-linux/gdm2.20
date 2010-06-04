@@ -14,12 +14,12 @@ Summary(pt_BR.UTF-8):	Gerenciador de Entrada do GNOME
 Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm2.20
-Version:	2.20.10
+Version:	2.20.11
 Release:	1
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/gdm-%{version}.tar.bz2
-# Source0-md5:	981c7ee7fbe453061e095ab52a3513f8
+# Source0-md5:	67696b64c81c317f61065810a32e8b36
 Source1:	gdm.pamd
 Source2:	gdm.init
 Source3:	gdm-pld-logo.png
