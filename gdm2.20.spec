@@ -176,6 +176,7 @@ mv po/sr@{Latn,latin}.po
 %{__autoconf}
 %{__automake}
 %configure \
+	LIBS="-lXau" \
 	--disable-console-helper \
 	--disable-scrollkeeper \
 	--with-console-kit=yes \
