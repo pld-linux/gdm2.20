@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm2.20
 Version:	2.20.11
-Release:	2
+Release:	3
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/gdm-%{version}.tar.bz2
@@ -66,7 +66,7 @@ BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libdmx-devel
 BuildRequires:	zenity
 Requires(post,postun):	/usr/bin/scrollkeeper-update
-Requires(post,postun):	gtk+2
+Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
 Requires(postun):	/usr/sbin/groupdel
 Requires(postun):	/usr/sbin/userdel
