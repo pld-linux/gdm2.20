@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm2.20
 Version:	2.20.11
-Release:	3
+Release:	4
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/gdm-%{version}.tar.bz2
@@ -57,7 +57,7 @@ BuildRequires:	pam-devel
 BuildRequires:	perl-modules
 BuildRequires:	pkgconfig
 BuildRequires:	rpmbuild(find_lang) >= 1.23
-BuildRequires:	rpmbuild(macros) >= 1.311
+BuildRequires:	rpmbuild(macros) >= 1.627
 BuildRequires:	scrollkeeper
 BuildRequires:	sed >= 4.0
 BuildRequires:	xorg-lib-libXdmcp-devel
@@ -75,7 +75,9 @@ Requires(pre):	/usr/sbin/groupadd
 Requires(pre):	/usr/sbin/useradd
 Requires:	libgnomeui >= 2.20.0
 Requires:	pam >= 0.99.7.1
+Requires:	systemd-units >= 37-0.10
 Requires:	which
+Requires:	xinitrc-ng >= 1.0
 Requires:	xorg-app-sessreg
 Requires:	xorg-app-xmodmap
 Suggests:	zenity
@@ -197,7 +199,8 @@ mv po/sr@{Latn,latin}.po
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 	$RPM_BUILD_ROOT{/home/services/xdm,/var/log/gdm} \
-	$RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky
+	$RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky \
+	$RPM_BUILD_ROOT%{systemdunitdir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -211,6 +214,8 @@ install %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
 install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
+
+ln -s /dev/null $RPM_BUILD_ROOT%{systemdunitdir}/gdm.service
 
 install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
@@ -234,10 +239,12 @@ rm -rf $RPM_BUILD_ROOT
 %post
 %scrollkeeper_update_post
 %update_icon_cache hicolor
+%systemd_reload
 
 %postun
 %scrollkeeper_update_postun
 %update_icon_cache hicolor
+%systemd_reload
 
 if [ "$1" = "0" ]; then
 	%userremove xdm
@@ -281,6 +288,7 @@ fi
 %attr(755,root,root) %{_libdir}/gdmlogin
 %attr(755,root,root) %{_sbindir}/*
 
+%{systemdunitdir}/gdm.service
 %dir %{_sysconfdir}/gdm
 %dir %{_sysconfdir}/gdm/Init
 %dir %{_sysconfdir}/gdm/PreSession
