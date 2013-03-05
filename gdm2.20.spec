@@ -5,7 +5,7 @@
 #
 # Conditiional build:
 %bcond_without	selinux	# without selinux
-#
+
 Summary:	GNOME Display Manager
 Summary(es.UTF-8):	Administrador de Entrada del GNOME
 Summary(ja.UTF-8):	GNOME ディスプレイマネージャ
@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm2.20
 Version:	2.20.11
-Release:	5
+Release:	6
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/gdm-%{version}.tar.bz2
@@ -32,6 +32,7 @@ Patch1:		gdm-conf.patch
 Patch2:		gdm-xsession.patch
 Patch3:		gdm-desktop.patch
 Patch4:		gdm-defaults.patch
+Patch5:		xinit-sh.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel

@@ -1,0 +1,11 @@
+--- gdm-2.20.11/config/Xsession.in~	2013-03-06 00:17:36.000000000 +0200
++++ gdm-2.20.11/config/Xsession.in	2013-03-06 00:18:31.189137195 +0200
+@@ -183,7 +183,7 @@
+ 
+ # run all system xinitrc shell scripts.
+ if [ -d /etc/X11/xinit/xinitrc.d ]; then
+-    for i in /etc/X11/xinit/xinitrc.d/* ; do
++    for i in /etc/X11/xinit/xinitrc.d/*.sh; do
+         if [ -x "$i" ]; then
+ 	    . "$i"
+         fi
