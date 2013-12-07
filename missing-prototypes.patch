@@ -1,0 +1,19 @@
+--- gdm-2.20.11/daemon/gdm-daemon-config.h~	2010-06-03 03:06:25.000000000 +0200
++++ gdm-2.20.11/daemon/gdm-daemon-config.h	2013-12-07 15:23:30.982654875 +0100
+@@ -78,6 +78,7 @@
+ gboolean       gdm_daemon_config_to_string            (const char *key,
+                                                        const char *display,
+                                                        char **retval);
++void           gdm_daemon_load_config_file            (GdmConfig **load_config);
+ gboolean       gdm_daemon_config_update_key           (const char *key);
+ 
+ 
+--- gdm-2.20.11/gui/gdmlanguages.h~	2010-06-03 03:06:25.000000000 +0200
++++ gdm-2.20.11/gui/gdmlanguages.h	2013-12-07 15:25:16.432654112 +0100
+@@ -67,4 +67,6 @@
+ void		gdm_lang_op_always_restart	(const gchar *args);
+ gint            gdm_lang_ask_restart            (gchar *language);
+ 
++void		lang_set_custom_callback	(gchar *language);
++
+ #endif /* GDM_LANGUAGES_H */

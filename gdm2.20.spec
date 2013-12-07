@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm2.20
 Version:	2.20.11
-Release:	6
+Release:	7
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/gdm-%{version}.tar.bz2
@@ -33,6 +33,7 @@ Patch2:		gdm-xsession.patch
 Patch3:		gdm-desktop.patch
 Patch4:		gdm-defaults.patch
 Patch5:		xinit-sh.patch
+Patch6:		missing-prototypes.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel
@@ -168,6 +169,8 @@ Skrypt init dla GDM-a.
 %patch2 -p1
 %patch3 -p1
 %patch4 -p1
+%patch5 -p1
+%patch6 -p1
 
 sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
 mv po/sr@{Latn,latin}.po
