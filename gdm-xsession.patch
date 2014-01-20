@@ -12,7 +12,7 @@ diff -urN gdm-2.6.0.3.orig/config/Xsession.in gdm-2.6.0.3/config/Xsession.in
  # Translation stuff
  if [ -x "@EXPANDED_LIBEXECDIR@/gdmtranslate" ] ; then
    gdmtranslate="@EXPANDED_LIBEXECDIR@/gdmtranslate"
-@@ -222,6 +226,23 @@
+@@ -222,14 +226,23 @@
    fi
  fi
  
@@ -33,6 +33,14 @@ diff -urN gdm-2.6.0.3.orig/config/Xsession.in gdm-2.6.0.3/config/Xsession.in
 +    command="$wmstyledir/$command.sh"
 +fi
 +
- # add ssh-agent if found
- sshagent="`gdmwhich ssh-agent`"
- if [ -n "$sshagent" ] && [ -x "$sshagent" ] && [ -z "$SSH_AUTH_SOCK" ]; then
+-# add ssh-agent if found
+-sshagent="`gdmwhich ssh-agent`"
+-if [ -n "$sshagent" ] && [ -x "$sshagent" ] && [ -z "$SSH_AUTH_SOCK" ]; then
+-    command="$sshagent -- $command"
+-elif [ -z "$sshagent" ] ; then
+-    echo "$0: ssh-agent not found!"
+-fi
+-
+ echo "$0: Setup done, will execute: $command"
+ 
+ eval exec $command
