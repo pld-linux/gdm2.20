@@ -229,10 +229,14 @@ touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 %find_lang gdm --with-gnome --with-omf --all-name
 
 # Remove useless files
-rm $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/modules/*.{la,a}
+%{__rm} $RPM_BUILD_ROOT%{_libdir}/gtk-2.0/modules/*.{la,a}
 
 # moved to gnome-session
-rm $RPM_BUILD_ROOT%{_datadir}/xsessions/gnome.desktop
+%{__rm} $RPM_BUILD_ROOT%{_datadir}/xsessions/gnome.desktop
+
+# remove broken jpegs
+%{__rm} $RPM_BUILD_ROOT%{_pixmapsdir}/faces/{dice,launch}.jpg
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
