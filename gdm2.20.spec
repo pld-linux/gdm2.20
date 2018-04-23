@@ -15,8 +15,8 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm2.20
 Version:	2.20.11
-Release:	11
-License:	GPL/LGPL
+Release:	12
+License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/gdm-%{version}.tar.bz2
 # Source0-md5:	67696b64c81c317f61065810a32e8b36
@@ -300,19 +300,19 @@ fi
 %attr(755,root,root) %{_bindir}/gdmflexiserver
 %attr(755,root,root) %{_bindir}/gdmphotosetup
 %attr(755,root,root) %{_bindir}/gdmthemetester
-%attr(755,root,root) %{_libdir}/gdm-ssh-session
-%attr(755,root,root) %{_libdir}/gdmaskpass
-%attr(755,root,root) %{_libdir}/gdmopen
-%attr(755,root,root) %{_libdir}/gdmtranslate
-%attr(755,root,root) %{_libdir}/gdmchooser
-%attr(755,root,root) %{_libdir}/gdmgreeter
-%attr(755,root,root) %{_libdir}/gdmlogin
 %attr(755,root,root) %{_sbindir}/gdm
 %attr(755,root,root) %{_sbindir}/gdm-binary
 %attr(755,root,root) %{_sbindir}/gdm-restart
 %attr(755,root,root) %{_sbindir}/gdm-safe-restart
 %attr(755,root,root) %{_sbindir}/gdm-stop
 %attr(755,root,root) %{_sbindir}/gdmsetup
+%attr(755,root,root) %{_libexecdir}/gdm-ssh-session
+%attr(755,root,root) %{_libexecdir}/gdmaskpass
+%attr(755,root,root) %{_libexecdir}/gdmopen
+%attr(755,root,root) %{_libexecdir}/gdmtranslate
+%attr(755,root,root) %{_libexecdir}/gdmchooser
+%attr(755,root,root) %{_libexecdir}/gdmgreeter
+%attr(755,root,root) %{_libexecdir}/gdmlogin
 
 %{systemdunitdir}/gdm.service
 %dir %{_sysconfdir}/gdm
