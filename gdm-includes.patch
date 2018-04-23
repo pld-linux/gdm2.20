@@ -1,0 +1,10 @@
+--- gdm-2.20.11/utils/Makefile.am.orig	2010-06-03 03:06:25.000000000 +0200
++++ gdm-2.20.11/utils/Makefile.am	2018-04-22 22:21:59.682310362 +0200
+@@ -8,7 +8,6 @@
+ 	-I.						\
+ 	-I..						\
+ 	-I$(top_srcdir)/daemon				\
+-	-I$(top_srcdir)/vicious-extensions		\
+ 	-DGNOMELOCALEDIR=\""$(datadir)/locale"\" 	\
+ 	$(UTILS_CFLAGS)
+ 

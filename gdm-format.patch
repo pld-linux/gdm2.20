@@ -1,0 +1,69 @@
+--- gdm-2.20.11/daemon/gdm-daemon-config.c.orig	2010-06-03 03:06:25.000000000 +0200
++++ gdm-2.20.11/daemon/gdm-daemon-config.c	2018-04-22 21:53:51.242329643 +0200
+@@ -1935,7 +1935,7 @@
+ 
+ 	} else {
+ 		if (console_notify) {
+-			gchar *s = g_strdup_printf (C_(N_("XDMCP is disabled and GDM "
++			gchar *s = g_strdup (C_(N_("XDMCP is disabled and GDM "
+ 							  "cannot find any static server "
+ 							  "to start.  Aborting!  Please "
+ 							  "correct the configuration "
+@@ -1993,7 +1993,7 @@
+ 
+ 	if G_UNLIKELY (uid == 0) {
+ 		if (console_notify) {
+-			gchar *s = g_strdup_printf (C_(N_("The GDM user is set to be root, but "
++			gchar *s = g_strdup (C_(N_("The GDM user is set to be root, but "
+ 							  "this is not allowed since it can "
+ 							  "pose a security risk.  Please "
+ 							  "correct GDM configuration and "
+@@ -2025,7 +2025,7 @@
+ 
+ 	if G_UNLIKELY (gid == 0) {
+ 		if (console_notify) {
+-			gchar *s = g_strdup_printf (C_(N_("The GDM group is set to be root, but "
++			gchar *s = g_strdup (C_(N_("The GDM group is set to be root, but "
+ 							  "this is not allowed since it can "
+ 							  "pose a security risk. Please "
+ 							  "correct GDM configuration and "
+--- gdm-2.20.11/daemon/slave.c.orig	2010-06-03 03:06:25.000000000 +0200
++++ gdm-2.20.11/daemon/slave.c	2018-04-22 22:15:02.428981793 +0200
+@@ -265,7 +265,7 @@
+ 	} else {									\
+ 		/* evil! how this this happen */					\
+ 		if (slave_start_jmp_error_to_print != NULL)				\
+-			gdm_error (slave_start_jmp_error_to_print);			\
++			gdm_error ("%s", slave_start_jmp_error_to_print);		\
+ 		gdm_error ("Bad (very very VERY bad!) things happening in signal");	\
+ 		_exit (DISPLAY_REMANAGE);						\
+ 	}										\
+@@ -691,7 +691,7 @@
+ 	need_to_quit_after_session_stop = TRUE;
+ 
+ 	if (slave_start_jmp_error_to_print != NULL)
+-		gdm_error (slave_start_jmp_error_to_print);
++		gdm_error ("%s", slave_start_jmp_error_to_print);
+ 	slave_start_jmp_error_to_print = NULL;
+ 
+ 	/* only if we're not hanging in session stop and getting a
+@@ -720,7 +720,7 @@
+ 	need_to_quit_after_session_stop = TRUE;
+ 
+ 	if (slave_start_jmp_error_to_print != NULL)
+-		gdm_error (slave_start_jmp_error_to_print);
++		gdm_error ("%s", slave_start_jmp_error_to_print);
+ 	slave_start_jmp_error_to_print = NULL;
+ 
+ 	gdm_debug ("term_quit: Final cleanup");
+--- gdm-2.20.11/daemon/misc.c.orig	2010-06-03 03:06:25.000000000 +0200
++++ gdm-2.20.11/daemon/misc.c	2018-04-22 22:15:49.818981253 +0200
+@@ -2222,7 +2222,7 @@
+     va_end (args);
+ 
+     /* Log to both syslog and stderr */
+-    gdm_error (s);
++    gdm_error ("%s", s);
+     if (getpid () == gdm_main_pid) {
+ 	    gdm_fdprintf (2, "%s\n", s);
+     }

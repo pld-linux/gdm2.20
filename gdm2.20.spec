@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm2.20
 Version:	2.20.11
-Release:	10
+Release:	11
 License:	GPL/LGPL
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/gdm-%{version}.tar.bz2
@@ -34,6 +34,8 @@ Patch3:		gdm-desktop.patch
 Patch4:		gdm-defaults.patch
 Patch5:		xinit-sh.patch
 Patch6:		missing-prototypes.patch
+Patch7:		gdm-format.patch
+Patch8:		gdm-includes.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel
@@ -66,7 +68,6 @@ BuildRequires:	xorg-lib-libXdmcp-devel
 BuildRequires:	xorg-lib-libXi-devel
 BuildRequires:	xorg-lib-libXinerama-devel
 BuildRequires:	xorg-lib-libdmx-devel
-BuildRequires:	zenity
 Requires(post,postun):	/usr/bin/scrollkeeper-update
 Requires(post,postun):	gtk-update-icon-cache
 Requires(post,postun):	hicolor-icon-theme
@@ -132,6 +133,18 @@ GDM (GNOME Display Manager) - це реімплементація xdm (X Display
 Manager). GDM дозволяє вам входити в систему, на якій запущено X
 Window та підтримує роботу кількох різних X сеансів одночасно.
 
+%package faces
+Summary:	Faces icons for GDM
+Summary(pl.UTF-8):	Ikony twarzy dla GDM
+Group:		X11/Applications
+Conflicts:	gnome-control-center >= 3
+
+%description faces
+Faces icons for GDM.
+
+%description faces -l pl.UTF-8
+Ikony twarzy dla GDM.
+
 %package Xnest
 Summary:	Xnest (ie embedded X) server for GDM
 Summary(pl.UTF-8):	Serwer Xnest dla GDM
@@ -171,9 +184,11 @@ Skrypt init dla GDM-a.
 %patch4 -p1
 %patch5 -p1
 %patch6 -p1
+%patch7 -p1
+%patch8 -p1
 
-sed -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-mv po/sr@{Latn,latin}.po
+%{__sed} -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
+%{__mv} po/sr@{Latn,latin}.po
 
 %build
 %{__libtoolize}
@@ -184,19 +199,20 @@ mv po/sr@{Latn,latin}.po
 %{__automake}
 %configure \
 	LIBS="-lXau" \
+	ZENITY=/usr/bin/zenity \
 	--disable-console-helper \
 	--disable-scrollkeeper \
-	--with-console-kit=yes \
 	--enable-authentication-scheme=pam \
 	--enable-secureremote \
+	--with-console-kit \
 	--with-pam-prefix=/etc \
-	--with-tcp-wrappers=yes \
-	--with%{!?with_selinux:out}-selinux \
-	--with-libaudit=yes \
-	--with-xdmcp=yes \
-	--with-xinerama=yes \
-	--with-dmx=yes \
-	--enable-ipv6=yes
+	--with-tcp-wrappers \
+	--with-selinux%{!?with_selinux:=no} \
+	--with-libaudit \
+	--with-xdmcp \
+	--with-xinerama \
+	--with-dmx \
+	--enable-ipv6
 
 %{__make}
 
@@ -211,18 +227,18 @@ install -d $RPM_BUILD_ROOT/etc/{rc.d/init.d,pam.d,security} \
 	DESTDIR=$RPM_BUILD_ROOT \
 	PAM_PREFIX=/etc
 
-mv $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop \
+%{__mv} $RPM_BUILD_ROOT%{_datadir}/gdm/BuiltInSessions/default.desktop \
 	$RPM_BUILD_ROOT%{_datadir}/xsessions
 
-install %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
-install %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
+cp -p %{SOURCE1} $RPM_BUILD_ROOT/etc/pam.d/gdm
+cp -p %{SOURCE5} $RPM_BUILD_ROOT/etc/pam.d/gdm-autologin
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/rc.d/init.d/gdm
 
-install %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
+cp -p %{SOURCE3} $RPM_BUILD_ROOT%{_pixmapsdir}
 
-ln -s /dev/null $RPM_BUILD_ROOT%{systemdunitdir}/gdm.service
+ln -sf /dev/null $RPM_BUILD_ROOT%{systemdunitdir}/gdm.service
 
-install storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
+cp -p storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
 
@@ -291,7 +307,12 @@ fi
 %attr(755,root,root) %{_libdir}/gdmchooser
 %attr(755,root,root) %{_libdir}/gdmgreeter
 %attr(755,root,root) %{_libdir}/gdmlogin
-%attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_sbindir}/gdm
+%attr(755,root,root) %{_sbindir}/gdm-binary
+%attr(755,root,root) %{_sbindir}/gdm-restart
+%attr(755,root,root) %{_sbindir}/gdm-safe-restart
+%attr(755,root,root) %{_sbindir}/gdm-stop
+%attr(755,root,root) %{_sbindir}/gdmsetup
 
 %{systemdunitdir}/gdm.service
 %dir %{_sysconfdir}/gdm
@@ -315,14 +336,22 @@ fi
 %attr(1770,root,xdm) /var/lib/gdm
 %attr(750,xdm,xdm) /var/log/gdm
 %attr(750,xdm,xdm) /home/services/xdm
-%{_pixmapsdir}/*
+%{_pixmapsdir}/gdm-foot-logo.png
+%{_pixmapsdir}/gdm-pld-logo.png
+%{_pixmapsdir}/nobody.png
+%{_pixmapsdir}/nohost.png
 %{_datadir}/gdm
 %{_datadir}/xsessions/default.desktop
 %{_datadir}/xsessions/ssh.desktop
-%{_iconsdir}/hicolor/*/apps/*.png
-%{_iconsdir}/hicolor/*/apps/*.svg
-%attr(755,root,root) %{_libdir}/gtk-2.0/modules/lib*.so
-%{_mandir}/man1/gdm*
+%{_iconsdir}/hicolor/*x*/apps/gdm*.png
+%{_iconsdir}/hicolor/scalable/apps/gdm*.svg
+%attr(755,root,root) %{_libdir}/gtk-2.0/modules/libdwellmouselistener.so
+%attr(755,root,root) %{_libdir}/gtk-2.0/modules/libkeymouselistener.so
+%{_mandir}/man1/gdm.1*
+
+%files faces
+%defattr(644,root,root,755)
+%{_pixmapsdir}/faces
 
 %files Xnest
 %defattr(644,root,root,755)
