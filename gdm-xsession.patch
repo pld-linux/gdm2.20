@@ -10,8 +10,8 @@ diff -urN gdm-2.6.0.3.orig/config/Xsession.in gdm-2.6.0.3/config/Xsession.in
 +fi
 +
  # Translation stuff
- if [ -x "@EXPANDED_LIBEXECDIR@/gdmtranslate" ] ; then
-   gdmtranslate="@EXPANDED_LIBEXECDIR@/gdmtranslate"
+ if [ -x "@libexecdir@/gdmtranslate" ] ; then
+   gdmtranslate="@libexecdir@/gdmtranslate"
 @@ -222,14 +226,23 @@
    fi
  fi
