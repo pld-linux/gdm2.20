@@ -15,7 +15,7 @@ Summary(ru.UTF-8):	Дисплейный менеджер GNOME
 Summary(uk.UTF-8):	Дисплейний менеджер GNOME
 Name:		gdm2.20
 Version:	2.20.11
-Release:	13
+Release:	14
 License:	GPL v2+
 Group:		X11/Applications
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gdm/2.20/gdm-%{version}.tar.bz2
@@ -36,6 +36,7 @@ Patch5:		xinit-sh.patch
 Patch6:		missing-prototypes.patch
 Patch7:		gdm-format.patch
 Patch8:		gdm-includes.patch
+Patch9:		gdm-types.patch
 URL:		http://www.gnome.org/projects/gdm/
 BuildRequires:	ConsoleKit-devel
 BuildRequires:	attr-devel
@@ -186,9 +187,7 @@ Skrypt init dla GDM-a.
 %patch -P6 -p1
 %patch -P7 -p1
 %patch -P8 -p1
-
-%{__sed} -i -e 's#sr@Latn#sr@latin#' po/LINGUAS
-%{__mv} po/sr@{Latn,latin}.po
+%patch -P9 -p1
 
 %build
 %{__libtoolize}
@@ -241,6 +240,8 @@ ln -sf /dev/null $RPM_BUILD_ROOT%{systemdunitdir}/gdm.service
 cp -p storky/*.* $RPM_BUILD_ROOT%{_datadir}/gdm/themes/storky/
 
 touch $RPM_BUILD_ROOT/etc/security/blacklist.gdm
+
+%{__mv} $RPM_BUILD_ROOT%{_localedir}/{sr@Latn,sr@latin}
 
 %find_lang gdm --with-gnome --with-omf --all-name
 

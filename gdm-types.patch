@@ -1,0 +1,33 @@
+--- gdm-2.20.11/common/gdm-config.c.orig	2010-06-03 03:06:25.000000000 +0200
++++ gdm-2.20.11/common/gdm-config.c	2025-08-30 15:29:05.511117491 +0200
+@@ -611,7 +611,7 @@ gdm_config_free (GdmConfig *config)
+ 	 * to NULL, so if this function is called again, we
+ 	 * do not try to free the same data structures again.
+ 	 */
+-	e    = config->entries;
++	e    = (GdmConfigEntry*) config->entries;
+ 	mkf  = config->mandatory_key_file;
+ 	dkf  = config->default_key_file;
+ 	ckf  = config->custom_key_file;
+@@ -630,8 +630,8 @@ gdm_config_free (GdmConfig *config)
+ 	g_slice_free (GdmConfig, config);
+ 
+ 	if (e != NULL) {
+-		g_ptr_array_foreach (e, (GFunc)gdm_config_entry_free, NULL);
+-		g_ptr_array_free (e, TRUE);
++		g_ptr_array_foreach ((GPtrArray*)e, (GFunc)gdm_config_entry_free, NULL);
++		g_ptr_array_free ((GPtrArray*)e, TRUE);
+ 	}
+ 	if (mkf != NULL)
+ 		g_key_file_free (mkf);
+--- gdm-2.20.11/gui/gdmchooser.c.orig	2010-06-03 03:06:25.000000000 +0200
++++ gdm-2.20.11/gui/gdmchooser.c	2025-08-30 15:31:04.191850121 +0200
+@@ -261,7 +261,7 @@ gdm_chooser_host_alloc (const char *host
+ 			host->picture = gdk_pixbuf_scale_simple (img, w, h,
+ 								 GDK_INTERP_BILINEAR);
+ 		else
+-			host->picture = g_object_ref (G_OBJECT (img));
++			host->picture = (GdkPixbuf *)g_object_ref (G_OBJECT (img));
+ 	
+ 		g_object_unref (G_OBJECT (img));
+ 	} else if (defhostimg != NULL) {
